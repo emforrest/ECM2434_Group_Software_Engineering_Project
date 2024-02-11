@@ -4,4 +4,5 @@ from django.http import HttpResponse
 
 
 def main(request):
-    return HttpResponse("Hello, world. This is main.")
+    #return HttpResponse("Hello, world. This is main.")
+    return render(request, "main/main.html")
