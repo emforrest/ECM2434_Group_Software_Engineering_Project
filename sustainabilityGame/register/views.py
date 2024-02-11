@@ -6,4 +6,5 @@ from django.http import HttpResponse
 
 
 def register(request):
-    return HttpResponse("This is the register page.")
+    #return HttpResponse("This is the register page.")
+    return render(request, "register/register.html")
