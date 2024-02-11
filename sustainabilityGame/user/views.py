@@ -15,4 +15,4 @@ def settings(request):
 
 def upload(request):
     #return HttpResponse("This is the user upload page.")
-    return render(request, "user/upload.html"
+    return render(request, "user/upload.html")
