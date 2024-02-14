@@ -40,9 +40,9 @@ div.box input {
     width: 300px;
 }
 div.box h1 {
-    position: absolute;
-    top: 25%;
-    left: 25%;
+    position: relative;
+    top: 0;
+    left: 0;
     align-items: center;
     block-size: fit-content;
     background-color: lightgreen;
