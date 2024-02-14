@@ -20,13 +20,13 @@ div.box {
     display: flex;
     justify-content: center;
     align-items: center;
-   /*block-size: fit-content;
+    block-size: fit-content;
     margin-top: 100px;
     vertical-align: middle;
     text-align: center;
     width: 50%;
     padding: 40px;
-    height: 50%;*/
+   /* height: 50%;*/
     font-size: 50px;
     background-color: darkgreen;
 }
