@@ -5,3 +5,28 @@ div.main {
     font-size: 100px;
     color: blue;
 }
+
+input {
+    position: relative;
+    block-size: fit-content;
+    text-align: center;
+    background-color: darkgrey;
+    color: blue;
+    resize: none;
+}
+
+div.userForm {
+    margin-top: 100px;
+    vertical-align: middle;
+    width: 50%;
+    float: left;
+    padding-bottom: 80px;
+    height: 10px;
+    font-size: 50px;
+}
+div.userForm input {
+    margin: 20px;
+    padding: 10px;
+    font-size: 25px;
+    width: 300px;
+}
