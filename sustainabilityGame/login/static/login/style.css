@@ -15,18 +15,18 @@ div.main {
     resize: none;
 }*/
 
-div.userForm {
+div.box {
     margin-top: 100px;
     vertical-align: middle;
     text-align: center;
-    width: 50%;
+    width: 200px;
     float: left;
     padding-bottom: 80px;
-    height: 10px;
+    height: 50px;
     font-size: 50px;
     background-color: darkgreen;
 }
-div.userForm input {
+div.box input {
     margin: 20px;
     padding: 10px;
     font-size: 25px;
