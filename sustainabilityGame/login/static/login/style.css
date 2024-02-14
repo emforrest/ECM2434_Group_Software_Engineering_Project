@@ -16,8 +16,8 @@ div.main {
 }*/
 
 div.box {
-    /*height: 300px;
-    display: flex;*/
+    /*height: 300px;*/
+    display: flex;
     justify-content: center;
     align-items: center;
     block-size: fit-content;
