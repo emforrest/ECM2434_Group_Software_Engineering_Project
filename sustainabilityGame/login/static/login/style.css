@@ -19,10 +19,10 @@ div.box {
     margin-top: 100px;
     vertical-align: middle;
     text-align: center;
-    width: 200px;
+    width: 50%;
     float: left;
     padding-bottom: 80px;
-    height: 50px;
+    height: 50%;
     font-size: 50px;
     background-color: darkgreen;
 }
