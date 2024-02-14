@@ -17,7 +17,8 @@ div.main {
 
 div.box {
     position: absolute;
-    transform: translate(50%, 0%);
+    justify-content: center;
+    align-items: center;
     block-size: fit-content;
     margin-top: 100px;
     vertical-align: middle;
