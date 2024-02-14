@@ -34,7 +34,7 @@ div.box {
 }
 div.box input {
     margin: 20px;
-    padding: 10px;
+    padding-bottom: 10px;
     font-size: 25px;
     width: 300px;
 }
