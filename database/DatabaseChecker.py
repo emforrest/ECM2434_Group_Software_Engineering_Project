@@ -11,7 +11,7 @@ databases = cursor.fetchall()
 # Check if the database exists
 database_exists = False
 for db in databases:
-    if db[0] == 'groupsoftdevdatabase':
+    if db[0] == 'sustainabilitygame':
         database_exists = True
         break
 
