@@ -1,5 +1,8 @@
 /env
+/sustainabilityGame/leaderboard/__pycache__
+/sustainabilityGame/groups/__pycache__
+/sustainabilityGame/login/__pycache__
 /sustainabilityGame/main/__pycache__
 /sustainabilityGame/register/__pycache__
-/sustainabilityGame/sustainabilityGame/__pycache__
+/sustainabilityGame/sustainibilityGame/__pycache__
 /sustainabilityGame/user/__pycache__
