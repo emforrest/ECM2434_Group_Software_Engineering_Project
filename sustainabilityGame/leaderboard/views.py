@@ -7,4 +7,4 @@ from django.http import HttpResponse
 
 def leaderboard(request):
     #return HttpResponse("This is the leaderboard page.")
-    return render(request, "leaderboard\leaderboard.html")
+    return render(request, "leaderboard/leaderboard.html")
