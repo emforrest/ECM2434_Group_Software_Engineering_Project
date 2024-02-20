@@ -6,4 +6,5 @@ from django.http import HttpResponse
 
 
 def login(request):
-    return HttpResponse("This is the log in page.")
+    #return HttpResponse("This is the log in page.")
+    return render(request, "login/login.html")
