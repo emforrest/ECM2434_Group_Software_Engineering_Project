@@ -1,7 +1,7 @@
 import mysql.connector
 
 # Connect to MySQL server
-cnx = mysql.connector.connect(user='django', password='acf6Z4LeA85FF9gY!', host='129.146.245.9', port='3306')
+cnx = mysql.connector.connect(user='django', password='acf6Z4LeA85FF9gY!', host='129.146.140.114', port='3306')
 cursor = cnx.cursor()
 
 # Execute SQL query to check if database exists
