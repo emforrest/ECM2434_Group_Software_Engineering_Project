@@ -5,7 +5,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-        
+    #map {
+            height: 400px;
+            width: 100%;
+        }
+
     .dropdown {
       position: relative;
       display: inline-block;
@@ -35,20 +39,21 @@
     </style>
 
 
-
-
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIZe4j6_6bvgDSdz4rjX_29_r6C6FGi1Y&libraries=places">
+  //add API key here
+</script> 
 
 
 </head>
 <body>
 
 <h1>Upload a Journey</h1>
+<p><i>User : "username"</i></p>
 <br>
 <form name="upload" id="upload">
     Select an on-campus location: 
     <br>
     <select name="oncampus" id="oncampus">
-        <option value="" selected="selected">Select</option>
         <option value = "Forum">Forum</option>
         <option value = "Amory">Amory</option>
         <option value = "Devonshire House">Devonshire House</option>
@@ -59,14 +64,51 @@
         <option value = "Sports Park">Sports Park</option>
       </select>
       <br><br>
+
+
+
     Enter an off-campus location:
     <br>
-    <input type="text" id="latitude" name="latitude"><input type="text" id="longitude" name="longitude">
-      <br><br>
+    <input type="text" id="autocomplete" name="autocomplete" placeholder="Select">
+      <br>
+      
+      <script>
+        let autocomplete;
+        function initAutocomplete(){
+          autocomplete = new google.maps.places.Autocomplete(
+            document.getElementById('autocomplete'),
+            {
+              types:['address'],
+              componentRestrictions: {'country': ['gb']},
+              fields : ['geometry', 'name']
+            }
+          );
+          autocomplete.addListener('place_changed', onPlaceChanged);
+        }
+      
+        function onPlaceChanged(){
+          var place = autocomplete.getPlace();
+          if (!place.geometry){
+            document.getElementById('autocomplete').placeholder='Select';
+          }
+          else{
+            document.getElementById('autocomplete').innerHTML=place.name;
+          }
+        }
+      </script>
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIZe4j6_6bvgDSdz4rjX_29_r6C6FGi1Y&libraries=places&callback=initAutocomplete" async defer>
+  //add API key here
+</script>
+      <br>
+
+
+
+
     Select the mode of transport used: 
     <br>
     <select name="transport" id="transport">
-        <option value="" selected="selected">Select</option>
         <option value = "Bus">Bus</option>
         <option value = "Train">Train</option>
         <option value = "Bike">Bike</option>
@@ -82,4 +124,4 @@
 </html>
 
 
-https://developers.google.com/maps/documentation/javascript/place-autocomplete?_gl=1*bkn49n*_up*MQ..*_ga*OTYxODg1MjA3LjE3MDg0NDk5OTM.*_ga_NRWSTWS78N*MTcwODQ0OTk5My4xLjAuMTcwODQ0OTk5My4wLjAuMA..
+<!--https://developers.google.com/maps/documentation/javascript/place-autocomplete?_gl=1*bkn49n*_up*MQ..*_ga*OTYxODg1MjA3LjE3MDg0NDk5OTM.*_ga_NRWSTWS78N*MTcwODQ0OTk5My4xLjAuMTcwODQ0OTk5My4wLjAuMA..-->
