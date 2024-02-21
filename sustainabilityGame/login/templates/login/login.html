@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <link rel="stylesheet" href="{% static 'login/style.css' %}">
+    <head>
+        <title>Registration page</title>
+        
+    </head>
+    <body>
+    <div class = "main" id = "main">
+
+    <form method = "POST">
+        <div class = "box">
+            <h1>Log in</h1>
+            Username: <br>
+            <input type = "text" size = "75" name = "username">
+            <br>
+            Password: <br>
+            <input type = "text" size = "75" name = "password">
+            <br>
+            <input type = "submit" value="Submit">
+        </div>
+    </form>
+</div>
+</body>
+</html>

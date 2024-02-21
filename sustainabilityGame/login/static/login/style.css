@@ -1,0 +1,49 @@
+div.main {
+    text-align: center;
+    /*padding-top: 100px;*/
+    padding-bottom: 50px;
+    font-size: 30px;
+    color: black;
+}
+
+/*input {
+    position: relative;
+    block-size: fit-content;
+    text-align: center;
+    background-color: darkgrey;
+    color: black;
+    resize: none;
+}*/
+
+div.box {
+    /*height: 300px;
+    display: flex;
+    justify-content: center;*/
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    align-items: center;
+    block-size: fit-content;
+    vertical-align: middle;
+    text-align: center;
+    width: 50%;
+    padding-bottom: 40px;
+   /* height: 50%;*/
+    font-size: 30px;
+    background-color: darkgreen;
+}
+div.box input {
+    margin: 20px;
+    padding-bottom: 10px;
+    font-size: 25px;
+    width: 300px;
+}
+div.box h1 {
+    position: relative;
+    top: 0;
+    left: 0;
+    align-items: center;
+    block-size: fit-content;
+    background-color: lightgreen;
+    text-align: center;
+}
