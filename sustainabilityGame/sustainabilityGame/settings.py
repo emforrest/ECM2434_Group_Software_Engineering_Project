@@ -82,10 +82,10 @@ WSGI_APPLICATION = 'sustainabilityGame.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'GroupSoftDevDataBase',
-        'USER': 'root',
-        'PASSWORD': 'root',
-        'HOST': '127.0.0.1',
+        'NAME': 'sustainabilitygame',
+        'USER': 'django',
+        'PASSWORD': 'acf6Z4LeA85FF9gY!',
+        'HOST': '129.146.140.114',
         'PORT': '3306',
     }
 }
