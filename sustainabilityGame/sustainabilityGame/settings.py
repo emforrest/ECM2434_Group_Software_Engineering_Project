@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'leaderboard',
     'register',
     'user',
-    'login'
+    'login',
+    'admin'
 ]
 
 MIDDLEWARE = [
