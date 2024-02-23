@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
     
-    <head>
+    <head> 
         <title>Registration page</title>
         <link rel="stylesheet" href="{% static 'login/style.css' %}">
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -10,6 +10,7 @@
     </head>
 
     <body>
+        <h1>Welcome back!</h1>
         <div class = "wrapper">
             <form action="">
                 <h1>Login</h1>
@@ -21,13 +22,21 @@
                     <input type="password" placeholder="password" required>
                     <i class='bx bxs-lock-alt'></i>
                 </div>
+                <div class="link">
+                    <p><a href="#">Forgot password?</a></p>
+                </div>
                 <button type="submit" class="btn">Login</button>
 
-                <div class="register-link">
+                <div class="link">
                     <p>Don't have an account? <a href="/register/">Register</a></p>
                 </div>
             </form>
             
         </div>
+
+        <div class="wrapper">
+            <p>&copy; 2024 CO2 Saving. All Rights Reserved.</p>
+        </div>
+
     </body>
 </html>
