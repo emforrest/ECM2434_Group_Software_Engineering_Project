@@ -6,5 +6,5 @@ from django.http import HttpResponse
 
 def mainAdmin(request):
     #return HttpResponse("This is the group create page.")
-    return render(request, "admin/mainAdmin.html")
+    return render(request, "adminUser/mainAdmin.html")
 
