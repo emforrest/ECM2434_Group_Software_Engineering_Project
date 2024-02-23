@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -6,20 +5,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leaderboard</title>
+    <link rel="stylesheet" href= "{% static 'leaderboard/style.css' %}">
 </head>
 <body>
     <main class="table">
         <section class="leaderboard_header">
             <h1>Leaderboard</h1>
         </section>
-        <section class="leaderbaord_body">
+        <section class="leaderboard_body">
             <table>
                 <thead>
                     <tr>
-                        <th></th>
-                        <th> </th>
+                        <th>Position</th>
+                        <th>Username</th>
+                        <th>Co2 Saved</th>
                     </tr>
                 </thead>
+                <tbody>
+                    {%for user in users%}
+                    <tr>
+                        <td>{{user.position}}</th>
+                        <td>{{user.name}}</th>
+                        <td>{{user.totalCo2Saved}}</th>
+                    </tr>
+                    {%endfor%}
+                </tbody>
             </table>
         </section>
     </main>

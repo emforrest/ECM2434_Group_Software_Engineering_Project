@@ -1,0 +1,96 @@
+* {
+    margin: 0; 
+    padding: 0;
+
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url("https://media.studentcrowd.net/w852-h568-q90-cfill/1435759019_uploaded.jpg") no-repeat;
+    background-size: cover;
+    background-position: center;
+
+    backdrop-filter: blur(5px);
+}
+
+.leaderboard_header {
+    height: 10%; 
+    width: 100%;
+    background-color: rgba(64, 162, 106, 0.5);
+    padding: .8rem 1rem;
+    text-align: center;
+
+}
+
+.leaderboard_body {
+    width: 95%;
+    max-height: 89%;
+    background-color: rgba(102, 225, 155, 0.6);
+
+    margin: .8rem auto;
+    border-radius: .6rem;
+
+    overflow: auto;
+}
+
+
+main.table {
+    width: 50%;
+    max-width: 350px;
+    height: 50%;
+    background-color: rgba(46, 139, 87, 0.6);
+    margin: auto;
+
+    backdrop-filter: blur(12px);
+    box-shadow: 0 .4rem .8rem black;
+    border-radius: .8rem;
+
+}
+
+
+table, th, td {
+    padding: 1rem;
+}
+
+thead th {
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: rgba(89, 213, 172, 0.7);
+}
+
+tbody tr:nth-child(even) {
+    background-color: rgba(132, 234, 200, 0.7);
+}
+
+tbody tr:nth-child(odd) {
+    background-color: rgba(156, 230, 205, 0.7);
+}
+
+tbody tr:nth-child(1) {
+    background-color: rgba(255, 217, 0, 0.7);
+}
+
+tbody tr:nth-child(2) {
+    background-color: rgba(192, 192, 192, 0.7);
+}
+
+tbody tr:nth-child(3) {
+    background-color: rgba(94, 29, 29, 0.7);
+}
+    
+
+@media (max-width: 600px) {
+    main.table {
+        width: 40%;
+    }
+
+    th, td {
+        font-size: 25px;
+    }
+}
