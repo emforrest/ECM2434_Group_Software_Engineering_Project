@@ -1,3 +1,5 @@
+CREATE SCHEMA sustainabilitygame;
+
 CREATE TABLE groups (
     GroupID INT AUTO_INCREMENT PRIMARY KEY,
     Name VARCHAR(255) NOT NULL,
