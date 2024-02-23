@@ -1,2 +1,2 @@
-/env
-/sustainabilityGame/env
+**/env
+**/__pycache__
