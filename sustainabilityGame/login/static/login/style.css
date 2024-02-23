@@ -1,24 +1,24 @@
-div.main {
+/*div.main {
     text-align: center;
-    /*padding-top: 100px;*/
+    padding-top: 100px;
     padding-bottom: 50px;
     font-size: 30px;
     color: black;
 }
 
-/*input {
+input {
     position: relative;
     block-size: fit-content;
     text-align: center;
     background-color: darkgrey;
     color: black;
     resize: none;
-}*/
+}
 
 div.box {
-    /*height: 300px;
+    height: 300px;
     display: flex;
-    justify-content: center;*/
+    justify-content: center;
     position: absolute;
     top: 25%;
     left: 25%;
@@ -28,7 +28,7 @@ div.box {
     text-align: center;
     width: 50%;
     padding-bottom: 40px;
-   /* height: 50%;*/
+    height: 50%;
     font-size: 30px;
     background-color: darkgreen;
 }
@@ -46,4 +46,84 @@ div.box h1 {
     block-size: fit-content;
     background-color: lightgreen;
     text-align: center;
+}*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url('forum.jpg') no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.wrapper {
+    width: 420px;
+    /*background: seagreen;*/
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .2);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    color: #fff;
+    border-radius: 10px;
+    padding: 30px 40px;
+}
+
+.wrapper h1 {
+    font-size: 36px;
+    text-align: center;
+}
+
+.wrapper .input-box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+}
+
+.input-box input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid rgba(255, 255, 255, .2);
+    border-radius: 40px;
+    font-size: 16px;
+    color: #fff;
+    padding: 20px 45px 20px 20px ;
+}
+
+.input-box input::placeholder {
+    color: #fff;
+}
+
+.input-box i {
+    position: absolute;
+    right: 20px;
+    top: 30%;
+    transform: translateV(-25%);
+    font-size: 20px;
+}
+
+.wrapper .btn {
+    width: 100%;
+    height: 45px;
+    background: #fff;
+    border: none;
+    outline: none;
+    border-radius: 50px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+    font-weight: 600;
 }
