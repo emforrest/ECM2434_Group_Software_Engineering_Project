@@ -21,7 +21,7 @@ body {
 .leaderboard_header {
     height: 10%; 
     width: 100%;
-    background-color: rgba(64, 162, 106, 0.5);
+    background-color: rgba(191, 222, 204, 0.5);
     padding: .8rem 1rem;
     text-align: center;
 
@@ -30,7 +30,7 @@ body {
 .leaderboard_body {
     width: 95%;
     max-height: 89%;
-    background-color: rgba(102, 225, 155, 0.6);
+    background-color: rgba(202, 231, 214, 0.6);
 
     margin: .8rem auto;
     border-radius: .6rem;
@@ -43,7 +43,7 @@ main.table {
     width: 50%;
     max-width: 350px;
     height: 50%;
-    background-color: rgba(46, 139, 87, 0.6);
+    background-color: rgba(192, 216, 203, 0.6);
     margin: auto;
 
     backdrop-filter: blur(12px);
@@ -61,15 +61,15 @@ thead th {
     position: sticky;
     top: 0;
     left: 0;
-    background-color: rgba(89, 213, 172, 0.7);
+    background-color: rgba(194, 221, 212, 0.7);
 }
 
 tbody tr:nth-child(even) {
-    background-color: rgba(132, 234, 200, 0.7);
+    background-color: rgba(83, 97, 93, 0.7);
 }
 
 tbody tr:nth-child(odd) {
-    background-color: rgba(156, 230, 205, 0.7);
+    background-color: rgba(134, 134, 134, 0.7);
 }
 
 tbody tr:nth-child(1) {

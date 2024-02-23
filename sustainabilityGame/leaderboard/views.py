@@ -29,7 +29,7 @@ def leaderboard(request):
     user4.position = 4
 
     user5 = User()
-    user5.name = "Guilia"
+    user5.name = "Giulia"
     user5.totalCo2Saved = 6.5
     user5.position = 5
 
