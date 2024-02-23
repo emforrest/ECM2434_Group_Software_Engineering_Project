@@ -1,1 +1,29 @@
-<h1>This is the user home page</h1>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>User home page</title>
+        <link rel="stylesheet" href="{% static 'user/style.css' %}">
+    </head>
+
+    <body>
+        <div class="profile-wrapper">
+            <div class="profile-box">
+                <h1>Profile</h1>
+                <br>
+                <p>Username: <i>MyUsername</i></p>
+                <br>
+                <p>Join Date: <i>MyDate</i></p>
+            </div>
+        </div>
+        <div class="profile-wrapper">
+            <div class="upload-box">
+                <h1>Savings</h1>
+                <br>
+                <p>Total Saving: <i>MySavings</i></p>
+                <br>
+                <a href="/user/upload"><button type="submit" class="upload-btn">Upload Journey</button></a>
+            </div>
+        </div>
+    </body>
+</html>
