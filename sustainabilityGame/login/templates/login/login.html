@@ -11,6 +11,7 @@
 
     <body>
         <div class = "wrapper">
+            {% if not request.user.is_authenticated %}
             <form action="" method='POST'>
                 {% csrf_token %}
                 <h1>Login</h1>
@@ -31,7 +32,10 @@
                     <p>Don't have an account? <a href="/register/">Register</a></p>
                 </div>
             </form>
-            
+            {% else %}
+            <p>You're already logged in. Would you like to <a href="/logout">logout</a>?</p>
+            {% endif %}
+
         </div>
     </body>
 </html>
