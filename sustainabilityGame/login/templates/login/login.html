@@ -1,11 +1,12 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
     
     <head>
         <title>Registration page</title>
         <link rel="stylesheet" href="{% static 'login/style.css' %}">
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        
     </head>
 
     <body>
@@ -21,6 +22,10 @@
                     <i class='bx bxs-lock-alt'></i>
                 </div>
                 <button type="submit" class="btn">Login</button>
+
+                <div class="register-link">
+                    <p>Don't have an account? <a href="/register/">Register</a></p>
+                </div>
             </form>
             
         </div>
