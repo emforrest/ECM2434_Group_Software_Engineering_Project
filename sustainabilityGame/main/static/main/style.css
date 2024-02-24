@@ -74,7 +74,7 @@ main.table {
     margin: auto;
 
     backdrop-filter: blur(12px);
-    box-shadow: 0 .4rem .8rem black;
+    box-shadow: 0 .1rem .2rem black;
     border-radius: .8rem;
 
 }
