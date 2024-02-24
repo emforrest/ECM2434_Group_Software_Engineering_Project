@@ -2,7 +2,10 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>User home page</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="{% static 'user/style.css' %}">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     </head>
@@ -43,9 +46,13 @@
                 <br>
                 <p>Email: <i>MyEmail</i></p>
                 <br>
-                <p>Username: <i>MyUsername</i></p>
+                <p>Name: <i>MyName</i></p>
                 <br>
-                <p>Join Date: <i>MyDate</i></p>
+                <p>Email: <i>MyEmail</i></p>
+                <br>
+                <p>Username: <i>{{ username }}</i></p>
+                <br>
+                <p>Join Date: <i>{{ myDate }}</i></p>
             </div>
         </div>
         <br>

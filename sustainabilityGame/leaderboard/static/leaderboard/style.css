@@ -16,27 +16,27 @@
 }
 
 .leaderboard_body {
-    width: 85%;
-    max-width: 550px;
-    max-height: 100%;
+    width: 100%;
     background-color: rgba(219, 219, 219, 0.733);
 
-    margin: .8rem auto;
+    margin: auto;
     border-radius: .6rem;
 
-    overflow: auto;
 }
 
 
 main.table {
-    width: 45vh;
-    height: 90vh;
+    width: 45%;
+    max-width: 419px;
+    height: 8%;
+    max-height: 700px;
     background-color: rgba(239, 239, 239, 0.459);
     margin: auto;
 
     backdrop-filter: blur(12px);
     box-shadow: 0 .4rem .8rem black;
-    border-radius: .8rem;
+    border-radius: .6rem;
+    overflow: auto;
 
 }
 
@@ -60,18 +60,6 @@ tbody tr:nth-child(odd) {
     background-color: rgba(223, 223, 223, 0.7);
 }
 
-tbody tr:nth-child(1) {
-    background-color: rgba(255, 217, 0, 0.7);
-}
-
-tbody tr:nth-child(2) {
-    background-color: rgba(192, 192, 192, 0.7);
-}
-
-tbody tr:nth-child(3) {
-    background-color: rgba(94, 29, 29, 0.7);
-}
-
 tbody tr:nth-child(n + 11) {
     background-color: rgba(155, 155, 155, 0.7);
 }
@@ -79,7 +67,7 @@ tbody tr:nth-child(n + 11) {
 
 @media (max-width: 310px) {
     main.table {
-        width: 100%;
+        width: 40%;
     }
 
     th, td {
@@ -89,6 +77,6 @@ tbody tr:nth-child(n + 11) {
 
 @media (max-height: 700px) {
     main.table {
-        width: 85%;
+        height: 10%;
     }
 }

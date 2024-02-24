@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+        <title>Registration page</title>
+        <link rel="stylesheet" href="{% static 'login/style.css' %}">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        
+    </head>
+
+    <body>
+        <div class = "wrapper">
+            {% if request.user.is_authenticated %}
+            <form action="" method='POST'>
+                {% csrf_token %}
+                <p>Are you sure you want to logout?</p>
+                <button type='submit'>Yes, logout.</button>
+
+            </form>
+            {% else %}
+            <p>You're not logged in. Would you like to <a href="/login/">login</a>?</p>
+            <div class="register-link">
+                <p>Don't have an account? <a href="/register/">Register</a></p>
+            </div>
+            {% endif %}
+        </div>
+    </body>
+</html>
