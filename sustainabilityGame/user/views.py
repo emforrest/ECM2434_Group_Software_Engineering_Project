@@ -6,11 +6,17 @@ from django.contrib.auth.models import User
 
 from django.http import HttpResponse
 
-@login_required
+#@login_required
 def home(request):
+    firstName = request.user.first_name
+    lastName = request.user.last_name
+    name = firstName + " " + lastName
+    email = request.user.email
     username = request.user.username
     myDate = request.user.date_joined
-    context = context = {"username": username,
+    context = context = {"name": name,
+                         "email": email,
+                         "username": username,
                          "myDate": myDate}
     #return HttpResponse("This is the user homepage.")
     return render(request, "user/home.html", context)
