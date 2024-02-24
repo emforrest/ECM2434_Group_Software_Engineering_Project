@@ -38,7 +38,27 @@ def leaderboard(request):
     user6.totalCo2Saved = 5.2
     user6.position = 6
 
+    user7 = User()
+    user7.name = "Diego"
+    user7.totalCo2Saved = 4.8
+    user7.position = 7
 
-    users = [user1, user2, user3, user4, user5, user6]
+    user8 = User()
+    user8.name = "Solomon"
+    user8.totalCo2Saved = 4.5
+    user8.position = 8
+
+    user9 = User()
+    user9.name = "Matt"
+    user9.totalCo2Saved = 4.3
+    user9.position = 9
+
+    user10 = User()
+    user10.name = "John"
+    user10.totalCo2Saved = 0.8
+    user10.position = 19
+
+
+    users = [user1, user2, user3, user4, user5, user6, user7, user8, user9, user10]
     #return HttpResponse("This is the leaderboard page.")
     return render(request, "leaderboard/leaderboard.html", {'users':users})
