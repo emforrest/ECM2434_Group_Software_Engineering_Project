@@ -35,6 +35,8 @@
             </div>
         </nav>
     </header>
+
+    <br>
     <main class="table">
         <section class="leaderboard_header">
             <h1>Leaderboard</h1>
@@ -42,17 +44,25 @@
         <section class="leaderboard_body">
             <table>
                 <thead>
-                    <tr>
-                        <th>Position</th>
-                        <th>Username</th>
-                        <th>Co2 Saved</th>
+                    <tr> 
+                        <th>Position &nbsp &nbsp &nbsp  &nbsp &nbsp   </th>
+                        <th>Username &nbsp &nbsp &nbsp &nbsp &nbsp  </th>
+                        <th>Co2 Saved &nbsp &nbsp &nbsp &nbsp &nbsp </th>
                     </tr>
                 </thead>
                 <tbody>
                     {%for user in users%}
                     <tr>
-                        <td>{{user.position}}</th>
-                        <td>{{user.name}}</th>
+                        <td>{{user.position}}</td>
+                        {% if user.position == 1 %}
+                        <td>{{user.name}} 🥇</td>
+                        {% elif user.position == 2 %}
+                        <td>{{user.name}} 🥈</td>
+                        {% elif user.position == 3 %}
+                        <td>{{user.name}} 🥉</td>
+                        {% else %}
+                        <td>{{user.name}}</td>
+                        {% endif %}
                         <td>{{user.totalCo2Saved}}</th>
                     </tr>
                     {%endfor%}
