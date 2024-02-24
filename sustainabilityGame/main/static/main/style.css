@@ -1,0 +1,100 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    color: black;
+}
+
+body {
+    min-height: 100vh;
+    background: url('forum.jpg') no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+h1 {
+    text-align: center;
+    font-size: 36px;
+}
+
+.main-header {
+    height: 15%; 
+    width: 100%;
+    font-family: "Poppins", sans-serif;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: .8rem 1rem;
+    text-align: center;
+    border-radius: .6rem;
+
+}
+
+.main-description {
+    width: 95vh;
+    max-height: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+
+    margin: .8rem auto;
+    border-radius: .6rem;
+
+    overflow: auto;
+    font-size: 20px;
+}
+
+.main-links {
+    width: 95vh;
+    max-height: 100%;
+
+    margin: .8rem auto;
+    border-radius: .6rem;
+
+    overflow: auto;
+    text-align: center;
+}
+
+.main-links .btn {
+    width: 35%;
+    height: 50px;
+    background: #edf7ff;
+    border: none;
+    outline: none;
+    margin: 10px;
+    border-radius: 20px;
+}
+
+.btn:hover {
+    background-color: #a1d6ffd5;
+    color: white;
+}
+
+main.table {
+    width: 100vh;
+    height: 70vh;
+    background-color:rgba(255, 255, 255, .8);
+    margin: auto;
+
+    backdrop-filter: blur(12px);
+    box-shadow: 0 .1rem .2rem black;
+    border-radius: .8rem;
+
+}
+
+.footer {
+    position: center;
+    bottom: 10px;
+    margin: auto;
+    width: 100vh;
+    height: 40px;
+    background-color:rgba(255, 255, 255, .6);
+    border: 2px solid rgba(255, 255, 255, .2);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    color: #fff;
+    border-radius: 10px;
+    padding: 5px 2px;
+}
+
+.footer p {
+    text-align: center;
+}
+

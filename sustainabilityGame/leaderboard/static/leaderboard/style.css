@@ -5,6 +5,13 @@
     box-sizing: border-box;
 }
 
+body {
+    min-height: 100vh;
+    background: url('forum.jpg') no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
 .leaderboard_header {
     height: 10%; 
     width: 100%;
