@@ -4,10 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leaderboard</title>
-    <link rel="stylesheet" href= "{% static 'leaderboard/style.css' %}">
+    <title>CO2 Saving Website</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
+    <link rel="stylesheet" href="{% static 'adminUser/style.css' %}">
+    <!--<link rel="stylesheet" href="style.css">-->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
     <header>
@@ -26,6 +27,9 @@
                         <a class="nav-link" href="/login/">Login</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="/leaderboard/">Leaderboard</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="/user/">User Profile</a>
                     </li>
                     <li class="nav-item">
@@ -35,43 +39,20 @@
             </div>
         </nav>
     </header>
+    
 
-    <br>
-    <main class="table">
-        <section class="leaderboard_header">
-            <h1>Leaderboard</h1>
-        </section>
-        <section class="leaderboard_body">
-            <table>
-                <thead>
-                    <tr> 
-                        <th>Position &nbsp &nbsp &nbsp  &nbsp &nbsp   </th>
-                        <th>Username &nbsp &nbsp &nbsp &nbsp &nbsp  </th>
-                        <th>Co2 Saved &nbsp &nbsp &nbsp &nbsp &nbsp </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {%for user in users%}
-                    <tr>
-                        <td>{{user.position}}</td>
-                        {% if user.position == 1 %}
-                        <td>{{user.name}} 🥇</td>
-                        {% elif user.position == 2 %}
-                        <td>{{user.name}} 🥈</td>
-                        {% elif user.position == 3 %}
-                        <td>{{user.name}} 🥉</td>
-                        {% else %}
-                        <td>{{user.name}}</td>
-                        {% endif %}
-                        <td>{{user.totalCo2Saved}}</th>
-                    </tr>
-                    {%endfor%}
-                </tbody>
-            </table>
-        </section>
-    </main>
+
+    
+
+    <footer class="mt-5">
+        <div class="container text-center">
+            <p>&copy; 2024 CO2 Saving. All Rights Reserved.</p>
+        </div>
+    </footer>
+    
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
