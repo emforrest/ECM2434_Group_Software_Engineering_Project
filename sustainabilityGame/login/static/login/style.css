@@ -7,9 +7,9 @@
 }
 
 body {
-    display: grid;
+    /*display: grid;
     justify-content: center;
-    align-items: center;
+    align-items: center;*/
     min-height: 100vh;
     background: url('forum.jpg') no-repeat;
     background-size: cover;
@@ -21,6 +21,7 @@ h1 {
 }
 
 .wrapper {
+    margin: auto;
     width: 420px;
     background: transparent;
     border: 2px solid rgba(255, 255, 255, .2);
@@ -28,7 +29,26 @@ h1 {
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
     color: #fff;
     border-radius: 10px;
-    padding: 30px 40px;
+    padding: 20px 40px;
+}
+
+.footer {
+    position: center;
+    bottom: 10px;
+    margin: auto;
+    width: 420px;
+    height: 40px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .2);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    color: #fff;
+    border-radius: 10px;
+    padding: 5px 2px;
+}
+
+.footer p {
+    text-align: center;
 }
 
 .wrapper h1 {
