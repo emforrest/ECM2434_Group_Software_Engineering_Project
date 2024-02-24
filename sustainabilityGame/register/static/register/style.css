@@ -16,12 +16,9 @@ body {
     background-position: center;
 }
 
-h1 {
-    text-align: center;
-}
-
-.wrapper {
+.container {
     width: 420px;
+    margin: 10px;
     background: transparent;
     border: 2px solid rgba(255, 255, 255, .2);
     backdrop-filter: blur(20px);
@@ -31,16 +28,16 @@ h1 {
     padding: 30px 40px;
 }
 
-.wrapper h1 {
+.container h1 {
     font-size: 36px;
     text-align: center;
 }
 
-.wrapper .input-box {
+.container .input-box {
     position: relative;
     width: 100%;
     height: 50px;
-    margin: 30px 0;
+    margin: 20px 0;
 }
 
 .input-box input {
@@ -68,7 +65,7 @@ h1 {
     font-size: 20px;
 }
 
-.wrapper .btn {
+.container .btn {
     width: 100%;
     height: 45px;
     background: #fff;
@@ -82,9 +79,9 @@ h1 {
     font-weight: 600;
 }
 
-.wrapper .link {
+.container .link {
     font-size: 14.5px;
-    text-align: center;
+    text-align: left;
     margin: 20px 0 15px;
 }
 
