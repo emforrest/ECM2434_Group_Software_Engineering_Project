@@ -13,6 +13,7 @@
     <h1>Welcome to CarbonCommuter</h1>
     <div class="container">
         <h1>Register</h1>
+<<<<<<< HEAD
         <div class="input-box">
             <input type="text" placeholder="name" required>
         </div>
@@ -37,6 +38,49 @@
             <p>Already registered? <a href="/login/">Login</a></p>
             <p>Back to <a href="/">Home</a></p>
         </div>
+=======
+        <form action="/register/" method="POST">
+            {% csrf_token %}
+            {% if error %}
+                <p style='color:red'>{{ error }}</p>
+            {% endif %}
+            <div class="form-group">
+                <label for="name">First Name:</label>
+                <input type="text" class="form-control" id="first_name" name="first_name" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Last Name:</label>
+                <input type="text" class="form-control" id="last_name" name="last_name" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Email:</label>
+                <input type="text" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Username:</label>
+                <input type="text" class="form-control" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Password:</label>
+                <input type="password" class="form-control" id="password1" name="password1" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Re-enter your password:</label>
+                <input type="password" class="form-control" id="password2" name="password2" required>
+            </div>
+            <div class="form-group">
+                <label for="group">Group:</label>
+                <select class="form-control" id="group" name="group">
+                    <option value="">Select Group</option>
+                    <!-- You may populate this dropdown with existing groups from your database -->
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+        <hr>
+        <p>Already registered? <a href="/login/">Login here</a></p>
+        <p>Back to <a href="/">Home</a></p>
+>>>>>>> AbigailHinton
     </div>
 
     <footer class="mt-5">
