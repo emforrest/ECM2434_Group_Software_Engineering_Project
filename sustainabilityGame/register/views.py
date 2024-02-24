@@ -19,7 +19,6 @@ def register(request):
         if password1 != password2:
             context = {"error": "The passwords do not match"}
             return render(request, "register/register.html", context)
-        print(first_name, last_name, email, username, password1)
         #checking user does not already exist
         user = authenticate(request, username=username, password=password1)
         userFilter = User.objects.filter(username=username)
@@ -37,7 +36,6 @@ def register(request):
         except ValidationError as error:
             context = {"error": error}
             return render(request, "register/register.html", context)
-        print(validatePass)
         #creating the new user and redirecting to user home page
         newUser = User.objects.create_user(first_name=first_name, 
                                       last_name=last_name, 
