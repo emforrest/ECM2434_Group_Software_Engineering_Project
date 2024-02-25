@@ -63,4 +63,7 @@ def upload(request):
         savings = distanceToCO2(distance, transport)
         print(savings)
         
+        request.user.profile.total_saving += savings
+        request.user.profile.save()
+        
     return render(request, "user/upload.html", context)
