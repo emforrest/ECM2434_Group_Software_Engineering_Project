@@ -86,3 +86,16 @@ def getCampusCoords(location: str) -> dict:
         return campus[location]
     else:
         return {}
+    
+    
+def convertTravelType(type: str) -> TravelType:
+    # Match type to TravelType object
+    match type.lower():
+        case "bus":
+            return TravelType.BUS
+        case "train":
+            return TravelType.TRAIN
+        case "bike":
+            return TravelType.BIKE
+        case "walk":
+            return TravelType.WALK
