@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
     
-    <head> 
+    <head>
         <title>Registration page</title>
         <link rel="stylesheet" href="{% static 'login/style.css' %}">
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -20,9 +20,6 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="/register/">Register</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="/leaderboard/">Leaderboard</a>
                         </li>
                         <li class="nav-item">
@@ -35,43 +32,24 @@
 
         <br>
         <div class = "wrapper">
-            {% if not request.user.is_authenticated %}
+            {% if request.user.is_authenticated %}
             <form action="" method='POST'>
-                <h1>Welcome back!</h1>
                 {% csrf_token %}
-                <h1>Login</h1>
-                {% if error %}
-                    <p style='color:red'>{{ error }}</p>
-                {% endif %}
-                <div class="input-box">
-                    <input type="text" placeholder="username" name="username" autocomplete="off" required>
-                    <i class='bx bxs-user'></i>
-                </div>
-                <div class="input-box">
-                    <input type="password" placeholder="password" name="password" autocomplete="off" required>
-                    <i class='bx bxs-lock-alt'></i>
-                </div>
-                <!--div class="link">
-                    <p><a href="#">Forgot password?</a></p>
-                </div-->
-                <button type="submit" class="btn">Login</button>
+                <p>Are you sure you want to logout?</p>
+                <button type='submit' class="btn">Yes, logout.</button>
 
-                <div class="link">
-                    <p>Don't have an account? <a href="/register/">Register</a></p>
-                </div>
             </form>
             {% else %}
-            <p>You're already logged in. Would you like to <a href="/logout">logout</a>?</p>
+            <p>You're not logged in. Would you like to <a href="/login/">login</a>?</p>
+            <div class="register-link">
+                <p>Don't have an account? <a href="/register/">Register</a></p>
+            </div>
             {% endif %}
-
         </div>
+
         <br>
         <div class="footer">
             <p>&copy; 2024 CO2 Saving. All Rights Reserved.</p>
         </div>
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     </body>
 </html>
