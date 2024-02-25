@@ -3,8 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
 # Render user webpages here
+from common.utils import locationToDistance, getCampusCoords, distanceToCO2, convertTravelType
 
-from django.http import HttpResponse
 
 @login_required
 def home(request):
@@ -42,9 +42,25 @@ def upload(request):
     context = context = {"username": username}
     #return HttpResponse("This is the user upload page.")
     if request.method == "POST":
+        
         print(request.POST.get("oncampus"))
         print(request.POST.get("autocomplete"))
         print(request.POST.get("lat"))
         print(request.POST.get("lng"))
         print(request.POST.get("transport"))
+        
+        origin = getCampusCoords(request.POST.get('oncampus'))
+        if origin == {}:
+            raise RuntimeError("On-campus location not found!")
+        
+        transport = convertTravelType(request.POST.get('transport'))
+        if transport is None:
+            raise RuntimeError("Transport not found!")
+        
+        distance = locationToDistance(origin['latitude'], origin['longitude'], float(request.POST.get('lat')), float(request.POST.get('lng')), transport)
+        print(distance)
+        
+        savings = distanceToCO2(distance, transport)
+        print(savings)
+        
     return render(request, "user/upload.html", context)

@@ -1,7 +1,7 @@
 
 import json
 import requests
-from travelTypes import TravelType
+from common.travelTypes import TravelType
 
 
 # These are the functions for calculating how much CO2 has been saved by the journey being done sustainably
@@ -17,7 +17,7 @@ def distanceToCO2(distance: float, transport: TravelType|int):
                         transport = TravelType.BIKE 
                 case 3: 
                         transport = TravelType.WALK 
-    co2_saved = distance * abs(transport - TravelType.CAR)
+    co2_saved = distance * abs(transport.value - TravelType.CAR.value)
     return co2_saved 
 
 
@@ -77,8 +77,8 @@ def locationToDistance(origin_lat: float, origin_long: float, dest_lat: float, d
 def getCampusCoords(location: str) -> dict:
     
     # Load campus coords from json file
-    with open("campusCoordinates.json", "r") as file:
-        campus = json.loads(file)
+    with open("common/campusCoordinates.json", "rb") as file:
+        campus = json.load(file)
         file.close()
     
     # Return latitude and longitude dictionary associated with location name in file
@@ -99,3 +99,4 @@ def convertTravelType(type: str) -> TravelType:
             return TravelType.BIKE
         case "walk":
             return TravelType.WALK
+    return None
