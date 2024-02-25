@@ -5,7 +5,6 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>User home page</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="{% static 'user/style.css' %}">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     </head>
@@ -21,7 +20,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="/login/">Login</a>
+                            <a class="nav-link" href="/logout/">Logout</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/register/">Register</a>
@@ -41,10 +40,6 @@
         <div class="wrapper">
             <div class="profile-box">
                 <h1>Profile</h1>
-                <br>
-                <p>Name: <i>MyName</i></p>
-                <br>
-                <p>Email: <i>MyEmail</i></p>
                 <br>
                 <p>Name: <i>{{ name }}</i></p>
                 <br>
