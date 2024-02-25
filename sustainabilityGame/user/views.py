@@ -41,4 +41,10 @@ def upload(request):
     username = request.user.username
     context = context = {"username": username}
     #return HttpResponse("This is the user upload page.")
+    if request.method == "POST":
+        print(request.POST.get("oncampus"))
+        print(request.POST.get("autocomplete"))
+        print(request.POST.get("lat"))
+        print(request.POST.get("lng"))
+        print(request.POST.get("transport"))
     return render(request, "user/upload.html", context)
