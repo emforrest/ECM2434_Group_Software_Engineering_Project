@@ -1,13 +1,3 @@
-header {
-    position: fixed;
-    top: 0;
-}
-footer {
-    position: fixed;
-    bottom: 0;
-}
-
-
 #map {
     height: 400px;
     width: 100%;

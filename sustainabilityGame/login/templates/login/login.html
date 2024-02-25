@@ -33,10 +33,11 @@
             </nav>
         </header>
 
-        <h1>Welcome back!</h1>
+        <br>
         <div class = "wrapper">
             {% if not request.user.is_authenticated %}
             <form action="" method='POST'>
+                <h1>Welcome back!</h1>
                 {% csrf_token %}
                 <h1>Login</h1>
                 {% if error %}
