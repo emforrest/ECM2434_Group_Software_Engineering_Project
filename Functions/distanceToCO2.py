@@ -2,7 +2,7 @@
 from travelTypes import TravelType
 
 #function takes in distance traveled, and a number representing how they did it. web app will call this fuction.
-def distanceToCO2(distance, transport):
+def distanceToCO2(distance: float, transport: TravelType|int):
         match transport: 
                 case 0: 
                         transport = TravelType.BUS 

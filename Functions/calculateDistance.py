@@ -57,4 +57,4 @@ def locationToDistance(origin_lat: float, origin_long: float, dest_lat: float, d
 
 
 # Test function
-print(locationToDistance(50.727163, -3.535225, 50.736235, -3.534693, TravelType.TRAIN))
+print(locationToDistance(50.727163, -3.535225, 50.736235, -3.534693, TravelType.BIKE))
