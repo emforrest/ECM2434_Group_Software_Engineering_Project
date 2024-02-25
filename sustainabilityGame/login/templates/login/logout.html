@@ -6,16 +6,37 @@
         <title>Registration page</title>
         <link rel="stylesheet" href="{% static 'login/style.css' %}">
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     </head>
 
     <body>
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="/">CarbonCommuter</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+    
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/leaderboard/">Leaderboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <br>
         <div class = "wrapper">
             {% if request.user.is_authenticated %}
             <form action="" method='POST'>
                 {% csrf_token %}
                 <p>Are you sure you want to logout?</p>
-                <button type='submit'>Yes, logout.</button>
+                <button type='submit' class="btn">Yes, logout.</button>
 
             </form>
             {% else %}
@@ -24,6 +45,11 @@
                 <p>Don't have an account? <a href="/register/">Register</a></p>
             </div>
             {% endif %}
+        </div>
+
+        <br>
+        <div class="footer">
+            <p>&copy; 2024 CO2 Saving. All Rights Reserved.</p>
         </div>
     </body>
 </html>

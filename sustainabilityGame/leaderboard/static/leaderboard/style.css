@@ -5,6 +5,35 @@
     box-sizing: border-box;
 }
 
+body {
+    min-height: 100vh;
+    background: url('forum.jpg') no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.footer {
+    position: center;
+    bottom: 10px;
+    margin: auto;
+    width: 45%;
+    max-width: 419px;
+    height: 40px;
+    background-color:rgba(255, 255, 255, .6);
+    border: 2px solid rgba(255, 255, 255, .2);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    color: #fff;
+    border-radius: 10px;
+    padding: 5px 2px;
+    overflow: auto;
+}
+
+.footer p {
+    text-align: center;
+    color: black;
+}
+
 .leaderboard_header {
     height: 10%; 
     width: 100%;

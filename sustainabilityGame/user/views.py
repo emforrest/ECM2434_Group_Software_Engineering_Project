@@ -8,19 +8,37 @@ from django.http import HttpResponse
 
 @login_required
 def home(request):
+    firstName = request.user.first_name
+    lastName = request.user.last_name
+    name = firstName + " " + lastName
+    email = request.user.email
     username = request.user.username
     myDate = request.user.date_joined
-    context = context = {"username": username,
+    context = context = {"name": name,
+                         "email": email,
+                         "username": username,
                          "myDate": myDate}
     #return HttpResponse("This is the user homepage.")
     return render(request, "user/home.html", context)
 
 @login_required
 def settings(request):
+    firstName = request.user.first_name
+    lastName = request.user.last_name
+    email = request.user.email
+    username = request.user.username
+    myDate = request.user.date_joined
+    context = context = {"firstName": firstName,
+                         "lastName" : lastName,
+                         "email": email,
+                         "username": username,
+                         "myDate": myDate}
     #return HttpResponse("This is the user settings page.")
-    return render(request, "user/settings.html")
+    return render(request, "user/settings.html", context)
 
 @login_required
 def upload(request):
+    username = request.user.username
+    context = context = {"username": username}
     #return HttpResponse("This is the user upload page.")
-    return render(request, "user/upload.html")
+    return render(request, "user/upload.html", context)

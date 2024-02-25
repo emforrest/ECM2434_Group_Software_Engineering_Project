@@ -1,13 +1,3 @@
-header {
-    position: fixed;
-    top: 0;
-}
-footer {
-    position: fixed;
-    bottom: 0;
-}
-
-
 #map {
     height: 400px;
     width: 100%;
@@ -46,6 +36,7 @@ footer {
     background-color: #3e8e41;
 }
 
+
 * {
     margin: 0;
     padding: 0;
@@ -54,28 +45,45 @@ footer {
 }
 
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     min-height: 100vh;
     background: url('forum.jpg') no-repeat;
     background-size: cover;
     background-position: center;
 }
 
+h1 {
+    text-align: center;
+    color: black;
+}
+
 .wrapper {
+    margin: auto;
     width: 420px;
-    background: transparent;
+    background-color: transparent;
     border: 2px solid rgba(255, 255, 255, .2);
     backdrop-filter: blur(20px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
-    color: #fff;
+    color: white;
     border-radius: 10px;
-    padding: 30px 40px;
+    padding: 15px 40px;
 }
 
-.wrapper h1 {
-    font-size: 36px;
+.footer {
+    position: center;
+    bottom: 10px;
+    margin: auto;
+    width: 420px;
+    height: 40px;
+    background-color: transparent;
+    border: 2px solid rgba(255, 255, 255, .2);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    color: white;
+    border-radius: 10px;
+    padding: 5px 2px;
+}
+
+.footer p {
     text-align: center;
 }
 
@@ -93,6 +101,11 @@ body {
     font-weight: 600;
 }
 
+.wrapper .btn:hover {
+    background-color: #a1d6ffd5;
+    color:black;
+}
+
 .profile-wrapper {
     width: 40%;
     height: 200px;
@@ -101,26 +114,74 @@ body {
     border: 2px solid rgba(255, 255, 255, .2);
     backdrop-filter: blur(20px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
-    color: #fff;
+    color: white;
     border-radius: 10px;
     padding: 30px 40px;
 }
 
 .profile-wrapper h1 {
     font-size: 36px;
+    color: white;
 }
 
 .profile-wrapper p i {
     text-align: left;
 }
 
-.profile-wrapper .upload-btn {
-    width: 100%;
-    height: 35px;
-    background: #fff;
-    border: none;
-    outline: none;
-    border-radius: 50px;
+.wrapper h1 {
+    font-size: 36px;
+    text-align: center;
+    color: white;
 }
 
+.wrapper p1 {
+    font-weight: bold;
+}
 
+.wrapper .input-box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 15px 0;
+}
+
+.input-box input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid rgba(255, 255, 255, .2);
+    border-radius: 40px;
+    font-size: 16px;
+    color: #fff;
+    padding: 20px 45px 20px 20px ;
+}
+
+.input-box input::placeholder {
+    color: #fff;
+}
+
+.input-box i {
+    position: absolute;
+    right: 20px;
+    top: 30%;
+    transform: translateV(-25%);
+    font-size: 20px;
+}
+
+.wrapper .link {
+    font-size: 14.5px;
+    text-align: center;
+    margin: 20px 0 15px;
+}
+
+.link p a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.link p a:hover {
+    text-decoration: underline;
+}

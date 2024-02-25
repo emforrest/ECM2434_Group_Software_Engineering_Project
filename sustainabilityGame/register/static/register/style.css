@@ -3,41 +3,65 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
-    color: white;
+    /*color: white;*/
 }
 
 body {
-    display: grid;
+    /*display: grid;
     justify-content: center;
-    align-items: center;
+    align-items: center;*/
     min-height: 100vh;
     background: url('forum.jpg') no-repeat;
     background-size: cover;
     background-position: center;
 }
 
-.container {
+h1 {
+    color: white;
+    text-align: center;
+}
+
+.wrapper {
+    margin: auto;
     width: 420px;
-    margin: 10px;
     background: transparent;
     border: 2px solid rgba(255, 255, 255, .2);
     backdrop-filter: blur(20px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
     color: #fff;
     border-radius: 10px;
-    padding: 30px 40px;
+    padding: 15px 40px;
 }
 
-.container h1 {
+.footer {
+    position: center;
+    bottom: 10px;
+    margin: auto;
+    width: 420px;
+    height: 40px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .2);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    color: #fff;
+    border-radius: 10px;
+    padding: 5px 2px;
+}
+
+.footer p {
+    text-align: center;
+}
+
+.wrapper h1 {
     font-size: 36px;
     text-align: center;
 }
 
-.container .input-box {
+.wrapper .input-box {
     position: relative;
     width: 100%;
     height: 50px;
-    margin: 20px 0;
+    margin: 15px 0;
 }
 
 .input-box input {
@@ -65,7 +89,7 @@ body {
     font-size: 20px;
 }
 
-.container .btn {
+.wrapper .btn {
     width: 100%;
     height: 45px;
     background: #fff;
@@ -79,9 +103,9 @@ body {
     font-weight: 600;
 }
 
-.container .link {
+.wrapper .link {
     font-size: 14.5px;
-    text-align: left;
+    text-align: center;
     margin: 20px 0 15px;
 }
 
