@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 
 from django.http import HttpResponse
 
-#@login_required
+@login_required
 def home(request):
     firstName = request.user.first_name
     lastName = request.user.last_name
