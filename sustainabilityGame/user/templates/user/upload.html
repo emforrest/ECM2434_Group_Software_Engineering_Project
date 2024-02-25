@@ -1,125 +1,116 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<title>Upload</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-    #map {
-            height: 400px;
-            width: 100%;
-        }
-
-    .dropdown {
-      position: relative;
-      display: inline-block;
-    }
-    
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: #f1f1f1;
-      min-width: 160px;
-      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-      z-index: 1;
-    }
-    
-    .dropdown-content a {
-      color: black;
-      padding: 12px 16px;
-      text-decoration: none;
-      display: block;
-    }
-    
-    .dropdown-content a:hover {background-color: #ddd;}
-    
-    .dropdown:hover .dropdown-content {display: block;}
-    
-    .dropdown:hover .dropbtn {background-color: #3e8e41;}
-    </style>
-
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIZe4j6_6bvgDSdz4rjX_29_r6C6FGi1Y&libraries=places">
-  //add API key here
-</script> 
-
-
+    <title>Upload</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'user/style.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIZe4j6_6bvgDSdz4rjX_29_r6C6FGi1Y&libraries=places">
+    //add API key here
+    </script> 
 </head>
+
 <body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/">CO2 Saving</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-<h1>Upload a Journey</h1>
-<p><i>User : "username"</i></p>
-<br>
-<form name="upload" id="upload">
-    Select an on-campus location: 
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login/">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/leaderboard/">Leaderboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/">User Profile</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
     <br>
-    <select name="oncampus" id="oncampus">
-        <option value = "Forum">Forum</option>
-        <option value = "Amory">Amory</option>
-        <option value = "Devonshire House">Devonshire House</option>
-        <option value = "Peter Chalk">Peter Chalk</option>
-        <option value = "Living Systems Institute">Living Systems Institute</option>
-        <option value = "Harrison">Harrison</option>
-        <option value = "Business School">Business School</option>
-        <option value = "Sports Park">Sports Park</option>
-      </select>
-      <br><br>
+    <div class="wrapper">
+        <h1>Upload a Journey</h1>
+        <p><i>User : "username"</i></p>
+        <br>
+        <form name="upload" id="upload">
+            Select an on-campus location: 
+            <br>
+            <select name="oncampus" id="oncampus">
+                <option value = "Forum">Forum</option>
+                <option value = "Amory">Amory</option>
+                <option value = "Devonshire House">Devonshire House</option>
+                <option value = "Peter Chalk">Peter Chalk</option>
+                <option value = "Living Systems Institute">Living Systems Institute</option>
+                <option value = "Harrison">Harrison</option>
+                <option value = "Business School">Business School</option>
+                <option value = "Sports Park">Sports Park</option>
+            </select>
+            <br><br>
 
 
 
-    Enter an off-campus location:
+            Enter an off-campus location:
+            <br>
+            <input type="text" id="autocomplete" name="autocomplete" placeholder="Select">
+            <br>
+            
+            <script>
+                let autocomplete;
+                function initAutocomplete(){
+                    autocomplete = new google.maps.places.Autocomplete(
+                        document.getElementById('autocomplete'),
+                        {
+                        types:['address'],
+                        componentRestrictions: {'country': ['gb']},
+                        fields : ['geometry', 'name']
+                        }
+                    );
+                    autocomplete.addListener('place_changed', onPlaceChanged);
+                }
+            
+                function onPlaceChanged(){
+                    var place = autocomplete.getPlace();
+                    if (!place.geometry){
+                        document.getElementById('autocomplete').placeholder='Select';
+                    }
+                    else{
+                        document.getElementById('autocomplete').innerHTML=place.name;
+                    }
+                }
+            </script>
+
+
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIZe4j6_6bvgDSdz4rjX_29_r6C6FGi1Y&libraries=places&callback=initAutocomplete" async defer>
+            //add API key here
+            </script>
+            <br>
+            Select the mode of transport used: 
+            <br>
+            <select name="transport" id="transport">
+                <option value = "Bus">Bus</option>
+                <option value = "Train">Train</option>
+                <option value = "Bike">Bike</option>
+                <option value = "Walk">Walk</option>
+            </select>
+            <br><br>
+            <button type="submit" class="btn">Submit</button>
+
+        </form>
+    </div>
     <br>
-    <input type="text" id="autocomplete" name="autocomplete" placeholder="Select">
-      <br>
-      
-      <script>
-        let autocomplete;
-        function initAutocomplete(){
-          autocomplete = new google.maps.places.Autocomplete(
-            document.getElementById('autocomplete'),
-            {
-              types:['address'],
-              componentRestrictions: {'country': ['gb']},
-              fields : ['geometry', 'name']
-            }
-          );
-          autocomplete.addListener('place_changed', onPlaceChanged);
-        }
-      
-        function onPlaceChanged(){
-          var place = autocomplete.getPlace();
-          if (!place.geometry){
-            document.getElementById('autocomplete').placeholder='Select';
-          }
-          else{
-            document.getElementById('autocomplete').innerHTML=place.name;
-          }
-        }
-      </script>
-
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIZe4j6_6bvgDSdz4rjX_29_r6C6FGi1Y&libraries=places&callback=initAutocomplete" async defer>
-  //add API key here
-</script>
-      <br>
-
-
-
-
-    Select the mode of transport used: 
-    <br>
-    <select name="transport" id="transport">
-        <option value = "Bus">Bus</option>
-        <option value = "Train">Train</option>
-        <option value = "Bike">Bike</option>
-        <option value = "Walk">Walk</option>
-      </select>
-      <br><br>
-      <input type="submit" value="Submit">  
-    </form>
-    
-
-
+    <div class="footer">
+        <p>&copy; 2024 CO2 Saving. All Rights Reserved.</p>
+    </div>
 </body>
 </html>
 

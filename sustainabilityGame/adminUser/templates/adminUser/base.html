@@ -5,8 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CO2 Saving Website</title>
-    <link rel="stylesheet" href= "{% static 'main/style.css' %}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'adminUser/style.css' %}">
+    <!--<link rel="stylesheet" href="style.css">-->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
     <header>
@@ -30,28 +32,24 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/user/">User Profile</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/groups/">Groups</a>
+                    </li>
                 </ul>
             </div>
         </nav>
     </header>
-    <br>
-    <main class="table">
-        <section class="main-header">
-            <h1>Welcome to CarbonCommuter</h1>
-        </section>
-        <section class="main-description">
-            <p>Register now to start tracking your carbon emissions, join groups, and compete with others to see who can make the most significant impact!</p>
-        </section>
-        <section class="main-links">
-            <a href="/register/"><button type="submit" class="btn">Register</button></a><p>if you are a new user.</p>
-            <a href="/login/"><button type="submit" class="btn">Login</button></a><p>if you are an existing user.</p>
-            <a href="/leaderboard/"><button type="submit" class="btn">View Leaderboard</button></a><p>to see top savers.</p>
-        </section>
-    </main>
-    <br>
-    <div class="footer">
-        <p>&copy; 2024 CO2 Saving. All Rights Reserved.</p>
-    </div>
+    
+
+
+    
+
+    <footer class="mt-5">
+        <div class="container text-center">
+            <p>&copy; 2024 CO2 Saving. All Rights Reserved.</p>
+        </div>
+    </footer>
+    
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
