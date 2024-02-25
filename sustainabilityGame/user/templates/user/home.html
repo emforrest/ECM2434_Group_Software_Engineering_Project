@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>User home page</title>
         <link rel="stylesheet" href="{% static 'user/style.css' %}">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     </head>
 
@@ -29,7 +30,7 @@
                             <a class="nav-link" href="/leaderboard/">Leaderboard</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/user/">User Profile</a>
+                            <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
                         </li>
                     </ul>
                 </div>
@@ -41,13 +42,14 @@
             <div class="profile-box">
                 <h1>Profile</h1>
                 <br>
-                <p>Name: <i>{{ name }}</i></p>
+                <p><p1>Name: </p1><i>{{ name }}</i></p>
                 <br>
-                <p>Email: <i>{{ email }}</i></p>
+                <p><p1>Email: </p1><i>{{ email }}</i></p>
                 <br>
-                <p>Username: <i>{{ username }}</i></p>
+                <p><p1>Username: </p1><i>{{ username }}</i></p>
                 <br>
-                <p>Join Date: <i>{{ myDate }}</i></p>
+                <p><p1>Join Date: </p1><i>{{ myDate }}</i></p>
+                <a href="/user/settings"><button type="submit" class="btn">Edit Profile</button></a>
             </div>
         </div>
         <br>
@@ -55,7 +57,7 @@
             <div class="upload-box">
                 <h1>Savings</h1>
                 <br>
-                <p>Total Saving: <i>MySavings</i></p>
+                <p><p1>Total Saving: </p1><i>MySavings</i></p>
                 <br>
                 <a href="/user/upload"><button type="submit" class="btn">Upload Journey</button></a>
             </div>

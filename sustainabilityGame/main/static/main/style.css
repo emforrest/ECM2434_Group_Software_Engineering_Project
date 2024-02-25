@@ -3,7 +3,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
-    color: black;
+    /*color: black;*/
 }
 
 body {
@@ -70,7 +70,7 @@ h1 {
 main.table {
     width: 100vh;
     height: 70vh;
-    background-color:rgba(255, 255, 255, .8);
+    background-color: rgba(255, 255, 255, .8);
     margin: auto;
 
     backdrop-filter: blur(12px);
@@ -96,5 +96,6 @@ main.table {
 
 .footer p {
     text-align: center;
+    color: black;
 }
 
