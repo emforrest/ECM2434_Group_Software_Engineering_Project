@@ -21,7 +21,7 @@ def distanceToCO2(distance: float, transport: TravelType|int):
     return co2_saved 
 
 
-def locationToDistance(origin_lat: float, origin_long: float, dest_lat: float, dest_long: float, transport: TravelType):
+def locationToDistance(origin_lat: float, origin_long: float, dest_lat: float, dest_long: float, transport: TravelType) -> float:
     
     # Create JSON data format of origin and destination latitudes/longitute values required for the request
     data = {"origins": [
@@ -72,3 +72,17 @@ def locationToDistance(origin_lat: float, origin_long: float, dest_lat: float, d
         if result[0]['condition'] == "ROUTE_EXISTS":
             return result[0]['distanceMeters']
     return 0
+
+
+def getCampusCoords(location: str) -> dict:
+    
+    # Load campus coords from json file
+    with open("campusCoordinates.json", "r") as file:
+        campus = json.loads(file)
+        file.close()
+    
+    # Return latitude and longitude dictionary associated with location name in file
+    if location in campus.keys():
+        return campus[location]
+    else:
+        return {}
