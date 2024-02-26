@@ -21,12 +21,12 @@ The aim of this project was to build a game focused around sustainability. Our i
 [![Django](https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white)](https://pypi.org/project/Django/)
 [![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)](https://dev.mysql.com/downloads/mysql/)
 [![Oracle](https://img.shields.io/badge/Oracle-F80000?style=for-the-badge&logo=oracle&logoColor=white)](https://www.oracle.com/cloud/)
-[![Trello](https://img.shields.io/badge/Trello-%23026AA7.svg?style=for-the-badge&logo=Trello&logoColor=white)](https://trello.com/b/yyfAlINB/kanban-board)
+[![Trello](https://img.shields.io/badge/Trello-%23026AA7.svg?style=for-the-badge&logo=Trello&logoColor=white)](https://trello.com/b/yyfAlINB/the-ceiling-fans)
 
 - Designed for [Python 3.11](https://www.python.org/downloads/) with [Django v5.0.2](https://pypi.org/project/Django/).
 - Uses a MySQL database running v3.0.36, which can be installed [here](https://dev.mysql.com/downloads/mysql/).
 - Set up with a MySQL server running on an [Oracle Cloud](https://www.oracle.com/cloud/) instance.
-- Project planning and tracking done via a [Kanban board](https://trello.com/b/yyfAlINB/kanban-board) hosted on Trello.
+- Project planning and tracking done via a [Kanban board](https://trello.com/b/yyfAlINB/the-ceiling-fans) hosted on Trello.
 
 ### Setting up the virtual environment
 
