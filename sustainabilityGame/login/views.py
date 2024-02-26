@@ -1,9 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 
-# Render Login webpages here
-
-from django.http import HttpResponse
+from user.models import Profile
 
 
 def login_view(request):
@@ -17,9 +15,15 @@ def login_view(request):
             context = {"error": "Invalid username or password"}
             return render(request, "login/login.html", context)
         login(request, user) #log user into server
+        
+        # Create profile for user if they are a legacy user
+        print("login")
+        if not(hasattr(user, 'profile')):
+            print("creating profile")
+            profile = Profile(user=user)
+            profile.save()
+        
         return redirect("/user/")
-
-    #return HttpResponse("This is the log in page.")
     return render(request, "login/login.html")
 
 def logout_view(request):
