@@ -3,7 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
 # Render user webpages here
-from common.utils import locationToDistance, getCampusCoords, distanceToCO2, convertTravelType
+from common.utils import locationToDistance, getCampusCoords, distanceToCO2
+from common.travelTypes import TravelType
 
 
 @login_required
@@ -53,7 +54,7 @@ def upload(request):
         if origin == {}:
             raise RuntimeError("On-campus location not found!")
         
-        transport = convertTravelType(request.POST.get('transport'))
+        transport = TravelType.from_str(request.POST.get('transport'))
         if transport is None:
             raise RuntimeError("Transport not found!")
         

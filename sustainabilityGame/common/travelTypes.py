@@ -13,3 +13,30 @@ class TravelType(Enum):
     TRAIN = 0.041
     BIKE = 0.021
     WALK = 0.056
+    
+    def __str__(self) -> str:
+        if self.name == "CAR":
+            return "Driving"
+        elif self.name == "BUS":
+            return "By bus"
+        elif self.name == "TRAIN":
+            return "By train"
+        elif self.name == "BIKE":
+            return "Cycling"
+        else:
+            return "Walking"
+        
+    @staticmethod
+    def from_str(string: str) -> Enum:
+        if string.lower() in ["bus", "by bus"]:
+            return TravelType.BUS
+        elif string.lower() in ["train", "by train"]:
+            return TravelType.TRAIN
+        elif string.lower() in ["bike", "cycling", "by bike"]:
+            return TravelType.BIKE
+        elif string.lower() in ["walk", "walking", "on foot"]:
+            return TravelType.WALK
+        elif string.lower() in ["car", "driving", "by car"]:
+            return TravelType.CAR
+        else:
+            return None
