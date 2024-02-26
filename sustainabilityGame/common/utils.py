@@ -1,9 +1,27 @@
-from travelTypes import TravelType
-import requests
+
 import json
+import requests
+from common.travelTypes import TravelType
 
 
-def locationToDistance(origin_lat: float, origin_long: float, dest_lat: float, dest_long: float, transport: TravelType):
+# These are the functions for calculating how much CO2 has been saved by the journey being done sustainably
+# Function takes in distance traveled, and a number representing how they did it. web app will call this fuction.
+def distanceToCO2(distance: float, transport: TravelType|int):
+    if type(transport) is int:
+        match transport: 
+                case 0: 
+                        transport = TravelType.BUS 
+                case 1:   
+                        transport = TravelType.TRAIN
+                case 2: 
+                        transport = TravelType.BIKE 
+                case 3: 
+                        transport = TravelType.WALK 
+    co2_saved = distance * abs(transport.value - TravelType.CAR.value)
+    return co2_saved 
+
+
+def locationToDistance(origin_lat: float, origin_long: float, dest_lat: float, dest_long: float, transport: TravelType) -> float:
     
     # Create JSON data format of origin and destination latitudes/longitute values required for the request
     data = {"origins": [
@@ -56,5 +74,29 @@ def locationToDistance(origin_lat: float, origin_long: float, dest_lat: float, d
     return 0
 
 
-# Test function
-print(locationToDistance(50.727163, -3.535225, 50.736235, -3.534693, TravelType.TRAIN))
+def getCampusCoords(location: str) -> dict:
+    
+    # Load campus coords from json file
+    with open("common/campusCoordinates.json", "rb") as file:
+        campus = json.load(file)
+        file.close()
+    
+    # Return latitude and longitude dictionary associated with location name in file
+    if location in campus.keys():
+        return campus[location]
+    else:
+        return {}
+    
+    
+def convertTravelType(type: str) -> TravelType:
+    # Match type to TravelType object
+    match type.lower():
+        case "bus":
+            return TravelType.BUS
+        case "train":
+            return TravelType.TRAIN
+        case "bike":
+            return TravelType.BIKE
+        case "walk":
+            return TravelType.WALK
+    return None

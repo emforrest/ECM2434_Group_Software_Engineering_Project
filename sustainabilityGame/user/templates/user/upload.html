@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{% static 'user/style.css' %}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIZe4j6_6bvgDSdz4rjX_29_r6C6FGi1Y&libraries=places">
     //add API key here
@@ -16,7 +17,7 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="/">CO2 Saving</a>
+            <a class="navbar-brand" href="/">CarbonCommuter</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -24,13 +25,13 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/login/">Login</a>
+                        <a class="nav-link" href="/logout/">Logout</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/leaderboard/">Leaderboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/user/">User Profile</a>
+                        <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
                     </li>
                 </ul>
             </div>
@@ -40,11 +41,17 @@
     <br>
     <div class="wrapper">
         <h1>Upload a Journey</h1>
-        <p><i>User : "username"</i></p>
+        <p><i>User : {{username}}</i></p>
         <br>
-        <form name="upload" id="upload">
-            Select an on-campus location: 
-            <br>
+        <form name="upload" id="upload" action="/user/upload/" method="post">
+            Select an on-campus location:
+            {% csrf_token %}
+            {% if error %}
+                <p style='color:red'>{{ error }}</p>
+            {% endif %}
+            <input type="hidden" id="lat" name="lat" value="lat">
+            <input type="hidden" id="lng" name="lng" value="lng">
+
             <select name="oncampus" id="oncampus">
                 <option value = "Forum">Forum</option>
                 <option value = "Amory">Amory</option>
@@ -54,10 +61,28 @@
                 <option value = "Harrison">Harrison</option>
                 <option value = "Business School">Business School</option>
                 <option value = "Sports Park">Sports Park</option>
+                <option value = "Queens">Queens</option>
+                <option value = "Washington Singer">Washington Singer</option>
+                <option value = "Laver">Laver</option>
+                <option value = "Innovation Centre">Innovation Centre</option>
+                <option value = "South West Institute of Technology">South West Institute of Technology</option>
+                <option value = "Bus Stop - North Park Road">Bus Stop - North Park Road</option>
+                <option value = "Bus Stop - Innovation Centre">Bus Stop - Innovation Centre</option>
+                <option value = "Bus Stop - Rennes Drive">Bus Stop - Rennes Drive</option>
+                <option value = "Bus Stop - Poole Gate">Bus Stop - Poole Gate</option>
+                <option value = "Bus Stop - Perry Road">Bus Stop - Perry Road</option>
+                <option value = "Bus Stop - Streatham Rise">Bus Stop - Streatham Rise</option>
+                <option value = "Bus Stop - Knightley">Bus Stop - Knightley</option>
+                <option value = "Bus Stop - The Queen's Drive">Bus Stop - The Queen's Drive</option>
+                <option value = "Bus Stop - Prince of Wales Road">Bus Stop - Prince of Wales Road</option>
+                <option value = "Bike Rack - Stocker Road">Bike Rack - Stocker Road</option>
+                <option value = "Bike Rack - Sports Park">Bike Rack - Sports Park</option>
+                <option value = "Bike Rack - Business School">Bike Rack - Business School</option>
+                <option value = "Bike Rack - Terrace Restaurant">Bike Rack - Terrace Restaurant</option>
+                <option value = "Bike Rack - Amory">Bike Rack - Amory</option>
+
             </select>
             <br><br>
-
-
 
             Enter an off-campus location:
             <br>
@@ -72,7 +97,8 @@
                         {
                         types:['address'],
                         componentRestrictions: {'country': ['gb']},
-                        fields : ['geometry', 'name']
+                        fields : ['geometry', 'name'],
+                        strictBounds: true
                         }
                     );
                     autocomplete.addListener('place_changed', onPlaceChanged);
@@ -85,14 +111,16 @@
                     }
                     else{
                         document.getElementById('autocomplete').innerHTML=place.name;
+                        document.getElementById('lat').value = place.geometry.location.lat().toString();
+                        document.getElementById('lng').value = place.geometry.location.lng().toString();
                     }
                 }
             </script>
 
-
             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIZe4j6_6bvgDSdz4rjX_29_r6C6FGi1Y&libraries=places&callback=initAutocomplete" async defer>
             //add API key here
             </script>
+
             <br>
             Select the mode of transport used: 
             <br>

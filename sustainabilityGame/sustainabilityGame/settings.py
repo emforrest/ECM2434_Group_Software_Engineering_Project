@@ -86,7 +86,7 @@ DATABASES = {
         'NAME': 'sustainabilitygame',
         'USER': 'django',
         'PASSWORD': 'acf6Z4LeA85FF9gY!',
-        'HOST': '129.146.140.114',
+        'HOST': '129.153.205.30',
         'PORT': '3306',
     }
 }
