@@ -1,1 +1,76 @@
-<h1>This is the user settings page</h1>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>User home page</title>
+        <link rel="stylesheet" href="{% static 'user/style.css' %}">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    </head>
+
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="/">CarbonCommuter</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+    
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout/">Logout</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/register/">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/leaderboard/">Leaderboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <br>
+        <div class="wrapper">
+            <form action="/user/">
+                <h1>Settings</h1>
+                <div class="input-box">
+                    <input type="text" placeholder= {{firstName}} id="first_name" name="first_name">
+                </div>
+                <div class="input-box">
+                    <input type="text" placeholder= {{lastName}} id="last_name" name="last_name">
+                </div>
+                <div class="input-box">
+                    <input type="text" placeholder= {{username}} id="username" name="username">
+                    <i class='bx bxs-user'></i>
+                </div>
+                <div class="input-box">
+                    <input type="text" placeholder= {{email}} id="email" name="email">
+                    <i class='bx bxs-envelope'></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" placeholder="password" id="password1" name="password1" required>
+                    <i class='bx bxs-lock-alt'></i>
+                </div>
+                <button type="submit" class="btn">Submit</button> 
+            </form>
+        </div>
+
+        <br>
+        <div class="footer">
+            <p>&copy; 2024 CO2 Saving. All Rights Reserved.</p>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    </body>
+</html>
