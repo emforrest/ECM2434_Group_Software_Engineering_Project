@@ -61,13 +61,24 @@ pip install -r requirements.txt
 As part of the project, we are using a MySQL database hosted on Oracle Cloud. This allows us to synchronise our project database across all 6 developers. The application already has the connection details, however for reference, they are as follows:
 
 ```text
-Host: 129.146.140.114
+Host: 129.153.205.30
 Port: 3306
 User: django
 Pass: acf6Z4LeA85FF9gY!
 ```
 
-If the application can't find a database connection, you can setup a local MySQL server by following the [MySQL installation guide](https://dev.mysql.com/doc/mysql-installation-excerpt/5.7/en/). Once running, you can use our provided [GroupSoftDevDataBase.sql](database/GroupSoftDevDataBase.sql) file to create the database and necessary tables. You will also need to run `python manage.py migrate` before starting the webserver!
+If the application can't find a database connection, you can setup a local MySQL server by following the [MySQL installation guide](https://dev.mysql.com/doc/mysql-installation-excerpt/5.7/en/). Once running, create a schema using the following SQL command:
+
+```sql
+CREATE SCHEMA 'sustainabilitygame';
+```
+
+You will also need to carry out a migration before you can start the webserver using the following commands:
+
+```shell
+python manage.py makemigrations
+python manage.py migrate
+```
 
 ### Starting the webserver
 
@@ -83,8 +94,13 @@ env\Scripts\Activate.ps1
 source env/bin/activate
 ```
 
-Then, use the following command to start the webserver:
+First, make sure you're inside the sustainabilityGame directory. Then, use the following command to start the webserver:
 
 ```shell
+cd sustainabilityGame
 python manage.py runserver
 ```
+
+Alternatively, you can use the included scripts to easily start the webserver in one click:
+- For windows: [start_server.bat](start_server.bat)
+- For MacOS/Linux: [start_server.sh](start_server.sh)
