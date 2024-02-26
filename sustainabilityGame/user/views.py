@@ -40,30 +40,25 @@ def settings(request):
 @login_required
 def upload(request):
     username = request.user.username
-    context = context = {"username": username}
-    #return HttpResponse("This is the user upload page.")
+    context = {"username": username}
     if request.method == "POST":
         
-        print(request.POST.get("oncampus"))
-        print(request.POST.get("autocomplete"))
-        print(request.POST.get("lat"))
-        print(request.POST.get("lng"))
-        print(request.POST.get("transport"))
-        
+        # Get name of location on campus from form and map it to a latitude and longitude dict stored inside common/campusCoordinates.json
         origin = getCampusCoords(request.POST.get('oncampus'))
         if origin == {}:
             raise RuntimeError("On-campus location not found!")
         
+        # Convert the string representation of the transport type to a TravelType object.
         transport = TravelType.from_str(request.POST.get('transport'))
         if transport is None:
             raise RuntimeError("Transport not found!")
         
-        distance = locationToDistance(origin['latitude'], origin['longitude'], float(request.POST.get('lat')), float(request.POST.get('lng')), transport)
-        print(distance)
-        
-        savings = distanceToCO2(distance, transport)
+        # Convert both sets of latitude/longitude coordinates to a distance, and then calculate the carbon saved based on that distance, using the method defined in common/utils.py
+        distance = locationToDistance(origin['latitude'], origin['longitude'], float(request.POST.get('lat')), float(request.POST.get('lng')), transport)     
+        savings = distanceToCO2(distance/1000, transport)
         print(savings)
         
+        # Increment the total savings stored inside the users profile model by the additonal carbon savings
         request.user.profile.total_saving += savings
         request.user.profile.save()
         

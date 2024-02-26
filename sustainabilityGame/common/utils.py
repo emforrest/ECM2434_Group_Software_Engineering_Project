@@ -6,19 +6,10 @@ from common.travelTypes import TravelType
 
 # These are the functions for calculating how much CO2 has been saved by the journey being done sustainably
 # Function takes in distance traveled, and a number representing how they did it. web app will call this fuction.
-def distanceToCO2(distance: float, transport: TravelType|int):
-    if type(transport) is int:
-        match transport: 
-                case 0: 
-                        transport = TravelType.BUS 
-                case 1:   
-                        transport = TravelType.TRAIN
-                case 2: 
-                        transport = TravelType.BIKE 
-                case 3: 
-                        transport = TravelType.WALK 
-    co2_saved = distance * abs(transport.value - TravelType.CAR.value)
-    return co2_saved 
+def distanceToCO2(distance: float, transport: TravelType|str):
+    if type(transport) is str:
+        transport = TravelType.from_str(transport)
+    return distance * abs(TravelType.CAR.value - transport.value)
 
 
 def locationToDistance(origin_lat: float, origin_long: float, dest_lat: float, dest_long: float, transport: TravelType) -> float:
