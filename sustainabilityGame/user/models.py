@@ -21,7 +21,7 @@ class Profile(models.Model):
         user (User): A one-to-one relationship with the built in User model.
         total_saving (float): The total carbon savings of a user across all journeys.
     """
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     total_saving = models.FloatField(default=0)
     
     
@@ -47,4 +47,4 @@ class Journey(models.Model):
     origin = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True)
     destination = models.CharField(max_length=128)
     transport = models.CharField(max_length=16, blank=False)
-    time_logged = models.DateTimeField(auto_created=True, blank=False)
+    time_logged = models.DateTimeField(auto_now_add=True)

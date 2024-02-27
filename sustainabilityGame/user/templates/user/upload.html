@@ -59,8 +59,9 @@
             {% endif %}
 
             <!--These hidden inputs are used to convert the user's off-campus location into latitude and longitude coordinates and pass them through-->
-            <input type="hidden" id="lat" name="lat" value="lat">
-            <input type="hidden" id="lng" name="lng" value="lng">
+            <input type="hidden" id="lat" name="lat" value="">
+            <input type="hidden" id="lng" name="lng" value="">
+            <input type="hidden" id="postcode" name="postcode" value="">
 
             <select name="oncampus" id="oncampus">
                 <option value = "Forum">Forum</option>
@@ -124,6 +125,7 @@
                         document.getElementById('autocomplete').innerHTML=place.name;
                         document.getElementById('lat').value = place.geometry.location.lat().toString();
                         document.getElementById('lng').value = place.geometry.location.lng().toString();
+                        document.getElementById('postcode').value = place.address_components.postal_code;
                     }
                 }
             </script>

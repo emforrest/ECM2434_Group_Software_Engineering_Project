@@ -10,6 +10,8 @@ from django.contrib.auth.decorators import login_required
 
 from common.utils import locationToDistance, getCampusCoords, distanceToCO2
 from common.travelTypes import TravelType
+from user.models import Journey
+from main.models import Location
 
 
 @login_required
@@ -93,10 +95,26 @@ def upload(request):
         savings = distanceToCO2(distance/1000, transport)
         print(savings)
         
+        # Create a new Location object if it doesn't yet exist.
+        location, created = Location.objects.get_or_create(lat = float(request.POST.get('lat')),
+                                                  lng = float(request.POST.get('lng')),
+                                                  address = request.POST.get('autocomplete'),
+                                                  postcode = request.POST.get('postcode'))
+        if created:
+            location.save()
+        
+        # Create a new entry in the journey's table
+        journey = Journey(user = request.user,
+                          distance = distance/1000,
+                          origin = location, 
+                          destination = request.POST.get('oncampus'),
+                          transport = request.POST.get('transport'))
+        journey.save()
+        
         # Increment the total savings stored inside the users profile model by the additonal carbon savings
         request.user.profile.total_saving += savings
         request.user.profile.save()
-        return redirect("success", journey_id=123)
+        return redirect("success", journey_id=journey.id)
         
     return render(request, "user/upload.html", context)
 
