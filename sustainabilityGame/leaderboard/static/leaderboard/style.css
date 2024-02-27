@@ -55,8 +55,8 @@ body {
 
 
 main.table {
-    width: 60%;
-    max-width: 419px;
+    width: 70%;
+    max-width: 600px;
     height: 8%;
     max-height: 700px;
     background-color: rgba(239, 239, 239, 0.459);
@@ -94,7 +94,7 @@ tbody tr:nth-child(n + 11) {
 }
     
 
-@media (max-width: 310px) {
+@media (max-width: 450px) {
     main.table {
         width: 40%;
     }

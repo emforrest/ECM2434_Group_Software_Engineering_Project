@@ -10,7 +10,7 @@ from django.http import HttpResponse
 
 def leaderboard(request):
     users = []
-    users_profile = Profile.objects.all().order_by("-total_saving")[:5]
+    users_profile = Profile.objects.all().order_by("-total_saving")[:10]
     x = 1
     for profile in users_profile:
         user_entry = Leaderboard_Entry()

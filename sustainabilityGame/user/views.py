@@ -4,6 +4,9 @@ authors: Sam Townley, Eleanor Forrest
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+
+from .models import Profile
+
 from common.utils import locationToDistance, getCampusCoords, distanceToCO2, convertTravelType
 
 
@@ -24,9 +27,12 @@ def home(request):
     email = request.user.email
     username = request.user.username
     myDate = request.user.date_joined
+    co2Saved = request.user.profile.total_saving
     context = context = {"name": name,
                          "email": email,
                          "username": username,
+                         "myDate": myDate,
+                         "co2Saved" : co2Saved}
                          "myDate": myDate}
     return render(request, "user/home.html", context)
 
