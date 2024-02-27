@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.contrib.auth.models import User
 from user.models import Profile
 from .models import Leaderboard_Entry
 
