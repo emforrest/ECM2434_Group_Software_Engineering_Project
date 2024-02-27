@@ -1,18 +1,17 @@
 
-from enum import Enum
-
 """Defines an enum that maps travel methods to their CO2 emissions per KM.
 
 The Enum is to be used to standarise how we refer to travel methods throughout
 the Django app. Figures used are taken from the following sources: 
-https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/901692/conversion-factors-2020-methodology.pdf
-https://ecf.com/news-and-events/news/how-much-co2-does-cycling-really-save.
+- https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/901692/conversion-factors-2020-methodology.pdf
+- https://ecf.com/news-and-events/news/how-much-co2-does-cycling-really-save
 
 Authors:
-
-    Sam Townley
-    Jack Skinner
+- Sam Townley
+- Jack Skinner
 """
+
+from enum import Enum
 
 class TravelType(Enum):
     """Enum defining the CO2 emissions per KM for different modes of transport.
