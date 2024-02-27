@@ -20,10 +20,8 @@ class Location(models.Model):
         lat (float): The latitude of the location.
         lng (float): The longitude of the location.
         address (string): The full address of the location.
-        postcode (string): The postcode of the location.
     """
     id = models.AutoField(primary_key=True, auto_created=True, unique=True)
     lat = models.FloatField(blank=False)
     lng = models.FloatField(blank=False)
     address = models.CharField(max_length=256, blank=False, unique=True)
-    postcode = models.CharField(max_length=16, blank=False)

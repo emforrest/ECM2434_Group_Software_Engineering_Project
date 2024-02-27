@@ -98,8 +98,7 @@ def upload(request):
         # Create a new Location object if it doesn't yet exist.
         location, created = Location.objects.get_or_create(lat = float(request.POST.get('lat')),
                                                   lng = float(request.POST.get('lng')),
-                                                  address = request.POST.get('autocomplete'),
-                                                  postcode = request.POST.get('postcode'))
+                                                  address = request.POST.get('autocomplete'))
         if created:
             location.save()
         

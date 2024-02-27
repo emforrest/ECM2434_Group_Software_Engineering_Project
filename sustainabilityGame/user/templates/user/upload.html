@@ -14,7 +14,7 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!--Set up the connection to the Google Maps API-->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIZe4j6_6bvgDSdz4rjX_29_r6C6FGi1Y&libraries=places">
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIZe4j6_6bvgDSdz4rjX_29_r6C6FGi1Y&libraries=places&callback=initAutocomplete&loading=async">
     </script> 
 </head>
 
@@ -61,7 +61,6 @@
             <!--These hidden inputs are used to convert the user's off-campus location into latitude and longitude coordinates and pass them through-->
             <input type="hidden" id="lat" name="lat" value="">
             <input type="hidden" id="lng" name="lng" value="">
-            <input type="hidden" id="postcode" name="postcode" value="">
 
             <select name="oncampus" id="oncampus">
                 <option value = "Forum">Forum</option>
@@ -125,13 +124,8 @@
                         document.getElementById('autocomplete').innerHTML=place.name;
                         document.getElementById('lat').value = place.geometry.location.lat().toString();
                         document.getElementById('lng').value = place.geometry.location.lng().toString();
-                        document.getElementById('postcode').value = place.address_components.postal_code;
                     }
                 }
-            </script>
-
-            <!--Ensure the Google Maps Places library is used-->
-            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIZe4j6_6bvgDSdz4rjX_29_r6C6FGi1Y&libraries=places&callback=initAutocomplete" async defer>
             </script>
 
             <br>
