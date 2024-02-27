@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, password_validation
+from django.contrib.auth import authenticate, password_validation, login
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
@@ -44,7 +44,10 @@ def register(request):
         # Create profile on registration
         profile = Profile(user=newUser)
         profile.save()
-        
+
+        userLogin = authenticate(request, username=username, password=password1)
+        login(request, userLogin) #log user into server
+
         return redirect("/user/")
     return render(request, "register/register.html")
 
