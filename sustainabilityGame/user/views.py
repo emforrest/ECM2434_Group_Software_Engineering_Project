@@ -5,9 +5,8 @@ Authors:
 - Sam Townley
 - Eleanor Forrest
 """
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 
 from common.utils import locationToDistance, getCampusCoords, distanceToCO2
 from common.travelTypes import TravelType
@@ -97,5 +96,12 @@ def upload(request):
         # Increment the total savings stored inside the users profile model by the additonal carbon savings
         request.user.profile.total_saving += savings
         request.user.profile.save()
+        return redirect("success", journey_id=123)
         
     return render(request, "user/upload.html", context)
+
+
+@login_required
+def upload_success(request, journey_id: int):
+    print(journey_id)
+    return render(request, "user/success.html")
