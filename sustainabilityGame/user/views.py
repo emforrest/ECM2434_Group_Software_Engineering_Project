@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from .models import Profile
 
 # Render user webpages here
 from common.utils import locationToDistance, getCampusCoords, distanceToCO2, convertTravelType
@@ -14,10 +15,12 @@ def home(request):
     email = request.user.email
     username = request.user.username
     myDate = request.user.date_joined
+    co2Saved = request.user.profile.total_saving
     context = context = {"name": name,
                          "email": email,
                          "username": username,
-                         "myDate": myDate}
+                         "myDate": myDate,
+                         "co2Saved" : co2Saved}
     #return HttpResponse("This is the user homepage.")
     return render(request, "user/home.html", context)
 
