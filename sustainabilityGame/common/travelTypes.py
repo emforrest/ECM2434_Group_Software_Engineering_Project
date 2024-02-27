@@ -21,11 +21,11 @@ class TravelType(Enum):
     strings.
 
     Attributes:
-        CAR: CO2 emissions per KM for an average diesel car.
-        BUS: CO2 emissions per KM for an average bus journey.
-        TRAIN: CO2 emissions per KM for an average train journey.
-        BIKE: CO2 emissions per KM when cycling.
-        WALK: CO2 emissions per KM when walking.
+        CAR (float): CO2 emissions per KM for an average diesel car.
+        BUS (float): CO2 emissions per KM for an average bus journey.
+        TRAIN (float): CO2 emissions per KM for an average train journey.
+        BIKE (float): CO2 emissions per KM when cycling.
+        WALK (float): CO2 emissions per KM when walking.
     """
     CAR = 0.15
     BUS = 0.10
