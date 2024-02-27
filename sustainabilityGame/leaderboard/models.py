@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class User: 
+class Leaderboard_Entry: 
     position : int
     name : str
     totalCo2Saved : float 

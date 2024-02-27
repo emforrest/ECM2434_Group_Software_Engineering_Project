@@ -18,6 +18,7 @@ def distanceToCO2(distance: float, transport: TravelType|int):
                 case 3: 
                         transport = TravelType.WALK 
     co2_saved = distance * abs(transport.value - TravelType.CAR.value)
+    round(co2_saved, 2)
     return co2_saved 
 
 

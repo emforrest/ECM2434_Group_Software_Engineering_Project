@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>User home page</title>
-        <link rel="stylesheet" href="{% static 'user/style.css' %}">
+        <link rel="stylesheet" href="{% static 'sustainabilityGame/style.css' %}">
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     </head>
@@ -57,7 +57,7 @@
             <div class="upload-box">
                 <h1>Savings</h1>
                 <br>
-                <p><p1>Total Saving: </p1><i>MySavings</i></p>
+                <p><p1>Total Saving: </p1><i>{{ co2Saved }}</i></p>
                 <br>
                 <a href="/user/upload"><button type="submit" class="btn">Upload Journey</button></a>
             </div>
@@ -65,7 +65,7 @@
 
         <br>
         <div class="footer">
-            <p>&copy; 2024 CO2 Saving. All Rights Reserved.</p>
+            <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
         </div>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
