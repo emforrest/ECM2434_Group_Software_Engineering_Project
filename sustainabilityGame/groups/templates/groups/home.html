@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>User home page</title>
+        <title>Group home page</title>
         <link rel="stylesheet" href="{% static 'sustainabilityGame/style.css' %}">
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -17,7 +17,7 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-    
+
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
@@ -37,38 +37,47 @@
             </nav>
         </header>
 
-        <br>
-        <div class="wrapper">
-            <div class="profile-box">
-                <h1>Profile</h1>
-                <br>
-                <p><p1>Name: </p1><i>{{ name }}</i></p>
-                <br>
-                <p><p1>Email: </p1><i>{{ email }}</i></p>
-                <br>
-                <p><p1>Username: </p1><i>{{ username }}</i></p>
-                <br>
-                <p><p1>Join Date: </p1><i>{{ myDate }}</i></p>
-                <a href="/user/settings"><button type="submit" class="btn">Edit Profile</button></a>
+        <main class="container mt-4">
+            <h2>All Groups and Their Members</h2>
+            {% for group in groups %}
+            <div class="card mb-3">
+                <div class="card-header">
+                    {{ group.name }}
+                </div>
+                <ul class="list-group list-group-flush">
+                    {% for user in group.user_set.all %}
+                    <li class="list-group-item">{{ user.username }}</li>
+                    {% empty %}
+                    <li class="list-group-item">No members in this group.</li>
+                    {% endfor %}
+                </ul>
             </div>
-        </div>
+            {% endfor %}
+        </main>
+
         <br>
         <div class="wrapper">
             <div class="upload-box">
-                <h1>Savings</h1>
+                <h1>Create Group</h1>
                 <br>
-                <p><p1>Total Saving: </p1><i>MySavings</i></p>
-                <br>
-                <a href="/user/upload"><button type="submit" class="btn">Upload Journey</button></a>
+                <a href="/groups/create"><button type="submit" class="btn">Create</button></a>
             </div>
         </div>
 
         <br>
         <div class="wrapper">
             <div class="upload-box">
-                <h1>Groups</h1>
+                <h1>Join Group</h1>
                 <br>
-                <a href="/groups/"><button type="submit" class="btn">Groups</button></a>
+                <a href="/groups/join"><button type="submit" class="btn">Join</button></a>
+            </div>
+        </div>
+
+        <div class="wrapper">
+            <div class="upload-box">
+                <h1>Leave Group</h1>
+                <br>
+                <a href="/groups/leave"><button type="submit" class="btn">Leave</button></a>
             </div>
         </div>
 
@@ -80,5 +89,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     </body>
 </html>
