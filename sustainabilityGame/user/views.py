@@ -32,7 +32,7 @@ def home(request):
                          "email": email,
                          "username": username,
                          "myDate": myDate,
-                         "co2Saved" : co2Saved}
+                         "co2Saved" : co2Saved,
                          "myDate": myDate}
     return render(request, "user/home.html", context)
 
