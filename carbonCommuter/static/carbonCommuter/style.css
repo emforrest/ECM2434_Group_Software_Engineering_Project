@@ -1,3 +1,4 @@
+/*Authors: Giulia Brown, Jack Skinner*/
 /*general style*/
 * {
     margin: 0;
@@ -35,7 +36,7 @@ h1 {
 }
 
 .main-description {
-    width: 95vh;
+    width: 700px;
     max-height: 100%;
     background-color: rgba(255, 255, 255, 0.5);
 
@@ -47,8 +48,8 @@ h1 {
 }
 
 .main-links {
-    width: 95vh;
-    max-height: 100%;
+    width: 400px;
+    min-height: 300px;
 
     margin: .8rem auto;
     border-radius: .6rem;
@@ -76,8 +77,8 @@ h1 {
 
 /*main page table style*/
 main.main-table {
-    width: 100vh;
-    height: 70vh;
+    width: 700px;
+    height:550px;
     background-color: rgba(255, 255, 255, .8);
     margin: auto;
 
@@ -120,6 +121,7 @@ main.table {
     border-radius: .6rem;
     overflow: auto;
 }
+
 
 table, th, td {
     padding: 1rem;
@@ -361,7 +363,7 @@ tbody tr:nth-child(n + 11) {
     position: center;
     bottom: 10px;
     margin: auto;
-    width: 100vh;
+    width: 48%;
     height: 40px;
     background-color:rgba(255, 255, 255, .6);
     border: 2px solid rgba(255, 255, 255, .2);

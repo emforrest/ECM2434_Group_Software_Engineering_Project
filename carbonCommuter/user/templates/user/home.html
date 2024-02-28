@@ -1,10 +1,15 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
+<!--A HTML document that produces the user home webpage, which display's a user's personal information and total savings so far.-->
+<!--authors: Giulia Brown-->
+
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>User home page</title>
+        <!--Import styling-->
         <link rel="stylesheet" href="{% static 'sustainabilityGame/style.css' %}">
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -12,6 +17,7 @@
 
     <body>
         <header>
+            <!--Set up the navbar as seen on every webpage-->
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <a class="navbar-brand" href="/">CarbonCommuter</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,6 +44,7 @@
         </header>
 
         <br>
+        <!-- Display the current user information in the Profile box-->
         <div class="wrapper">
             <div class="profile-box">
                 <h1>Profile</h1>
@@ -53,6 +60,7 @@
             </div>
         </div>
         <br>
+        <!--Display the carbon savings and a button to upload a new journey in the Savings box-->
         <div class="wrapper">
             <div class="upload-box">
                 <h1>Savings</h1>
@@ -64,6 +72,7 @@
         </div>
 
         <br>
+        <!--Another box containing a button to view groups-->
         <div class="wrapper">
             <div class="upload-box">
                 <h1>Groups</h1>
@@ -76,9 +85,5 @@
         <div class="footer">
             <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
         </div>
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     </body>
 </html>

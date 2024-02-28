@@ -1,22 +1,27 @@
-{% load static %}
+{% load static %} <!-- Load Django's static management to use in the template -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Create Group - CarbonCommutator</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create a Group</title>
+    <!-- External CSS for styling, including a custom stylesheet and Boxicons for icons -->
     <link rel="stylesheet" href="{% static 'sustainabilityGame/style.css' %}">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Bootstrap for responsive design and styling components -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
     <header>
+        <!-- Navigation bar setup with Bootstrap for a consistent look and responsive design -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="/">CarbonCommuter</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand" href="/">CarbonCommuter</a> <!-- Brand link to home -->
+            <button class="navbar-toggler" for responsive navigation menu expansion -->
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
+                <ul class="navbar-nav ml-auto"> <!-- Navigation items aligned to the right -->
                     <li class="nav-item">
                         <a class="nav-link" href="/logout/">Logout</a>
                     </li>
@@ -27,35 +32,31 @@
                         <a class="nav-link" href="/leaderboard/">Leaderboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/user/">Profile</a>
+                        <a class="nav-link" href="/user/">Profile</a> <!-- User profile link -->
                     </li>
                 </ul>
             </div>
         </nav>
     </header>
 
-    <br>
     <div class="wrapper">
+        <!-- Form for creating a new group -->
         <form action="/groups/create/" method="POST">
             <h1>Create Group</h1>
-            {% csrf_token %}
+            {% csrf_token %} <!-- CSRF token for form security -->
             {% if error %}
-                <p style='color:red'>{{ error }}</p>
+                <p style='color:red'>{{ error }}</p> <!-- Display any error messages -->
             {% endif %}
             <div class="input-box">
                 <input type="text" placeholder="Group Name" id="group_name" name="group_name" required>
+                <!-- Input for the group name -->
             </div>
-            <button type="submit" class="btn">Create</button>
+            <button type="submit" class="btn">Create</button> <!-- Submit button for the form -->
         </form>
     </div>
 
-    <br>
     <div class="footer">
-        <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
+        <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p> <!-- Footer content -->
     </div>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
