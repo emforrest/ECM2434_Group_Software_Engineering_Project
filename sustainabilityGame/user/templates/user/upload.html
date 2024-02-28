@@ -2,20 +2,25 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!--A HTML document that produces the upload webpage, so users can input the start and end coordinates of their journey and the mode of transport used.-->
+<!--authors: Eleanor Forrest, Jack Skinner, Giulia Brown, Sam Townley-->
+
 <head>
+    <!--Import styling-->
     <title>Upload</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{% static 'sustainabilityGame/style.css' %}">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!--Set up the connection to the Google Maps API-->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIZe4j6_6bvgDSdz4rjX_29_r6C6FGi1Y&libraries=places">
-    //add API key here
     </script> 
 </head>
 
 <body>
     <header>
+        <!--The navbar, consistent across the site-->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="/">CarbonCommuter</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,14 +46,19 @@
     <br>
     <div class="wrapper">
         <h1>Upload a Journey</h1>
+
         <p><i>User : {{username}}</i></p>
         <br>
+
+        <!--The form object takes the user's selections and passes them to the upload function-->
         <form name="upload" id="upload" action="/user/upload/" method="post">
             Select an on-campus location:
             {% csrf_token %}
             {% if error %}
                 <p style='color:red'>{{ error }}</p>
             {% endif %}
+
+            <!--These hidden inputs are used to convert the user's off-campus location into latitude and longitude coordinates and pass them through-->
             <input type="hidden" id="lat" name="lat" value="lat">
             <input type="hidden" id="lng" name="lng" value="lng">
 
@@ -90,6 +100,7 @@
             <br>
             
             <script>
+                //Use the Google Maps API to allow the user to type and then select an off-campus location
                 let autocomplete;
                 function initAutocomplete(){
                     autocomplete = new google.maps.places.Autocomplete(
@@ -117,8 +128,8 @@
                 }
             </script>
 
+            <!--Ensure the Google Maps Places library is used-->
             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIZe4j6_6bvgDSdz4rjX_29_r6C6FGi1Y&libraries=places&callback=initAutocomplete" async defer>
-            //add API key here
             </script>
 
             <br>
@@ -141,6 +152,3 @@
     </div>
 </body>
 </html>
-
-
-<!--https://developers.google.com/maps/documentation/javascript/place-autocomplete?_gl=1*bkn49n*_up*MQ..*_ga*OTYxODg1MjA3LjE3MDg0NDk5OTM.*_ga_NRWSTWS78N*MTcwODQ0OTk5My4xLjAuMTcwODQ0OTk5My4wLjAuMA..-->
