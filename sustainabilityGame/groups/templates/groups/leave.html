@@ -20,7 +20,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/logout/">Logout</a>
                     </li>
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="/register/">Register</a>
                     </li>
                     <li class="nav-item">
@@ -37,9 +37,12 @@
     <br>
     <div class="container">
         <h1>Leave a Group</h1>
-        {% for message in messages %}
-        <p style='color:red'>{{ message }}</p>
-        {% endfor %}
+        {% if message %}
+        <p style='color:green'>{{ message }}</p>
+        {% endif %}
+        {% if error %}
+        <p style='color:red'>{{ error }}</p>
+        {% endif %}
         <ul class="list-group mt-3">
             {% for group in groups %}
             <li class="list-group-item d-flex justify-content-between align-items-center">
