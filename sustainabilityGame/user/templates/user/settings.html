@@ -45,9 +45,14 @@
 
         <br>
         <div class="wrapper">
-            <form action="/user/">
+            <form action="/user/settings/" method = "POST">
                 <!--Input forms for the first name, last name, username, email and password-->
                 <h1>Settings</h1>
+                {% csrf_token %} <!-- for security of the inputs of the POST form -->
+                <!-- if an input was invalid, an error will be produced and printed on screen below for the user to re-enter their details correctly -->
+                {% if error %}
+                    <p style='color:red'>{{ error }}</p>
+                {% endif %}
                 <div class="input-box">
                     <input type="text" placeholder= {{firstName}} id="first_name" name="first_name">
                 </div>
