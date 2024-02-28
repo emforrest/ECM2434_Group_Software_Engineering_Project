@@ -1,3 +1,3 @@
 source env/bin/activate
-cd sustainabilityGame
+cd carbonCommuter
 python manage.py runserver
