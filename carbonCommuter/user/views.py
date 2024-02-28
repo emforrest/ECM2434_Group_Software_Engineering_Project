@@ -5,7 +5,6 @@ Authors:
 """
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.db.models import Model
 
 from common.travelTypes import TravelType
 from user.models import Journey
@@ -87,7 +86,7 @@ def upload(request):
         # Create a new Location object if it doesn't yet exist.
         try:
             location = Location.objects.get(address = request.POST.get('autocomplete'))
-        except Model.DoesNotExist:
+        except Location.DoesNotExist:
             location = Location.objects.create(lat = request.POST.get('lat'),
                                                lng = request.POST.get('lng'),
                                                address = request.POST.get('autocomplete'))
