@@ -37,9 +37,12 @@
     <br>
     <div class="container">
         <h1>Leave a Group</h1>
-        {% for message in messages %}
-        <p style='color:red'>{{ message }}</p>
-        {% endfor %}
+        {% if message %}
+        <p style='color:green'>{{ message }}</p>
+        {% endif %}
+        {% if error %}
+        <p style='color:red'>{{ error }}</p>
+        {% endif %}
         <ul class="list-group mt-3">
             {% for group in groups %}
             <li class="list-group-item d-flex justify-content-between align-items-center">

@@ -1,9 +1,5 @@
-from venv import logger
-
 from django.contrib.auth.models import Group
-from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 
@@ -16,38 +12,38 @@ def home(request):
 
 @login_required
 def create_group(request):
+    context = {}  # Initialize context dictionary
     if request.method == 'POST':
         group_name = request.POST.get('group_name')
         if Group.objects.filter(name=group_name).exists():
-            messages.error(request, 'Group already exists.')
-            return redirect('/groups/create/')  # Adjusted to use direct path
+            context['error'] = 'Group already exists.'  # Add error to context instead of using messages
+            return render(request, 'groups/create.html', context)  # Pass context to render
 
         new_group = Group.objects.create(name=group_name)
         request.user.groups.add(new_group)
-        messages.success(request, 'Group created successfully.')
-        return redirect('/groups/')  # Adjust as necessary, assuming home page lists groups
+        return redirect('/groups/')  # Assuming successful creation redirects to groups listing
 
-    return render(request, 'groups/create.html')
+    return render(request, 'groups/create.html', context)  # Ensure context is passed for GET requests
 
 
 @login_required
 def join_group(request):
+    context = {'groups': Group.objects.all().exclude(user=request.user)}  # Initialize context with groups
     if request.method == 'POST':
         group_id = request.POST.get('group_id')
         try:
             group = Group.objects.get(id=group_id)
             request.user.groups.add(group)
-            messages.success(request, f'You have joined {group.name}.')
-            return redirect('/groups/')  # Adjust as necessary
+            return redirect('/groups/')  # Redirect after successful addition
         except Group.DoesNotExist:
-            messages.error(request, 'This group does not exist.')
+            context['error'] = 'This group does not exist.'  # Add error message to context
 
-    groups = Group.objects.all().exclude(user=request.user)
-    return render(request, 'groups/join.html', {'groups': groups})
+    return render(request, 'groups/join.html', context)
 
 
 @login_required
 def leave_group(request):
+    context = {'groups': request.user.groups.all()}  # Initialize context with user's groups
     if request.method == 'POST':
         group_id = request.POST.get('group_id')
         group = get_object_or_404(Group, id=group_id)
@@ -55,13 +51,11 @@ def leave_group(request):
         # Check if the user is a member of the group
         if group in request.user.groups.all():
             request.user.groups.remove(group)
-            messages.success(request, f'You have successfully left {group.name}.')
+            context['message'] = f'You have successfully left {group.name}.'  # Success message
+            return redirect('/groups/')  # Use a direct path for redirect with message
         else:
-            messages.error(request, 'You are not a member of this group.')
+            context['error'] = 'You are not a member of this group.'  # Error message
 
-        return redirect('/groups/')  # Use a direct path for redirect
+    return render(request, 'groups/leave.html', context)
 
-    # GET request: Show the leave group page with list of user's groups
-    user_groups = request.user.groups.all()
-    return render(request, 'groups/leave.html', {'groups': user_groups})
 
