@@ -3,17 +3,18 @@ Authors:
 - Sam Townley
 - Eleanor Forrest
 """
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 
 from common.travelTypes import TravelType
+from user.models import Journey
+from main.models import Location
 from common.utils import locationToDistance, getCampusCoords, distanceToCO2
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
 
 
 @login_required
 def home(request):
-    """
-    Return the /user/home page with the information about the current user such as their name and email address.
+    """Return the /user/home page with the information about the current user such as their name and email address.
     Parameters:
     request - the HTTP request containing information about the current user
     Return:
@@ -37,8 +38,7 @@ def home(request):
 
 @login_required
 def settings(request):
-    """
-    Return the /user/settings page with the information about the current user such as their name and email address.
+    """Return the /user/settings page with the information about the current user such as their name and email address.
     Parameters:
     request - the HTTP request containing information about the current user
     Return:
@@ -59,9 +59,7 @@ def settings(request):
 
 @login_required
 def upload(request):
-    """
-@@ -74,28 +52,8 @@ def upload(request):
-    The function returns the rendering of the upload webpage using the provided information    
+    """The function returns the rendering of the upload webpage using the provided information    
     """
     username = request.user.username
     context = {"username": username}
@@ -84,10 +82,41 @@ def upload(request):
                                       float(request.POST.get('lng')), transport)
         savings = distanceToCO2(distance / 1000, transport)
         print(savings)
-
+        
+        # Create a new Location object if it doesn't yet exist.
+        location, created = Location.objects.get_or_create(lat = float(request.POST.get('lat')),
+                                                  lng = float(request.POST.get('lng')),
+                                                  address = request.POST.get('autocomplete'))
+        if created:
+            location.save()
+        
+        # Create a new entry in the journey's table
+        journey = Journey(user = request.user,
+                          distance = distance/1000,
+                          origin = location, 
+                          destination = request.POST.get('oncampus'),
+                          transport = request.POST.get('transport'))
+        journey.save()
+        
         # Increment the total savings stored inside the users profile model by the additonal carbon savings
-
         request.user.profile.total_saving += savings
         request.user.profile.save()
-
+        return redirect("success", journey_id=journey.id)
+        
     return render(request, "user/upload.html", context)
+
+
+@login_required
+def upload_success(request, journey_id: int):
+    
+    # Get journey object and calculate CO2 savings
+    journey = Journey.objects.get(id=journey_id)
+    savings = distanceToCO2(journey.distance, journey.transport)
+    
+    # Add journey information to context so it can be displayed on frontend
+    context = {
+        "distance": journey.distance,
+        "co2_saved": savings,
+        "transport": journey.transport
+    }
+    return render(request, "user/success.html", context)
