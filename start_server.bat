@@ -1,3 +1,3 @@
 call env\Scripts\activate.bat
-cd sustainabilityGame
+cd carbonCommuter
 python manage.py runserver
