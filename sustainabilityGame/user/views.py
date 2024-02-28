@@ -88,17 +88,7 @@ def settings(request):
         request.user.email = email
         request.user.username = username
         request.user.save()
-        co2Saved = request.user.profile.total_saving
-        name = first_name + " " + last_name
-        context = context = {"name": name,
-                            "email": email,
-                            "username": username,
-                            "myDate": myDate,
-                            "co2Saved": co2Saved,
-                            "myDate": myDate}
-        return render(request, "user/home.html", context)
-
-    return render(request, "user/settings.html", context)
+    return redirect("")
 
 
 @login_required
