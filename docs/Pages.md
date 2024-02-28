@@ -15,15 +15,23 @@ For the Logout page, if the user is authenticated, it should ask for a confirmat
 
 ## Register - `./register`
 
+Register follows a standard website register template, with a form that contains fields for the first and last name, username, email address, password, and another to re-enter the password. The password is checked against standard security checks (such as length and whether it is a common password), then verified to match the re-entered password. If these checks pass then a new user is created within the database. The user is then redirected to the user home page.
+
 ## Leaderboard - `./leaderboard`
 
+
+
 ## User Home - `./user`
+
+The user home page is a dashboard for a user, containing their public and private information including first and last name, email address, username and join date, and their total carbon saving so far, as well as buttons to edit their information, upload a journey or access groups. This page can only be accessed when a user is logged in.
 
 ## Upload Journey - `./user/upload` or `./user/upload/<journey-id>`
 
 This is the portal for uploading journeys, and contains a form where the user can select both a location on campus and a location off campus, as well as a mode of transport. This is then submitted, and the distance between the two points should be calculated, along with it's carbon savings. When a journey is successfully uploaded, they are redirected to the `upload/<journey_id>` page, which contains a confirmation, and information about the journey that was just upload. From here, the user can return to the [user home](#user-home---user) page.
 
 ## User Settings - `./user/settings`
+
+The user settings page allows a user to make edits to their personal information. It is only available if a user is already logged in. They can edit their first and last name, email address and username. The user must enter their current password in order for the changes to be made to their account.
 
 ## Groups Home - `./groups`
 
