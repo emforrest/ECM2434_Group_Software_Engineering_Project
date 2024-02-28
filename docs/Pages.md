@@ -19,13 +19,19 @@ For the Logout page, if the user is authenticated, it should ask for a confirmat
 
 ## User Home - `./user`
 
-## Upload Journey - `./user/upload`
+## Upload Journey - `./user/upload` or `./user/upload/<journey-id>`
+
+This is the portal for uploading journeys, and contains a form where the user can select both a location on campus and a location off campus, as well as a mode of transport. This is then submitted, and the distance between the two points should be calculated, along with it's carbon savings. When a journey is successfully uploaded, they are redirected to the `upload/<journey_id>` page, which contains a confirmation, and information about the journey that was just upload. From here, the user can return to the [user home](#user-home---user) page.
 
 ## User Settings - `./user/settings`
 
 ## Groups Home - `./groups`
 
-## About A Specific Group - `./groups/<group-id>`
+The groups home page is the publicly facing page. It displays a list of the top groups, similar to the [Leaderboard](#leaderboard---leaderboard) page and filterable based on different periods of time, e.g. week, month, year. If the user is authenticated, there should also be a list of the user's joined groups, as well as a button to join a group using a code. This page could also display recommnended public groups, depending on the user who's logged in, or generic suggestions if no user is logged in.
+
+## About A Specific Group - `./groups/<group-id>` 
+
+*(Not Completed Yet)*
 
 The group "profile" page displays more in-detail information about a given group, based on the group id specified. Here, users can see the profile picture and description of the group, as well as see a button to join the group if it's public. This page will also display a full list of the members within the groups. If you are a member of the group, you will also be able to visit a tab within the page that displays the leaderboard for just the members within the group, similar to how the [Leaderboard](#leaderboard---leaderboard) page works. Members of the group will also have an option to leave the group from this page.
 
