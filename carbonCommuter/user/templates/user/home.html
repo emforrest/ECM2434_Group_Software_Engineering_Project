@@ -46,9 +46,10 @@
         <br>
         <br>
         <br>
+        <!-- Set up two columns to display the Profile details, the savings and groups-->
         <div class="row">
             <div class="column">
-                <div class="profile-box">
+                <div class="column-box">
                     <h1>Profile</h1>
                     <br>
                     <p><p1>Name: </p1><i>{{ name }}</i></p>
@@ -63,15 +64,14 @@
             </div>
             <br>
             <div class="column">
-                <div class="profile-box">
+                <div class="column-box">
                     <h1>Savings</h1>
                     <br>
                     <p><p1>Total Saving: </p1><i>{{ co2Saved }}</i></p>
                     <br>
                     <a href="/user/upload"><button type="submit" class="btn">Upload Journey</button></a>
                 </div>
-                <br>
-                <div class="profile-box">
+                <div class="column-box">
                     <h1>Groups</h1>
                     <br>
                     <a href="/groups/"><button type="submit" class="btn">Groups</button></a>
