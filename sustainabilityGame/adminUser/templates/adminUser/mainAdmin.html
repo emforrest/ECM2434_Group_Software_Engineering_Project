@@ -1,10 +1,15 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
+<!-- A HTML document that produces the home page for admin users. -->
+<!-- authors: Abi Hinton -->
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CO2 Saving Website</title>
+    <!-- import styling -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'adminUser/style.css' %}">
     <!--<link rel="stylesheet" href="style.css">-->
@@ -12,6 +17,7 @@
 </head>
 <body>
     <header>
+        <!--The navbar, consistent across the site-->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="/">CO2 Saving</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,6 +48,7 @@
     <br>
     <div class="wrapper">
     <div class="container mt-5">
+        <!-- the text to show the user they have reached the admin page -->
         <h1>CarbonCommuter Admin</h1>
         <p></p>
         <p>Register now to start tracking your carbon emissions, join groups, and compete with others to see who can make the most significant impact!</p>
@@ -50,6 +57,7 @@
     </div>  
     <br>
 
+    <!--The footer, consistent across the site-->
     <footer class="mt-5">
         <div class="container text-center">
             <p>&copy; 2024 CO2 Saving. All Rights Reserved.</p>
