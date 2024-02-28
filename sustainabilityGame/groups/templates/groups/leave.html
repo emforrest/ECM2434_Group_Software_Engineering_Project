@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Join Group - CO2 Saving Website</title>
+    <title>Leave Group - CO2 Saving Website</title>
     <link rel="stylesheet" href="{% static 'sustainabilityGame/style.css' %}">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -36,25 +36,23 @@
 
     <br>
     <div class="container">
-        <h1>Join a Group</h1>
+        <h1>Leave a Group</h1>
         {% for message in messages %}
-        <p style='color:green'>{{ message }}</p>
+        <p style='color:red'>{{ message }}</p>
         {% endfor %}
         <ul class="list-group mt-3">
             {% for group in groups %}
             <li class="list-group-item d-flex justify-content-between align-items-center">
                 {{ group.name }}
-                <form action="/groups/join/" method="POST">
+                <form action="{% url 'leave_group' %}" method="POST">
                     {% csrf_token %}
-                    <!-- Ensure the name attribute matches what the view expects -->
                     <input type="hidden" name="group_id" value="{{ group.id }}">
-                    <button type="submit" class="btn btn-primary btn-sm">Join</button>
+                    <button type="submit" class="btn btn-danger btn-sm">Leave</button>
                 </form>
             </li>
             {% endfor %}
         </ul>
     </div>
-
 
     <br>
     <div class="footer">
