@@ -1,3 +1,4 @@
+/*Authors: Giulia Brown, Jack Skinner*/
 /*general style*/
 * {
     margin: 0;
@@ -319,7 +320,7 @@ tbody tr:nth-child(n + 11) {
     position: center;
     bottom: 10px;
     margin: auto;
-    width: 48%;
+    width: 420px;
     height: 40px;
     background: transparent;
     border: 2px solid rgba(255, 255, 255, .2);
