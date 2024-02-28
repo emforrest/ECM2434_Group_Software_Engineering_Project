@@ -25,7 +25,7 @@ def home(request):
     email = request.user.email
     username = request.user.username
     myDate = request.user.date_joined
-    co2Saved = 10 #request.user.profile.total_saving
+    co2Saved = request.user.profile.total_saving
     context = context = {"name": name,
                          "email": email,
                          "username": username,
