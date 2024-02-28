@@ -91,6 +91,7 @@ def settings(request):
         request.user.save()
         co2Saved = request.user.profile.total_saving
         name = first_name + " " + last_name
+        
         context = context = {"name": name,
                             "email": email,
                             "username": username,
