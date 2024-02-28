@@ -1,0 +1,75 @@
+{% load static %} <!-- Load Django's static files -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leave a Group</title>
+    <!-- External CSS for styling -->
+    <link rel="stylesheet" href="{% static 'sustainabilityGame/style.css' %}">
+    <!-- Boxicons for additional icons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Bootstrap for responsive design and component styling -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <header>
+        <!-- Navigation bar setup with Bootstrap -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/">CarbonCommuter</a> <!-- Link back to home -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navigation links -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto"> <!-- Align items to the right -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout/">Logout</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/register/">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/leaderboard/">Leaderboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/">Profile</a> <!-- User profile link -->
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main content area -->
+    <div class="container">
+        <h1>Leave a Group</h1>
+        <!-- Display success or error messages if any -->
+        {% if message %}
+        <p style='color:green'>{{ message }}</p>
+        {% endif %}
+        {% if error %}
+        <p style='color:red'>{{ error }}</p>
+        {% endif %}
+        <!-- List of groups the user is a member of -->
+        <ul class="list-group mt-3">
+            {% for group in groups %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ group.name }} <!-- Display group name -->
+                <!-- Form to submit leave group request -->
+                <form action="{% url 'leave_group' %}" method="POST">
+                    {% csrf_token %} <!-- CSRF token for form security -->
+                    <input type="hidden" name="group_id" value="{{ group.id }}"> <!-- Hidden field to pass group ID -->
+                    <button type="submit" class="btn btn-danger btn-sm">Leave</button> <!-- Button to submit form -->
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Footer content -->
+    <div class="footer">
+        <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
+    </div>
+</body>
+</html>
