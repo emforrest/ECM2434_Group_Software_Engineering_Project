@@ -5,7 +5,8 @@ Authors:
 """
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.db.models import Model
+from django.contrib.auth import authenticate, password_validation, login
+from django.contrib.auth.models import User
 
 from common.travelTypes import TravelType
 from user.models import Journey
@@ -55,7 +56,49 @@ def settings(request):
                          "email": email,
                          "username": username,
                          "myDate": myDate}
-    return render(request, "user/settings.html", context)
+    if request.method == "POST":
+        #accessing the data from the POST request
+        first_name = request.POST.get("first_name")
+        last_name = request.POST.get("last_name")
+        email = request.POST.get("email")
+        username = request.POST.get("username")
+        password1 = request.POST.get("password1")
+
+        #checking user does not already exist
+        user = authenticate(request, username=username, password=password1)
+        userFilter = User.objects.filter(username=username)
+        if (userFilter.exists() and (username != request.user.username)):
+            context["error"] = "This user already exists!"
+            return render(request, "user/settings.html", context)
+
+        #checking if email is already being used with a registered account
+        userFilterEmail = User.objects.filter(email=email)
+        if (userFilterEmail.exists() and (email != request.user.email)):
+            context["error"] = "This email is already being used"
+            return render(request, "user/settings.html", context)
+
+        #checking if password is correct 
+        user = authenticate(request, username=request.user.username, password=password1)
+        if user is None:
+            context = {"error": "Invalid password"}
+            return render(request, "user/settings.html", context)
+
+        request.user.first_name = first_name
+        request.user.last_name = last_name
+        request.user.email = email
+        request.user.username = username
+        request.user.save()
+        co2Saved = request.user.profile.total_saving
+        name = first_name + " " + last_name
+        
+        context = context = {"name": name,
+                            "email": email,
+                            "username": username,
+                            "myDate": myDate,
+                            "co2Saved": co2Saved,
+                            "myDate": myDate}
+        return render(request, "user/home.html", context)
+    return render(request, "user/settings.html", context)  
 
 
 @login_required
@@ -87,7 +130,7 @@ def upload(request):
         # Create a new Location object if it doesn't yet exist.
         try:
             location = Location.objects.get(address = request.POST.get('autocomplete'))
-        except Model.DoesNotExist:
+        except Location.DoesNotExist:
             location = Location.objects.create(lat = request.POST.get('lat'),
                                                lng = request.POST.get('lng'),
                                                address = request.POST.get('autocomplete'))
