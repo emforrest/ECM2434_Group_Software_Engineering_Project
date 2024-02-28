@@ -38,8 +38,7 @@ def distanceToCO2(distance: float, transport: TravelType|str) -> float:
     # Verify method of transport is valid and return CO2 savings to 2 d.p
     if type(transport) is TravelType and transport is not None:
         savings = distance * abs(TravelType.CAR.value - transport.value)
-        round(savings, 2)
-        return savings
+        return round(savings, 2)
     else:
         raise ValueError("Unknown mode of transport specified!")
 
