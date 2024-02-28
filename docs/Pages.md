@@ -19,7 +19,7 @@ Register follows a standard website register template, with a form that contains
 
 ## Leaderboard - `./leaderboard`
 
-
+The leaderboard page allows users to compare their carbon savings to other users. It will display the all time carbon savings for the top 10 users on the system. Eventually, users should be able to filter the leaderboard to different periods of time, such as a week, month, or year. They should also be able to choose how many users to display on the leaderboard, and keep scrolling down to go through all users in the leaderboard.
 
 ## User Home - `./user`
 
