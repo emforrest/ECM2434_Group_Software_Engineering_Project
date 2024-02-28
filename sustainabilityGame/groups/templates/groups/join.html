@@ -37,7 +37,6 @@
     <br>
     <div class="container">
         <h1>Join a Group</h1>
-        <!-- Display error message from the context -->
         {% if error %}
         <p style='color:red'>{{ error }}</p>
         {% endif %}
@@ -47,7 +46,6 @@
                 {{ group.name }}
                 <form action="/groups/join/" method="POST">
                     {% csrf_token %}
-                    <!-- Ensure the name attribute matches what the view expects -->
                     <input type="hidden" name="group_id" value="{{ group.id }}">
                     <button type="submit" class="btn btn-primary btn-sm">Join</button>
                 </form>
@@ -60,9 +58,5 @@
     <div class="footer">
         <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
     </div>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
