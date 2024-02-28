@@ -4,11 +4,10 @@ Authors:
 - Eleanor Forrest
 """
 
-from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
-from common.utils import locationToDistance, getCampusCoords, distanceToCO2
 from common.travelTypes import TravelType
+from common.utils import locationToDistance, getCampusCoords, distanceToCO2
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
 
 
 @login_required
@@ -26,7 +25,7 @@ def home(request):
     email = request.user.email
     username = request.user.username
     myDate = request.user.date_joined
-    co2Saved = request.user.profile.total_saving
+    co2Saved = 10 #request.user.profile.total_saving
     context = context = {"name": name,
                          "email": email,
                          "username": username,

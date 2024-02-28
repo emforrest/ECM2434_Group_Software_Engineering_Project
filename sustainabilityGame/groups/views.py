@@ -25,7 +25,7 @@ def create_group(request):
         new_group = Group.objects.create(name=group_name)
         request.user.groups.add(new_group)
         messages.success(request, 'Group created successfully.')
-        return redirect('/')  # Adjust as necessary, assuming home page lists groups
+        return redirect('/groups/')  # Adjust as necessary, assuming home page lists groups
 
     return render(request, 'groups/create.html')
 
