@@ -19,11 +19,15 @@ Register follows a standard website register template, with a form that contains
 
 ## Leaderboard - `./leaderboard`
 
+The leaderboard page allows users to compare their carbon savings to other users. It will display the all time carbon savings for the top 10 users on the system. Eventually, users should be able to filter the leaderboard to different periods of time, such as a week, month, or year. They should also be able to choose how many users to display on the leaderboard, and keep scrolling down to go through all users in the leaderboard.
+
 ## User Home - `./user`
 
 The user home page is a dashboard for a user, containing their public and private information including first and last name, email address, username and join date, and their total carbon saving so far, as well as buttons to edit their information, upload a journey or access groups. This page can only be accessed when a user is logged in.
 
-## Upload Journey - `./user/upload`
+## Upload Journey - `./user/upload` or `./user/upload/<journey-id>`
+
+This is the portal for uploading journeys, and contains a form where the user can select both a location on campus and a location off campus, as well as a mode of transport. This is then submitted, and the distance between the two points should be calculated, along with it's carbon savings. When a journey is successfully uploaded, they are redirected to the `upload/<journey_id>` page, which contains a confirmation, and information about the journey that was just upload. From here, the user can return to the [user home](#user-home---user) page.
 
 ## User Settings - `./user/settings`
 
@@ -31,7 +35,11 @@ The user settings page allows a user to make edits to their personal information
 
 ## Groups Home - `./groups`
 
-## About A Specific Group - `./groups/<group-id>`
+The groups home page is the publicly facing page. It displays a list of the top groups, similar to the [Leaderboard](#leaderboard---leaderboard) page and filterable based on different periods of time, e.g. week, month, year. If the user is authenticated, there should also be a list of the user's joined groups, as well as a button to join a group using a code. This page could also display recommnended public groups, depending on the user who's logged in, or generic suggestions if no user is logged in.
+
+## About A Specific Group - `./groups/<group-id>` 
+
+*(Not Completed Yet)*
 
 The group "profile" page displays more in-detail information about a given group, based on the group id specified. Here, users can see the profile picture and description of the group, as well as see a button to join the group if it's public. This page will also display a full list of the members within the groups. If you are a member of the group, you will also be able to visit a tab within the page that displays the leaderboard for just the members within the group, similar to how the [Leaderboard](#leaderboard---leaderboard) page works. Members of the group will also have an option to leave the group from this page.
 
