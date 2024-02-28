@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<!-- A HTML document that produces the main home page. -->
+<!-- authors: Jack Skinner, Giulia Brown -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CO2 Saving Website</title>
+    <!-- import styling -->
+    <link rel="stylesheet" href= "{% static 'carbonCommuter/style.css' %}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <header>
+        <!--The navbar, consistent across the site-->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/">CarbonCommuter</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/register/">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login/">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/leaderboard/">Leaderboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <br>
+    <!-- Main page table with a brief description of the app and the buttons to register, login and leaderboard-->
+    <main class="main-table">
+        <section class="main-header">
+            <h1>Welcome to CarbonCommuter</h1>
+        </section>
+        <section class="main-description">
+            <p>Register now to start tracking your carbon emissions, join groups, and compete with others to see who can make the most significant impact!</p>
+        </section>
+        <section class="main-links">
+            <a href="/register/"><button type="submit" class="btn">Register</button></a><p>if you are a new user.</p>
+            <a href="/login/"><button type="submit" class="btn">Login</button></a><p>if you are an existing user.</p>
+            <a href="/leaderboard/"><button type="submit" class="btn">View Leaderboard</button></a><p>to see top savers.</p>
+        </section>
+    </main>
+    <br>
+    <!--The footer, consistent across the site-->
+    <div class="main-footer">
+        <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<!--A HTML document that produces the user home webpage, which display's a user's personal information and total savings so far.-->
+<!--authors: Giulia Brown-->
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>User home page</title>
+        <!--Import styling-->
+        <link rel="stylesheet" href="{% static 'carbonCommuter/style.css' %}">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    </head>
+
+    <body>
+        <header>
+            <!--Set up the navbar as seen on every webpage-->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="/">CarbonCommuter</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+    
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout/">Logout</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/register/">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/leaderboard/">Leaderboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <br>
+        <br>
+        <br>
+        <div class="row">
+            <div class="column">
+                <div class="profile-box">
+                    <h1>Profile</h1>
+                    <br>
+                    <p><p1>Name: </p1><i>{{ name }}</i></p>
+                    <br>
+                    <p><p1>Email: </p1><i>{{ email }}</i></p>
+                    <br>
+                    <p><p1>Username: </p1><i>{{ username }}</i></p>
+                    <br>
+                    <p><p1>Join Date: </p1><i>{{ myDate }}</i></p>
+                    <a href="/user/settings"><button type="submit" class="btn">Edit Profile</button></a>
+                </div>
+            </div>
+            <br>
+            <div class="column">
+                <div class="profile-box">
+                    <h1>Savings</h1>
+                    <br>
+                    <p><p1>Total Saving: </p1><i>{{ co2Saved }}</i></p>
+                    <br>
+                    <a href="/user/upload"><button type="submit" class="btn">Upload Journey</button></a>
+                </div>
+                <br>
+                <div class="profile-box">
+                    <h1>Groups</h1>
+                    <br>
+                    <a href="/groups/"><button type="submit" class="btn">Groups</button></a>
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <div class="footer">
+            <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
+        </div>
+    </body>
+</html>
