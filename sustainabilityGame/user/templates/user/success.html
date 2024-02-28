@@ -43,6 +43,17 @@
     <br>
     <div class="wrapper">
         <h1>Your journey has been registered!</h1>
+        <br>
+        <p><p1>Carbon Saved: </p1><i>{{ co2_saved }}</i></p>
+        <br>
+        <button type="button" class="btn" id="btn_home">Go home</button>
+
+        <script>
+            document.getElementById("btn_home").onclick = function () {
+                location.href = "/user/";
+            };
+        </script>
+
     </div>
     <br>
     <div class="footer">

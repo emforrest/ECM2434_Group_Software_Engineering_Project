@@ -120,5 +120,15 @@ def upload(request):
 
 @login_required
 def upload_success(request, journey_id: int):
-    print(journey_id)
-    return render(request, "user/success.html")
+    
+    # Get journey object and calculate CO2 savings
+    journey = Journey.objects.get(id=journey_id)
+    savings = distanceToCO2(journey.distance, journey.transport)
+    
+    # Add journey information to context so it can be displayed on frontend
+    context = {
+        "distance": journey.distance,
+        "co2_saved": savings,
+        "transport": journey.transport
+    }
+    return render(request, "user/success.html", context)
