@@ -107,10 +107,10 @@ env\Scripts\Activate.ps1
 source env/bin/activate
 ```
 
-Then, move inside the sustainabilityGame directory if you're not already, and use the following command to start the webserver:
+Then, move inside the [carbonCommuter](./carbonCommuter/) directory if you're not already, and use the following command to start the webserver:
 
 ```shell
-cd sustainabilityGame
+cd carbonCommuter
 python manage.py runserver
 ```
 
