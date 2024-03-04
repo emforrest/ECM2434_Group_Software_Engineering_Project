@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join a Group</title>
+    <!-- Link to external CSS file stored in static files -->
+    <link rel="stylesheet" href="{% static 'carbonCommuter/style.css' %}">
+    <!-- Link to Boxicons for icons usage -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Bootstrap CSS for responsive design and styling components -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <header>
+        <!-- Navigation bar using Bootstrap for a responsive design -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <!-- Website logo or name -->
+            <a class="navbar-brand" href="/">CarbonCommuter</a>
+            <!-- Navbar toggler for mobile responsiveness -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar links for navigation -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <!-- Navigation items -->
+                    <li class="nav-item"><a class="nav-link" href="/logout/">Logout</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/register/">Register</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/leaderboard/">Leaderboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/user/">Profile</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <br>
+    <div class="container">
+        <!-- Page heading -->
+        <h1>Join a Group</h1>
+        <!-- Error message display area -->
+        {% if error %}
+        <p style='color:red'>{{ error }}</p>
+        {% endif %}
+        <!-- List of groups available for joining -->
+        <ul class="list-group mt-3">
+            {% for group in groups %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <!-- Display group name -->
+                {{ group.name }}
+                <!-- Form to submit join request -->
+                <form action="/groups/join/" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="group_id" value="{{ group.id }}">
+                    <button type="submit" class="btn btn-primary btn-sm">Join</button>
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <br>
+    <div class="footer">
+        <!-- Footer content -->
+        <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
+    </div>
+</body>
+</html>

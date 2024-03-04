@@ -15,6 +15,13 @@ CarbonCommuter is a free-to-use website that tracks carbon savings from students
 - Jack Skinner - [@Lonk2004](https://github.com/Lonk2004)
 - Charles Symonds - [@Charles-Symonds-10](https://github.com/Charles-Symonds-10)
 
+### Documents
+
+- Process Documents: https://trello.com/b/yyfAlINB/the-ceiling-fans
+  - Meeting Notes: [docs/Meeting Notes.docx](./docs/Meeting%20Notes.docx)
+  - Kanban Snapshots: [docs/kanban-snapshots](./docs/kanban-snapshots/)
+- Product Documents: [docs/Pages.md](./docs/Pages.md)
+
 ### Aims
 
 The aim of this project was to build a game focused around sustainability. Our idea was to create an application that encouraged university students to travel sustainably and consider the carbon impact of their journeys! With an estimated 37,000+ students and staff on campus (\*), a small reduction in the number of journeys made by car to campus would lead to a significant reduction in the emissions of harmful CO2. To do this, we intent to positively reward users for each journey they make to/from campus that wasn't in a car (see [gamification](#gamificiation) for more info). On top of this, we'd like to point out the facilities on campus that students can make use of, such as bike racks and bus stops, to achieve this goal.
@@ -107,10 +114,10 @@ env\Scripts\Activate.ps1
 source env/bin/activate
 ```
 
-Then, move inside the sustainabilityGame directory if you're not already, and use the following command to start the webserver:
+Then, move inside the [carbonCommuter](./carbonCommuter/) directory if you're not already, and use the following command to start the webserver:
 
 ```shell
-cd sustainabilityGame
+cd carbonCommuter
 python manage.py runserver
 ```
 
