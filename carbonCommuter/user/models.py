@@ -23,8 +23,13 @@ class Profile(models.Model):
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     total_saving = models.FloatField(default=0)
-    
-    
+    #flag is true if no journey has been started, and it is false if a journey has already been started
+    flag = bool(True)
+    #current/new start journey coords
+    start_long = 0.0
+    start_lat = 0.0
+    transport = ""
+ 
 class Journey(models.Model):
     """Contains information about each journey, linked to a user.
     

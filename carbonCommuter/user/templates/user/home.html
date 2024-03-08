@@ -69,7 +69,11 @@
                     <br>
                     <p><p1>Total Saving: </p1><i>{{ co2Saved }}</i></p>
                     <br>
-                    <a href="/user/upload"><button type="submit" class="btn">Upload Journey</button></a>
+                    {% if flag %}
+                    <a href="/user/upload"><button type="submit" class="btn">Start Journey</button></a>
+                    {% else %}
+                    <a href="/user/upload"><button type="submit" class="btn">End Journey</button></a>
+                    {% endif %}
                 </div>
                 <div class="column-box">
                     <h1>Groups</h1>

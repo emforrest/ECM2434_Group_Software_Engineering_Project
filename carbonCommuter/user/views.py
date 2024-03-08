@@ -13,7 +13,6 @@ from user.models import Journey
 from main.models import Location
 from common.utils import locationToDistance, getCampusCoords, distanceToCO2
 
-
 @login_required
 def home(request):
     """Return the /user/home page with the information about the current user such as their name and email address.
@@ -29,12 +28,14 @@ def home(request):
     username = request.user.username
     myDate = request.user.date_joined
     co2Saved = request.user.profile.total_saving
+    flag = request.user.profile.flag
     context = context = {"name": name,
                          "email": email,
                          "username": username,
                          "myDate": myDate,
                          "co2Saved": co2Saved,
-                         "myDate": myDate}
+                         "myDate": myDate,
+                         "flag": flag}
     return render(request, "user/home.html", context)
 
 
@@ -106,51 +107,96 @@ def upload(request):
     """The function returns the rendering of the upload webpage using the provided information    
     """
     username = request.user.username
-    context = {"username": username}
+    flag = request.user.profile.flag
+    context = context =  {"username": username,
+                          "flag": flag}
 
     # Deal with a POST request from the form
     if request.method == "POST":
 
-        # Get name of location on campus from form and map it to a latitude and longitude dict stored inside common/campusCoordinates.json
-        origin = getCampusCoords(request.POST.get('oncampus'))
-        if origin == {}:
-            raise RuntimeError("On-campus location not found!")
+        request.user.profile.start_lat  = float(request.POST.get('lat'))
+        request.user.profile.start_long = float(request.POST.get('lng'))
 
         # Convert the string representation of the transport type to a TravelType object.
-        transport = TravelType.from_str(request.POST.get('transport'))
-        if transport is None:
-            raise RuntimeError("Transport not found!")
+        request.user.profile.transport = TravelType.from_str(request.POST.get('transport'))
+        if request.user.profile.transport is None:
+           raise RuntimeError("Transport not found!")
+
+        request.user.profile.flag = bool(False)
+        request.user.profile.save()
+        # Get name of location on campus from form and map it to a latitude and longitude dict stored inside common/campusCoordinates.json
+        #origin = getCampusCoords(request.POST.get('oncampus'))
+        #if origin == {}:
+        #    raise RuntimeError("On-campus location not found!")
+
+        # Convert the string representation of the transport type to a TravelType object.
+        #transport = TravelType.from_str(request.POST.get('transport'))
+        #if transport is None:
+        #   raise RuntimeError("Transport not found!")
 
         # Convert both sets of latitude/longitude coordinates to a distance, and then calculate the carbon saved based on that distance, using the methods defined in common/utils.py
-        distance = locationToDistance(origin['latitude'], origin['longitude'], float(request.POST.get('lat')),
-                                      float(request.POST.get('lng')), transport)
-        savings = distanceToCO2(distance / 1000, transport)
-        print(savings)
+        #distance = locationToDistance(origin['latitude'], origin['longitude'], float(request.POST.get('lat')),
+        #                              float(request.POST.get('lng')), transport)
+        #savings = distanceToCO2(distance / 1000, transport)
+        #print(savings)
         
         # Create a new Location object if it doesn't yet exist.
-        try:
-            location = Location.objects.get(address = request.POST.get('autocomplete'))
-        except Location.DoesNotExist:
-            location = Location.objects.create(lat = request.POST.get('lat'),
-                                               lng = request.POST.get('lng'),
-                                               address = request.POST.get('autocomplete'))
-            location.save()
-        except Exception as ex:
-            raise ex
+        #try:
+        #    location = Location.objects.get(address = request.POST.get('autocomplete'))
+        #except Location.DoesNotExist:
+        #    location = Location.objects.create(lat = request.POST.get('lat'),
+        #                                       lng = request.POST.get('lng'),
+        #                                       address = request.POST.get('autocomplete'))
+        #    location.save()
+        #except Exception as ex:
+        #    raise ex
         
+        # Create a new entry in the journey's table
+        #journey = Journey(user = request.user,
+        #                  distance = distance/1000,
+        #                  origin = location, 
+        #                  destination = request.POST.get('oncampus'),
+        #                  transport = request.POST.get('transport'))
+        #journey.save()
+        
+        # Increment the total savings stored inside the users profile model by the additonal carbon savings
+        #request.user.profile.total_saving += savings
+        #request.user.profile.save()
+        #return redirect("success", journey_id=journey.id)
+    if request.method == "POST":
+
+        end_lat  = float(request.POST.get('lat'))
+        end_long = float(request.POST.get('lng'))
+
+        # Convert both sets of latitude/longitude coordinates to a distance, and then calculate the carbon saved based on that distance, using the methods defined in common/utils.py
+        distance = locationToDistance(request.user.profile.start_lat, request.user.profile.start_long, end_lat,
+                                      end_long, request.user.profile.transport)
+        savings = distanceToCO2(distance / 1000, request.user.profile.transport)
+        print(savings)
+
+        #need to create and save location
+        #need to add the origin and destination to the journey 
+
         # Create a new entry in the journey's table
         journey = Journey(user = request.user,
                           distance = distance/1000,
-                          origin = location, 
-                          destination = request.POST.get('oncampus'),
                           transport = request.POST.get('transport'))
         journey.save()
         
         # Increment the total savings stored inside the users profile model by the additonal carbon savings
         request.user.profile.total_saving += savings
-        request.user.profile.save()
-        return redirect("success", journey_id=journey.id)
         
+        #journey complete, set flag back to True
+        request.user.profile.flag = bool(True)
+        #reset journey details in user
+        request.user.profile.start_lat = float(0)
+        request.user.profile.start_long = float(0)
+        request.user.profile.transport = str("")
+
+        request.user.profile.save()
+
+        return redirect("success", journey_id=journey.id)
+
     return render(request, "user/upload.html", context)
 
 
