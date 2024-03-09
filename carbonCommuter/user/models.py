@@ -12,23 +12,7 @@ Authors:
 from django.db import models
 from main.models import Location
 from django.contrib.auth.models import User
-
-
-class Profile(models.Model):
-    """Contains any information about a user that isn't related to authentication.
-
-    Attributes:
-        user (User): A one-to-one relationship with the built in User model.
-        total_saving (float): The total carbon savings of a user across all journeys.
-    """
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    total_saving = models.FloatField(default=0)
-    #flag is true if no journey has been started, and it is false if a journey has already been started
-    flag = bool(True)
-    #current/new start journey coords
-    start_long = 0.0
-    start_lat = 0.0
-    transport = ""
+    
  
 class Journey(models.Model):
     """Contains information about each journey, linked to a user.
@@ -48,8 +32,24 @@ class Journey(models.Model):
     """
     id = models.AutoField(primary_key=True, auto_created=True, unique=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=False)
-    distance = models.FloatField(blank=False)
-    origin = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True)
-    destination = models.CharField(max_length=128)
-    transport = models.CharField(max_length=16, blank=False)
-    time_logged = models.DateTimeField(auto_now_add=True)
+    distance = models.FloatField(null=False, blank=True, default=0)
+    carbon_savings = models.FloatField(null=False, blank=True, default=0)
+    off_campus = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True, blank=True)
+    on_campus = models.CharField(max_length=128, null=True, blank=True)
+    # The direction of the journey (0 = "to campus", 1 = "from campus")
+    direction = models.IntegerField(null=False, blank=False, default=0)
+    transport = models.CharField(max_length=16, blank=False, null=False)
+    time_started = models.DateTimeField(null=False, blank=False)
+    time_finished = models.DateTimeField(null=True, blank=True)
+    
+    
+class Profile(models.Model):
+    """Contains any information about a user that isn't related to authentication.
+
+    Attributes:
+        user (User): A one-to-one relationship with the built in User model.
+        total_saving (float): The total carbon savings of a user across all journeys.
+    """
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    total_saving = models.FloatField(default=0)
+    active_journey = models.ForeignKey(Journey, on_delete=models.SET_NULL, null=True, blank=True)
