@@ -22,6 +22,10 @@ class Location(models.Model):
         address (string): The full address of the location.
     """
     id = models.AutoField(primary_key=True, auto_created=True, unique=True)
-    lat = models.FloatField(blank=False)
-    lng = models.FloatField(blank=False)
-    address = models.CharField(max_length=256, blank=False, unique=True)
+    name = models.CharField(max_length=64, null=True, blank=True)
+    lat = models.FloatField(null=False, blank=False)
+    lng = models.FloatField(null=False, blank=False)
+    address = models.CharField(max_length=255, null=False, blank=False, unique=True, db_index=True)
+    on_campus = models.BooleanField(null=False, blank=True, default=False)
+    type = models.CharField(max_length=32, null=True, blank=True)
+    
