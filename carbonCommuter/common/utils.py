@@ -13,6 +13,7 @@ Authors:
 import json
 import math
 import requests
+from typing import Union
 from common.travelTypes import TravelType
 
 def distanceToCO2(distance: float, transport: TravelType|str) -> float:
@@ -144,22 +145,34 @@ def getCampusCoords(location: str) -> dict:
         dict: A dictionary with 2 keys, latitude and longitude containing float values.
     """
     
-    # Load campus coords from json file
-    with open("common/campusCoordinates.json", "rb") as file:
-        campus = json.load(file)
-        file.close()
-    
     # Return latitude and longitude dictionary associated with location name in file
+    campus = loadCampusCoords()
     if location in campus.keys():
         return campus[location]
     else:
         raise ValueError("Unknown location on campus!")
+    
+    
+def loadCampusCoords() -> dict:
+    # Load campus coords from json file
+    with open("common/campusCoordinates.json", "rb") as file:
+        campus = json.load(file)
+        file.close()
+    return campus
 
 
-def isWithinProximity(location1: tuple, location2: tuple) -> bool:
+def calculateDistanceBetween(location1: tuple, location2: tuple) -> float:
     DEGREES_PER_KM = 0.00898315277071498185515429725208
     distance = math.sqrt(math.pow((location1[0] - location2[0]), 2) + math.pow((location1[1] - location2[1]), 2)) / DEGREES_PER_KM
-    if distance < 0.5:
-        return True
-    else:
-        return False
+    return distance
+
+
+def getClosestCampus(lat: float, lng: float) -> Union[str, float]:
+    campus = loadCampusCoords()
+    results = {}
+    for name, coords in campus.items():
+        distance = calculateDistanceBetween((lat, lng), (coords["latitude"], coords['longitude']))
+        results[name] = distance
+        
+    ordered = dict(sorted(results.items(), key=lambda item: item[1]))
+    return list(ordered.items())[0]
