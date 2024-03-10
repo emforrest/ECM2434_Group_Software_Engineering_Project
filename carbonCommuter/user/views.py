@@ -97,7 +97,7 @@ def settings(request):
                             "myDate": myDate,
                             "co2Saved": co2Saved,
                             "myDate": myDate}
-        return render(request, "user/home.html", context)
+        return render(request, "user/user_groups_home_page.html", context)
     return render(request, "user/settings.html", context)  
 
 

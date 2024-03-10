@@ -1,0 +1,76 @@
+{% load static %} <!-- Load Django static files tag to include CSS and other static assets -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Groups Home Page</title>
+    <!-- Link to external CSS file stored in static files -->
+    <link rel="stylesheet" href="{% static 'carbonCommuter/style.css' %}">
+    <!-- Link to Boxicons for icons usage -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Bootstrap CSS for responsive design and styling components -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <header>
+        <!-- Navigation bar with Bootstrap classes for styling -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/">CarbonCommuter</a> <!-- Brand name with link to home -->
+            <!-- Toggle button for mobile navigation -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navigation links -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto"> <!-- Alignment to the right (ml-auto) -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout/">Logout</a> <!-- Logout link -->
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/register/">Register</a> <!-- Register link -->
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/leaderboard/">Leaderboard</a> <!-- Leaderboard link -->
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a> <!-- User profile link -->
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mt-5">
+        <h2>Your Groups</h2>
+        <!-- Loop through the user's groups instead of all groups -->
+        {% for group in request.user.groups.all %}
+        <div class="card mb-3">
+            <div class="card-header">
+                {{ group.name }}
+            </div>
+            <div class="card-body">
+                <a href="/groups/view/{{ group.id }}/" class="btn btn-primary">View Group</a>
+            </div>
+        </div>
+        {% empty %}
+        <p>You are not in any groups.</p>
+        {% endfor %}
+
+        <!-- Add the search button within a card layout -->
+        <div class="card mb-3">
+            <div class="card-body">
+                <a href="/groups/search/" class="btn btn-primary">Search for a Group to Join</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer mt-auto py-3">
+        <div class="container">
+            <span>&copy; 2024 Your Website. All Rights Reserved.</span>
+        </div>
+    </footer>
+</body>
+</html>
