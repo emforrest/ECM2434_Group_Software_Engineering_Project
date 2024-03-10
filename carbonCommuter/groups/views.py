@@ -47,6 +47,7 @@ def create_group(request):
 
         new_group = Group.objects.create(name=group_name)
         request.user.groups.add(new_group)
+        request.user.save()
         return redirect('/groups/')
 
     return render(request, 'groups/create.html', context)
@@ -70,6 +71,7 @@ def join_group(request):
         try:
             group = Group.objects.get(id=group_id)
             request.user.groups.add(group)
+            request.user.save()
             return redirect('/groups/')
         except Group.DoesNotExist:
             context['error'] = 'This group does not exist.'
@@ -97,6 +99,7 @@ def leave_group(request):
 
         if group in request.user.groups.all():
             request.user.groups.remove(group)
+            request.user.save()
             context['message'] = f'You have successfully left {group.name}.'
             return redirect('/groups/')
         else:
