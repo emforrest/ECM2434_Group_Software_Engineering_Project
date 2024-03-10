@@ -8,7 +8,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>User home page</title>
+        <title>Dashboard</title>
         <!--Import styling-->
         <link rel="stylesheet" href="{% static 'carbonCommuter/style.css' %}">
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -69,10 +69,10 @@
                     <br>
                     <p><p1>Total Saving: </p1><i>{{ co2Saved }}</i></p>
                     <br>
-                    {% if flag %}
-                    <a href="/user/upload"><button type="submit" class="btn">Start Journey</button></a>
+                    {% if not started %}
+                    <a href="/user/journeys/create"><button type="submit" class="btn">Start Journey</button></a>
                     {% else %}
-                    <a href="/user/upload"><button type="submit" class="btn">End Journey</button></a>
+                    <a href="/user/journeys/finish"><button type="submit" class="btn">End Journey</button></a>
                     {% endif %}
                 </div>
                 <div class="column-box">

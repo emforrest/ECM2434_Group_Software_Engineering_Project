@@ -1,0 +1,115 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<!--A HTML document that produces the upload webpage, so users can input the start and end coordinates of their journey and the mode of transport used.-->
+<!--authors: Eleanor Forrest, Jack Skinner, Giulia Brown, Sam Townley-->
+
+<head>
+    <!--Import styling-->
+    <title>End Your Journey</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'carbonCommuter/style.css' %}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!--Set up the connection to the Google Maps API-->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIZe4j6_6bvgDSdz4rjX_29_r6C6FGi1Y&libraries=places&callback=initAutocomplete&loading=async">
+    </script> 
+</head>
+
+<body>
+    <header>
+        <!--The navbar, consistent across the site-->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/">CarbonCommuter</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout/">Logout</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/leaderboard/">Leaderboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <br>
+    <div class="wrapper">
+        <!--The form object takes the user's selections and passes them to the upload function-->
+        <form name="end" id="end_journey" action="/user/journeys/finish" method="post">
+            {% csrf_token %}
+            <h1>End Your Journey</h1>
+        
+            {% if error %}
+                <p style='color:red'>{{ error }}</p>
+            {% endif %}
+    
+            <!--These hidden inputs are used to convert the user's off-campus location into latitude and longitude coordinates and pass them through-->
+            <input type="hidden" id="lat" name="lat" value="">
+            <input type="hidden" id="long" name="long" value="">
+            <input type="hidden" id="addresss" name="address" value="">
+           
+            <button type="button" class="btn" onclick="getLocation()">Get My Location</button>
+            <br><br>
+            <div id="map">
+                <iframe id="google_map" width="350" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=720&amp;height=600&amp;hl=en&amp;q=Exeter&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+            </div>
+            <br>
+            
+            <button type="submit" class="btn">Confirm My Location</button>
+        </form>
+    </div>
+
+    <script>
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else { 
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        function showPosition(position) {
+            var lat    = position.coords.latitude,
+                long   = position.coords.longitude,
+                coords = lat + ', ' + long;
+
+            document.getElementById('lat').value = position.coords.latitude;
+            document.getElementById('long').value = position.coords.longitude;
+            document.getElementById('google_map').setAttribute('src', 'https://maps.google.co.uk?q=' + coords + '&output=embed');
+        }
+
+        function showError(error) {
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    alert("User denied the request for Geolocation.")
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    alert("Location information is unavailable.")
+                    break;
+                case error.TIMEOUT:
+                    alert("The request to get user location timed out.")
+                    break;
+                case error.UNKNOWN_ERROR:
+                    alert("An unknown error occurred.")
+                    break;
+            }
+        }
+    </script>
+            
+    <br>
+    <div class="footer">
+        <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
+    </div>
+</body>
+</html>

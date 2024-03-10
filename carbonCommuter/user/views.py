@@ -5,8 +5,10 @@ Authors:
 """
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, password_validation, login
+from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
+
+from datetime import datetime
 
 from common.travelTypes import TravelType
 from user.models import Journey
@@ -28,14 +30,14 @@ def home(request):
     username = request.user.username
     myDate = request.user.date_joined
     co2Saved = request.user.profile.total_saving
-    flag = request.user.profile.flag
+    active_journey = False
     context = context = {"name": name,
                          "email": email,
                          "username": username,
                          "myDate": myDate,
                          "co2Saved": co2Saved,
                          "myDate": myDate,
-                         "flag": flag}
+                         "started": active_journey}
     return render(request, "user/home.html", context)
 
 
@@ -103,27 +105,19 @@ def settings(request):
 
 
 @login_required
-def upload(request):
-    """The function returns the rendering of the upload webpage using the provided information    
+def create_journey(request):
+    """
+    The function returns the rendering of the upload webpage using the provided information    
     """
     username = request.user.username
-    flag = request.user.profile.flag
-    context = context =  {"username": username,
-                          "flag": flag}
-
-    # Deal with a POST request from the form
-    if request.method == "POST":
-
-        request.user.profile.start_lat  = float(request.POST.get('lat'))
-        request.user.profile.start_long = float(request.POST.get('lng'))
-
-        # Convert the string representation of the transport type to a TravelType object.
-        request.user.profile.transport = TravelType.from_str(request.POST.get('transport'))
-        if request.user.profile.transport is None:
-           raise RuntimeError("Transport not found!")
-
-        request.user.profile.flag = bool(False)
-        request.user.profile.save()
+    started = False
+    context = context =  {"username": username}
+    
+    if started:
+        return render(request, "user/start_journey.html", context)
+    else:
+        return render(request, "user/end_journey.html", context)
+    
         # Get name of location on campus from form and map it to a latitude and longitude dict stored inside common/campusCoordinates.json
         #origin = getCampusCoords(request.POST.get('oncampus'))
         #if origin == {}:
@@ -163,45 +157,10 @@ def upload(request):
         #request.user.profile.total_saving += savings
         #request.user.profile.save()
         #return redirect("success", journey_id=journey.id)
-    if request.method == "POST":
-
-        end_lat  = float(request.POST.get('lat'))
-        end_long = float(request.POST.get('lng'))
-
-        # Convert both sets of latitude/longitude coordinates to a distance, and then calculate the carbon saved based on that distance, using the methods defined in common/utils.py
-        distance = locationToDistance(request.user.profile.start_lat, request.user.profile.start_long, end_lat,
-                                      end_long, request.user.profile.transport)
-        savings = distanceToCO2(distance / 1000, request.user.profile.transport)
-        print(savings)
-
-        #need to create and save location
-        #need to add the origin and destination to the journey 
-
-        # Create a new entry in the journey's table
-        journey = Journey(user = request.user,
-                          distance = distance/1000,
-                          transport = request.POST.get('transport'))
-        journey.save()
-        
-        # Increment the total savings stored inside the users profile model by the additonal carbon savings
-        request.user.profile.total_saving += savings
-        
-        #journey complete, set flag back to True
-        request.user.profile.flag = bool(True)
-        #reset journey details in user
-        request.user.profile.start_lat = float(0)
-        request.user.profile.start_long = float(0)
-        request.user.profile.transport = str("")
-
-        request.user.profile.save()
-
-        return redirect("success", journey_id=journey.id)
-
-    return render(request, "user/upload.html", context)
 
 
 @login_required
-def upload_success(request, journey_id: int):
+def journey_created(request, journey_id: int):
     
     # Get journey object and calculate CO2 savings
     journey = Journey.objects.get(id=journey_id)
@@ -214,3 +173,46 @@ def upload_success(request, journey_id: int):
         "transport": journey.transport
     }
     return render(request, "user/success.html", context)
+
+
+@login_required
+def start_journey(request):
+    
+    if request.method == "POST":
+        print("Got start request")
+
+        # Convert the string representation of the transport type to a TravelType object.
+        transport = TravelType.from_str(request.POST.get('transport'))
+        if transport is None:
+           raise RuntimeError("Transport not found!")
+        
+        # Create a new Location object if it doesn't yet exist.
+        #try:
+        #    location = Location.objects.get(address = request.POST.get('address'))
+        #except Location.DoesNotExist:
+        #    location = Location.objects.create(lat = request.POST.get('lat'),
+        #                                       lng = request.POST.get('lng'),
+        #                                       address = request.POST.get('address'))
+        #    location.save()
+        #except Exception as ex:
+        #    raise ex
+        
+        # Create a new entry in the journey's table
+        #journey = Journey(user = request.user,
+        #                  origin = location, 
+        #                  transport = request.POST.get('transport'),
+        #                  time_started = datetime.now())
+        #journey.save()
+        return redirect("home")
+    else:
+        return render(request, "user/start_journey.html")
+        
+
+@login_required
+def end_journey(request):
+    
+    if request.method == "POST":
+        print("Got end request")
+        return redirect("home")
+    else:
+        return render(request, "user/end_journey.html")

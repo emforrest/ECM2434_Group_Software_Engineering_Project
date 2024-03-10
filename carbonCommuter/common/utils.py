@@ -11,6 +11,7 @@ Authors:
 """
 
 import json
+import math
 import requests
 from common.travelTypes import TravelType
 
@@ -153,3 +154,12 @@ def getCampusCoords(location: str) -> dict:
         return campus[location]
     else:
         raise ValueError("Unknown location on campus!")
+
+
+def isWithinProximity(location1: tuple, location2: tuple) -> bool:
+    DEGREES_PER_KM = 0.00898315277071498185515429725208
+    distance = math.sqrt(math.pow((location1[0] - location2[0]), 2) + math.pow((location1[1] - location2[1]), 2)) / DEGREES_PER_KM
+    if distance < 0.5:
+        return True
+    else:
+        return False
