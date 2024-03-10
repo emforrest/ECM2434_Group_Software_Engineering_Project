@@ -16,6 +16,7 @@ import requests
 from typing import Union
 from common.travelTypes import TravelType
 
+
 def distanceToCO2(distance: float, transport: TravelType|str) -> float:
     """Calculates the CO2 compared to driving based on the distance travelled.
 
@@ -126,31 +127,6 @@ def locationToDistance(origin_lat: float, origin_long: float, dest_lat: float, d
         if result[0]['condition'] == "ROUTE_EXISTS":
             return result[0]['distanceMeters']
     return 0
-
-
-def getCampusCoords(location: str) -> dict:
-    """Returns the longitude and latitude coordinates of locations on campus
-    
-    Loads the locations defined in campusCoordinates.json and returns the 
-    dictionary containing latitude and longitude coordinates if a mapping
-    exists with a matching key.
-
-    Args:
-        location (str): The location name on campus as given in campusCoordinates.json.
-
-    Raises:
-        ValueError: Location on campus doesn't have a lat/long mapped to it.
-
-    Returns:
-        dict: A dictionary with 2 keys, latitude and longitude containing float values.
-    """
-    
-    # Return latitude and longitude dictionary associated with location name in file
-    campus = loadCampusCoords()
-    if location in campus.keys():
-        return campus[location]
-    else:
-        raise ValueError("Unknown location on campus!")
     
     
 def loadCampusCoords() -> dict:

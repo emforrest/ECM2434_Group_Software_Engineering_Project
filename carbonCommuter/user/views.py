@@ -13,7 +13,7 @@ from datetime import datetime
 from common.travelTypes import TravelType
 from user.models import Journey
 from main.models import Location
-from common.utils import locationToDistance, getCampusCoords, distanceToCO2
+from common.utils import locationToDistance, distanceToCO2, getClosestCampus
 
 @login_required
 def home(request):
@@ -186,6 +186,13 @@ def start_journey(request):
         transport = TravelType.from_str(request.POST.get('transport'))
         if transport is None:
            raise RuntimeError("Transport not found!")
+       
+        building, distance = getClosestCampus(request.POST.get('lat'), request.POST.get('lng'))
+        if distance <= 0.5:
+            print("On Campus")
+            print("Building name: ", building)
+        else:
+            print("Off Campus")
         
         # Create a new Location object if it doesn't yet exist.
         #try:
