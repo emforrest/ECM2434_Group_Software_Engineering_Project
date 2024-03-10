@@ -180,6 +180,7 @@ def start_journey(request):
     
     if request.method == "POST":
         print("Got start request")
+        print(request.POST.get("address"))
 
         # Convert the string representation of the transport type to a TravelType object.
         transport = TravelType.from_str(request.POST.get('transport'))
@@ -203,7 +204,7 @@ def start_journey(request):
         #                  transport = request.POST.get('transport'),
         #                  time_started = datetime.now())
         #journey.save()
-        return redirect("home")
+        return redirect("dashboard")
     else:
         return render(request, "user/start_journey.html")
         
@@ -213,6 +214,6 @@ def end_journey(request):
     
     if request.method == "POST":
         print("Got end request")
-        return redirect("home")
+        return redirect("dashboard")
     else:
         return render(request, "user/end_journey.html")

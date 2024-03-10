@@ -57,7 +57,7 @@
             <!--These hidden inputs are used to convert the user's off-campus location into latitude and longitude coordinates and pass them through-->
             <input type="hidden" id="lat" name="lat" value="">
             <input type="hidden" id="long" name="long" value="">
-            <input type="hidden" id="addresss" name="address" value="">
+            <input type="hidden" id="address" name="address" value="">
            
             <button type="button" class="btn" onclick="getLocation()">Get My Location</button>
             <br><br>
@@ -79,6 +79,21 @@
             }
         }
 
+        function getAddress(position) {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=AIzaSyCVEKGGBT_8WryClHT64tPqFONldHdY35Y`);
+            xhr.send();
+            xhr.responseType = "json";
+            xhr.onload = () => {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    const results = xhr.response;
+                    document.getElementById('address').value = results['results'][0]['formatted_address'];
+                } else {
+                    console.log(`Error: ${xhr.status}`);
+                }
+            };
+        }
+
         function showPosition(position) {
             var lat    = position.coords.latitude,
                 long   = position.coords.longitude,
@@ -86,6 +101,7 @@
 
             document.getElementById('lat').value = position.coords.latitude;
             document.getElementById('long').value = position.coords.longitude;
+            getAddress(position);
             document.getElementById('google_map').setAttribute('src', 'https://maps.google.co.uk?q=' + coords + '&output=embed');
         }
 

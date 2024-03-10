@@ -10,7 +10,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path("", views.home, name="home"),
+    path("", views.home, name="dashboard"),
     path("settings/", views.settings, name="settings"),
     path("journeys/<int:journey_id>/", views.journey_created, name="success"),
     path("journeys/create", views.start_journey, name="start"),
