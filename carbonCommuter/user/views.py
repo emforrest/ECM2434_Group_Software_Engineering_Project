@@ -117,46 +117,12 @@ def create_journey(request):
         return render(request, "user/start_journey.html", context)
     else:
         return render(request, "user/end_journey.html", context)
-    
-        # Get name of location on campus from form and map it to a latitude and longitude dict stored inside common/campusCoordinates.json
-        #origin = getCampusCoords(request.POST.get('oncampus'))
-        #if origin == {}:
-        #    raise RuntimeError("On-campus location not found!")
-
-        # Convert the string representation of the transport type to a TravelType object.
-        #transport = TravelType.from_str(request.POST.get('transport'))
-        #if transport is None:
-        #   raise RuntimeError("Transport not found!")
 
         # Convert both sets of latitude/longitude coordinates to a distance, and then calculate the carbon saved based on that distance, using the methods defined in common/utils.py
         #distance = locationToDistance(origin['latitude'], origin['longitude'], float(request.POST.get('lat')),
         #                              float(request.POST.get('lng')), transport)
         #savings = distanceToCO2(distance / 1000, transport)
         #print(savings)
-        
-        # Create a new Location object if it doesn't yet exist.
-        #try:
-        #    location = Location.objects.get(address = request.POST.get('autocomplete'))
-        #except Location.DoesNotExist:
-        #    location = Location.objects.create(lat = request.POST.get('lat'),
-        #                                       lng = request.POST.get('lng'),
-        #                                       address = request.POST.get('autocomplete'))
-        #    location.save()
-        #except Exception as ex:
-        #    raise ex
-        
-        # Create a new entry in the journey's table
-        #journey = Journey(user = request.user,
-        #                  distance = distance/1000,
-        #                  origin = location, 
-        #                  destination = request.POST.get('oncampus'),
-        #                  transport = request.POST.get('transport'))
-        #journey.save()
-        
-        # Increment the total savings stored inside the users profile model by the additonal carbon savings
-        #request.user.profile.total_saving += savings
-        #request.user.profile.save()
-        #return redirect("success", journey_id=journey.id)
 
 
 @login_required
@@ -187,30 +153,38 @@ def start_journey(request):
         if transport is None:
            raise RuntimeError("Transport not found!")
        
-        building, distance = getClosestCampus(request.POST.get('lat'), request.POST.get('lng'))
-        if distance <= 0.5:
+        if request.POST.get('lat') in ["", None] or request.POST.get('long') in ["", None]:
+           raise RuntimeError("Missing latitude and longitude!")
+       
+        building, distance = getClosestCampus(float(request.POST.get('lat')), float(request.POST.get('long')))
+        if distance <= 0.3:
             print("On Campus")
             print("Building name: ", building)
+            location = Location.objects.get(name=building)
         else:
             print("Off Campus")
-        
-        # Create a new Location object if it doesn't yet exist.
-        #try:
-        #    location = Location.objects.get(address = request.POST.get('address'))
-        #except Location.DoesNotExist:
-        #    location = Location.objects.create(lat = request.POST.get('lat'),
-        #                                       lng = request.POST.get('lng'),
-        #                                       address = request.POST.get('address'))
-        #    location.save()
-        #except Exception as ex:
-        #    raise ex
+            
+            # Create a new Location object if it doesn't yet exist.
+            try:
+                location = Location.objects.get(address = request.POST.get('address'))
+            except Location.DoesNotExist:
+                location = Location.objects.create(lat = float(request.POST.get('lat')),
+                                                   lng = float(request.POST.get('long')),
+                                                   address = request.POST.get('address'))
+                location.save()
+            except Exception as ex:
+                raise ex
         
         # Create a new entry in the journey's table
-        #journey = Journey(user = request.user,
-        #                  origin = location, 
-        #                  transport = request.POST.get('transport'),
-        #                  time_started = datetime.now())
-        #journey.save()
+        journey = Journey(user = request.user,
+                          origin = location, 
+                          transport = request.POST.get('transport'),
+                          time_started = datetime.now())
+        journey.save()
+        
+        # Update the users active journey
+        request.user.profile.active_journey = journey
+        request.user.profile.save()
         return redirect("dashboard")
     else:
         return render(request, "user/start_journey.html")
