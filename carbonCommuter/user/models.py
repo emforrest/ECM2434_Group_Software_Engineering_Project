@@ -11,7 +11,24 @@ Authors:
 
 from django.db import models
 from main.models import Location
+from datetime import date, timedelta
 from django.contrib.auth.models import User
+
+
+class JourneyManager(models.Manager):
+    
+    def get_all_time_savings(self, user: User):
+        return self.filter(user=user).aaggregate(models.Sum('carbon_savings'))['carbon_savings__sum']
+    
+    def get_weekly_savings(self, user: User):
+        start = date.today() - timedelta(days=(date.today().weekday() + 1) % 7)
+        end = start + timedelta(days=7)
+        return self.filter(user=user, time_started__range=(start, end)).aaggregate(models.Sum('carbon_savings'))['carbon_savings__sum']
+    
+    def get_monthly_savings(self, user: User):
+        start = date.today().replace(day=1)
+        end = start + timedelta(months=1)
+        return self.filter(user=user, time_started__range=(start, end)).aaggregate(models.Sum('carbon_savings'))['carbon_savings__sum']
     
  
 class Journey(models.Model):
@@ -24,11 +41,11 @@ class Journey(models.Model):
     Attributes:
         id (int): A unique identifier for the journey, auto-incremented.
         user (User): A reference to a primary key on the built in User model.
-        distance (float): the distance travelled in KM.
-        origin (Location): A reference to a location stored inside the main_location table. 
-        destination (str): The on-campus location stored as a string.
+        distance (float): The distance travelled in KM.
+        carbon_savings (float): The CO2 saved (in KG) for the journey.
+        origin (Location): A reference to the origin location as stored inside the main_location table. 
+        destination (Location): A reference to the destination location as stored inside the main_location table. 
         transport (str): A string representing the mode of transport.
-        time_logged (datetime): The time the journey was recorded in the system.
     """
     id = models.AutoField(primary_key=True, auto_created=True, unique=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=False)
@@ -39,6 +56,7 @@ class Journey(models.Model):
     transport = models.CharField(max_length=16, blank=False, null=False)
     time_started = models.DateTimeField(null=False, blank=False)
     time_finished = models.DateTimeField(null=True, blank=True)
+    objects = JourneyManager()
     
     
 class Profile(models.Model):
@@ -46,8 +64,16 @@ class Profile(models.Model):
 
     Attributes:
         user (User): A one-to-one relationship with the built in User model.
-        total_saving (float): The total carbon savings of a user across all journeys.
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     total_saving = models.FloatField(default=0)
     active_journey = models.ForeignKey(Journey, on_delete=models.SET_NULL, null=True, blank=True)
+    
+    def get_total_savings(self):
+        return Journey.objects.get_all_time_savings(self.user)
+    
+    def has_active_journey(self):
+        if self.active_journey is None:
+            return False
+        else:
+            return True
