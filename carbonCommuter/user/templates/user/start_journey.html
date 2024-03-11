@@ -48,7 +48,7 @@
         <!--The form object takes the user's selections and passes them to the upload function-->
         <form name="start" id="start_journey" action="/user/journeys/create" method="post">
             {% csrf_token %}
-            <h1>Start Your Journey</h1>
+            <h1>Start A New Journey</h1>
 
             {% if error %}
                 <p style='color:red'>{{ error }}</p>
@@ -59,27 +59,67 @@
             <input type="hidden" id="long" name="long" value="">
             <input type="hidden" id="address" name="address" value="">
            
-            <button type="button" class="btn" onclick="getLocation()">Get My Location</button>
-            <br><br>
-            <div id="map">
-                <iframe id="google_map" width="350" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=720&amp;height=600&amp;hl=en&amp;q=Exeter&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+            <div id="tab1">
+                <h4>Where are you starting your journey from today?</h4>
+                <br>
+                <button type="button" class="btn" onclick="getLocation()">Get My Location</button>
+                <br><br>
+                <div id="map">
+                    <iframe id="google_map" width="350" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=720&amp;height=600&amp;hl=en&amp;q=Exeter&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+                </div>
+                <br>
+                <span>
+                    Your current address is:
+                    <span id="display_address">N/A</span>
+                </span>
+                <br>
+                <div id="manual_select" style="display: none">
+                    <br>
+                    <h6>Enter a new location below:</h6>
+                    <input id="automcomplete">
+                </div>
+                <br>
+                <div>
+                    <button type="button" id="btn_input" class="btn" style="display: inline-block; width: 49%" onclick="showManualInput()">Enter Manually</button>
+                    <button type="button" id="btn_continue" class="btn" style="display: inline-block; width: 49%" onclick="nextTab(1)">Confirm Location</button>
+                </div>
             </div>
-            <br>
-            Select the mode of transport used:
-            <br>
-            <select name="transport" id="transport">
-                <option value = "Bus">Bus</option>
-                <option value = "Train">Train</option>
-                <option value = "Bike">Bike</option>
-                <option value = "Walk">Walk</option>
-            </select>
-            <br><br>
 
-            <button type="submit" class="btn">Confirm My Location</button>
+            <div id="tab2" style="display: none">
+                <h4>Select the mode of transport you plan to use:</h4>
+                <br>
+                <select name="transport" id="transport">
+                    <option value = "Bus">Bus</option>
+                    <option value = "Train">Train</option>
+                    <option value = "Bike">Bike</option>
+                    <option value = "Walk">Walk</option>
+                </select>
+                <br><br>
+                <div>
+                    <button type="button" class="btn" style="display: inline-block; width: 49%" onclick="prevTab(2)">Go Back</button>
+                    <button type="submit" class="btn" style="display: inline-block; width: 49%">Confirm Transport</button>
+                </div>
+            </div>
         </form>
     </div>
 
     <script>
+        function showManualInput() {
+            document.getElementById("manual_select").style.display = "block";
+            document.getElementById("btn_input").style.display = "none";
+            document.getElementById("btn_continue").style.width = "100%"
+        }
+
+        function nextTab(current) {
+            document.getElementById(`tab${current}`).style.display = "none";
+            document.getElementById(`tab${current+1}`).style.display = "block";
+        }
+
+        function prevTab(current) {
+            document.getElementById(`tab${current}`).style.display = "none";
+            document.getElementById(`tab${current-1}`).style.display = "block";
+        }
+
         function getLocation() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(showPosition, showError);
@@ -97,6 +137,7 @@
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     const results = xhr.response;
                     document.getElementById('address').value = results['results'][0]['formatted_address'];
+                    document.getElementById('display_address').innerHTML = results['results'][0]['formatted_address'];
                 } else {
                     console.log(`Error: ${xhr.status}`);
                 }
