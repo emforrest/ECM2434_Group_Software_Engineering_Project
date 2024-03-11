@@ -52,13 +52,13 @@
                 <div class="column-box">
                     <h1>Profile</h1>
                     <br>
-                    <p><p1>Name: </p1><i>{{ name }}</i></p>
+                    <p><p1>Name: </p1><i>{{ full_name }}</i></p>
                     <br>
-                    <p><p1>Email: </p1><i>{{ email }}</i></p>
+                    <p><p1>Email: </p1><i>{{ request.user.email }}</i></p>
                     <br>
-                    <p><p1>Username: </p1><i>{{ username }}</i></p>
+                    <p><p1>Username: </p1><i>{{ request.user.username }}</i></p>
                     <br>
-                    <p><p1>Join Date: </p1><i>{{ myDate }}</i></p>
+                    <p><p1>Join Date: </p1><i>{{ request.user.date_joined }}</i></p>
                     <a href="/user/settings"><button type="submit" class="btn">Edit Profile</button></a>
                 </div>
             </div>

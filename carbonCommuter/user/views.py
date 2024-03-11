@@ -23,21 +23,12 @@ def home(request):
     Return:
     The function returns the rendering of the home webpage using the provided information    
     """
-    firstName = request.user.first_name
-    lastName = request.user.last_name
-    name = firstName + " " + lastName
-    email = request.user.email
-    username = request.user.username
-    myDate = request.user.date_joined
-    co2Saved = request.user.profile.total_saving
-    active_journey = False
-    context = context = {"name": name,
-                         "email": email,
-                         "username": username,
-                         "myDate": myDate,
+    name = request.user.first_name + " " + request.user.last_name
+    co2Saved = Journey.objects.get_all_time_savings(request.user)
+    started = request.user.profile.has_active_journey()
+    context = context = {"full_name": name,
                          "co2Saved": co2Saved,
-                         "myDate": myDate,
-                         "started": active_journey}
+                         "started": started}
     return render(request, "user/home.html", context)
 
 
@@ -49,16 +40,6 @@ def settings(request):
     Return:
     The function returns the rendering of the settings webpage using the provided information    
     """
-    firstName = request.user.first_name
-    lastName = request.user.last_name
-    email = request.user.email
-    username = request.user.username
-    myDate = request.user.date_joined
-    context = context = {"firstName": firstName,
-                         "lastName": lastName,
-                         "email": email,
-                         "username": username,
-                         "myDate": myDate}
     if request.method == "POST":
         #accessing the data from the POST request
         first_name = request.POST.get("first_name")
@@ -71,13 +52,13 @@ def settings(request):
         user = authenticate(request, username=username, password=password1)
         userFilter = User.objects.filter(username=username)
         if (userFilter.exists() and (username != request.user.username)):
-            context["error"] = "This user already exists!"
+            context = {"error": "This user already exists!"}
             return render(request, "user/settings.html", context)
 
         #checking if email is already being used with a registered account
         userFilterEmail = User.objects.filter(email=email)
         if (userFilterEmail.exists() and (email != request.user.email)):
-            context["error"] = "This email is already being used"
+            context = {"error": "This email is already being used"}
             return render(request, "user/settings.html", context)
 
         #checking if password is correct 
@@ -91,17 +72,8 @@ def settings(request):
         request.user.email = email
         request.user.username = username
         request.user.save()
-        co2Saved = request.user.profile.total_saving
-        name = first_name + " " + last_name
-        
-        context = context = {"name": name,
-                            "email": email,
-                            "username": username,
-                            "myDate": myDate,
-                            "co2Saved": co2Saved,
-                            "myDate": myDate}
-        return render(request, "user/home.html", context)
-    return render(request, "user/settings.html", context)  
+        return redirect("dashboard")
+    return render(request, "user/settings.html")  
 
 
 @login_required

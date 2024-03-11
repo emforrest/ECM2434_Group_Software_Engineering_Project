@@ -18,17 +18,17 @@ from django.contrib.auth.models import User
 class JourneyManager(models.Manager):
     
     def get_all_time_savings(self, user: User):
-        return self.filter(user=user).aaggregate(models.Sum('carbon_savings'))['carbon_savings__sum']
+        return self.filter(user=user).aggregate(models.Sum('carbon_savings'))['carbon_savings__sum']
     
     def get_weekly_savings(self, user: User):
         start = date.today() - timedelta(days=(date.today().weekday() + 1) % 7)
         end = start + timedelta(days=7)
-        return self.filter(user=user, time_started__range=(start, end)).aaggregate(models.Sum('carbon_savings'))['carbon_savings__sum']
+        return self.filter(user=user, time_started__range=(start, end)).aggregate(models.Sum('carbon_savings'))['carbon_savings__sum']
     
     def get_monthly_savings(self, user: User):
         start = date.today().replace(day=1)
         end = start + timedelta(months=1)
-        return self.filter(user=user, time_started__range=(start, end)).aaggregate(models.Sum('carbon_savings'))['carbon_savings__sum']
+        return self.filter(user=user, time_started__range=(start, end)).aggregate(models.Sum('carbon_savings'))['carbon_savings__sum']
     
  
 class Journey(models.Model):
