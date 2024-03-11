@@ -49,10 +49,6 @@
         <form name="end" id="end_journey" action="/user/journeys/finish" method="post">
             {% csrf_token %}
             <h1>End Your Current Journey</h1>
-        
-            {% if error %}
-                <p style='color:red'>{{ error }}</p>
-            {% endif %}
     
             <!--These hidden inputs are used to convert the user's off-campus location into latitude and longitude coordinates and pass them through-->
             <input type="hidden" id="lat" name="lat" value="">
@@ -62,26 +58,35 @@
             <h4>Where are you finishing your journey today?</h4>
             <br>
             <button type="button" class="btn" onclick="getLocation()">Get My Location</button>
-            <br><br>
+            <br>
+
+            <br>
             <div id="map">
                 <iframe id="google_map" width="350" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=720&amp;height=600&amp;hl=en&amp;q=Exeter&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
             </div>
+
             <br>
             <span>
                 Your current address is:
                 <span id="display_address">N/A</span>
             </span>
+
             <br>
             <div id="manual_select" style="display: none">
                 <br>
-                <h5>Enter a new location below:</h5>
-                <input id="automcomplete">
+                <h6>Enter a new location below:</h6>
+                <input type="text" id="autocomplete" name="autocomplete" placeholder="Enter a location...">
             </div>
+
             <br>
             <div>
                 <button type="button" id="btn_input" class="btn" style="display: inline-block; width: 49%" onclick="showManualInput()">Enter Manually</button>
                 <button type="submit" id="btn_submit" class="btn" style="display: inline-block; width: 49%" >Confirm Location</button>
             </div>
+
+            {% if error %}
+                <p style='color:red'>{{ error }}</p>
+            {% endif %}
         </form>
     </div>
 
@@ -90,6 +95,12 @@
             document.getElementById("manual_select").style.display = "block";
             document.getElementById("btn_input").style.display = "none";
             document.getElementById("btn_submit").style.width = "100%"
+        }
+
+        function hideManualInput() {
+            document.getElementById("manual_select").style.display = "none";
+            document.getElementById("btn_input").style.display = "inline-block";
+            document.getElementById("btn_submit").style.width = "49%"
         }
 
         function getLocation() {
@@ -108,8 +119,7 @@
             xhr.onload = () => {
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     const results = xhr.response;
-                    document.getElementById('address').value = results['results'][0]['formatted_address'];
-                    document.getElementById('display_address').innerHTML = results['results'][0]['formatted_address'];
+                    setAddress(results['results'][0]['formatted_address']);
                 } else {
                     console.log(`Error: ${xhr.status}`);
                 }
@@ -117,14 +127,8 @@
         }
 
         function showPosition(position) {
-            var lat    = position.coords.latitude,
-                long   = position.coords.longitude,
-                coords = lat + ', ' + long;
-
-            document.getElementById('lat').value = position.coords.latitude;
-            document.getElementById('long').value = position.coords.longitude;
+            setLatLong(position.coords.latitude, position.coords.longitude);
             getAddress(position);
-            document.getElementById('google_map').setAttribute('src', 'https://maps.google.co.uk?q=' + coords + '&output=embed');
         }
 
         function showError(error) {
@@ -143,7 +147,42 @@
                     break;
             }
         }
-    </script>
+
+        let autocomplete;
+        function initAutocomplete(){
+            autocomplete = new google.maps.places.Autocomplete(
+                document.getElementById('autocomplete'),
+                {
+                types:['address'],
+                componentRestrictions: {'country': ['gb']},
+                fields : ['geometry', 'formatted_address'],
+                strictBounds: true
+                }
+            );
+            autocomplete.addListener('place_changed', onPlaceChanged);
+        }
+    
+        function onPlaceChanged(){
+            var place = autocomplete.getPlace();
+            if (place.geometry) {
+                console.log(place.formatted_address);
+                setAddress(place.formatted_address);
+                setLatLong(place.geometry.location.lat().toString(), place.geometry.location.lng().toString());
+                hideManualInput();
+            }
+        }
+
+        function setAddress(address) {
+            document.getElementById('address').value = address;
+            document.getElementById('display_address').innerHTML = address;
+        }
+
+        function setLatLong(lat, long) {
+            document.getElementById('lat').value = lat;
+            document.getElementById('long').value = long;
+            document.getElementById('google_map').setAttribute('src', `https://maps.google.co.uk?q=${lat},${long}&output=embed`);
+        }
+        </script>
             
     <br>
     <div class="footer">
