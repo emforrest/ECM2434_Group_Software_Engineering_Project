@@ -13,26 +13,28 @@
     <header>
         <!-- Navigation bar with Bootstrap classes for styling -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="/">CarbonCommuter</a> <!-- Brand name with link to home -->
-            <!-- Toggle button for mobile navigation -->
+            <a class="navbar-brand" href="/">CarbonCommuter</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <!-- Navigation links -->
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto"> <!-- Alignment to the right (ml-auto) -->
+                <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/logout/">Logout</a> <!-- Logout link -->
+                        <a class="nav-link" href="{% url 'user_groups_home_page' %}">Groups</a>
+                    </li>
+                    <!-- Existing navigation links -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout/">Logout</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/register/">Register</a> <!-- Register link -->
+                        <a class="nav-link" href="/register/">Register</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/leaderboard/">Leaderboard</a> <!-- Leaderboard link -->
+                        <a class="nav-link" href="/leaderboard/">Leaderboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a> <!-- User profile link -->
+                        <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
                     </li>
                 </ul>
             </div>
@@ -40,27 +42,34 @@
     </header>
 
     <main class="container mt-5">
-        <h2>Search for Groups</h2>
-        <form action="{% url 'search_groups' %}" method="get" class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" name="q" placeholder="Search for groups..." aria-label="Search" value="{{ query }}">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-        <!-- Display the search results -->
-        {% if groups %}
-            {% for group in groups %}
-            <div class="card mb-3">
-                <div class="card-header">
-                    {{ group.name }}
-                </div>
-                <div class="card-body">
-                    <a href="{% url 'group_page' group.id %}" class="btn btn-primary">View Group</a>
-                    <!-- Assuming you have logic to determine if the user is not a member of the group -->
-                </div>
+        <div class="row">
+            <!-- Left column for search results -->
+            <div class="col-md-8">
+                <h2>Search Results</h2>
+                <!-- Display the search results -->
+                {% if groups %}
+                    {% for group in groups %}
+                        <div class="card mb-3">
+                            <div class="card-header">
+                                {{ group.name }}
+                            </div>
+                            <div class="card-body">
+                                <a href="{% url 'group_page' group.id %}" class="btn btn-primary">View Group</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>No groups found.</p>
+                {% endif %}
             </div>
-            {% endfor %}
-        {% else %}
-            <p>No groups found.</p>
-        {% endif %}
+            <!-- Right column for search bar -->
+            <div class="col-md-4">
+                <form action="{% url 'search_groups' %}" method="get" class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" name="q" placeholder="Search for groups..." aria-label="Search" value="{{ query }}">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
     </main>
 
     <footer class="footer mt-auto py-3">

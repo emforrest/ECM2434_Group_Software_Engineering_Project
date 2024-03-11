@@ -56,3 +56,11 @@ def join_group(request, group_id):
     request.user.groups.add(group)
     # Use the name of the URL pattern for the group page
     return HttpResponseRedirect(reverse('group_page', args=[group_id]))
+
+@login_required
+def leave_group(request, group_id):
+    if request.method == 'POST':
+        group = get_object_or_404(Group, id=group_id)
+        group.user_set.remove(request.user)
+        # Redirect to a confirmation page, the group page, or elsewhere
+        return HttpResponseRedirect(reverse('group_page', args=[group_id]))
