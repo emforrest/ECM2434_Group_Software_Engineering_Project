@@ -207,10 +207,11 @@ def format_time_between(time1: datetime, time2: datetime) -> str:
     minutes = (diff.seconds % 3600) // 60
     
     # If 1 or more hours, add this to the result string.
+    formatted = ""
     if hours > 1:
-        formatted = f"{hours} hours"
+        formatted += f"{hours} hours"
     elif hours == 1:
-        formatted = "1 hour"
+        formatted += "1 hour"
         
     # If both hours and minutes are present, add an ampersand between the two.
     if hours > 0 and minutes > 0:

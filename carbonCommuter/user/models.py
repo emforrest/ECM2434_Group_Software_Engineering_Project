@@ -75,7 +75,7 @@ class Journey(models.Model):
         transport (str): A string representing the mode of transport.
         time_started (datetime): The time the journey was started in the system.
         time_finished (datetime): The time the journey was marked as finished.
-        estimated_time (float): The time the journey was estimated to take, not accounting for traffic. Used for verification only.
+        estimated_time (float): The time the journey was estimated to take (in minutes), not accounting for traffic. Used for verification only.
         objects (JourneyManager): Overwrite the default model manager with our custom manager defined above.
     """
     id = models.AutoField(primary_key=True, auto_created=True, unique=True)
