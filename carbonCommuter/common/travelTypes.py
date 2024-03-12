@@ -35,23 +35,20 @@ class TravelType(Enum):
     
     def __str__(self) -> str:
         """Overwrites the default values returned from str(TravelType).
-        
-        Similar to overwriting the "toString()" method in Java. Gives a more
-        readable version that can be used within the frontend.
 
         Returns:
-            str: A human readable string version of the enum name.
+            str: A simplified string representation of the enum.
         """
         if self.name == "CAR":
-            return "Driving"
+            return "car"
         elif self.name == "BUS":
-            return "By bus"
+            return "bus"
         elif self.name == "TRAIN":
-            return "By train"
+            return "train"
         elif self.name == "BIKE":
-            return "Cycling"
+            return "bike"
         else:
-            return "Walking"
+            return "walk"
         
     @staticmethod
     def from_str(string: str) -> Enum:
@@ -63,9 +60,9 @@ class TravelType(Enum):
         Returns:
             Enum: A TravelType enum mapping to the string argument.
         """
-        if string.lower() in ["bus", "by bus"]:
+        if string.lower() in ["bus", "by bus", "using the bus"]:
             return TravelType.BUS
-        elif string.lower() in ["train", "by train"]:
+        elif string.lower() in ["train", "by train", "using the train"]:
             return TravelType.TRAIN
         elif string.lower() in ["bike", "cycling", "by bike"]:
             return TravelType.BIKE
@@ -75,3 +72,23 @@ class TravelType(Enum):
             return TravelType.CAR
         else:
             return None
+        
+    
+    def to_str(self) -> str:
+        """Gives a morereadable version that can be used within the frontend.
+        
+        Similar to overwriting the "toString()" method in Java.
+
+        Returns:
+            str: A human readable string version of the enum name.
+        """
+        if self.name == "CAR":
+            return "driving"
+        elif self.name == "BUS":
+            return "using the bus"
+        elif self.name == "TRAIN":
+            return "using the train"
+        elif self.name == "BIKE":
+            return "cycling"
+        else:
+            return "walking"

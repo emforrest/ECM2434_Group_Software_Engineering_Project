@@ -11,20 +11,53 @@ Authors:
 
 from django.db import models
 from main.models import Location
+from datetime import date, timedelta
 from django.contrib.auth.models import User
 
 
-class Profile(models.Model):
-    """Contains any information about a user that isn't related to authentication.
+class JourneyManager(models.Manager):
+    """A custom manager for journey's to allow abstraction of methods commonly used for querying the Journey table."""
+    
+    def get_all_time_savings(self, user: User) -> float:
+        """Calculates the total amount of CO2 saved for all journeys made in a User's lifetime on the system.
 
-    Attributes:
-        user (User): A one-to-one relationship with the built in User model.
-        total_saving (float): The total carbon savings of a user across all journeys.
-    """
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    total_saving = models.FloatField(default=0)
+        Args:
+            user (User): The user object to retrieve results for.
+
+        Returns:
+            float: The total amount of CO2 saved measured in KG.
+        """
+        return self.filter(user=user).aggregate(models.Sum('carbon_savings'))['carbon_savings__sum']
     
+    def get_weekly_savings(self, user: User) -> float:
+        """Calculates the total amount of CO2 saved for all journeys made in the current week, starting from Monday.
+
+        Args:
+            user (User): The user object to retrieve results for.
+
+        Returns:
+            float: The total amount of CO2 saved measured in KG.
+        """
+        # Get a date for the monday of the current week, and the sunday of the same week.
+        start = date.today() - timedelta(days=date.today().weekday())
+        end = start + timedelta(days=6)
+        return self.filter(user=user, time_started__range=(start, end)).aggregate(models.Sum('carbon_savings'))['carbon_savings__sum']
     
+    def get_monthly_savings(self, user: User) -> float:
+        """Calculates the total amount of CO2 saved for all journeys made in the current month, starting from the first day of the month.
+
+        Args:
+            user (User): The user object to retrieve results for.
+
+        Returns:
+            float: The total amount of CO2 saved measured in KG.
+        """
+        # Get a date for the first day of the current month, and the last day of the current month.
+        start = date.today().replace(day=1)
+        end = start + timedelta(months=1) - timedelta(days=1)
+        return self.filter(user=user, time_started__range=(start, end)).aggregate(models.Sum('carbon_savings'))['carbon_savings__sum']
+    
+ 
 class Journey(models.Model):
     """Contains information about each journey, linked to a user.
     
@@ -35,16 +68,54 @@ class Journey(models.Model):
     Attributes:
         id (int): A unique identifier for the journey, auto-incremented.
         user (User): A reference to a primary key on the built in User model.
-        distance (float): the distance travelled in KM.
-        origin (Location): A reference to a location stored inside the main_location table. 
-        destination (str): The on-campus location stored as a string.
+        distance (float): The distance travelled (in KM).
+        carbon_savings (float): The CO2 saved (in KG) for the journey.
+        origin (Location): A reference to the origin location as stored inside the main_location table. 
+        destination (Location): A reference to the destination location as stored inside the main_location table. 
         transport (str): A string representing the mode of transport.
-        time_logged (datetime): The time the journey was recorded in the system.
+        time_started (datetime): The time the journey was started in the system.
+        time_finished (datetime): The time the journey was marked as finished.
+        estimated_time (float): The time the journey was estimated to take, not accounting for traffic. Used for verification only.
+        objects (JourneyManager): Overwrite the default model manager with our custom manager defined above.
     """
     id = models.AutoField(primary_key=True, auto_created=True, unique=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=False)
-    distance = models.FloatField(blank=False)
-    origin = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True)
-    destination = models.CharField(max_length=128)
-    transport = models.CharField(max_length=16, blank=False)
-    time_logged = models.DateTimeField(auto_now_add=True)
+    distance = models.FloatField(null=False, blank=True, default=0)
+    carbon_savings = models.FloatField(null=False, blank=True, default=0)
+    origin = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True, blank=False, related_name='origin')
+    destination = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True, blank=True, related_name='destination')
+    transport = models.CharField(max_length=16, blank=False, null=False)
+    time_started = models.DateTimeField(null=False, blank=False)
+    time_finished = models.DateTimeField(null=True, blank=True)
+    estimated_time = models.FloatField(null=True, blank=True)
+    objects = JourneyManager()
+    
+    
+class Profile(models.Model):
+    """Contains any information about a user that isn't related to authentication.
+
+    Attributes:
+        user (User): A one-to-one relationship with the built in User model.
+        active_journey (Journey): A reference to an incomplete journey for the current user if one exists. Will be none otherwise.
+    """
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    active_journey = models.ForeignKey(Journey, on_delete=models.SET_NULL, null=True, blank=True)
+    
+    def get_total_savings(self) -> float:
+        """Gets the total CO2 savings for the current user, using the JourneyManager.
+
+        Returns:
+            float: The total amount of CO2 saved measured in KG.
+        """
+        return Journey.objects.get_all_time_savings(self.user)
+    
+    def has_active_journey(self) -> bool:
+        """Checks if the current user object has an active journey associated with their account.
+
+        Returns:
+            bool: True if the user has an active journey, false otherwise.
+        """
+        if self.active_journey is None:
+            return False
+        else:
+            return True
