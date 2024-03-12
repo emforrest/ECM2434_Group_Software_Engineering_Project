@@ -21,7 +21,7 @@ class JourneyManager(models.Manager):
         return self.filter(user=user).aggregate(models.Sum('carbon_savings'))['carbon_savings__sum']
     
     def get_weekly_savings(self, user: User):
-        start = date.today() - timedelta(days=(date.today().weekday() + 1) % 7)
+        start = date.today() - timedelta(days=date.today().weekday())
         end = start + timedelta(days=7)
         return self.filter(user=user, time_started__range=(start, end)).aggregate(models.Sum('carbon_savings'))['carbon_savings__sum']
     
