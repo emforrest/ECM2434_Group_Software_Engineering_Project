@@ -14,6 +14,7 @@ import json
 import math
 import requests
 from typing import Union
+from datetime import datetime
 from common.travelTypes import TravelType
 
 
@@ -184,3 +185,18 @@ def get_distance_to_campus(lat: float, lng: float) -> Union[str, float]:
         
     ordered = dict(sorted(results.items(), key=lambda item: item[1]))
     return list(ordered.items())[0]
+
+
+def format_time_between(time1: datetime, time2: datetime) -> str:
+    diff = time1 - time2
+    
+    if diff.hours > 1 or diff.days > 1:
+        formatted = f"{diff.hours + 24 * diff.days} hours"
+    elif diff.hours == 1:
+        formatted = "1 hour"
+        
+    if diff.minutes > 1:
+        formatted += f" & {diff.minutes} minutes"
+    elif diff.minutes == 1:
+        formatted += " & 1 minute"
+    return formatted

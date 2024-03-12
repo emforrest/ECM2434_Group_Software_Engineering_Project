@@ -12,7 +12,7 @@ from . import views
 urlpatterns = [
     path("", views.home, name="dashboard"),
     path("settings/", views.settings, name="settings"),
-    path("journeys/<int:journey_id>/", views.journey_created, name="success"),
+    path("journeys/<int:journey_id>/", views.journey_created, name="journey"),
     path("journeys/create", views.start_journey, name="start"),
     path("journeys/finish", views.end_journey, name="end")
 ]

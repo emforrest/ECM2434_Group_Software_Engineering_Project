@@ -13,7 +13,7 @@ from datetime import datetime
 from common.travelTypes import TravelType
 from user.models import Journey
 from main.models import Location
-from common.utils import get_route, calculate_co2, get_distance_to_campus
+from common.utils import get_route, calculate_co2, get_distance_to_campus, format_time_between
 
 from django.http import HttpResponse
 
@@ -81,27 +81,32 @@ def settings(request):
 @login_required
 def start_journey(request):
     
+    # Check the user has an active journey, and if so, return an unauthorized error
+    journey = request.user.profile.active_journey
+    if journey is not None:
+        return HttpResponse(status=403)
+    
+    # If method is POST, handle form submission
     if request.method == "POST":
-        print("Got start request")
-        print(request.POST.get("address"))
 
         # Convert the string representation of the transport type to a TravelType object.
         transport = TravelType.from_str(request.POST.get('transport'))
         if transport is None:
            raise RuntimeError("Transport not found!")
        
+        # Check the POST request contains a valid latitude and longitude or address
         if request.POST.get('lat') in ["", None] or request.POST.get('long') in ["", None]:
            raise RuntimeError("Missing latitude and longitude!")
-       
+        elif request.POST.get('address') in ["", None]:
+            raise RuntimeError("Missing address string!")
+
+        # Get the closest building to campus and check if it's within an acceptable range (300m)
         building, distance = get_distance_to_campus(float(request.POST.get('lat')), float(request.POST.get('long')))
         if distance <= 0.3:
-            print("On Campus")
-            print("Building name: ", building)
             location = Location.objects.get(name=building)
         else:
-            print("Off Campus")
             
-            # Create a new Location object if it doesn't yet exist.
+            # Get (or create) a Location object for the specified location if off campus
             try:
                 location = Location.objects.get(address = request.POST.get('address'))
             except Location.DoesNotExist:
@@ -115,7 +120,7 @@ def start_journey(request):
         # Create a new entry in the journey's table
         journey = Journey(user = request.user,
                           origin = location, 
-                          transport = request.POST.get('transport'),
+                          transport = str(transport),
                           time_started = datetime.now())
         journey.save()
         
@@ -123,6 +128,8 @@ def start_journey(request):
         request.user.profile.active_journey = journey
         request.user.profile.save()
         return redirect("dashboard")
+    
+    # Render the form if visited by a GET request
     else:
         return render(request, "user/start_journey.html")
         
@@ -175,7 +182,7 @@ def end_journey(request):
         # Reset user's active journey flag by setting active journey to none
         request.user.profile.active_journey = None
         request.user.profile.save()
-        return redirect("dashboard")
+        return redirect("journey", journey_id=journey.id)
     
     # Render the form if visited by a GET request
     else:
@@ -185,14 +192,15 @@ def end_journey(request):
 @login_required
 def journey_created(request, journey_id: int):
     
-    # Get journey object and calculate CO2 savings
+    # Check the journey exists
     journey = Journey.objects.get(id=journey_id)
-    savings = journey.carbon_savings
+    if journey is None:
+        return HttpResponse(status=404)
     
     # Add journey information to context so it can be displayed on frontend
     context = {
-        "distance": journey.distance,
-        "co2_saved": savings,
-        "transport": journey.transport
+        "journey": journey,
+        "transport": TravelType.from_str(journey.transport).to_str(),
+        "time_taken": format_time_between(journey.time_finished, journey.time_started)
     }
     return render(request, "user/success.html", context)
