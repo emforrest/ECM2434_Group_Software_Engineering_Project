@@ -1,138 +1,128 @@
 {
     "Forum" :
     {
-        "latitude" : 50.73549,
-        "longitude" : -3.53283
+        "latitude" : 50.73529083954629,
+        "longitude" : -3.5337007691475097
     },
     "Amory" :
     {
-        "latitude" : 50.73663,
-        "longitude" : -3.53164
+        "latitude" : 50.736570693976674,
+        "longitude" : -3.531681815524105
     },
     "Devonshire House" :
     {
-        "latitude" : 50.73505,
-        "longitude" : -3.53438
+        "latitude" : 50.73490079038139,
+        "longitude" : -3.5344620717831448
     },
     "Peter Chalk" :
     {
-        "latitude" : 50.73638,
-        "longitude" : -3.53612
+        "latitude" : 50.73622405145848,
+        "longitude" : -3.5360695422687245
     },
     "Living Systems Institute" :
     {
-        "latitude" : 50.73704,
-        "longitude" : -3.53450
+        "latitude" : 50.736949424490646,
+        "longitude" : -3.5349708906867834
     },
     "Harrison" :
     {
-        "latitude" : 50.73788,
-        "longitude" : -3.53261
+        "latitude" : 50.73768103367227,
+        "longitude" : -3.5326239683756953
     },
     "Business School - Building One" :
     {
-        "latitude" : 50.73568,
-        "longitude" : -3.52994
+        "latitude" : 50.73556753128423,
+        "longitude" : -3.5299882085058507
     },
     "Sports Park" :
     {
-        "latitude" : 50.73794,
-        "longitude" : -3.53705
+        "latitude" : 50.73764299889492,
+        "longitude" : -3.5371976844199096
     },
     "Queens" :
     {
-        "latitude" : 50.73421,
-        "longitude" : -3.53486
+        "latitude" : 50.734166436197995,
+        "longitude" : -3.534851375294323
     },
     "Washington Singer" :
     {
-        "latitude" : 50.73327,
-        "longitude" : -3.53648
+        "latitude" : 50.733149620637654,
+        "longitude" : -3.5365046201438566
     },
     "Laver" :
     {
-        "latitude" : 50.73755,
-        "longitude" : -3.53343
+        "latitude" : 50.73750894088812,
+        "longitude" : -3.5335233461784514
     },
     "Innovation Centre" :
     {
-        "latitude" : 50.73865,
-        "longitude" : -3.53102
+        "latitude" : 50.738355728892685,
+        "longitude" : -3.5310941488115675
     },
     "South West Institute of Technology" :
     {
-        "latitude" : 50.73817,
-        "longitude" : -3.53012
+        "latitude" : 50.73808203845364,
+        "longitude" : -3.5305401014900064
     },
     "Bus Stop - North Park Road" :
     {
-        "latitude" : 50.73647,
-        "longitude" : -3.53429
+        "latitude" : 50.73634009746368,
+        "longitude" : -3.534672307953855
     },
     "Bus Stop - Innovation Centre" :
     {
-        "latitude" : 50.73763,
-        "longitude" : -3.53083
+        "latitude" : 50.73762927112131,
+        "longitude" : -3.5307846217392846
     },
     "Bus Stop - Rennes Drive" :
     {
-        "latitude" : 50.73619,
-        "longitude" : -3.53116
+        "latitude" : 50.73608035917334,
+        "longitude" : -3.5315267816779725
     },
     "Bus Stop - Poole Gate" :
     {
-        "latitude" : 50.73352,
-        "longitude" : -3.53278
+        "latitude" : 50.733359846896704,
+        "longitude" : -3.533038520343775
     },
     "Bus Stop - Perry Road" :
     {
-        "latitude" : 50.73248,
-        "longitude" : -3.53427
-    },
-    "Bus Stop - Streatham Rise" :
-    {
-        "latitude" : 50.73182,
-        "longitude" : -3.53770
+        "latitude" : 50.732226198632844,
+        "longitude" : -3.534971795295485
     },
     "Bus Stop - Knightley" :
     {
-        "latitude" : 50.73274,
-        "longitude" : -3.53755
+        "latitude" : 50.7326003995035,
+        "longitude" : -3.5378031344585996
     },
     "Bus Stop - The Queen's Drive" :
     {
-        "latitude" : 50.73471,
-        "longitude" : -3.53560
-    },
-    "Bus Stop - Prince of Wales Road" :
-    {
-        "latitude" : 50.73216,
-        "longitude" : -3.53741
+        "latitude" : 50.734735498518916,
+        "longitude" : -3.5357017467516703
     },
     "Bike Rack - Stocker Road" :
     {
-        "latitude" : 50.73580,
-        "longitude" : -3.53304
+        "latitude" : 50.735825330027744,
+        "longitude" : -3.532834418115756
     },
     "Bike Rack - Sports Park" :
     {
-        "latitude" : 50.73801,
-        "longitude" : -3.53635
+        "latitude" : 50.737966344737416,
+        "longitude" : -3.5362942233396506
     },
     "Bike Rack - Business School" :
     {
-        "latitude" : 50.73545,
-        "longitude" : -3.53130
+        "latitude" : 50.73608878813222,
+        "longitude" : -3.5306346079966238
     },
-    "Bike Rack - Terrace Restaurant" :
+    "Bike Rack - Devonshire House" :
     {
-        "latitude" : 50.73470,
-        "longitude" : -3.53405
+        "latitude" : 50.73471893854844,
+        "longitude" : -3.5342749203664607
     },
     "Bike Rack - Amory" :
     {
-        "latitude" : 50.73592,
-        "longitude" : -3.53199
+        "latitude" : 50.73606807836131,
+        "longitude" : -3.531906437279346
     }   
 
 }

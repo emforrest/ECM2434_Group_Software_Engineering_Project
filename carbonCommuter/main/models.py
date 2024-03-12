@@ -25,7 +25,7 @@ class Location(models.Model):
     name = models.CharField(max_length=64, null=True, blank=True)
     lat = models.FloatField(null=False, blank=False)
     lng = models.FloatField(null=False, blank=False)
-    address = models.CharField(max_length=255, null=False, blank=False, unique=True, db_index=True)
+    address = models.CharField(max_length=255, null=False, blank=False, db_index=True)
     on_campus = models.BooleanField(null=False, blank=True, default=False)
     type = models.CharField(max_length=32, null=True, blank=True)
     

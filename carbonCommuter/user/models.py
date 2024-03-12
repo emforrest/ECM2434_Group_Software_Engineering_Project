@@ -56,6 +56,7 @@ class Journey(models.Model):
     transport = models.CharField(max_length=16, blank=False, null=False)
     time_started = models.DateTimeField(null=False, blank=False)
     time_finished = models.DateTimeField(null=True, blank=True)
+    estimated_time = models.FloatField(null=True, blank=True)
     objects = JourneyManager()
     
     
@@ -66,7 +67,6 @@ class Profile(models.Model):
         user (User): A one-to-one relationship with the built in User model.
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    total_saving = models.FloatField(default=0)
     active_journey = models.ForeignKey(Journey, on_delete=models.SET_NULL, null=True, blank=True)
     
     def get_total_savings(self):
