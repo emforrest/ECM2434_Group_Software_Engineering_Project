@@ -1,4 +1,6 @@
+
 """Contains the functions related to endpoints with the /user/ prefix, including rendering the three webpages and handling a user's upload.
+
 Authors: 
 - Sam Townley
 - Eleanor Forrest
@@ -7,26 +9,29 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
+from django.http import HttpResponse
 
 from datetime import datetime
 
-from common.travelTypes import TravelType
 from user.models import Journey
 from main.models import Location
+from common.travelTypes import TravelType
 from common.utils import get_route, calculate_co2, get_distance_to_campus, format_time_between
 
-from django.http import HttpResponse
 
 @login_required
 def home(request):
     """Return the /user/home page with the information about the current user such as their name and email address.
-    Parameters:
-    request - the HTTP request containing information about the current user
-    Return:
-    The function returns the rendering of the home webpage using the provided information    
+    
+    Args:
+        request: The HTTP request containing information about the current user
+    
+    Returns:
+        The function returns the rendering of the home webpage using the provided information    
     """
+    # Set the information about the user in the context and render the template with this
     name = request.user.first_name + " " + request.user.last_name
-    co2Saved = Journey.objects.get_all_time_savings(request.user)
+    co2Saved = request.user.profile.get_total_savings()
     started = request.user.profile.has_active_journey()
     context = context = {"full_name": name,
                          "co2Saved": co2Saved,
@@ -37,10 +42,12 @@ def home(request):
 @login_required
 def settings(request):
     """Return the /user/settings page with the information about the current user such as their name and email address.
-    Parameters:
-    request - the HTTP request containing information about the current user
-    Return:
-    The function returns the rendering of the settings webpage using the provided information    
+    
+    Args:
+        request: The HTTP request containing information about the current user
+    
+    Returns:
+        The function returns the rendering of the settings webpage using the provided information    
     """
     if request.method == "POST":
         #accessing the data from the POST request
@@ -69,6 +76,7 @@ def settings(request):
             context = {"error": "Invalid password"}
             return render(request, "user/settings.html", context)
 
+        # Update the information inside the user table
         request.user.first_name = first_name
         request.user.last_name = last_name
         request.user.email = email
@@ -80,7 +88,20 @@ def settings(request):
 
 @login_required
 def start_journey(request):
-    
+    """Handles the form page for starting a new journey within the system.
+
+    Args:
+        request: The HTTP request object containing information about the request.
+
+    Raises:
+        RuntimeError: An error occured whilst handling the form.
+        Exception: An unknown error occured whilst getting the location from the address.
+
+    Returns:
+        HttpResponse: An unsuccessful request was made. The status code will indicate why.
+        Redirect: The form was submitted correctly and the user was redirected to the dashboard upon completion.
+        Render: A get request was recieved and the form was rendered.
+    """
     # Check the user has an active journey, and if so, return an unauthorized error
     journey = request.user.profile.active_journey
     if journey is not None:
@@ -136,7 +157,20 @@ def start_journey(request):
 
 @login_required
 def end_journey(request):
-    
+    """Handles the form page for ending a current journey within the system.
+
+    Args:
+        request: The HTTP request object containing information about the request.
+
+    Raises:
+        RuntimeError: An error occured whilst handling the form.
+        Exception: An unknown error occured whilst getting the location from the address.
+
+    Returns:
+        HttpResponse: An unsuccessful request was made. The status code will indicate why.
+        Redirect: The form was submitted correctly and the user was redirected to the success page upon completion.
+        Render: A get request was recieved and the form was rendered.
+    """
     # Check the user has an active journey, and if not, return an unauthorized error
     journey = request.user.profile.active_journey
     if journey is None:
@@ -191,7 +225,19 @@ def end_journey(request):
 
 @login_required
 def journey_created(request, journey_id: int):
-    
+    """Displays information about a completed journey once it's been submitted successfully to the system.
+
+    Args:
+        request: The HTTP request object containing information about the request.
+
+    Raises:
+        RuntimeError: An error occured whilst handling the form.
+        Exception: An unknown error occured whilst getting the location from the address.
+
+    Returns:
+        HttpResponse: An unsuccessful request was made. The status code will indicate why.
+        Render: Renders the html for the page with the context generated inside the function.
+    """
     # Check the journey exists
     journey = Journey.objects.get(id=journey_id)
     if journey is None:
