@@ -112,7 +112,7 @@ def get_route(origin_lat: float, origin_long: float, dest_lat: float, dest_long:
     headers = {
         'Content-Type': 'application/json',
         'X-Goog-Api-Key': 'AIzaSyCVEKGGBT_8WryClHT64tPqFONldHdY35Y',
-        'X-Goog-FieldMask': 'distanceMeters,condition'
+        'X-Goog-FieldMask': 'distanceMeters,condition,staticDuration'
     }
 
     # Carry out the post request and check if the status code is a success. If not, handle the error accordingly and return 0 to indicate failure
@@ -177,26 +177,48 @@ def get_distance_to_campus(lat: float, lng: float) -> Union[str, float]:
         str: The name of building on campus, as saved in the database and inside campusCoordinates.json
         float: The distance to the marked building location, measured in KM.
     """
+    # Load the stored locations on campus from the local JSON file.
     campus = load_campus_coords()
+    
+    # Create a dictionary of distances for each location to the users location.
     results = {}
     for name, coords in campus.items():
         distance = calculate_direct_distance((lat, lng), (coords["latitude"], coords['longitude']))
         results[name] = distance
-        
+    
+    # Order the dictionary, and return the top key pair.
     ordered = dict(sorted(results.items(), key=lambda item: item[1]))
     return list(ordered.items())[0]
 
 
 def format_time_between(time1: datetime, time2: datetime) -> str:
+    """Formats the timedelta between two datetimes into a human-readable string.
+
+    Args:
+        time1 (datetime): The start datetime.
+        time2 (datetime): The end datetime.
+
+    Returns:
+        str: A formatted representation of time difference.
+    """
+    # Calculate the hours and minutes between the two datetimes
     diff = time1 - time2
+    hours = diff.days * 24 + diff.seconds // 3600
+    minutes = (diff.seconds % 3600) // 60
     
-    if diff.hours > 1 or diff.days > 1:
-        formatted = f"{diff.hours + 24 * diff.days} hours"
-    elif diff.hours == 1:
+    # If 1 or more hours, add this to the result string.
+    if hours > 1:
+        formatted = f"{hours} hours"
+    elif hours == 1:
         formatted = "1 hour"
         
-    if diff.minutes > 1:
-        formatted += f" & {diff.minutes} minutes"
-    elif diff.minutes == 1:
-        formatted += " & 1 minute"
+    # If both hours and minutes are present, add an ampersand between the two.
+    if hours > 0 and minutes > 0:
+        formatted += " & "
+    
+    # Add the minutes to the string if there are any.
+    if minutes > 1:
+        formatted += f"{minutes} minutes"
+    else:
+        formatted += "1 minute"
     return formatted
