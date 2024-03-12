@@ -13,7 +13,9 @@ from datetime import datetime
 from common.travelTypes import TravelType
 from user.models import Journey
 from main.models import Location
-from common.utils import locationToDistance, distanceToCO2, getClosestCampus
+from common.utils import get_route, calculate_co2, get_distance_to_campus
+
+from django.http import HttpResponse
 
 @login_required
 def home(request):
@@ -77,43 +79,6 @@ def settings(request):
 
 
 @login_required
-def create_journey(request):
-    """
-    The function returns the rendering of the upload webpage using the provided information    
-    """
-    username = request.user.username
-    started = False
-    context = context =  {"username": username}
-    
-    if started:
-        return render(request, "user/start_journey.html", context)
-    else:
-        return render(request, "user/end_journey.html", context)
-
-        # Convert both sets of latitude/longitude coordinates to a distance, and then calculate the carbon saved based on that distance, using the methods defined in common/utils.py
-        #distance = locationToDistance(origin['latitude'], origin['longitude'], float(request.POST.get('lat')),
-        #                              float(request.POST.get('lng')), transport)
-        #savings = distanceToCO2(distance / 1000, transport)
-        #print(savings)
-
-
-@login_required
-def journey_created(request, journey_id: int):
-    
-    # Get journey object and calculate CO2 savings
-    journey = Journey.objects.get(id=journey_id)
-    savings = distanceToCO2(journey.distance, journey.transport)
-    
-    # Add journey information to context so it can be displayed on frontend
-    context = {
-        "distance": journey.distance,
-        "co2_saved": savings,
-        "transport": journey.transport
-    }
-    return render(request, "user/success.html", context)
-
-
-@login_required
 def start_journey(request):
     
     if request.method == "POST":
@@ -128,7 +93,7 @@ def start_journey(request):
         if request.POST.get('lat') in ["", None] or request.POST.get('long') in ["", None]:
            raise RuntimeError("Missing latitude and longitude!")
        
-        building, distance = getClosestCampus(float(request.POST.get('lat')), float(request.POST.get('long')))
+        building, distance = get_distance_to_campus(float(request.POST.get('lat')), float(request.POST.get('long')))
         if distance <= 0.3:
             print("On Campus")
             print("Building name: ", building)
@@ -165,8 +130,69 @@ def start_journey(request):
 @login_required
 def end_journey(request):
     
+    # Check the user has an active journey, and if not, return an unauthorized error
+    journey = request.user.profile.active_journey
+    if journey is None:
+        return HttpResponse(status=403)
+    
+    # If method is POST, handle form submission
     if request.method == "POST":
-        print("Got end request")
+        
+        # Get the closest building to campus and check if it's within an acceptable range (300m)
+        building, distance = get_distance_to_campus(float(request.POST.get('lat')), float(request.POST.get('long')))
+        if distance <= 0.3:
+            location = Location.objects.get(name=building)
+        else:
+            
+            # Get (or create) a Location object for the specified location if off campus
+            try:
+                location = Location.objects.get(address = request.POST.get('address'))
+            except Location.DoesNotExist:
+                location = Location.objects.create(lat = float(request.POST.get('lat')),
+                                                   lng = float(request.POST.get('long')),
+                                                   address = request.POST.get('address'))
+                location.save()
+            except Exception as ex:
+                raise ex
+            
+        # Convert the string representation of the transport type to a TravelType object.
+        transport = TravelType.from_str(journey.transport)
+        if transport is None:
+           raise RuntimeError("Transport not found!")
+        
+        # Convert both sets of latitude/longitude coordinates to a distance, and then calculate the carbon saved based on that distance, using the methods defined in common/utils.py
+        distance, time = get_route(journey.origin.lat, journey.origin.lng, location.lat, location.lng, transport)
+        savings = calculate_co2(distance, transport)
+        
+        # Save calculations and final timestamp to current journey
+        journey.destination = location
+        journey.distance = distance
+        journey.estimated_time = time
+        journey.carbon_savings = savings
+        journey.time_finished = datetime.now()
+        journey.save()
+        
+        # Reset user's active journey flag by setting active journey to none
+        request.user.profile.active_journey = None
+        request.user.profile.save()
         return redirect("dashboard")
+    
+    # Render the form if visited by a GET request
     else:
         return render(request, "user/end_journey.html")
+    
+
+@login_required
+def journey_created(request, journey_id: int):
+    
+    # Get journey object and calculate CO2 savings
+    journey = Journey.objects.get(id=journey_id)
+    savings = journey.carbon_savings
+    
+    # Add journey information to context so it can be displayed on frontend
+    context = {
+        "distance": journey.distance,
+        "co2_saved": savings,
+        "transport": journey.transport
+    }
+    return render(request, "user/success.html", context)
