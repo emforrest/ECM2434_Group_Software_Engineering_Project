@@ -13,15 +13,22 @@ from django.db import models
 
 
 class Location(models.Model):
-    """Contains information about a location outside of campus.
+    """Contains information about a geographical location (on or off campus).
 
     Attributes:
         id (int): A unique identifier for the location, automatically generated.
+        name (str): An optional name used to identify the location.
         lat (float): The latitude of the location.
         lng (float): The longitude of the location.
-        address (string): The full address of the location.
+        address (str): The full address of the location.
+        on_campus (bool): Whether or not the location is location inside campus.
+        type (str): The type of location. Used to distinguish between areas on campus, e.g. Bus Stops or Bike Racks
     """
     id = models.AutoField(primary_key=True, auto_created=True, unique=True)
-    lat = models.FloatField(blank=False)
-    lng = models.FloatField(blank=False)
-    address = models.CharField(max_length=256, blank=False, unique=True)
+    name = models.CharField(max_length=64, null=True, blank=True)
+    lat = models.FloatField(null=False, blank=False)
+    lng = models.FloatField(null=False, blank=False)
+    address = models.CharField(max_length=255, null=False, blank=False, db_index=True)
+    on_campus = models.BooleanField(null=False, blank=True, default=False)
+    type = models.CharField(max_length=32, null=True, blank=True)
+    
