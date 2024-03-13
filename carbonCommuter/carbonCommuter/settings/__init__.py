@@ -1,4 +1,5 @@
 from .base import *
+from .logging import *
 import os
 
 # Load the correct config according to the type of environment config
