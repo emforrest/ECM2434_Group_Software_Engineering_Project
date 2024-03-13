@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -80,14 +81,17 @@ WSGI_APPLICATION = 'carbonCommuter.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+if "DB_CNF_PATH" in os.environ:
+    DB_CNF_PATH = os.environ.get("DB_CNF_PATH")
+else:
+    DB_CNF_PATH = "../database/my.cnf"
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sustainabilitygame',
-        'USER': 'django',
-        'PASSWORD': 'acf6Z4LeA85FF9gY!',
-        'HOST': '129.153.205.30',
-        'PORT': '3306',
+        'OPTIONS': {
+            'read_default_file': DB_CNF_PATH
+        }
     }
 }
 
