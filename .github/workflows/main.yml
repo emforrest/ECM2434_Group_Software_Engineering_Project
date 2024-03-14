@@ -5,6 +5,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: master
     steps:
       - name: Deploy using SSH
         uses: appleboy/ssh-action@master
