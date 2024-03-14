@@ -8,7 +8,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>User home page</title>
+        <title>Settings</title>
         <!--Import styling-->
         <link rel="stylesheet" href="{% static 'carbonCommuter/style.css' %}">
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -54,17 +54,17 @@
                     <p style='color:red'>{{ error }}</p>
                 {% endif %}
                 <div class="input-box">
-                    <input type="text" value = {{firstName}} id="first_name" name="first_name">
+                    <input type="text" value={{request.user.first_name}} id="first_name" name="first_name">
                 </div>
                 <div class="input-box">
-                    <input type="text" value = {{lastName}} id="last_name" name="last_name">
+                    <input type="text" value={{request.user.last_name}} id="last_name" name="last_name">
                 </div>
                 <div class="input-box">
-                    <input type="text" value = {{username}} id="username" name="username">
+                    <input type="text" value={{request.user.username}} id="username" name="username">
                     <i class='bx bxs-user'></i>
                 </div>
                 <div class="input-box">
-                    <input type="text" value= {{email}} id="email" name="email">
+                    <input type="text" value={{request.user.email}} id="email" name="email">
                     <i class='bx bxs-envelope'></i>
                 </div>
                 <div class="input-box">

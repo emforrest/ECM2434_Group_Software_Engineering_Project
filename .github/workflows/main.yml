@@ -1,0 +1,23 @@
+name: Deploy Webserver
+on:
+  push:
+    branches: [main]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: master
+    steps:
+      - name: Deploy using SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: opc
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd django/ECM2434_Group_Software_Engineering_Project
+            sudo pkill -f runserver
+            git pull
+            source env/bin/activate
+            pip install -r requirements.txt
+            cd carbonCommuter
+            sudo -E nice nohup ../env/bin/python manage.py runserver 0.0.0.0:80 &
