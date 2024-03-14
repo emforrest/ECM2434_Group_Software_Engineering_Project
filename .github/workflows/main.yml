@@ -14,7 +14,7 @@ jobs:
           username: opc
           key: ${{ secrets.SSH_KEY }}
           script: |
-            pkill -f gunicorn
+            kill $(pgrep -f gunicorn | grep -v ^$$\$)
             cd ../../usr/local/share/carboncommuter/
             git pull
             source env/bin/activate
