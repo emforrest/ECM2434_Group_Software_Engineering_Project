@@ -22,4 +22,4 @@ jobs:
             rm -r staticfiles
             cd carbonCommuter
             python manage.py collectstatic
-            nohup nice gunicorn carbonCommuter.wsgi &
+            nohup nice gunicorn carbonCommuter.wsgi > foo.out 2> foo.err < /dev/null &
