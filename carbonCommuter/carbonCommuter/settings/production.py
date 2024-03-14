@@ -6,7 +6,7 @@ import sentry_sdk
 
 SECRET_KEY = os.environ.get('DJANGO_SECRET')
 DEBUG = False
-ALLOWED_HOSTS = ["*.carboncommuter.xyz", "carboncommuter.xyz", "127.0.0.1", "localhost", "129.153.205.30"]
+ALLOWED_HOSTS = ["www.carboncommuter.xyz", "carboncommuter.xyz", "127.0.0.1", "localhost", "129.153.205.30"]
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
@@ -26,8 +26,11 @@ DATABASES = {
 # Enforce HTTPS
 # https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/#https
 
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
+#SECURE_BROWSER_XSS_FILTER = True
+#SECURE_CONTENT_TYPE_NOSNIFF = True
+#CSRF_COOKIE_SECURE = True
+#SESSION_COOKIE_SECURE = True
+#CSRF_TRUSTED_ORIGINS = ["https://carboncommuter.xyz", "https://www.carboncommuter.xyz"]
 
 
 # Configure Sentry for error monitoring
