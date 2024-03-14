@@ -21,4 +21,5 @@ jobs:
             pip install -r requirements.txt
             cd carbonCommuter
             python manage.py collectstatic
+            yes
             nohup nice gunicorn carbonCommuter.wsgi &
