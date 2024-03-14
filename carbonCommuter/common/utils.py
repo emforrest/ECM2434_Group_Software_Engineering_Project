@@ -16,6 +16,7 @@ import requests
 from typing import Union
 from datetime import datetime
 from common.travelTypes import TravelType
+from leaderboard.models import Leaderboard_Entry
 
 
 def calculate_co2(distance: float, transport: TravelType|str) -> float:
@@ -222,3 +223,26 @@ def format_time_between(time1: datetime, time2: datetime) -> str:
     else:
         formatted += "1 minute"
     return formatted
+
+def leaderboardData(users_journeys):
+    users = []
+    current_id = -1
+    for journey in users_journeys:
+        print(journey.user_id)
+        if journey.user.id != current_id: 
+            if current_id != -1:
+                users.append(user_entry)
+            user_entry = Leaderboard_Entry()
+            current_id = journey.user_id
+            user_entry.name = journey.user.first_name + " " + journey.user.last_name
+            user_entry.totalCo2Saved = 0
+        try:
+            user_entry.totalCo2Saved += journey.carbon_savings
+        except:
+            user_entry.totalCo2Saved += 0
+    users.append(user_entry)
+    users.sort(key=lambda x: x.totalCo2Saved, reverse=True)
+    users = users[:10]
+    for x in range(0,len(users)):
+        users[x].position = x+1
+    return users
