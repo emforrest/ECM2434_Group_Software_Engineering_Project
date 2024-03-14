@@ -6,7 +6,7 @@ import sentry_sdk
 
 SECRET_KEY = os.environ.get('DJANGO_SECRET')
 DEBUG = False
-ALLOWED_HOSTS = [".carboncommuter.xyz", "127.0.0.1", "localhost"]
+ALLOWED_HOSTS = ["carboncommuter.xyz", "127.0.0.1", "localhost", "129.153.205.30"]
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
