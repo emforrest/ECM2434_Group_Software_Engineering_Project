@@ -19,6 +19,7 @@ jobs:
             git pull
             source env/bin/activate
             pip install -r requirements.txt
+            rm -r staticfiles
             cd carbonCommuter
             python manage.py collectstatic
             nohup nice gunicorn carbonCommuter.wsgi &
