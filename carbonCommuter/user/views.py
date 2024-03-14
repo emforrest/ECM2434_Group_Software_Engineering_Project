@@ -229,6 +229,7 @@ def journey_created(request, journey_id: int):
 
     Args:
         request: The HTTP request object containing information about the request.
+        journey_id: The ID of the journey being processed. 
 
     Raises:
         RuntimeError: An error occured whilst handling the form.
@@ -250,3 +251,39 @@ def journey_created(request, journey_id: int):
         "time_taken": format_time_between(journey.time_finished, journey.time_started)
     }
     return render(request, "user/success.html", context)
+
+@login_required
+def profile(request, username:str):
+    """Displays the public profile of the user passed in.
+
+    Args:
+        request: The HTTP request object containing information about the request.
+        username: The username of the user whose profile should be accessed. 
+
+    Returns:
+        HttpResponse: An unsuccessful request was made. The status code will indicate why.
+        Render: Renders the html for the page with the context generated inside the function.
+    """
+
+    #Check the user exists
+    userFilter = User.objects.filter(username=username)
+    if userFilter.exists():
+        user = userFilter[0]
+        co2Saved = user.profile.get_total_savings()
+        if request.user.username == username:
+            isCurrentUser = True
+        else:
+            isCurrentUser = False
+        context = {
+            "username": username,
+            "dateJoined" : user.date_joined,
+            "co2Saved" : co2Saved,
+            "isCurrentUser" : isCurrentUser,
+        
+        }
+        return render(request, "user/profile.html", context)
+    else:
+        return HttpResponse(status=404)
+
+
+    
