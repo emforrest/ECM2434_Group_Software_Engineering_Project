@@ -31,5 +31,5 @@ urlpatterns = [
     path("user/", include("user.urls")),
     path("groups/", include("groups.urls")),
     path("admin/", admin.site.urls),
-    path("adminUser/", include("adminUser.urls"))
+    path("adminUser/", include("adminUser.urls")),
 ]
