@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!--A HTML document that produces a public user profile, displaying public information including username and badges.-->
+<!--A HTML document that produces a public user profile, displaying public information and allowing users to follow others.-->
 <!--authors: Eleanor Forrest-->
 
     <head>
@@ -46,7 +46,7 @@
         <br>
         <br>
         <br>
-        
+        <!--Set up the public profile information box-->
         <div class="row">
             <div class="column">
                 <div class="column-box">
@@ -59,10 +59,18 @@
                     <br>
                     {% if isCurrentUser %}
                         <!-- If it is the user's public profile a back button is displayed -->
-                        <a href="/user/"><button type="submit" class="btn">Back</button></a>
+                        <a href="/user/"><button type="back" class="btn">Back</button></a>
                     {% else %}
                         <!-- Otherwise a Follow button is displayed (follow/unfollow) -->
-                        <button type="submit" class="btn"> Follow</button>
+                        <form action="/user/follow/" method="POST">
+                        {% csrf_token %}
+                        {% if followingUser %}
+                            <button type="submit" class="btn" name="follow" value="unfollow">Unfollow</button>
+                        {% else %}
+                            <button type="submit" class="btn" name="follow" value="follow">Follow</button>
+                        {% endif %}
+                        <input type="hidden" id="followedUser" name="followedUser" value="{{ userToFollow }}">
+                        </form>
                     {% endif %}
                 </div>
             </div>
@@ -73,4 +81,4 @@
             <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
         </div>
     </body>
-</html>
+    </html>
