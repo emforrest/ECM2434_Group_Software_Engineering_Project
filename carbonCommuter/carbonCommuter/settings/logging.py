@@ -62,7 +62,6 @@ def backup_logs():
                 for file in os.listdir("../logs/"):
                     if file.endswith(".log"):
                         zip.write(f"../logs/{file}")
-                        os.remove(f"../logs/{file}")
 
 # Trigger backup
 backup_logs()
@@ -73,7 +72,7 @@ backup_logs()
 
 LOGGING = {
     "version": 1,
-    "disable_existing_loggers": True,
+    "disable_existing_loggers": False,
     "handlers": {
         "console": {
             "class": "logging.StreamHandler",
@@ -84,6 +83,7 @@ LOGGING = {
             "class": "logging.handlers.RotatingFileHandler",
             "level": "INFO",
             "filename": "../logs/master.log",
+            "mode": "w",
             "encoding": "utf-8",
             "maxBytes": 6708864, # 64MB
             "backupCount": 10,
@@ -93,6 +93,7 @@ LOGGING = {
             "class": "logging.handlers.RotatingFileHandler",
             "level": "DEBUG",
             "filename": "../logs/debug.log",
+            "mode": "w",
             "encoding": "utf-8",
             "maxBytes": 6708864, # 64MB
             "backupCount": 10,
@@ -104,8 +105,14 @@ LOGGING = {
             "()": ColouredFormat
         }
     },
+    "loggers": {
+        "django": {
+            "level": "DEBUG",
+            "propagate": True,
+        }
+    },
     "root": {
         "handlers": ["console", "master", "debug"],
         "level": "DEBUG",
-    },
+    }
 }
