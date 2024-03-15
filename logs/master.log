@@ -1,0 +1,192 @@
+15-03-2024 10:24:28 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+15-03-2024 10:24:32 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 200 2961
+15-03-2024 10:24:33 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:24:33 [38;5;220m[WARNING][0m django.request: Not Found: /favicon.ico
+15-03-2024 10:24:33 [38;5;220m[WARNING][0m django.server: "GET /favicon.ico HTTP/1.1" 404 3149
+15-03-2024 10:24:36 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 200 2961
+15-03-2024 10:24:36 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:24:37 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 200 2961
+15-03-2024 10:24:37 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:24:38 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 200 2961
+15-03-2024 10:24:38 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:24:38 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 200 2961
+15-03-2024 10:24:38 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:24:39 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 200 2961
+15-03-2024 10:24:39 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:24:40 [38;5;220m[WARNING][0m django.request: Not Found: /favicon.ico
+15-03-2024 10:24:40 [38;5;220m[WARNING][0m django.server: "GET /favicon.ico HTTP/1.1" 404 3149
+15-03-2024 10:24:40 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 200 2961
+15-03-2024 10:24:40 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:24:40 [38;5;220m[WARNING][0m django.request: Not Found: /favicon.ico
+15-03-2024 10:24:40 [38;5;220m[WARNING][0m django.server: "GET /favicon.ico HTTP/1.1" 404 3149
+15-03-2024 10:24:40 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 200 2961
+15-03-2024 10:24:40 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:24:40 [38;5;220m[WARNING][0m django.request: Not Found: /favicon.ico
+15-03-2024 10:24:40 [38;5;220m[WARNING][0m django.server: "GET /favicon.ico HTTP/1.1" 404 3149
+15-03-2024 10:24:40 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 200 2961
+15-03-2024 10:24:40 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:24:40 [38;5;220m[WARNING][0m django.request: Not Found: /favicon.ico
+15-03-2024 10:24:40 [38;5;220m[WARNING][0m django.server: "GET /favicon.ico HTTP/1.1" 404 3149
+15-03-2024 10:24:40 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 200 2961
+15-03-2024 10:24:40 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:24:40 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 200 2961
+15-03-2024 10:24:40 [38;5;220m[WARNING][0m django.request: Not Found: /favicon.ico
+15-03-2024 10:24:40 [38;5;25m[INFO][0m django.server: - Broken pipe from ('127.0.0.1', 49390)
+15-03-2024 10:24:40 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:24:40 [38;5;220m[WARNING][0m django.request: Not Found: /favicon.ico
+15-03-2024 10:24:40 [38;5;220m[WARNING][0m django.server: "GET /favicon.ico HTTP/1.1" 404 3149
+15-03-2024 10:24:41 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 200 2961
+15-03-2024 10:24:41 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:24:41 [38;5;220m[WARNING][0m django.request: Not Found: /favicon.ico
+15-03-2024 10:24:41 [38;5;220m[WARNING][0m django.server: "GET /favicon.ico HTTP/1.1" 404 3149
+15-03-2024 10:24:42 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 200 2961
+15-03-2024 10:24:42 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:24:42 [38;5;220m[WARNING][0m django.request: Not Found: /favicon.ico
+15-03-2024 10:24:42 [38;5;220m[WARNING][0m django.server: "GET /favicon.ico HTTP/1.1" 404 3149
+15-03-2024 10:24:42 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 200 2961
+15-03-2024 10:24:42 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:24:42 [38;5;220m[WARNING][0m django.request: Not Found: /favicon.ico
+15-03-2024 10:24:42 [38;5;220m[WARNING][0m django.server: "GET /favicon.ico HTTP/1.1" 404 3149
+15-03-2024 10:24:42 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 200 2961
+15-03-2024 10:24:42 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:24:42 [38;5;220m[WARNING][0m django.request: Not Found: /favicon.ico
+15-03-2024 10:24:42 [38;5;220m[WARNING][0m django.server: "GET /favicon.ico HTTP/1.1" 404 3149
+15-03-2024 10:24:42 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 200 2961
+15-03-2024 10:24:42 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:24:42 [38;5;220m[WARNING][0m django.request: Not Found: /favicon.ico
+15-03-2024 10:24:42 [38;5;220m[WARNING][0m django.server: "GET /favicon.ico HTTP/1.1" 404 3149
+15-03-2024 10:24:43 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 200 2961
+15-03-2024 10:24:43 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:24:43 [38;5;220m[WARNING][0m django.request: Not Found: /favicon.ico
+15-03-2024 10:24:43 [38;5;220m[WARNING][0m django.server: "GET /favicon.ico HTTP/1.1" 404 3149
+15-03-2024 10:24:54 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+15-03-2024 10:24:56 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 200 2961
+15-03-2024 10:24:56 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:25:51 [38;5;25m[INFO][0m django.utils.autoreload: C:\Users\charl\.CompilerPrograms\Python\Lib\site-packages\django\contrib\admin\exceptions.py changed, reloading.
+15-03-2024 10:26:10 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+15-03-2024 10:26:13 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 200 2961
+15-03-2024 10:26:13 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:28:19 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+15-03-2024 10:28:22 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 200 2961
+15-03-2024 10:28:22 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:28:27 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 200 2961
+15-03-2024 10:28:27 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:28:27 [38;5;220m[WARNING][0m django.request: Not Found: /favicon.ico
+15-03-2024 10:28:27 [38;5;220m[WARNING][0m django.server: "GET /favicon.ico HTTP/1.1" 404 3149
+15-03-2024 10:28:27 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 200 2961
+15-03-2024 10:28:27 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:28:27 [38;5;220m[WARNING][0m django.request: Not Found: /favicon.ico
+15-03-2024 10:28:27 [38;5;220m[WARNING][0m django.server: "GET /favicon.ico HTTP/1.1" 404 3149
+15-03-2024 10:28:28 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 200 2961
+15-03-2024 10:28:28 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:28:28 [38;5;220m[WARNING][0m django.request: Not Found: /favicon.ico
+15-03-2024 10:28:28 [38;5;220m[WARNING][0m django.server: "GET /favicon.ico HTTP/1.1" 404 3149
+15-03-2024 10:28:28 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 200 2961
+15-03-2024 10:28:28 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:28:28 [38;5;220m[WARNING][0m django.request: Not Found: /favicon.ico
+15-03-2024 10:28:28 [38;5;220m[WARNING][0m django.server: "GET /favicon.ico HTTP/1.1" 404 3149
+15-03-2024 10:28:28 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 200 2961
+15-03-2024 10:28:28 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:28:28 [38;5;220m[WARNING][0m django.request: Not Found: /favicon.ico
+15-03-2024 10:28:28 [38;5;220m[WARNING][0m django.server: "GET /favicon.ico HTTP/1.1" 404 3149
+15-03-2024 10:28:28 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 200 2961
+15-03-2024 10:28:28 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:28:28 [38;5;220m[WARNING][0m django.request: Not Found: /favicon.ico
+15-03-2024 10:28:28 [38;5;220m[WARNING][0m django.server: "GET /favicon.ico HTTP/1.1" 404 3149
+15-03-2024 10:28:28 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 200 2961
+15-03-2024 10:28:28 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:28:28 [38;5;220m[WARNING][0m django.request: Not Found: /favicon.ico
+15-03-2024 10:28:28 [38;5;220m[WARNING][0m django.server: "GET /favicon.ico HTTP/1.1" 404 3149
+15-03-2024 10:28:28 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 200 2961
+15-03-2024 10:28:28 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:28:28 [38;5;220m[WARNING][0m django.request: Not Found: /favicon.ico
+15-03-2024 10:28:28 [38;5;220m[WARNING][0m django.server: "GET /favicon.ico HTTP/1.1" 404 3149
+15-03-2024 10:28:29 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 200 2961
+15-03-2024 10:28:29 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:28:29 [38;5;220m[WARNING][0m django.request: Not Found: /favicon.ico
+15-03-2024 10:28:29 [38;5;220m[WARNING][0m django.server: "GET /favicon.ico HTTP/1.1" 404 3149
+15-03-2024 10:28:29 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 200 2961
+15-03-2024 10:28:29 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:28:29 [38;5;220m[WARNING][0m django.request: Not Found: /favicon.ico
+15-03-2024 10:28:29 [38;5;220m[WARNING][0m django.server: "GET /favicon.ico HTTP/1.1" 404 3149
+15-03-2024 10:31:27 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 200 2961
+15-03-2024 10:31:27 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:31:30 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 302 0
+15-03-2024 10:31:30 [38;5;25m[INFO][0m django.server: "GET /accounts/login/?next=/user/ HTTP/1.1" 200 4071
+15-03-2024 10:31:30 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:31:31 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 302 0
+15-03-2024 10:31:31 [38;5;25m[INFO][0m django.server: "GET /accounts/login/?next=/user/ HTTP/1.1" 200 4071
+15-03-2024 10:31:31 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:31:35 [38;5;25m[INFO][0m django.server: "POST /accounts/login/?next=/user/ HTTP/1.1" 302 0
+15-03-2024 10:31:37 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 4309
+15-03-2024 10:31:37 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:31:48 [38;5;25m[INFO][0m django.server: "GET /groups/ HTTP/1.1" 200 3712
+15-03-2024 10:31:49 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:32:01 [38;5;25m[INFO][0m django.server: "GET /groups/search/ HTTP/1.1" 200 2967
+15-03-2024 10:32:01 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:32:06 [38;5;25m[INFO][0m django.server: "GET /groups/search/?q=c HTTP/1.1" 200 4182
+15-03-2024 10:32:06 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:32:09 [38;5;25m[INFO][0m django.server: "GET /groups/view/2/ HTTP/1.1" 200 2880
+15-03-2024 10:32:09 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:32:13 [38;5;25m[INFO][0m django.server: "POST /groups/leave/2/ HTTP/1.1" 302 0
+15-03-2024 10:32:14 [38;5;25m[INFO][0m django.server: "GET /groups/view/2/ HTTP/1.1" 200 2885
+15-03-2024 10:32:14 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:32:18 [38;5;25m[INFO][0m django.server: "POST /groups/join/2/ HTTP/1.1" 302 0
+15-03-2024 10:32:19 [38;5;25m[INFO][0m django.server: "GET /groups/view/2/ HTTP/1.1" 200 2880
+15-03-2024 10:32:19 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:32:23 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 302 0
+15-03-2024 10:32:25 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 4309
+15-03-2024 10:32:25 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:36:22 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+15-03-2024 10:36:27 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 302 0
+15-03-2024 10:36:29 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 4309
+15-03-2024 10:36:29 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:36:35 [38;5;25m[INFO][0m django.server: "GET /user/journeys/create HTTP/1.1" 200 9543
+15-03-2024 10:36:35 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:36:53 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 302 0
+15-03-2024 10:36:55 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 4309
+15-03-2024 10:36:55 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:37:01 [38;5;25m[INFO][0m django.server: "GET /groups/ HTTP/1.1" 200 3712
+15-03-2024 10:37:01 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:37:19 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 302 0
+15-03-2024 10:37:21 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 4309
+15-03-2024 10:37:21 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:41:33 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 302 0
+15-03-2024 10:41:35 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 4309
+15-03-2024 10:41:35 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:41:39 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 200 2961
+15-03-2024 10:41:39 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:41:47 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 302 0
+15-03-2024 10:41:49 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 4309
+15-03-2024 10:41:49 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:42:45 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 200 2961
+15-03-2024 10:42:45 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:42:45 [38;5;220m[WARNING][0m django.request: Not Found: /favicon.ico
+15-03-2024 10:42:45 [38;5;220m[WARNING][0m django.server: "GET /favicon.ico HTTP/1.1" 404 3149
+15-03-2024 10:51:45 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+15-03-2024 10:51:48 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 200 2961
+15-03-2024 10:51:48 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:51:55 [38;5;25m[INFO][0m django.server: "GET /login/ HTTP/1.1" 200 4071
+15-03-2024 10:51:55 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:51:59 [38;5;25m[INFO][0m django.server: "POST /login/ HTTP/1.1" 302 0
+15-03-2024 10:52:01 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 4309
+15-03-2024 10:52:01 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:52:08 [38;5;25m[INFO][0m django.server: "GET /groups/ HTTP/1.1" 200 3712
+15-03-2024 10:52:08 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:55:23 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+15-03-2024 10:55:27 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 302 0
+15-03-2024 10:55:29 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 4309
+15-03-2024 10:55:29 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 10:55:34 [38;5;25m[INFO][0m django.server: "GET /groups/ HTTP/1.1" 200 3712
+15-03-2024 10:55:34 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 11:01:54 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+15-03-2024 11:01:58 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 302 0
+15-03-2024 11:02:00 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 4309
+15-03-2024 11:02:00 [38;5;220m[WARNING][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 404 1831
+15-03-2024 11:04:46 [38;5;25m[INFO][0m django.utils.autoreload: C:\Users\charl\.GroupSoftwareDev\ECM2434_Group_Software_Engineering_Project\carbonCommuter\carbonCommuter\settings\base.py changed, reloading.
+15-03-2024 11:04:47 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+15-03-2024 11:04:51 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 302 0
+15-03-2024 11:04:53 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 4309
+15-03-2024 11:04:53 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 200 8854
+15-03-2024 11:04:53 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/forum.jpg HTTP/1.1" 200 627536
+15-03-2024 11:05:00 [38;5;25m[INFO][0m django.server: "GET /groups/ HTTP/1.1" 200 3712

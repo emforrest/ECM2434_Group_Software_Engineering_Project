@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Group home page</title>
+    <title>User Groups Home Page</title>
     <!-- Link to external CSS file stored in static files -->
     <link rel="stylesheet" href="{% static 'carbonCommuter/style.css' %}">
     <!-- Link to Boxicons for icons usage -->
@@ -43,49 +43,34 @@
         </nav>
     </header>
 
-    <div class="row">
-        <div class="column">
-            <!-- Main content area -->
-            <h2>All Groups and Their Members</h2>
-            <!-- Loop through groups passed in context -->
-            {% for group in groups %}
-            <div class="card mb-3">
-                <div class="card-header">
-                    {{ group.name }} <!-- Display group name -->
-                </div>
-                <ul class="list-group list-group-flush">
-                    <!-- Loop through users in each group -->
-                    {% for user in group.user_set.all %}
-                    <li class="list-group-item">{{ user.username }}</li> <!-- Display user's username -->
-                    {% empty %}
-                    <li class="list-group-item">No members in this group.</li> <!-- Message if no users in the group -->
-                    {% endfor %}
-                </ul>
+    <main class="container mt-5">
+        <h2>Your Groups</h2>
+        <!-- Loop through the user's groups instead of all groups -->
+        {% for group in request.user.groups.all %}
+        <div class="card mb-3">
+            <div class="card-header">
+                {{ group.name }}
             </div>
-            {% endfor %}
+            <div class="card-body">
+                <a href="/groups/view/{{ group.id }}/" class="btn btn-primary">View Group</a>
+            </div>
         </div>
+        {% empty %}
+        <p>You are not in any groups.</p>
+        {% endfor %}
 
-        <!-- Separate sections for Create, Join, and Leave group actions with corresponding buttons -->
-        <div class="column">
-            <br>
-            <div class="column-box">
-                <h1>Create Group</h1>
-                <a href="/groups/create"><button type="submit" class="btn">Create</button></a>
-            </div>
-            <div class="column-box">
-                <h1>Join Group</h1>
-                <a href="/groups/join"><button type="submit" class="btn">Join</button></a>
-            </div>
-            <div class="column-box">
-                <h1>Leave Group</h1>
-                <a href="/groups/leave"><button type="submit" class="btn">Leave</button></a>
+        <!-- Add the search button within a card layout -->
+        <div class="card mb-3">
+            <div class="card-body">
+                <a href="/groups/search/" class="btn btn-primary">Search for a Group to Join</a>
             </div>
         </div>
-    </div>
-    <br>
-    <!-- Footer section -->
-    <div class="footer">
-        <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
-    </div>
+    </main>
+
+    <footer class="footer mt-auto py-3">
+        <div class="container">
+            <span>&copy; 2024 Your Website. All Rights Reserved.</span>
+        </div>
+    </footer>
 </body>
 </html>

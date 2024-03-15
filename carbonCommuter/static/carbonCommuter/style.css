@@ -75,6 +75,11 @@ h1 {
     color: white;
 }
 
+.column-box .btn-danger {
+    background-color: red !important;
+    color: white !important; /* Use !important to override other styles */
+}
+
 /*main page table style*/
 main.main-table {
     width: 700px;
@@ -400,9 +405,10 @@ tbody tr:nth-child(n + 11) {
 
 /*Login, Register, Profile footer*/
 .footer {
-    position: center;
+    position: fixed;
+    left: 50%;
     bottom: 10px;
-    margin: auto;
+    transform: translateX(-50%);
     width: 420px;
     height: 40px;
     background: transparent;
