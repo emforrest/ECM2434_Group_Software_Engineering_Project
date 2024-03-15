@@ -9,11 +9,13 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
+
 
 from datetime import datetime
 
-from user.models import Journey
+from user.models import Journey, Follower
 from main.models import Location
 from common.travelTypes import TravelType
 from common.utils import get_route, calculate_co2, get_distance_to_campus, format_time_between
@@ -270,20 +272,60 @@ def profile(request, username:str):
     if userFilter.exists():
         user = userFilter[0]
         co2Saved = user.profile.get_total_savings()
+        #Work out the context
         if request.user.username == username:
             isCurrentUser = True
         else:
             isCurrentUser = False
+        if Follower.objects.filter(follower=request.user, followedUser=user).exists():
+            followingUser = True
+        else:
+            followingUser = False
+
         context = {
             "username": username,
             "dateJoined" : user.date_joined,
             "co2Saved" : co2Saved,
             "isCurrentUser" : isCurrentUser,
+            "followingUser" : followingUser,
+            "userToFollow" : user,
         
         }
         return render(request, "user/profile.html", context)
     else:
         return HttpResponse(status=404)
+
+def follow(request):
+    """Handles the logic of following another user
+
+    Args:
+        request: The HTTP request object containing information about the request.
+
+    Returns:
+        HttpResponseRedirect: Refreshes the profile page the user is currently viewing
+        HttpResponse: An unsuccessful request was made. The status code will indicate why.
+    """
+    if request.method == 'POST':
+        data=request.POST
+        action=data.get('follow')
+        #Get the user that is being followed
+        followedUser=User.objects.filter(username=data.get('followedUser'))[0]
+
+        if action=="follow":
+            #Create a Follow relationship
+            follower=Follower.objects.create(follower=request.user, followedUser=followedUser)
+            follower.save()
+        elif action == "unfollow":
+            #Remove a follow relationship
+            follower=Follower.objects.get(follower=request.user, followedUser=followedUser)
+            follower.delete()
+        return HttpResponseRedirect(reverse('profile', kwargs={'username': followedUser}))
+    else:
+        return HttpResponse(status = 405)
+    
+
+
+
 
 
     
