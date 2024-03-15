@@ -11,6 +11,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 
+import logging
 from datetime import datetime
 
 from user.models import Journey
@@ -18,6 +19,7 @@ from main.models import Location
 from common.travelTypes import TravelType
 from common.utils import get_route, calculate_co2, get_distance_to_campus, format_time_between
 
+LOGGER = logging.getLogger(__name__)
 
 @login_required
 def home(request):
@@ -113,7 +115,8 @@ def start_journey(request):
         # Convert the string representation of the transport type to a TravelType object.
         transport = TravelType.from_str(request.POST.get('transport'))
         if transport is None:
-           raise RuntimeError("Transport not found!")
+            LOGGER.error("Transport not found!")
+            raise RuntimeError("Transport not found!")
        
         # Check the POST request contains a valid latitude and longitude or address
         if request.POST.get('lat') in ["", None] or request.POST.get('long') in ["", None]:
