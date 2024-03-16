@@ -322,6 +322,24 @@ tbody tr:nth-child(n + 11) {
     text-decoration: underline;
 }
 
+.column-box2 {
+    margin: 10px;
+    width: 900px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .2);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    color: #fff;
+    border-radius: 10px;
+    padding: 15px 30px;
+}
+.column-box2 img {
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+    /*opacity: 0.15;*/
+}
+
 /*Upload page style*/
 #map {
     height: 350px;
