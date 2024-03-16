@@ -1,9 +1,19 @@
 
-function onLoad(tab = 1) {
+function onLoad(tab = "") {
     window.attempts = 0;
     window.last_accuracy = "0";
-    window.current_tab = tab;
-    getLocation();
+    
+    if (tab != "") {
+        window.current_tab = parseInt(tab);
+    } else {
+        window.current_tab = 1;
+    }
+
+    if (window.current_tab > 0) {
+        window.current_tab = 0;
+        nextTab();
+        getLocation();
+    }
 }
 
 function showManualInput() {
