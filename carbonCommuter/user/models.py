@@ -121,6 +121,7 @@ class Profile(models.Model):
         else:
             return True
         
+
 class Follower(models.Model):
     """Represents the following relationship between users
 
@@ -133,3 +134,80 @@ class Follower(models.Model):
 
     class Meta:
         unique_together = ('follower', 'followedUser') #There should only be one 'following' relationship from the first user to the second user.
+        
+        
+
+'''class Badges(models.Model):
+    """Contains the information about the badges a user has achieved.
+
+    Attributes:
+        user (User): A one-to-one relationship with the built in User model.
+        monthLeaderboard (boolean): A boolean value to declare whether the user has the badge or not
+        weekLeaderboard (boolean): A boolean value to declare whether the user has the badge or not
+        topLeaderboard (boolean): A boolean value to declare whether the user has the badge or not
+        amory (boolean): A boolean value to declare whether the user has the badge or not
+        businessSchool (boolean): A boolean value to declare whether the user has the badge or not
+        devonshireHouse (boolean): A boolean value to declare whether the user has the badge or not
+        forum (boolean): A boolean value to declare whether the user has the badge or not
+        harrison (boolean): A boolean value to declare whether the user has the badge or not
+        innovationCentre (boolean): A boolean value to declare whether the user has the badge or not
+        laver (boolean): A boolean value to declare whether the user has the badge or not
+        lsi (boolean): A boolean value to declare whether the user has the badge or not
+        peterChalk (boolean): A boolean value to declare whether the user has the badge or not
+        queens (boolean): A boolean value to declare whether the user has the badge or not
+        sportsPark (boolean): A boolean value to declare whether the user has the badge or not
+        swiot (boolean): A boolean value to declare whether the user has the badge or not
+        washingtonSinger (boolean): A boolean value to declare whether the user has the badge or not
+        sevenDays (boolean): A boolean value to declare whether the user has the badge or not
+        fourteenDays (boolean): A boolean value to declare whether the user has the badge or not
+        thirtyDays (boolean): A boolean value to declare whether the user has the badge or not
+        fiftyDays (boolean): A boolean value to declare whether the user has the badge or not
+        seventyFiveDays (boolean): A boolean value to declare whether the user has the badge or not
+        hundredDays (boolean): A boolean value to declare whether the user has the badge or not
+    """
+    user = models.ForeignKey(User, primary_key=True, on_delete=models.CASCADE, blank=False)
+    #user = models.OneToOneField(User, on_delete=models.CASCADE, blank=False)
+    monthLeaderboard = models.BooleanField(null=False, blank=False, default=False)
+    weekLeaderboard = models.BooleanField(null=False, blank=False, default=False)
+    topLeaderboard = models.BooleanField(null=False, blank=False, default=False)
+    amory = models.BooleanField(null=False, blank=False, default=False)
+    businessSchool = models.BooleanField(null=False, blank=False, default=False)
+    devonshireHouse = models.BooleanField(null=False, blank=False, default=False)
+    forum = models.BooleanField(null=False, blank=False, default=False)
+    harrison = models.BooleanField(null=False, blank=False, default=False)
+    innovationCentre = models.BooleanField(null=False, blank=False, default=False)
+    laver = models.BooleanField(null=False, blank=False, default=False)
+    lsi = models.BooleanField(null=False, blank=False, default=False)
+    peterChalk = models.BooleanField(null=False, blank=False, default=False)
+    queens = models.BooleanField(null=False, blank=False, default=False)
+    sportsPark = models.BooleanField(null=False, blank=False, default=False)
+    swiot = models.BooleanField(null=False, blank=False, default=False)
+    washingtonSinger = models.BooleanField(null=False, blank=False, default=False)
+    sevenDays = models.BooleanField(null=False, blank=False, default=False)
+    fourteenDays = models.BooleanField(null=False, blank=False, default=False)
+    thirtyDays = models.BooleanField(null=False, blank=False, default=False)
+    fiftyDays = models.BooleanField(null=False, blank=False, default=False)
+    seventyFiveDays = models.BooleanField(null=False, blank=False, default=False)
+    hundredDays = models.BooleanField(null=False, blank=False, default=False)
+'''
+
+
+class Badges(models.Model):
+    id = models.AutoField(primary_key=True, auto_created=True, unique=True, default=0)
+    name = models.CharField(max_length=100, blank=False, default="")
+    #description = models.TextField()
+
+class UserBadge(models.Model):
+    id = models.AutoField(primary_key=True, auto_created=True, unique=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    badge = models.ForeignKey(Badges, on_delete=models.CASCADE)
+    #collected = models.BooleanField(default=False)
+    def get_badges(user) -> list:
+        """Gets all the badges one user has achieved
+
+        Returns:
+            list: A list of all badges
+        """
+        badges = UserBadge.objects.all().filter(user=user)
+        print(badges)
+        return badges

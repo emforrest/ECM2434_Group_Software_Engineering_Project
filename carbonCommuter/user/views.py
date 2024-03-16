@@ -17,6 +17,8 @@ import logging
 from datetime import datetime
 
 from user.models import Journey, Follower
+from user.models import Journey
+from user.models import Badges, UserBadge
 from main.models import Location
 from common.travelTypes import TravelType
 from common.utils import get_route, calculate_co2, get_distance_to_campus, format_time_between
@@ -37,10 +39,68 @@ def home(request):
     name = request.user.first_name + " " + request.user.last_name
     co2Saved = request.user.profile.get_total_savings()
     started = request.user.profile.has_active_journey()
+
+    #setting values for opacity to show if user has the badges
+    userBadge = UserBadge.get_badges(request.user)
+    #userBadge = request.userBadge.get_badges()
+    badgesList = []
+    for badge in userBadge:
+        badgeName = Badges.objects.get(id=badge.badge_id).name
+        badgesList.append(badgeName)
+        print(Badges.objects.get(id=badge.badge_id).name)
+    #userBadges = userBadge.get_badges()
+    amoryOpac = determine_opacity("Amory", badgesList)
+    businessSchoolOpac = determine_opacity("Business School - Building One", badgesList)
+    devonshireHouseOpac = determine_opacity("Devonshire House", badgesList)
+    forumOpac = determine_opacity("Forum", badgesList)
+    harrisonOpac = determine_opacity("Harrison", badgesList)
+    innovationCentreOpac = determine_opacity("Innovation Centre", badgesList)
+    laverOpac = determine_opacity("Laver", badgesList)
+    lsiOpac = determine_opacity("Living Systems Institute", badgesList)
+    peterChalkOpac = determine_opacity("Peter Chalk", badgesList)
+    queensOpac = determine_opacity("Queens", badgesList)
+    sportsParkOpac = determine_opacity("Sports Park", badgesList)
+    swiotOpac = determine_opacity("South West Institute of Technology", badgesList)
+    washingtonSinger = determine_opacity("Washington Singer", badgesList)
+    '''sevenDaysOpac = determine_opacity(userBadges.sevenDays)
+    fourteenDaysOpac = determine_opacity(userBadges.fourteenDays)
+    thirtyDaysOpac = determine_opacity(userBadges.thirtyDays)
+    fiftyDaysOpac = determine_opacity(userBadges.fiftyDays)
+    seventyFiveDaysOpac = determine_opacity(userBadges.seventyFiveDays)
+    hundredDaysOpac = determine_opacity(userBadges.hundredDays)'''
+
+
     context = context = {"full_name": name,
                          "co2Saved": co2Saved,
-                         "started": started}
+                         "started": started,
+                         "sevenDaysOpac": 0.15,
+                         "fourteenDaysOpac": 0.15,
+                         "thirtyDaysOpac": 0.15,
+                         "fiftyDaysOpac": 1,
+                         "seventyFiveDaysOpac": 1,
+                         "hundredDaysOpac": 1, 
+                         "amoryOpac": amoryOpac, 
+                         "businessSchoolOpac": businessSchoolOpac, 
+                         "devonshireHouseOpac": devonshireHouseOpac, 
+                         "forumOpac": forumOpac, 
+                         "harrisonOpac": harrisonOpac, 
+                         "innovationCentreOpac": innovationCentreOpac, 
+                         "laverOpac": laverOpac, 
+                         "lsiOpac": lsiOpac, 
+                         "peterChalkOpac": peterChalkOpac,
+                         "queensOpac": queensOpac,
+                         "sportsParkOpac": sportsParkOpac,
+                         "swiotOpac": swiotOpac,
+                         "washingtonSinger": washingtonSinger}
     return render(request, "user/home.html", context)
+
+
+def determine_opacity(badge, badgesList):
+    if badge in badgesList:
+        opacity = 1
+    else:
+        opacity = 0.15
+    return opacity
 
 
 @login_required
@@ -131,7 +191,9 @@ def start_journey(request):
         if distance <= 0.3:
             location = Location.objects.get(name=building)
         else:
-            
+            #set building to None as location not on campus
+            building = None
+
             # Get (or create) a Location object for the specified location if off campus
             try:
                 location = Location.objects.get(address = request.POST.get('address'))
@@ -143,6 +205,10 @@ def start_journey(request):
             except Exception as ex:
                 raise ex
         
+        # add the location badge to the user if location on campus
+        if (building != None):
+            check_location(building, request.user)
+
         # Create a new entry in the journey's table
         journey = Journey(user = request.user,
                           origin = location, 
@@ -189,7 +255,8 @@ def end_journey(request):
         if distance <= 0.3:
             location = Location.objects.get(name=building)
         else:
-            
+            #set building to None as location not on campus
+            building = None
             # Get (or create) a Location object for the specified location if off campus
             try:
                 location = Location.objects.get(address = request.POST.get('address'))
@@ -200,7 +267,11 @@ def end_journey(request):
                 location.save()
             except Exception as ex:
                 raise ex
-            
+        
+        # add the location badge to the user if location on campus
+        if (building != None):
+            check_location(building, request.user)
+
         # Convert the string representation of the transport type to a TravelType object.
         transport = TravelType.from_str(journey.transport)
         if transport is None:
@@ -256,6 +327,7 @@ def journey_created(request, journey_id: int):
         "time_taken": format_time_between(journey.time_finished, journey.time_started)
     }
     return render(request, "user/success.html", context)
+
 
 @login_required
 def profile(request, username:str):
@@ -332,3 +404,71 @@ def follow(request):
 
 
     
+
+def check_location(location, user):
+    """Adding the location badge to the Badges table if the user has travelled to that location.
+
+    Args:
+        location: The location the user has logged, to add as a badge
+        user: The user to be able to get the badges for that specific user
+    """
+    print("location = ", location)
+    badgeLocation = False
+    if location == "Amory":
+        badgeLocation = True
+    elif location == "Business School - Building One":
+        badgeLocation = True
+    elif location == "Devonshire House":
+        badgeLocation = True
+    elif location == "Forum":
+        badgeLocation = True
+    elif location == "Harrison":
+        badgeLocation = True
+    elif location == "Innovation Centre":
+        badgeLocation = True
+    elif location == "Laver":
+        badgeLocation = True
+    elif location == "Living Systems Institute":
+        badgeLocation = True
+    elif location == "Peter Chalk":
+        badgeLocation = True
+    elif location == "Queens":
+        badgeLocation = True
+    elif location == "Sports Park":
+        badgeLocation = True
+    elif location == "South West Institute of Technology":
+        badgeLocation = True
+    elif location == "Washington Singer":
+        badgeLocation = True
+    if badgeLocation:
+        newBadge = UserBadge(user_id=user.id, badge_id=Badges.objects.get(name=location).id)
+        newBadge.save()
+    else:
+        print("Invalid location")
+    '''userBadges = Badges.objects.get(user=user)
+    if location == "Amory":
+        userBadges.amory = True
+    elif location == "BusinessSchool":
+        userBadges.businessSchool = True
+    elif location == "DevonshireHouse":
+        userBadges.devonshireHouse = True
+    elif location == "Forum":
+        userBadges.forum = True
+    elif location == "Harrison":
+        userBadges.harrison = True
+    elif location == "InnovationCentre":
+        userBadges.innovationCentre = True
+    elif location == "Laver":
+        userBadges.laver = True
+    elif location == "LSI":
+        userBadges.lsi = True
+    elif location == "PeterChalk":
+        userBadges.peterChalk = True
+    elif location == "Queens":
+        userBadges.queens = True
+    elif location == "SportsPark":
+        userBadges.sportsPark = True
+    elif location == "Swiot":
+        userBadges.swiot = True
+    elif location == "WashingtonSinger":
+        userBadges.washingtonSinger = True'''
