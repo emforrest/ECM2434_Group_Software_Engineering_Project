@@ -190,3 +190,627 @@
 15-03-2024 11:04:53 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 200 8854
 15-03-2024 11:04:53 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/forum.jpg HTTP/1.1" 200 627536
 15-03-2024 11:05:00 [38;5;25m[INFO][0m django.server: "GET /groups/ HTTP/1.1" 200 3712
+16-03-2024 14:32:33 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+16-03-2024 14:32:51 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 7451
+16-03-2024 14:32:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 200 8755
+16-03-2024 14:32:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/7days.png HTTP/1.1" 200 143056
+16-03-2024 14:32:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/50days.png HTTP/1.1" 200 138645
+16-03-2024 14:32:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/30days.png HTTP/1.1" 200 129224
+16-03-2024 14:32:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/100days.png HTTP/1.1" 200 126404
+16-03-2024 14:32:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/14days.png HTTP/1.1" 200 137526
+16-03-2024 14:32:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/75days.png HTTP/1.1" 200 142434
+16-03-2024 14:32:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/BusinessSchool.png HTTP/1.1" 200 184323
+16-03-2024 14:32:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Forum.png HTTP/1.1" 200 202350
+16-03-2024 14:32:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/InnovationCentre.png HTTP/1.1" 200 186886
+16-03-2024 14:32:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Amory.png HTTP/1.1" 200 190873
+16-03-2024 14:32:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/DevonshireHouse.png HTTP/1.1" 200 196478
+16-03-2024 14:32:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Harrison.png HTTP/1.1" 200 180110
+16-03-2024 14:32:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Laver.png HTTP/1.1" 200 197293
+16-03-2024 14:32:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Queens.png HTTP/1.1" 200 196906
+16-03-2024 14:32:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Swiot.png HTTP/1.1" 200 161776
+16-03-2024 14:32:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/LSI.png HTTP/1.1" 200 206471
+16-03-2024 14:32:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/forum.jpg HTTP/1.1" 200 627536
+16-03-2024 14:32:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/SportsPark.png HTTP/1.1" 200 176504
+16-03-2024 14:32:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/PeterChalk.png HTTP/1.1" 200 182142
+16-03-2024 14:32:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/WashingtonSinger.png HTTP/1.1" 200 209215
+16-03-2024 14:32:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Leaderboard/1weekLeaderboard.png HTTP/1.1" 200 144189
+16-03-2024 14:32:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Leaderboard/TopLeaderboard.png HTTP/1.1" 200 126194
+16-03-2024 14:32:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Leaderboard/1monthLeaderboard.png HTTP/1.1" 200 142964
+16-03-2024 14:33:11 [38;5;25m[INFO][0m django.server: "GET /groups/ HTTP/1.1" 200 4040
+16-03-2024 14:33:11 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 304 0
+16-03-2024 14:33:30 [38;5;9m[ERROR][0m django.request: Internal Server Error: /leaderboard/
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/abihinton/Documents/Uni/Year 2/Group Software Engineering Project/ECM2434_Group_Software_Engineering_Project/carbonCommuter/leaderboard/views.py", line 13, in leaderboard
+    users_profile = Profile.objects.all().order_by("-total_saving")[:10]
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django/db/models/query.py", line 1701, in order_by
+    obj.query.add_ordering(*field_names)
+  File "/opt/homebrew/lib/python3.11/site-packages/django/db/models/sql/query.py", line 2253, in add_ordering
+    self.names_to_path(item.split(LOOKUP_SEP), self.model._meta)
+  File "/opt/homebrew/lib/python3.11/site-packages/django/db/models/sql/query.py", line 1772, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'total_saving' into field. Choices are: active_journey, active_journey_id, id, user, user_id
+16-03-2024 14:33:30 [38;5;9m[ERROR][0m django.server: "GET /leaderboard/ HTTP/1.1" 500 80351
+16-03-2024 14:33:39 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 7451
+16-03-2024 14:33:39 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 304 0
+16-03-2024 14:33:39 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/7days.png HTTP/1.1" 304 0
+16-03-2024 14:33:39 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/14days.png HTTP/1.1" 304 0
+16-03-2024 14:33:39 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/100days.png HTTP/1.1" 304 0
+16-03-2024 14:33:39 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/75days.png HTTP/1.1" 304 0
+16-03-2024 14:33:39 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/30days.png HTTP/1.1" 304 0
+16-03-2024 14:33:39 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Amory.png HTTP/1.1" 304 0
+16-03-2024 14:33:39 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/50days.png HTTP/1.1" 304 0
+16-03-2024 14:33:39 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/BusinessSchool.png HTTP/1.1" 304 0
+16-03-2024 14:33:39 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Harrison.png HTTP/1.1" 304 0
+16-03-2024 14:33:39 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/DevonshireHouse.png HTTP/1.1" 304 0
+16-03-2024 14:33:39 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/LSI.png HTTP/1.1" 304 0
+16-03-2024 14:33:39 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Forum.png HTTP/1.1" 304 0
+16-03-2024 14:33:39 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Laver.png HTTP/1.1" 304 0
+16-03-2024 14:33:39 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/InnovationCentre.png HTTP/1.1" 304 0
+16-03-2024 14:33:39 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Swiot.png HTTP/1.1" 304 0
+16-03-2024 14:33:39 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Leaderboard/TopLeaderboard.png HTTP/1.1" 304 0
+16-03-2024 14:33:39 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/SportsPark.png HTTP/1.1" 304 0
+16-03-2024 14:33:39 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/WashingtonSinger.png HTTP/1.1" 304 0
+16-03-2024 14:33:39 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Queens.png HTTP/1.1" 304 0
+16-03-2024 14:33:39 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/PeterChalk.png HTTP/1.1" 304 0
+16-03-2024 14:33:39 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Leaderboard/1monthLeaderboard.png HTTP/1.1" 304 0
+16-03-2024 14:33:39 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Leaderboard/1weekLeaderboard.png HTTP/1.1" 304 0
+16-03-2024 14:33:43 [38;5;25m[INFO][0m django.server: "GET /user/journeys/create HTTP/1.1" 200 9543
+16-03-2024 14:36:46 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+16-03-2024 14:37:12 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 7451
+16-03-2024 14:37:12 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 304 0
+16-03-2024 14:37:12 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/75days.png HTTP/1.1" 304 0
+16-03-2024 14:37:12 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/50days.png HTTP/1.1" 304 0
+16-03-2024 14:37:12 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/14days.png HTTP/1.1" 304 0
+16-03-2024 14:37:12 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/7days.png HTTP/1.1" 304 0
+16-03-2024 14:37:12 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/100days.png HTTP/1.1" 304 0
+16-03-2024 14:37:12 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/30days.png HTTP/1.1" 304 0
+16-03-2024 14:37:12 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Amory.png HTTP/1.1" 304 0
+16-03-2024 14:37:12 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/BusinessSchool.png HTTP/1.1" 304 0
+16-03-2024 14:37:12 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/InnovationCentre.png HTTP/1.1" 304 0
+16-03-2024 14:37:12 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/DevonshireHouse.png HTTP/1.1" 304 0
+16-03-2024 14:37:12 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Harrison.png HTTP/1.1" 304 0
+16-03-2024 14:37:12 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Laver.png HTTP/1.1" 304 0
+16-03-2024 14:37:12 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Forum.png HTTP/1.1" 304 0
+16-03-2024 14:37:12 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/PeterChalk.png HTTP/1.1" 304 0
+16-03-2024 14:37:12 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/LSI.png HTTP/1.1" 304 0
+16-03-2024 14:37:12 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Queens.png HTTP/1.1" 304 0
+16-03-2024 14:37:12 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/SportsPark.png HTTP/1.1" 304 0
+16-03-2024 14:37:12 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/WashingtonSinger.png HTTP/1.1" 304 0
+16-03-2024 14:37:12 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Swiot.png HTTP/1.1" 304 0
+16-03-2024 14:37:12 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Leaderboard/TopLeaderboard.png HTTP/1.1" 304 0
+16-03-2024 14:37:12 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Leaderboard/1weekLeaderboard.png HTTP/1.1" 304 0
+16-03-2024 14:37:12 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Leaderboard/1monthLeaderboard.png HTTP/1.1" 304 0
+16-03-2024 15:01:34 [38;5;25m[INFO][0m django.utils.autoreload: /Users/abihinton/Documents/Uni/Year 2/Group Software Engineering Project/ECM2434_Group_Software_Engineering_Project/carbonCommuter/user/views.py changed, reloading.
+16-03-2024 15:01:34 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+16-03-2024 15:01:41 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 7451
+16-03-2024 15:01:41 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 304 0
+16-03-2024 15:01:41 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/7days.png HTTP/1.1" 304 0
+16-03-2024 15:01:41 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/14days.png HTTP/1.1" 304 0
+16-03-2024 15:01:41 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/30days.png HTTP/1.1" 304 0
+16-03-2024 15:01:41 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/100days.png HTTP/1.1" 304 0
+16-03-2024 15:01:41 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/75days.png HTTP/1.1" 304 0
+16-03-2024 15:01:41 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/50days.png HTTP/1.1" 304 0
+16-03-2024 15:01:41 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/BusinessSchool.png HTTP/1.1" 304 0
+16-03-2024 15:01:41 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Amory.png HTTP/1.1" 304 0
+16-03-2024 15:01:41 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/DevonshireHouse.png HTTP/1.1" 304 0
+16-03-2024 15:01:41 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Forum.png HTTP/1.1" 304 0
+16-03-2024 15:01:41 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/InnovationCentre.png HTTP/1.1" 304 0
+16-03-2024 15:01:41 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Harrison.png HTTP/1.1" 304 0
+16-03-2024 15:01:41 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Laver.png HTTP/1.1" 304 0
+16-03-2024 15:01:41 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/PeterChalk.png HTTP/1.1" 304 0
+16-03-2024 15:01:41 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/LSI.png HTTP/1.1" 304 0
+16-03-2024 15:01:41 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Queens.png HTTP/1.1" 304 0
+16-03-2024 15:01:41 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/SportsPark.png HTTP/1.1" 304 0
+16-03-2024 15:01:41 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Swiot.png HTTP/1.1" 304 0
+16-03-2024 15:01:41 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/WashingtonSinger.png HTTP/1.1" 304 0
+16-03-2024 15:01:41 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Leaderboard/TopLeaderboard.png HTTP/1.1" 304 0
+16-03-2024 15:01:41 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Leaderboard/1weekLeaderboard.png HTTP/1.1" 304 0
+16-03-2024 15:01:41 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Leaderboard/1monthLeaderboard.png HTTP/1.1" 304 0
+16-03-2024 15:01:45 [38;5;25m[INFO][0m django.server: "GET /user/journeys/create HTTP/1.1" 200 9543
+16-03-2024 15:02:04 [38;5;25m[INFO][0m django.server: "POST /user/journeys/create HTTP/1.1" 302 0
+16-03-2024 15:02:08 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 7449
+16-03-2024 15:02:13 [38;5;25m[INFO][0m django.server: "GET /user/journeys/finish HTTP/1.1" 200 8099
+16-03-2024 15:02:29 [38;5;9m[ERROR][0m django.request: Internal Server Error: /user/journeys/finish
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/abihinton/Documents/Uni/Year 2/Group Software Engineering Project/ECM2434_Group_Software_Engineering_Project/carbonCommuter/user/views.py", line 293, in end_journey
+    pastJourney = Journey.objects.get(user_id=request.user.id)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django/db/models/query.py", line 652, in get
+    raise self.model.MultipleObjectsReturned(
+user.models.Journey.MultipleObjectsReturned: get() returned more than one Journey -- it returned 9!
+16-03-2024 15:02:29 [38;5;9m[ERROR][0m django.server: "POST /user/journeys/finish HTTP/1.1" 500 82051
+16-03-2024 15:04:00 [38;5;25m[INFO][0m django.utils.autoreload: /Users/abihinton/Documents/Uni/Year 2/Group Software Engineering Project/ECM2434_Group_Software_Engineering_Project/carbonCommuter/user/views.py changed, reloading.
+16-03-2024 15:04:00 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+16-03-2024 15:04:22 [38;5;9m[ERROR][0m django.request: Internal Server Error: /user/journeys/finish
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/abihinton/Documents/Uni/Year 2/Group Software Engineering Project/ECM2434_Group_Software_Engineering_Project/carbonCommuter/user/views.py", line 293, in end_journey
+    pastJourney = Journey.objects.all.filter(user_id=request.user.id)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'function' object has no attribute 'filter'
+16-03-2024 15:04:22 [38;5;9m[ERROR][0m django.server: "POST /user/journeys/finish HTTP/1.1" 500 72695
+16-03-2024 15:04:40 [38;5;25m[INFO][0m django.utils.autoreload: /Users/abihinton/Documents/Uni/Year 2/Group Software Engineering Project/ECM2434_Group_Software_Engineering_Project/carbonCommuter/user/views.py changed, reloading.
+16-03-2024 15:04:40 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+16-03-2024 15:04:55 [38;5;25m[INFO][0m django.server: "POST /user/journeys/finish HTTP/1.1" 302 0
+16-03-2024 15:04:57 [38;5;25m[INFO][0m django.server: "GET /user/journeys/17/ HTTP/1.1" 200 2514
+16-03-2024 15:04:57 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 304 0
+16-03-2024 16:21:56 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+16-03-2024 16:22:02 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 7457
+16-03-2024 16:22:02 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 304 0
+16-03-2024 16:22:02 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/7days.png HTTP/1.1" 304 0
+16-03-2024 16:22:02 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/14days.png HTTP/1.1" 304 0
+16-03-2024 16:22:02 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/30days.png HTTP/1.1" 304 0
+16-03-2024 16:22:02 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/50days.png HTTP/1.1" 304 0
+16-03-2024 16:22:02 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/75days.png HTTP/1.1" 304 0
+16-03-2024 16:22:02 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/DevonshireHouse.png HTTP/1.1" 304 0
+16-03-2024 16:22:02 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/BusinessSchool.png HTTP/1.1" 304 0
+16-03-2024 16:22:02 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/100days.png HTTP/1.1" 304 0
+16-03-2024 16:22:02 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Forum.png HTTP/1.1" 304 0
+16-03-2024 16:22:02 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Amory.png HTTP/1.1" 304 0
+16-03-2024 16:22:02 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Harrison.png HTTP/1.1" 304 0
+16-03-2024 16:22:02 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Queens.png HTTP/1.1" 304 0
+16-03-2024 16:22:02 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/PeterChalk.png HTTP/1.1" 304 0
+16-03-2024 16:22:02 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/InnovationCentre.png HTTP/1.1" 304 0
+16-03-2024 16:22:02 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Laver.png HTTP/1.1" 304 0
+16-03-2024 16:22:02 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/SportsPark.png HTTP/1.1" 304 0
+16-03-2024 16:22:02 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/LSI.png HTTP/1.1" 304 0
+16-03-2024 16:22:02 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Swiot.png HTTP/1.1" 304 0
+16-03-2024 16:22:02 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/WashingtonSinger.png HTTP/1.1" 304 0
+16-03-2024 16:22:02 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Leaderboard/1monthLeaderboard.png HTTP/1.1" 304 0
+16-03-2024 16:22:02 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Leaderboard/TopLeaderboard.png HTTP/1.1" 304 0
+16-03-2024 16:22:02 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Leaderboard/1weekLeaderboard.png HTTP/1.1" 304 0
+16-03-2024 16:22:08 [38;5;25m[INFO][0m django.server: "GET /user/journeys/create HTTP/1.1" 200 9543
+16-03-2024 16:22:23 [38;5;9m[ERROR][0m django.request: Internal Server Error: /user/journeys/create
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/abihinton/Documents/Uni/Year 2/Group Software Engineering Project/ECM2434_Group_Software_Engineering_Project/carbonCommuter/user/views.py", line 210, in start_journey
+    check_location(building, request.user)
+  File "/Users/abihinton/Documents/Uni/Year 2/Group Software Engineering Project/ECM2434_Group_Software_Engineering_Project/carbonCommuter/user/views.py", line 450, in check_location
+    if not UserBadge.objects.get(user_id=user.id, badge_id=badgeID).exists():
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django/db/models/query.py", line 649, in get
+    raise self.model.DoesNotExist(
+user.models.UserBadge.DoesNotExist: UserBadge matching query does not exist.
+16-03-2024 16:22:23 [38;5;9m[ERROR][0m django.server: "POST /user/journeys/create HTTP/1.1" 500 85299
+16-03-2024 16:23:08 [38;5;25m[INFO][0m django.utils.autoreload: /Users/abihinton/Documents/Uni/Year 2/Group Software Engineering Project/ECM2434_Group_Software_Engineering_Project/carbonCommuter/user/views.py changed, reloading.
+16-03-2024 16:23:09 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+16-03-2024 16:23:25 [38;5;25m[INFO][0m django.server: "POST /user/journeys/create HTTP/1.1" 302 0
+16-03-2024 16:23:27 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 7452
+16-03-2024 16:23:49 [38;5;25m[INFO][0m django.server: "GET /user/journeys/finish HTTP/1.1" 200 8099
+16-03-2024 16:23:59 [38;5;9m[ERROR][0m django.request: Internal Server Error: /user/journeys/finish
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/abihinton/Documents/Uni/Year 2/Group Software Engineering Project/ECM2434_Group_Software_Engineering_Project/carbonCommuter/user/views.py", line 281, in end_journey
+    distance, time = get_route(journey.origin.lat, journey.origin.lng, location.lat, location.lng, transport)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/abihinton/Documents/Uni/Year 2/Group Software Engineering Project/ECM2434_Group_Software_Engineering_Project/carbonCommuter/common/utils.py", line 130, in get_route
+    distance = result[0]['distanceMeters'] / 1000
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^^
+KeyError: 'distanceMeters'
+16-03-2024 16:23:59 [38;5;9m[ERROR][0m django.server: "POST /user/journeys/finish HTTP/1.1" 500 78793
+16-03-2024 16:25:28 [38;5;9m[ERROR][0m django.request: Internal Server Error: /user/journeys/finish
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/abihinton/Documents/Uni/Year 2/Group Software Engineering Project/ECM2434_Group_Software_Engineering_Project/carbonCommuter/user/views.py", line 281, in end_journey
+    distance, time = get_route(journey.origin.lat, journey.origin.lng, location.lat, location.lng, transport)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/abihinton/Documents/Uni/Year 2/Group Software Engineering Project/ECM2434_Group_Software_Engineering_Project/carbonCommuter/common/utils.py", line 130, in get_route
+    distance = result[0]['distanceMeters'] / 1000
+               ~~~~~~~~~^^^^^^^^^^^^^^^^^^
+KeyError: 'distanceMeters'
+16-03-2024 16:25:28 [38;5;9m[ERROR][0m django.server: "POST /user/journeys/finish HTTP/1.1" 500 78862
+16-03-2024 16:26:00 [38;5;25m[INFO][0m django.server: "POST /user/journeys/finish HTTP/1.1" 302 0
+16-03-2024 16:26:02 [38;5;25m[INFO][0m django.server: "GET /user/journeys/18/ HTTP/1.1" 200 2507
+16-03-2024 16:28:39 [38;5;25m[INFO][0m django.utils.autoreload: /Users/abihinton/Documents/Uni/Year 2/Group Software Engineering Project/ECM2434_Group_Software_Engineering_Project/carbonCommuter/user/views.py changed, reloading.
+16-03-2024 16:28:40 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+16-03-2024 16:29:12 [38;5;25m[INFO][0m django.utils.autoreload: /Users/abihinton/Documents/Uni/Year 2/Group Software Engineering Project/ECM2434_Group_Software_Engineering_Project/carbonCommuter/user/views.py changed, reloading.
+16-03-2024 16:29:13 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+16-03-2024 16:29:18 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 7451
+16-03-2024 16:29:22 [38;5;25m[INFO][0m django.server: "GET /user/journeys/create HTTP/1.1" 200 9543
+16-03-2024 16:29:34 [38;5;25m[INFO][0m django.server: "POST /user/journeys/create HTTP/1.1" 302 0
+16-03-2024 16:29:37 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 7449
+16-03-2024 16:29:46 [38;5;25m[INFO][0m django.server: "GET /user/journeys/finish HTTP/1.1" 200 8099
+16-03-2024 16:29:58 [38;5;9m[ERROR][0m django.request: Internal Server Error: /user/journeys/finish
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/abihinton/Documents/Uni/Year 2/Group Software Engineering Project/ECM2434_Group_Software_Engineering_Project/carbonCommuter/user/views.py", line 293, in end_journey
+    pastJourney = Journey.objects.all().filter(user_id=request.user.id)[-1]
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django/db/models/query.py", line 431, in __getitem__
+    raise ValueError("Negative indexing is not supported.")
+ValueError: Negative indexing is not supported.
+16-03-2024 16:29:58 [38;5;9m[ERROR][0m django.server: "POST /user/journeys/finish HTTP/1.1" 500 76634
+16-03-2024 16:30:09 [38;5;25m[INFO][0m django.utils.autoreload: /Users/abihinton/Documents/Uni/Year 2/Group Software Engineering Project/ECM2434_Group_Software_Engineering_Project/carbonCommuter/user/views.py changed, reloading.
+16-03-2024 16:30:10 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+16-03-2024 16:30:21 [38;5;9m[ERROR][0m django.request: Internal Server Error: /user/journeys/finish
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/abihinton/Documents/Uni/Year 2/Group Software Engineering Project/ECM2434_Group_Software_Engineering_Project/carbonCommuter/user/views.py", line 254, in end_journey
+    building, distance = get_distance_to_campus(float(request.POST.get('lat')), float(request.POST.get('long')))
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: could not convert string to float: ''
+16-03-2024 16:30:21 [38;5;9m[ERROR][0m django.server: "POST /user/journeys/finish HTTP/1.1" 500 71771
+16-03-2024 16:30:35 [38;5;25m[INFO][0m django.server: "POST /user/journeys/finish HTTP/1.1" 302 0
+16-03-2024 16:30:37 [38;5;25m[INFO][0m django.server: "GET /user/journeys/19/ HTTP/1.1" 200 2512
+16-03-2024 16:31:41 [38;5;25m[INFO][0m django.utils.autoreload: /Users/abihinton/Documents/Uni/Year 2/Group Software Engineering Project/ECM2434_Group_Software_Engineering_Project/carbonCommuter/user/views.py changed, reloading.
+16-03-2024 16:31:41 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+16-03-2024 16:31:48 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 7451
+16-03-2024 16:31:52 [38;5;25m[INFO][0m django.server: "GET /user/journeys/create HTTP/1.1" 200 9543
+16-03-2024 16:32:03 [38;5;25m[INFO][0m django.server: "POST /user/journeys/create HTTP/1.1" 302 0
+16-03-2024 16:32:06 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 7449
+16-03-2024 16:32:10 [38;5;25m[INFO][0m django.server: "GET /user/journeys/finish HTTP/1.1" 200 8099
+16-03-2024 16:32:24 [38;5;9m[ERROR][0m django.request: Internal Server Error: /user/journeys/finish
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/abihinton/Documents/Uni/Year 2/Group Software Engineering Project/ECM2434_Group_Software_Engineering_Project/carbonCommuter/user/views.py", line 294, in end_journey
+    pastJourney = Journey.objects.latest(user_id=request.user.id)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: QuerySet.latest() got an unexpected keyword argument 'user_id'
+16-03-2024 16:32:24 [38;5;9m[ERROR][0m django.server: "POST /user/journeys/finish HTTP/1.1" 500 76737
+16-03-2024 16:33:07 [38;5;25m[INFO][0m django.utils.autoreload: /Users/abihinton/Documents/Uni/Year 2/Group Software Engineering Project/ECM2434_Group_Software_Engineering_Project/carbonCommuter/user/views.py changed, reloading.
+16-03-2024 16:33:07 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+16-03-2024 16:33:34 [38;5;25m[INFO][0m django.server: "POST /user/journeys/finish HTTP/1.1" 302 0
+16-03-2024 16:33:36 [38;5;25m[INFO][0m django.server: "GET /user/journeys/20/ HTTP/1.1" 200 2512
+16-03-2024 16:33:36 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 304 0
+16-03-2024 16:42:11 [38;5;25m[INFO][0m django.utils.autoreload: /Users/abihinton/Documents/Uni/Year 2/Group Software Engineering Project/ECM2434_Group_Software_Engineering_Project/carbonCommuter/user/views.py changed, reloading.
+16-03-2024 16:42:11 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+16-03-2024 16:42:17 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 7451
+16-03-2024 16:42:17 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/14days.png HTTP/1.1" 304 0
+16-03-2024 16:42:17 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/7days.png HTTP/1.1" 304 0
+16-03-2024 16:42:17 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/30days.png HTTP/1.1" 304 0
+16-03-2024 16:42:17 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/50days.png HTTP/1.1" 304 0
+16-03-2024 16:42:17 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Forum.png HTTP/1.1" 304 0
+16-03-2024 16:42:17 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/75days.png HTTP/1.1" 304 0
+16-03-2024 16:42:17 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/100days.png HTTP/1.1" 304 0
+16-03-2024 16:42:17 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Harrison.png HTTP/1.1" 304 0
+16-03-2024 16:42:17 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/DevonshireHouse.png HTTP/1.1" 304 0
+16-03-2024 16:42:17 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/BusinessSchool.png HTTP/1.1" 304 0
+16-03-2024 16:42:17 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Amory.png HTTP/1.1" 304 0
+16-03-2024 16:42:17 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/InnovationCentre.png HTTP/1.1" 304 0
+16-03-2024 16:42:17 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Laver.png HTTP/1.1" 304 0
+16-03-2024 16:42:17 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/PeterChalk.png HTTP/1.1" 304 0
+16-03-2024 16:42:17 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/WashingtonSinger.png HTTP/1.1" 304 0
+16-03-2024 16:42:17 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/LSI.png HTTP/1.1" 304 0
+16-03-2024 16:42:17 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Swiot.png HTTP/1.1" 304 0
+16-03-2024 16:42:17 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Queens.png HTTP/1.1" 304 0
+16-03-2024 16:42:17 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/SportsPark.png HTTP/1.1" 304 0
+16-03-2024 16:42:17 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Leaderboard/TopLeaderboard.png HTTP/1.1" 304 0
+16-03-2024 16:42:17 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Leaderboard/1weekLeaderboard.png HTTP/1.1" 304 0
+16-03-2024 16:42:17 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Leaderboard/1monthLeaderboard.png HTTP/1.1" 304 0
+16-03-2024 16:42:21 [38;5;25m[INFO][0m django.server: "GET /user/journeys/create HTTP/1.1" 200 9543
+16-03-2024 16:42:33 [38;5;25m[INFO][0m django.server: "POST /user/journeys/create HTTP/1.1" 302 0
+16-03-2024 16:42:36 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 7449
+16-03-2024 16:42:39 [38;5;25m[INFO][0m django.server: "GET /user/journeys/finish HTTP/1.1" 200 8099
+16-03-2024 16:42:52 [38;5;9m[ERROR][0m django.request: Internal Server Error: /user/journeys/finish
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/abihinton/Documents/Uni/Year 2/Group Software Engineering Project/ECM2434_Group_Software_Engineering_Project/carbonCommuter/user/views.py", line 299, in end_journey
+    print("difference: ", pastJourneyDate-dateNow, "\n")
+                          ~~~~~~~~~~~~~~~^~~~~~~~
+TypeError: can't subtract offset-naive and offset-aware datetimes
+16-03-2024 16:42:52 [38;5;9m[ERROR][0m django.server: "POST /user/journeys/finish HTTP/1.1" 500 73999
+16-03-2024 16:43:32 [38;5;25m[INFO][0m django.utils.autoreload: /Users/abihinton/Documents/Uni/Year 2/Group Software Engineering Project/ECM2434_Group_Software_Engineering_Project/carbonCommuter/user/views.py changed, reloading.
+16-03-2024 16:43:32 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+16-03-2024 16:43:45 [38;5;9m[ERROR][0m django.request: Internal Server Error: /user/journeys/finish
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/abihinton/Documents/Uni/Year 2/Group Software Engineering Project/ECM2434_Group_Software_Engineering_Project/carbonCommuter/user/views.py", line 299, in end_journey
+    print("difference: ", str(pastJourneyDate-dateNow), "\n")
+                              ~~~~~~~~~~~~~~~^~~~~~~~
+TypeError: can't subtract offset-naive and offset-aware datetimes
+16-03-2024 16:43:45 [38;5;9m[ERROR][0m django.server: "POST /user/journeys/finish HTTP/1.1" 500 74017
+16-03-2024 16:45:43 [38;5;25m[INFO][0m django.utils.autoreload: /Users/abihinton/Documents/Uni/Year 2/Group Software Engineering Project/ECM2434_Group_Software_Engineering_Project/carbonCommuter/user/views.py changed, reloading.
+16-03-2024 16:45:43 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+16-03-2024 16:45:56 [38;5;25m[INFO][0m django.server: "POST /user/journeys/finish HTTP/1.1" 302 0
+16-03-2024 16:45:58 [38;5;25m[INFO][0m django.server: "GET /user/journeys/21/ HTTP/1.1" 200 2513
+16-03-2024 16:45:58 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 304 0
+16-03-2024 16:48:21 [38;5;25m[INFO][0m django.utils.autoreload: /Users/abihinton/Documents/Uni/Year 2/Group Software Engineering Project/ECM2434_Group_Software_Engineering_Project/carbonCommuter/user/views.py changed, reloading.
+16-03-2024 16:48:22 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+16-03-2024 16:48:30 [38;5;25m[INFO][0m django.utils.autoreload: /Users/abihinton/Documents/Uni/Year 2/Group Software Engineering Project/ECM2434_Group_Software_Engineering_Project/carbonCommuter/user/views.py changed, reloading.
+16-03-2024 16:48:30 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+16-03-2024 16:48:36 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 7451
+16-03-2024 16:48:40 [38;5;25m[INFO][0m django.server: "GET /user/journeys/create HTTP/1.1" 200 9543
+16-03-2024 16:48:51 [38;5;25m[INFO][0m django.server: "POST /user/journeys/create HTTP/1.1" 302 0
+16-03-2024 16:48:54 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 7449
+16-03-2024 16:48:58 [38;5;25m[INFO][0m django.server: "GET /user/journeys/finish HTTP/1.1" 200 8099
+16-03-2024 16:49:11 [38;5;25m[INFO][0m django.server: "POST /user/journeys/finish HTTP/1.1" 302 0
+16-03-2024 16:49:13 [38;5;25m[INFO][0m django.server: "GET /user/journeys/22/ HTTP/1.1" 200 2512
+16-03-2024 16:51:04 [38;5;25m[INFO][0m django.utils.autoreload: /Users/abihinton/Documents/Uni/Year 2/Group Software Engineering Project/ECM2434_Group_Software_Engineering_Project/carbonCommuter/user/views.py changed, reloading.
+16-03-2024 16:51:04 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+16-03-2024 16:51:09 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 7451
+16-03-2024 16:51:09 [38;5;25m[INFO][0m django.server: - Broken pipe from ('127.0.0.1', 56790)
+16-03-2024 16:51:12 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 7451
+16-03-2024 16:51:19 [38;5;25m[INFO][0m django.server: "GET /user/journeys/create HTTP/1.1" 200 9543
+16-03-2024 16:51:32 [38;5;25m[INFO][0m django.server: "POST /user/journeys/create HTTP/1.1" 302 0
+16-03-2024 16:51:35 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 7449
+16-03-2024 16:51:40 [38;5;25m[INFO][0m django.server: "GET /user/journeys/finish HTTP/1.1" 200 8099
+16-03-2024 16:51:50 [38;5;25m[INFO][0m django.server: "POST /user/journeys/finish HTTP/1.1" 302 0
+16-03-2024 16:51:52 [38;5;25m[INFO][0m django.server: "GET /user/journeys/23/ HTTP/1.1" 200 2512
+16-03-2024 17:05:29 [38;5;25m[INFO][0m django.utils.autoreload: /Users/abihinton/Documents/Uni/Year 2/Group Software Engineering Project/ECM2434_Group_Software_Engineering_Project/carbonCommuter/user/views.py changed, reloading.
+16-03-2024 17:05:29 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+16-03-2024 17:05:39 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 7451
+16-03-2024 17:05:39 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/7days.png HTTP/1.1" 304 0
+16-03-2024 17:05:39 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 304 0
+16-03-2024 17:05:39 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/30days.png HTTP/1.1" 304 0
+16-03-2024 17:05:39 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/14days.png HTTP/1.1" 304 0
+16-03-2024 17:05:39 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/75days.png HTTP/1.1" 304 0
+16-03-2024 17:05:39 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Amory.png HTTP/1.1" 304 0
+16-03-2024 17:05:39 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/50days.png HTTP/1.1" 304 0
+16-03-2024 17:05:39 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/DevonshireHouse.png HTTP/1.1" 304 0
+16-03-2024 17:05:39 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/BusinessSchool.png HTTP/1.1" 304 0
+16-03-2024 17:05:39 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/100days.png HTTP/1.1" 304 0
+16-03-2024 17:05:39 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Forum.png HTTP/1.1" 304 0
+16-03-2024 17:05:39 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/PeterChalk.png HTTP/1.1" 304 0
+16-03-2024 17:05:39 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Harrison.png HTTP/1.1" 304 0
+16-03-2024 17:05:39 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/LSI.png HTTP/1.1" 304 0
+16-03-2024 17:05:39 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/InnovationCentre.png HTTP/1.1" 304 0
+16-03-2024 17:05:39 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Laver.png HTTP/1.1" 304 0
+16-03-2024 17:05:39 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Queens.png HTTP/1.1" 304 0
+16-03-2024 17:05:39 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Leaderboard/TopLeaderboard.png HTTP/1.1" 304 0
+16-03-2024 17:05:39 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/WashingtonSinger.png HTTP/1.1" 304 0
+16-03-2024 17:05:39 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Swiot.png HTTP/1.1" 304 0
+16-03-2024 17:05:39 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/SportsPark.png HTTP/1.1" 304 0
+16-03-2024 17:05:39 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Leaderboard/1monthLeaderboard.png HTTP/1.1" 304 0
+16-03-2024 17:05:39 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Leaderboard/1weekLeaderboard.png HTTP/1.1" 304 0
+16-03-2024 17:05:45 [38;5;25m[INFO][0m django.server: "GET /user/journeys/create HTTP/1.1" 200 9543
+16-03-2024 17:06:00 [38;5;25m[INFO][0m django.server: "POST /user/journeys/create HTTP/1.1" 302 0
+16-03-2024 17:06:03 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 7449
+16-03-2024 17:06:08 [38;5;25m[INFO][0m django.server: "GET /user/journeys/finish HTTP/1.1" 200 8099
+16-03-2024 17:06:20 [38;5;25m[INFO][0m django.server: "POST /user/journeys/finish HTTP/1.1" 302 0
+16-03-2024 17:06:22 [38;5;25m[INFO][0m django.server: "GET /user/journeys/24/ HTTP/1.1" 200 2512
+16-03-2024 17:09:48 [38;5;25m[INFO][0m django.utils.autoreload: /Users/abihinton/Documents/Uni/Year 2/Group Software Engineering Project/ECM2434_Group_Software_Engineering_Project/carbonCommuter/user/views.py changed, reloading.
+16-03-2024 17:09:48 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+16-03-2024 17:10:21 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 7451
+16-03-2024 17:10:26 [38;5;25m[INFO][0m django.server: "GET /user/journeys/create HTTP/1.1" 200 9543
+16-03-2024 17:10:40 [38;5;25m[INFO][0m django.server: "POST /user/journeys/create HTTP/1.1" 302 0
+16-03-2024 17:10:43 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 7449
+16-03-2024 17:10:47 [38;5;25m[INFO][0m django.server: "GET /user/journeys/finish HTTP/1.1" 200 8099
+16-03-2024 17:10:59 [38;5;25m[INFO][0m django.server: "POST /user/journeys/finish HTTP/1.1" 302 0
+16-03-2024 17:11:01 [38;5;25m[INFO][0m django.server: "GET /user/journeys/25/ HTTP/1.1" 200 2512
+16-03-2024 17:11:06 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 7451
+16-03-2024 17:43:22 [38;5;25m[INFO][0m django.utils.autoreload: /Users/abihinton/Documents/Uni/Year 2/Group Software Engineering Project/ECM2434_Group_Software_Engineering_Project/carbonCommuter/user/views.py changed, reloading.
+16-03-2024 17:43:22 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+16-03-2024 17:43:29 [38;5;25m[INFO][0m django.server: "GET /user/journeys/create HTTP/1.1" 200 9543
+16-03-2024 17:43:29 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 304 0
+16-03-2024 17:43:43 [38;5;25m[INFO][0m django.server: "POST /user/journeys/create HTTP/1.1" 302 0
+16-03-2024 17:43:46 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 7449
+16-03-2024 17:43:46 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/7days.png HTTP/1.1" 304 0
+16-03-2024 17:43:46 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/14days.png HTTP/1.1" 304 0
+16-03-2024 17:43:46 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/30days.png HTTP/1.1" 304 0
+16-03-2024 17:43:46 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/50days.png HTTP/1.1" 304 0
+16-03-2024 17:43:46 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/75days.png HTTP/1.1" 304 0
+16-03-2024 17:43:46 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/BusinessSchool.png HTTP/1.1" 304 0
+16-03-2024 17:43:46 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/100days.png HTTP/1.1" 304 0
+16-03-2024 17:43:46 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Amory.png HTTP/1.1" 304 0
+16-03-2024 17:43:46 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/DevonshireHouse.png HTTP/1.1" 304 0
+16-03-2024 17:43:46 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Forum.png HTTP/1.1" 304 0
+16-03-2024 17:43:46 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/InnovationCentre.png HTTP/1.1" 304 0
+16-03-2024 17:43:46 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Harrison.png HTTP/1.1" 304 0
+16-03-2024 17:43:46 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/LSI.png HTTP/1.1" 304 0
+16-03-2024 17:43:46 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Laver.png HTTP/1.1" 304 0
+16-03-2024 17:43:46 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/PeterChalk.png HTTP/1.1" 304 0
+16-03-2024 17:43:46 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/SportsPark.png HTTP/1.1" 304 0
+16-03-2024 17:43:46 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Queens.png HTTP/1.1" 304 0
+16-03-2024 17:43:46 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Swiot.png HTTP/1.1" 304 0
+16-03-2024 17:43:46 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/WashingtonSinger.png HTTP/1.1" 304 0
+16-03-2024 17:43:46 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Leaderboard/TopLeaderboard.png HTTP/1.1" 304 0
+16-03-2024 17:43:46 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Leaderboard/1weekLeaderboard.png HTTP/1.1" 304 0
+16-03-2024 17:43:46 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Leaderboard/1monthLeaderboard.png HTTP/1.1" 304 0
+16-03-2024 17:43:52 [38;5;25m[INFO][0m django.server: "GET /user/journeys/finish HTTP/1.1" 200 8099
+16-03-2024 17:44:05 [38;5;25m[INFO][0m django.server: "POST /user/journeys/finish HTTP/1.1" 302 0
+16-03-2024 17:44:07 [38;5;25m[INFO][0m django.server: "GET /user/journeys/26/ HTTP/1.1" 200 2506
+16-03-2024 17:46:47 [38;5;25m[INFO][0m django.utils.autoreload: /Users/abihinton/Documents/Uni/Year 2/Group Software Engineering Project/ECM2434_Group_Software_Engineering_Project/carbonCommuter/user/views.py changed, reloading.
+16-03-2024 17:46:47 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+16-03-2024 17:46:54 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 7465
+16-03-2024 17:46:58 [38;5;25m[INFO][0m django.server: "GET /user/journeys/create HTTP/1.1" 200 9543
+16-03-2024 17:47:09 [38;5;25m[INFO][0m django.server: "POST /user/journeys/create HTTP/1.1" 302 0
+16-03-2024 17:47:12 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 7463
+16-03-2024 17:47:17 [38;5;25m[INFO][0m django.server: "GET /user/journeys/finish HTTP/1.1" 200 8099
+16-03-2024 17:47:29 [38;5;25m[INFO][0m django.server: "POST /user/journeys/finish HTTP/1.1" 302 0
+16-03-2024 17:47:31 [38;5;25m[INFO][0m django.server: "GET /user/journeys/27/ HTTP/1.1" 200 2512
+16-03-2024 17:50:02 [38;5;25m[INFO][0m django.utils.autoreload: /Users/abihinton/Documents/Uni/Year 2/Group Software Engineering Project/ECM2434_Group_Software_Engineering_Project/carbonCommuter/user/views.py changed, reloading.
+16-03-2024 17:50:03 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+16-03-2024 17:50:08 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 7465
+16-03-2024 17:50:12 [38;5;25m[INFO][0m django.server: "GET /user/journeys/create HTTP/1.1" 200 9543
+16-03-2024 17:50:22 [38;5;25m[INFO][0m django.server: "POST /user/journeys/create HTTP/1.1" 302 0
+16-03-2024 17:50:25 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 7463
+16-03-2024 17:50:30 [38;5;25m[INFO][0m django.server: "GET /user/journeys/finish HTTP/1.1" 200 8099
+16-03-2024 17:50:42 [38;5;25m[INFO][0m django.server: "POST /user/journeys/finish HTTP/1.1" 302 0
+16-03-2024 17:50:44 [38;5;25m[INFO][0m django.server: "GET /user/journeys/28/ HTTP/1.1" 200 2512
+16-03-2024 17:51:20 [38;5;25m[INFO][0m django.utils.autoreload: /Users/abihinton/Documents/Uni/Year 2/Group Software Engineering Project/ECM2434_Group_Software_Engineering_Project/carbonCommuter/user/views.py changed, reloading.
+16-03-2024 17:51:20 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+16-03-2024 17:51:25 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 7465
+16-03-2024 17:51:25 [38;5;25m[INFO][0m django.server: - Broken pipe from ('127.0.0.1', 57383)
+16-03-2024 17:51:26 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 7465
+16-03-2024 17:51:30 [38;5;25m[INFO][0m django.server: "GET /user/journeys/create HTTP/1.1" 200 9543
+16-03-2024 17:51:42 [38;5;25m[INFO][0m django.server: "POST /user/journeys/create HTTP/1.1" 302 0
+16-03-2024 17:51:45 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 7463
+16-03-2024 17:51:49 [38;5;25m[INFO][0m django.server: "GET /user/journeys/finish HTTP/1.1" 200 8099
+16-03-2024 17:52:01 [38;5;25m[INFO][0m django.server: "POST /user/journeys/finish HTTP/1.1" 302 0
+16-03-2024 17:52:03 [38;5;25m[INFO][0m django.server: "GET /user/journeys/29/ HTTP/1.1" 200 2512
+16-03-2024 17:53:58 [38;5;25m[INFO][0m django.utils.autoreload: /Users/abihinton/Documents/Uni/Year 2/Group Software Engineering Project/ECM2434_Group_Software_Engineering_Project/carbonCommuter/user/views.py changed, reloading.
+16-03-2024 17:53:58 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+16-03-2024 17:54:06 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 7465
+16-03-2024 17:54:09 [38;5;25m[INFO][0m django.server: "GET /user/journeys/create HTTP/1.1" 200 9543
+16-03-2024 17:54:20 [38;5;25m[INFO][0m django.server: "POST /user/journeys/create HTTP/1.1" 302 0
+16-03-2024 17:54:23 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 7463
+16-03-2024 17:54:28 [38;5;25m[INFO][0m django.server: "GET /user/journeys/finish HTTP/1.1" 200 8099
+16-03-2024 17:54:37 [38;5;9m[ERROR][0m django.request: Internal Server Error: /user/journeys/finish
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/abihinton/Documents/Uni/Year 2/Group Software Engineering Project/ECM2434_Group_Software_Engineering_Project/carbonCommuter/user/views.py", line 254, in end_journey
+    building, distance = get_distance_to_campus(float(request.POST.get('lat')), float(request.POST.get('long')))
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: could not convert string to float: ''
+16-03-2024 17:54:37 [38;5;9m[ERROR][0m django.server: "POST /user/journeys/finish HTTP/1.1" 500 71775
+16-03-2024 17:54:37 [38;5;25m[INFO][0m django.server: - Broken pipe from ('127.0.0.1', 57544)
+16-03-2024 17:54:39 [38;5;9m[ERROR][0m django.request: Internal Server Error: /user/journeys/finish
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/django/contrib/auth/decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/abihinton/Documents/Uni/Year 2/Group Software Engineering Project/ECM2434_Group_Software_Engineering_Project/carbonCommuter/user/views.py", line 298, in end_journey
+    for pastJourney in range(pastJourneys, -1, -1):
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'QuerySet' object cannot be interpreted as an integer
+16-03-2024 17:54:39 [38;5;9m[ERROR][0m django.server: "POST /user/journeys/finish HTTP/1.1" 500 74293
+16-03-2024 17:55:51 [38;5;25m[INFO][0m django.utils.autoreload: /Users/abihinton/Documents/Uni/Year 2/Group Software Engineering Project/ECM2434_Group_Software_Engineering_Project/carbonCommuter/user/views.py changed, reloading.
+16-03-2024 17:55:51 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+16-03-2024 17:56:07 [38;5;25m[INFO][0m django.server: "POST /user/journeys/finish HTTP/1.1" 302 0
+16-03-2024 17:56:09 [38;5;25m[INFO][0m django.server: "GET /user/journeys/30/ HTTP/1.1" 200 2512
+16-03-2024 17:58:44 [38;5;25m[INFO][0m django.utils.autoreload: /Users/abihinton/Documents/Uni/Year 2/Group Software Engineering Project/ECM2434_Group_Software_Engineering_Project/carbonCommuter/user/views.py changed, reloading.
+16-03-2024 17:58:44 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+16-03-2024 18:11:32 [38;5;25m[INFO][0m django.utils.autoreload: /Users/abihinton/Documents/Uni/Year 2/Group Software Engineering Project/ECM2434_Group_Software_Engineering_Project/carbonCommuter/user/views.py changed, reloading.
+16-03-2024 18:11:32 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+16-03-2024 18:13:40 [38;5;25m[INFO][0m django.utils.autoreload: /Users/abihinton/Documents/Uni/Year 2/Group Software Engineering Project/ECM2434_Group_Software_Engineering_Project/carbonCommuter/user/views.py changed, reloading.
+16-03-2024 18:13:40 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+16-03-2024 18:16:52 [38;5;25m[INFO][0m django.utils.autoreload: /Users/abihinton/Documents/Uni/Year 2/Group Software Engineering Project/ECM2434_Group_Software_Engineering_Project/carbonCommuter/user/views.py changed, reloading.
+16-03-2024 18:16:52 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+16-03-2024 18:18:09 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 7474
+16-03-2024 18:18:09 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 304 0
+16-03-2024 18:18:09 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/7days.png HTTP/1.1" 304 0
+16-03-2024 18:18:09 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/14days.png HTTP/1.1" 304 0
+16-03-2024 18:18:09 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/30days.png HTTP/1.1" 304 0
+16-03-2024 18:18:09 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/50days.png HTTP/1.1" 304 0
+16-03-2024 18:18:09 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/100days.png HTTP/1.1" 304 0
+16-03-2024 18:18:09 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/75days.png HTTP/1.1" 304 0
+16-03-2024 18:18:09 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Amory.png HTTP/1.1" 304 0
+16-03-2024 18:18:09 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/DevonshireHouse.png HTTP/1.1" 304 0
+16-03-2024 18:18:09 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/BusinessSchool.png HTTP/1.1" 304 0
+16-03-2024 18:18:09 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Harrison.png HTTP/1.1" 304 0
+16-03-2024 18:18:09 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Forum.png HTTP/1.1" 304 0
+16-03-2024 18:18:09 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Laver.png HTTP/1.1" 304 0
+16-03-2024 18:18:09 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/InnovationCentre.png HTTP/1.1" 304 0
+16-03-2024 18:18:09 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/LSI.png HTTP/1.1" 304 0
+16-03-2024 18:18:09 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/PeterChalk.png HTTP/1.1" 304 0
+16-03-2024 18:18:09 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/SportsPark.png HTTP/1.1" 304 0
+16-03-2024 18:18:09 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Queens.png HTTP/1.1" 304 0
+16-03-2024 18:18:09 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Leaderboard/TopLeaderboard.png HTTP/1.1" 304 0
+16-03-2024 18:18:09 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Swiot.png HTTP/1.1" 304 0
+16-03-2024 18:18:09 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/WashingtonSinger.png HTTP/1.1" 304 0
+16-03-2024 18:18:09 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Leaderboard/1weekLeaderboard.png HTTP/1.1" 304 0
+16-03-2024 18:18:09 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Leaderboard/1monthLeaderboard.png HTTP/1.1" 304 0
+16-03-2024 18:18:13 [38;5;25m[INFO][0m django.server: "GET /user/journeys/create HTTP/1.1" 200 9543
+16-03-2024 18:18:28 [38;5;25m[INFO][0m django.server: "POST /user/journeys/create HTTP/1.1" 302 0
+16-03-2024 18:18:31 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 7472
+16-03-2024 18:18:35 [38;5;25m[INFO][0m django.server: "GET /user/journeys/finish HTTP/1.1" 200 8099
+16-03-2024 18:18:46 [38;5;25m[INFO][0m django.server: "POST /user/journeys/finish HTTP/1.1" 302 0
+16-03-2024 18:18:48 [38;5;25m[INFO][0m django.server: "GET /user/journeys/31/ HTTP/1.1" 200 2512
+16-03-2024 18:18:54 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 7474
+16-03-2024 18:19:33 [38;5;25m[INFO][0m django.server: "GET /user/journeys/create HTTP/1.1" 200 9543
+16-03-2024 18:19:45 [38;5;25m[INFO][0m django.server: "POST /user/journeys/create HTTP/1.1" 302 0
+16-03-2024 18:19:48 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 7472
+16-03-2024 18:19:52 [38;5;25m[INFO][0m django.server: "GET /user/journeys/finish HTTP/1.1" 200 8099
+16-03-2024 18:20:04 [38;5;25m[INFO][0m django.server: "POST /user/journeys/finish HTTP/1.1" 302 0
+16-03-2024 18:20:06 [38;5;25m[INFO][0m django.server: "GET /user/journeys/32/ HTTP/1.1" 200 2512
