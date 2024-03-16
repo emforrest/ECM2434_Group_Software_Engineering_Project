@@ -26,7 +26,7 @@ DATABASES = {
 # Enforce HTTPS
 # https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/#https
 
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'http')
 SECURE_SSL_REDIRECT = True
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
