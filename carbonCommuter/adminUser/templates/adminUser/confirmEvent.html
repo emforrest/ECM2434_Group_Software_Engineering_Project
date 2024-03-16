@@ -1,0 +1,114 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- A HTML document that produces the choose event page for admin users. -->
+<!-- authors: Eleanor Forrest -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <!--Import styling-->
+    <link rel="stylesheet" href="{% static 'carbonCommuter/style.css' %}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <header>
+        <!--The navbar, consistent across the site-->
+         <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/">CarbonCommuter</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'user_groups_home_page' %}">Groups</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout/">Logout</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/register/">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/leaderboard/">Leaderboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <br>
+    <div class="wrapper">
+    <div class="column">
+
+        <form action="/submitEvent/" method="POST">
+            {% csrf_token %}
+            <!--Display the relevant fields for the user to input the targets-->
+            {% for field, info in fieldsInfo.items %}
+            <br>
+            <label for="{{ field }}">{{ info.label }}</label>
+            {% if info.type == 'text' %}
+                <input type="text" id="{{ field }}" name="{{ field }}"><br>
+            {% elif info.type == 'dropdown' %}
+            <!--the user can select from many locations on campus-->
+            <select name="oncampus" id="oncampus">
+                <option value = "Forum">Forum</option>
+                <option value = "Amory">Amory</option>
+                <option value = "Devonshire House">Devonshire House</option>
+                <option value = "Peter Chalk">Peter Chalk</option>
+                <option value = "Living Systems Institute">Living Systems Institute</option>
+                <option value = "Harrison">Harrison</option>
+                <option value = "Business School">Business School</option>
+                <option value = "Sports Park">Sports Park</option>
+                <option value = "Queens">Queens</option>
+                <option value = "Washington Singer">Washington Singer</option>
+                <option value = "Laver">Laver</option>
+                <option value = "Innovation Centre">Innovation Centre</option>
+                <option value = "South West Institute of Technology">South West Institute of Technology</option>
+                <option value = "Bus Stop - North Park Road">Bus Stop - North Park Road</option>
+                <option value = "Bus Stop - Innovation Centre">Bus Stop - Innovation Centre</option>
+                <option value = "Bus Stop - Rennes Drive">Bus Stop - Rennes Drive</option>
+                <option value = "Bus Stop - Poole Gate">Bus Stop - Poole Gate</option>
+                <option value = "Bus Stop - Perry Road">Bus Stop - Perry Road</option>
+                <option value = "Bus Stop - Streatham Rise">Bus Stop - Streatham Rise</option>
+                <option value = "Bus Stop - Knightley">Bus Stop - Knightley</option>
+                <option value = "Bus Stop - The Queen's Drive">Bus Stop - The Queen's Drive</option>
+                <option value = "Bus Stop - Prince of Wales Road">Bus Stop - Prince of Wales Road</option>
+                <option value = "Bike Rack - Stocker Road">Bike Rack - Stocker Road</option>
+                <option value = "Bike Rack - Sports Park">Bike Rack - Sports Park</option>
+                <option value = "Bike Rack - Business School">Bike Rack - Business School</option>
+                <option value = "Bike Rack - Terrace Restaurant">Bike Rack - Terrace Restaurant</option>
+                <option value = "Bike Rack - Amory">Bike Rack - Amory</option>
+            </select>
+            {% endif %}
+        {% endfor %}
+        <br>
+
+        <label>Enter an end date for this event:</label>
+        <input type = 'date'> 
+        <br>
+        <br>
+        <a href="/adminUser/chooseEvent/"><button type="button" class="btn" style="display: inline-block; width: 49%">Back</button></a>
+        <button type="submit" class="btn" style="display: inline-block; width: 49%">Create Event</button>
+        </form>
+        <br>
+        
+    </div>
+    </div>
+
+
+    <br>
+
+    <!--The footer, consistent across the site-->
+    <div class="footer">
+        <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
+    </div>
