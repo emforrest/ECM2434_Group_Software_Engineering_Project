@@ -1,9 +1,8 @@
 
-function onLoad(tab = 0, error) {
+function onLoad(tab = 1) {
     window.attempts = 0;
     window.last_accuracy = "0";
     window.current_tab = tab;
-    window.error = error;
     getLocation();
 }
 
@@ -23,12 +22,14 @@ function nextTab() {
     document.getElementById(`tab${window.current_tab}`).style.display = "none";
     window.current_tab++;
     document.getElementById(`tab${window.current_tab}`).style.display = "block";
+    hideError();
 }
 
 function prevTab() {
     document.getElementById(`tab${window.current_tab}`).style.display = "none";
     window.current_tab--;
     document.getElementById(`tab${window.current_tab}`).style.display = "block";
+    hideError();
 }
 
 function getLocation() {
@@ -40,7 +41,7 @@ function getLocation() {
 }
 
 function checkAccuracy(position) {
-    if (window.current_tab > 0) {
+    if (window.current_tab > 1) {
         showPosition(position);
     } else if (parseFloat(position.coords.accuracy) < 300) {
         showPosition(position);
@@ -65,14 +66,22 @@ function checkAccuracy(position) {
 function accuracyErrorOnLoad() {
     console.log("Couldn't get an accurate location!");
     window.error = "Failed to get an accurate location! You may need to adjust it manually...";
-    var info = document.getElementById("info");
-    info.innerHTML = window.error;
-    info.style.color = "red";
+    document.getElementById("loading").style.display = "none";
+    showError();
 }
 
 function showPosition(position) {
     setLatLong(position.coords.latitude, position.coords.longitude);
     getAddress(position);
+}
+
+function showError() {
+    document.getElementById("error").innerHTML = window.error;
+    document.getElementById("error").style.display = "block";
+}
+
+function hideError() {
+    document.getElementById("error").style.display = "none";
 }
 
 function handleError(error) {

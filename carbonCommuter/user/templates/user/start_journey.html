@@ -16,6 +16,7 @@
     <!--Set up the connection to the Google Maps API-->
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIZe4j6_6bvgDSdz4rjX_29_r6C6FGi1Y&libraries=places&callback=initAutocomplete&loading=async"></script>
     <script type="text/javascript" src="{% static 'js/upload.js' %}"></script> 
+    <script>window.error='{{ error|escapejs }}'</script>
 </head>
 
 <body onload="onLoad();">
@@ -55,17 +56,17 @@
             <input type="hidden" id="long" name="long" value="">
             <input type="hidden" id="address" name="address" value="">
 
-            <div id="tab0" style="text-align: center;">
+            <div id="tab1" style="text-align: center;">
                 <h3>Getting your current location</h3>
                 <br>
                 <div style="margin: auto; width: 50%">
                     <img src="/media/loading/pikachu.gif"/>
                 </div>
                 <br>
-                <i id="info">This could take up to 30 seconds...</i>
+                <i id="loading">This could take up to 30 seconds...</i>
             </div>
            
-            <div id="tab1" style="display: none">
+            <div id="tab2" style="display: none">
                 <h4>Where are you starting your journey from today?</h4>
                 <br>
                 <button type="button" class="btn" onclick="getLocation();">Get My Location</button>
@@ -94,9 +95,11 @@
                     <button type="button" id="btn_input" class="btn" style="display: inline-block; width: 49%" onclick="showManualInput();">Enter Manually</button>
                     <button type="button" id="btn_continue" class="btn" style="display: inline-block; width: 49%" onclick="nextTab();hideManualInput();">Confirm Location</button>
                 </div>
+                
+                <br>
             </div>
 
-            <div id="tab2" style="display: none">
+            <div id="tab3" style="display: none">
                 <h4>Select the mode of transport you plan to use:</h4>
                 <br>
 
@@ -114,11 +117,8 @@
                     <button type="submit" class="btn" style="display: inline-block; width: 49%">Confirm Transport</button>
                 </div>
             </div>
-
-            {% if error %}
-                <p style='color:red'>{{ error }}</p>
-            {% endif %}
         </form>
+        <p id="error" style='color: red; display: none; text-align: center;'>An unknown error has occured...</p>
     </div>
          
     <br>
