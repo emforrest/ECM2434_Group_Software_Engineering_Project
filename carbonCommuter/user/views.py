@@ -297,8 +297,6 @@ def end_journey(request):
         for pastJourney in reversed(pastJourneys):
             pastJourneyDate = pastJourney.time_finished
             difference = dateNow-pastJourneyDate
-            print("past date: ", pastJourneyDate.weekday(), ", date now: ", dateNow.weekday())
-            print("difference: ", difference, "difference mins: ", difference.total_seconds()/60, "\n")
             if difference.seconds/60 > 1440:
                 #if the difference between the last journey is more than 1440 minutes (24 hours), no streak
                 break

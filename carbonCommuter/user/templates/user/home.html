@@ -54,6 +54,14 @@
             <div class="column">
                 <div class="column-box">
                     <h1>Profile</h1>
+                    <div class="streak">
+                        <img src="{% static 'carbonCommuter/CarbonCommuter images/Streaks/dailyStreak.png' %}" alt="Daily streak">
+                        {% if request.user.profile.streak > 10 %}
+                            <div style="left: 25%" class="streakText">{{ request.user.profile.streak }}</div>
+                        {% else %}
+                            <div class="streakText">{{ request.user.profile.streak }}</div>
+                        {% endif %}
+                    </div>
                     <br>
                     <p><p1>Name: </p1><i>{{ full_name }}</i></p>
                     <br>
