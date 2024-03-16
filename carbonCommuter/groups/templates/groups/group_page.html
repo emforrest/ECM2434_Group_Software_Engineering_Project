@@ -68,6 +68,32 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="column">
+            <div class="column-box">
+                <h2>Group Leader</h2>
+                <p>{{ leader.username }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Members List Section -->
+    <div class="row">
+        <div class="column">
+            <div class="column-box">
+                <h1>Group Members</h1>
+                <br>
+                <!-- Loop through each member and display their information -->
+                {% for member in members %}
+                    <p><i>{{ member.username }}</i></p>
+                    <!-- You can add more details here similar to the profile section in home.html -->
+                    <br>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
     <footer class="footer mt-auto py-3">
         <div class="container">
             <span>&copy; 2024 CarbonCommuter. All Rights Reserved.</span>
