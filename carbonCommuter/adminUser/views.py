@@ -19,3 +19,6 @@ def mainAdmin(request):
     """
     return render(request, "adminUser/mainAdmin.html")
 
+def createEvent(request):
+    return render(request, "adminUser/createEvent.html")
+

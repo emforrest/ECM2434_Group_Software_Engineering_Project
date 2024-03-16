@@ -27,6 +27,9 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
+                            <a class="nav-link" href="{% url 'user_groups_home_page' %}">Groups</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="/logout/">Logout</a>
                         </li>
                         <li class="nav-item">
@@ -46,7 +49,7 @@
         <br>
         <br>
         <br>
-        <!-- Set up two columns to display the Profile details, the savings and groups-->
+        <!-- Set up three columns to display the Profile details, badges, savings and groups-->
         <div class="row">
             <div class="column">
                 <div class="column-box">
@@ -60,6 +63,9 @@
                     <br>
                     <p><p1>Join Date: </p1><i>{{ request.user.date_joined }}</i></p>
                     <a href="/user/settings"><button type="submit" class="btn">Edit Profile</button></a>
+                    <br><br>
+                    <a  href="{% url 'profile' username=request.user.username %}"><button type="submit" class="btn">View Public Profile</button></a>
+                    
                 </div>
             </div>
             <br>
@@ -75,11 +81,47 @@
                     <a href="/user/journeys/finish"><button type="submit" class="btn">End Journey</button></a>
                     {% endif %}
                 </div>
+            </div>
+            <div class="column">
                 <div class="column-box">
-                    <h1>Groups</h1>
+                    <h1>Badges</h1>
                     <br>
-                    <a href="/groups/"><button type="submit" class="btn">Groups</button></a>
+                    <p>You haven't earned any badges. Better get exploring!</p> <!--Display the user's badges here-->
                 </div>
+            </div>
+        </div>
+        <!-- Adding another row to display the user badges -->
+        <div class="row">
+            <div class="column">
+            <div class="column-box2">
+                <h1>Badges</h1>
+                <br>
+                <h4>Streaks:</h4>
+                <img style="opacity:0.15" src="{% static 'carbonCommuter/CarbonCommuter images/Streaks/7days.png' %}" alt="7 Days">
+                <img style="opacity: '{{ fourteenDaysOpac }}'" src="{% static 'carbonCommuter/CarbonCommuter images/Streaks/14days.png' %}" alt="14 Days">
+                <img style="opacity:'{{ thirtyDaysOpac }}'" src="{% static 'carbonCommuter/CarbonCommuter images/Streaks/30days.png' %}" alt="30 Days">
+                <img style="opacity:'{{ fiftyDaysOpac }}'" src="{% static 'carbonCommuter/CarbonCommuter images/Streaks/50days.png' %}" alt="50 Days">
+                <img style="opacity:'{{ seventyFiveDaysOpac }}'" src="{% static 'carbonCommuter/CarbonCommuter images/Streaks/75days.png' %}" alt="75 Days">
+                <img style="opacity:'{{ hundredDaysOpac }}'" src="{% static 'carbonCommuter/CarbonCommuter images/Streaks/100days.png' %}" alt="100 Days">
+                <h4>Locations:</h4>
+                <img style="opacity: '{{ amoryOpac }}'" src="{% static 'carbonCommuter/CarbonCommuter images/Locations/Amory.png' %}" alt="Amory">
+                <img style="opacity: '{{ businessSchoolOpac }}'" src="{% static 'carbonCommuter/CarbonCommuter images/Locations/BusinessSchool.png' %}" alt="BusinessSchool">
+                <img style="opacity: '{{ devonshireHouseOpac }}'" src="{% static 'carbonCommuter/CarbonCommuter images/Locations/DevonshireHouse.png' %}" alt="DevonshireHouse">
+                <img style="opacity: '{{ forumOpac }}'" src="{% static 'carbonCommuter/CarbonCommuter images/Locations/Forum.png' %}" alt="Forum">
+                <img style="opacity: '{{ harrisonOpac }}'" src="{% static 'carbonCommuter/CarbonCommuter images/Locations/Harrison.png' %}" alt="Harrison">
+                <img style="opacity: '{{ innovationCentreOpac }}'" src="{% static 'carbonCommuter/CarbonCommuter images/Locations/InnovationCentre.png' %}" alt="InnovationCentre">
+                <img style="opacity: '{{ laverOpac }}'" src="{% static 'carbonCommuter/CarbonCommuter images/Locations/Laver.png' %}" alt="Laver">
+                <img style="opacity: '{{ lsiOpac }}'" src="{% static 'carbonCommuter/CarbonCommuter images/Locations/LSI.png' %}" alt="LSI">
+                <img style="opacity: '{{ peterChalkOpac }}'" src="{% static 'carbonCommuter/CarbonCommuter images/Locations/PeterChalk.png' %}" alt="PeterChalk">
+                <img style="opacity: '{{ queensOpac }}'" src="{% static 'carbonCommuter/CarbonCommuter images/Locations/Queens.png' %}" alt="Queens">
+                <img style="opacity: '{{ sportsParkOpac }}'" src="{% static 'carbonCommuter/CarbonCommuter images/Locations/SportsPark.png' %}" alt="SportsPark">
+                <img style="opacity: '{{ swiotOpac }}'" src="{% static 'carbonCommuter/CarbonCommuter images/Locations/Swiot.png' %}" alt="Swiot">
+                <img style="opacity: '{{ washingtonSingerOpac }}'" src="{% static 'carbonCommuter/CarbonCommuter images/Locations/WashingtonSinger.png' %}" alt="WashingtonSinger">
+                <h4>Leaderboard:</h4>
+                <img src="{% static 'carbonCommuter/CarbonCommuter images/Leaderboard/TopLeaderboard.png' %}" alt="Top of Leaderboard">
+                <img src="{% static 'carbonCommuter/CarbonCommuter images/Leaderboard/1weekLeaderboard.png' %}" alt="Top of Leaderboard for 1 week">
+                <img src="{% static 'carbonCommuter/CarbonCommuter images/Leaderboard/1monthLeaderboard.png' %}" alt="Top of Leaderboard for 1 month">
+            </div>
             </div>
         </div>
 
@@ -88,4 +130,7 @@
             <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
         </div>
     </body>
+
+    
+
 </html>
