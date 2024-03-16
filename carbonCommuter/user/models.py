@@ -7,6 +7,7 @@ and any additonal methods that relate to that table.
 
 Authors:
 - Sam Townley
+- Eleanor Forrest
 """
 
 from django.db import models
@@ -119,3 +120,16 @@ class Profile(models.Model):
             return False
         else:
             return True
+        
+class Follower(models.Model):
+    """Represents the following relationship between users
+
+    Attributes:
+    follower (User) - The user who is following another user
+    followedUser (User) - The user who is being followed
+    """
+    follower = models.ForeignKey(User, related_name='following', on_delete=models.CASCADE)
+    followedUser = models.ForeignKey(User, related_name='followers', on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ('follower', 'followedUser') #There should only be one 'following' relationship from the first user to the second user.
