@@ -27,6 +27,9 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
+                            <a class="nav-link" href="{% url 'user_groups_home_page' %}">Groups</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="/logout/">Logout</a>
                         </li>
                         <li class="nav-item">
@@ -46,7 +49,7 @@
         <br>
         <br>
         <br>
-        <!-- Set up two columns to display the Profile details, the savings and groups-->
+        <!-- Set up three columns to display the Profile details, badges, savings and groups-->
         <div class="row">
             <div class="column">
                 <div class="column-box">
@@ -60,6 +63,9 @@
                     <br>
                     <p><p1>Join Date: </p1><i>{{ request.user.date_joined }}</i></p>
                     <a href="/user/settings"><button type="submit" class="btn">Edit Profile</button></a>
+                    <br><br>
+                    <a  href="{% url 'profile' username=request.user.username %}"><button type="submit" class="btn">View Public Profile</button></a>
+                    
                 </div>
             </div>
             <br>
@@ -75,10 +81,12 @@
                     <a href="/user/journeys/finish"><button type="submit" class="btn">End Journey</button></a>
                     {% endif %}
                 </div>
+            </div>
+            <div class="column">
                 <div class="column-box">
-                    <h1>Groups</h1>
+                    <h1>Badges</h1>
                     <br>
-                    <a href="/groups/"><button type="submit" class="btn">Groups</button></a>
+                    <p>You haven't earned any badges. Better get exploring!</p> <!--Display the user's badges here-->
                 </div>
             </div>
         </div>
@@ -122,4 +130,7 @@
             <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
         </div>
     </body>
+
+    
+
 </html>

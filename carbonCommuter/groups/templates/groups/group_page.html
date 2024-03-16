@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta viewport="width=device-width, initial-scale=1.0">
+    <title>{{ group.name }} Group Page</title>
+    <link rel="stylesheet" href="{% static 'carbonCommuter/style.css' %}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <header>
+        <!-- Navigation bar from home.html -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/">CarbonCommuter</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'user_groups_home_page' %}">Groups</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout/">Logout</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/register/">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/leaderboard/">Leaderboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="column text-center">
+                <h1>{{ group.name }}</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <div class="column-box">
+                    {% if is_member %}
+                    <p>You are a member of this group.</p>
+                    <form action="{% url 'leave_group' group.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger" style="background-color: red; color: white;">Leave Group</button>
+
+                    </form>
+                    {% else %}
+                    <p>You are not a member of this group.</p>
+                    <form action="{% url 'join_group' group.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary" style="background-color: green; color: white;" >Join Group</button>
+                    </form>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="column">
+            <div class="column-box">
+                <h2>Group Leader</h2>
+                <p>{{ leader.username }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Members List Section -->
+    <div class="row">
+        <div class="column">
+            <div class="column-box">
+                <h1>Group Members</h1>
+                <br>
+                <!-- Loop through each member and display their information -->
+                {% for member in members %}
+                    <p><i>{{ member.username }}</i></p>
+                    <!-- You can add more details here similar to the profile section in home.html -->
+                    <br>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+    <footer class="footer mt-auto py-3">
+        <div class="container">
+            <span>&copy; 2024 CarbonCommuter. All Rights Reserved.</span>
+        </div>
+    </footer>
+</body>
+</html>

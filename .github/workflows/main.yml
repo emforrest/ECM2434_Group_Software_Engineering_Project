@@ -1,0 +1,24 @@
+name: Deploy Webserver
+on:
+  push:
+    branches: [main]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: master
+    steps:
+      - name: Deploy using SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: opc
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            kill $(pgrep -f gunicorn | grep -v ^$$\$)
+            cd ../../usr/local/share/carboncommuter/
+            git pull
+            source env/bin/activate
+            pip install -r requirements.txt
+            cd carbonCommuter
+            echo yes | python manage.py collectstatic
+            nohup nice gunicorn carbonCommuter.wsgi > foo.out 2> foo.err < /dev/null &
