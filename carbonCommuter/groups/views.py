@@ -49,6 +49,7 @@ def group_page(request, group_id):
 
     context = {
         'group': group,
+        'group_profile': group_profile,
         'is_member': is_member,
         'members': members,
         'leader': group_profile.leader,

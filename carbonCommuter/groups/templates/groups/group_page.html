@@ -99,7 +99,6 @@
         </div>
 
         <!-- Join Requests Section Visible Only to the Group Leader -->
-        <p>Group Privacy Status: {{ group_profile.is_private }}</p>
         {% if group_profile.is_private and leader.username == request.user.username %}
         <div class="row">
             <div class="column">
