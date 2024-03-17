@@ -253,17 +253,6 @@ tbody tr:nth-child(n + 11) {
 }
 
 /*Profile page*/
-/*.column {
-    float: left;
-    width: 500px;
-}
-
-.row:after {
-    content: "";
-    display: table;
-    clear: both;
-}*/
-
 .row {
     display: flex;
     justify-content: center;
@@ -329,7 +318,7 @@ tbody tr:nth-child(n + 11) {
 
 .column-box2 {
     margin: 10px;
-    width: 900px;
+    width: 100%;
     background: transparent;
     border: 2px solid rgba(255, 255, 255, .2);
     backdrop-filter: blur(20px);
@@ -421,9 +410,66 @@ tbody tr:nth-child(n + 11) {
     width: 420px;
 }
 
+.column-box .btn-info{
+    width: 100%;
+    height: 45px;
+    border: none;
+    outline: none;
+    border-radius: 50px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    color: white; 
+    background-color: green;
+}
+
+.column-box .btn-info:hover {
+    background-color: #0de840d5;
+    color: white;
+}
+
+.column-box .btn-primary{
+    width: 100%;
+    height: 45px;
+    border: none;
+    outline: none;
+    border-radius: 50px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    color: white; 
+    background-color: #17a2b8;
+}
+
+.column-box .btn-primary:hover {
+    background-color: #47f3e8d5;
+    color: white;
+}
+
+.column-box .btn-success{
+    width: 100%;
+    height: 45px;
+    border: none;
+    outline: none;
+    border-radius: 50px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    background-color: green; 
+}
+
+.column-box .btn-success:hover {
+    background-color: #0de840d5;
+    color: white;
+}
+
 /*Login, Register, Profile footer*/
 .footer {
-    position: fixed;
+    position: relative;
     left: 50%;
     bottom: 10px;
     transform: translateX(-50%);
@@ -444,7 +490,7 @@ tbody tr:nth-child(n + 11) {
 
 /*Leaderboard footer*/
 .l-footer {
-    position: center;
+    position: relative;
     bottom: 10px;
     margin: auto;
     width: 45%;
@@ -467,7 +513,7 @@ tbody tr:nth-child(n + 11) {
 
 /*Main Page footer*/
 .main-footer {
-    position: center;
+    position: relative;
     bottom: 10px;
     margin: auto;
     width: 700px;

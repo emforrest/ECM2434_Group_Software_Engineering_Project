@@ -24,13 +24,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/logout/">Logout</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/register/">Register</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="/leaderboard/">Leaderboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout/">Logout</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
@@ -41,21 +38,9 @@
     </header>
 
     <main class="container mt-5">
-        <!-- Search Groups Section -->
-        <br>
         <div class="row">
-            <div class="column-box">
-                <h1>Search for Groups</h1>
-                <div class="text-center">
-                    <a href="{% url 'search_groups' %}" class="btn btn-info" style="color: white; background-color: #17a2b8;">Search for Groups</a>
-                </div>
-            </div>
-        </div>
-
-        <br>
-        <div class="row">
-            <!-- Group List Column -->
             <div class="column">
+                <!-- Group List Column -->
                 <div class="column-box">
                     <h1>Your Groups</h1>
                     <!-- Loop through the user's groups -->
@@ -65,7 +50,7 @@
                             {{ group.name }}
                         </div>
                         <div class="card-body">
-                            <a href="{% url 'group_page' group.id %}" class="btn btn-primary">View Group</a>
+                            <a href="{% url 'group_page' group.id %}"><button type="submit" class="btn-primary">View Group</button></a>
                         </div>
                     </div>
                     {% empty %}
@@ -74,31 +59,31 @@
                 </div>
             </div>
 
-            <!-- Create Group Column -->
-            <br>
-            <div class="row">
+            <div class="column">
+                <!-- Search Groups Section -->
+                <div class="column-box">
+                    <h1>Search for Groups</h1>
+                    <a href="{% url 'search_groups' %}"><button type="submit" class="btn-info">Search for Groups</button></a>
+                </div>
+                <!-- Create Group Column -->
                 <div class="column-box">
                     <h1>Create a New Group</h1>
                     <form action="{% url 'create_group' %}" method="post">
                         {% csrf_token %}
                         <div class="form-group">
-                            <label for="groupName" style="color: black;">Group Name: </label>
-                            <input type="text" class="form-control" id="groupName" name="group_name" required>
+                            <input type="text" class="form-control" placeholder="Group Name" id="groupName" name="group_name" required>
                             <label for="is_private">Private Group:</label>
                             <input type="checkbox" id="is_private" name="is_private" value="on">
                         </div>
-                        <button type="submit" style="background-color: green; color: white;" class="btn btn-success">Create Group</button>
+                        <button type="submit" class="btn-success">Create Group</button>
                     </form>
                 </div>
             </div>
-
         </div>
     </main>
-
-    <footer class="footer mt-auto py-3">
-        <div class="container">
-            <span>&copy; 2024 CarbonCommuter. All Rights Reserved.</span>
-        </div>
+    <br>
+    <div class="footer">
+        <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
     </footer>
 
 </body>
