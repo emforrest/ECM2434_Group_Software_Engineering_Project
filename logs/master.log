@@ -941,3 +941,4 @@ django.db.utils.IntegrityError: (1364, "Field 'streak' doesn't have a default va
 17-03-2024 22:56:08 [38;5;25m[INFO][0m django.server: "GET /login/ HTTP/1.1" 200 4071
 17-03-2024 22:56:11 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 302 0
 17-03-2024 22:56:11 [38;5;25m[INFO][0m django.server: "GET /accounts/login/?next=/user/ HTTP/1.1" 200 4071
+17-03-2024 22:56:13 [38;5;25m[INFO][0m django.server: - Broken pipe from ('127.0.0.1', 57950)
