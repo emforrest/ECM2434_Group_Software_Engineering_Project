@@ -11,9 +11,13 @@
 /*set the same background for all the pages*/
 body {
     min-height: 100vh;
-    background: url('forum.jpg') no-repeat;
+    max-width: 100%;
+    background: url('forum.jpg');
     background-size: cover;
-    background-position: center;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: #464646;
 }
 
 /*set the text size and alignment for h1 texts*/
