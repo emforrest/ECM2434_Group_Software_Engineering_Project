@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- A HTML document that displays the carboncommuter privacy policy -->
+<!-- authors: Jack Skinner-->
+
+<head>
+    <title>Privacy Policy - CO2 Saving Website</title>
+    <!-- import styling -->
+    <link rel="stylesheet" href="{% static 'carbonCommuter/style.css' %}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <header>
+        <!--The navbar, consistent across the site-->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/">CarbonCommuter</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <!-- putting login or logout in the navbar depending on whether the user is already logged in -->
+                        {% if not request.user.is_authenticated %}
+                            <a class="nav-link" href="/login/">Login</a>
+                        {% else %}
+                            <a class="nav-link" href="/logout/">Logout</a>
+                        {% endif %} 
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/leaderboard/">Leaderboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <br>
+    <div class="wrapper">
+        <section class="PrivacyPolicy header">
+            <h1>Privacy Policy</h1>
+        </section>
+        <section class="PrivacyPolicy body">
+            <h1>Last Updated: 17/03/2024 </h1>
+            <p>We at CarbonCommuter operate the Carbon Commuter mobile application (the "App"). This Privacy Policy informs you of our policies regarding the collection, use, and disclosure of personal data when you use our App and the choices you have associated with that data.</p>
+            <h2>Information Collection and Use</h2>
+            <p>We collect several types of information for various purposes to provide and improve our service to you.
+                Types of Data Collected
+                Location Data: The Carbon Commuter app utilizes GPS technology to record users' commutes to and from campus. This includes tracking the user's off-campus location during their commute.
+                Personal Data: In order to provide personalized features and services, we may collect certain personally identifiable information from users, such as email addresses, names, and contact information.
+                </p>
+            <h3>Data Usage</h3>
+            <p>Off-Campus Location Storage
+                The off-campus location data collected during users' commutes is stored for manual review purposes for a period of two weeks.
+                After two weeks, this off-campus location data is automatically deleted from our servers.
+                On-Campus Location Storage
+                The public on-campus location data, used for awarding badges and achievements, is stored indefinitely in order to provide users with ongoing rewards and recognition for their commuting efforts.
+                </p>
+            <h4>Data Security</h4>
+            <p>We are committed to protecting the security of your data. We implement appropriate security measures to prevent unauthorized access, alteration, disclosure, or destruction of your personal information.</p>
+            <h5>Data Sharing</h5>
+            <p>We do not share your personal information with third parties except as described in this Privacy Policy.</p>
+            <h6>Changes to This Privacy Policy</h6>
+            <p>We may update our Privacy Policy from time to time. Thus, we advise you to review this page periodically for any changes. We will notify you of any changes by posting the new Privacy Policy on this page.</p>
+            <h7>Contact Us</h7>
+            <p>If you have any questions or concerns about our Privacy Policy, please contact us at carboncommuter@gmail.com
+                By using the Carbon Commuter app, you agree to the collection and use of information in accordance with this Privacy Policy.
+                </p>
+            <a href="/register/">Return</a>
+        </section>

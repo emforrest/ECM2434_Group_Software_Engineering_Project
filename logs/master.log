@@ -783,3 +783,161 @@ AttributeError: 'User' object has no attribute 'totalCo2Saved'
 16-03-2024 13:57:34 [38;5;25m[INFO][0m django.server: "GET /login/ HTTP/1.1" 200 4071
 16-03-2024 13:57:45 [38;5;25m[INFO][0m django.server: "GET /leaderboard/ HTTP/1.1" 200 8864
 16-03-2024 14:02:06 [38;5;25m[INFO][0m django.server: "GET /leaderboard/ HTTP/1.1" 200 8860
+17-03-2024 22:12:09 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+17-03-2024 22:12:19 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 200 2961
+17-03-2024 22:12:19 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 200 8869
+17-03-2024 22:12:22 [38;5;25m[INFO][0m django.server: "GET /register/ HTTP/1.1" 200 4602
+17-03-2024 22:12:54 [38;5;25m[INFO][0m django.server: "GET /register/ HTTP/1.1" 200 4608
+17-03-2024 22:12:59 [38;5;25m[INFO][0m django.server: "GET /register/ HTTP/1.1" 200 4608
+17-03-2024 22:13:07 [38;5;25m[INFO][0m django.server: "GET /register/ HTTP/1.1" 200 4608
+17-03-2024 22:13:11 [38;5;25m[INFO][0m django.server: "GET /register/ HTTP/1.1" 200 4608
+17-03-2024 22:13:13 [38;5;25m[INFO][0m django.server: "GET /register/ HTTP/1.1" 200 4608
+17-03-2024 22:13:14 [38;5;25m[INFO][0m django.server: "GET /register/ HTTP/1.1" 200 4608
+17-03-2024 22:14:00 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 200 2961
+17-03-2024 22:14:01 [38;5;25m[INFO][0m django.server: "GET /register/ HTTP/1.1" 200 4608
+17-03-2024 22:15:06 [38;5;25m[INFO][0m django.server: "GET /register/ HTTP/1.1" 200 4666
+17-03-2024 22:15:07 [38;5;25m[INFO][0m django.server: "GET /register/ HTTP/1.1" 200 4666
+17-03-2024 22:15:08 [38;5;25m[INFO][0m django.server: "GET /register/ HTTP/1.1" 200 4666
+17-03-2024 22:15:09 [38;5;25m[INFO][0m django.server: "GET /register/ HTTP/1.1" 200 4666
+17-03-2024 22:15:27 [38;5;25m[INFO][0m django.server: "GET /register/ HTTP/1.1" 200 4666
+17-03-2024 22:15:38 [38;5;25m[INFO][0m django.server: "GET /register/ HTTP/1.1" 200 4660
+17-03-2024 22:15:41 [38;5;25m[INFO][0m django.server: "GET /register/ HTTP/1.1" 200 4660
+17-03-2024 22:16:57 [38;5;25m[INFO][0m django.server: "GET /register/ HTTP/1.1" 200 4650
+17-03-2024 22:17:50 [38;5;25m[INFO][0m django.server: "GET /register/ HTTP/1.1" 200 4611
+17-03-2024 22:27:08 [38;5;25m[INFO][0m django.server: "GET /register/ HTTP/1.1" 200 4611
+17-03-2024 22:27:10 [38;5;25m[INFO][0m django.server: "GET /register/ HTTP/1.1" 200 4611
+17-03-2024 22:27:11 [38;5;25m[INFO][0m django.server: "GET /register/ HTTP/1.1" 200 4611
+17-03-2024 22:27:12 [38;5;25m[INFO][0m django.server: "GET /register/ HTTP/1.1" 200 4611
+17-03-2024 22:27:42 [38;5;25m[INFO][0m django.server: "GET /register/ HTTP/1.1" 200 4615
+17-03-2024 22:27:44 [38;5;220m[WARNING][0m django.request: Not Found: /PrivacyPolicy
+17-03-2024 22:27:44 [38;5;220m[WARNING][0m django.server: "GET /PrivacyPolicy HTTP/1.1" 404 3155
+17-03-2024 22:28:08 [38;5;25m[INFO][0m django.utils.autoreload: C:\Users\downw\OneDrive\Documents\ECM2434_Group_Software_Engineering_Project\carbonCommuter\register\views.py changed, reloading.
+17-03-2024 22:28:09 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+17-03-2024 22:28:15 [38;5;220m[WARNING][0m django.request: Not Found: /PrivacyPolicy
+17-03-2024 22:28:15 [38;5;220m[WARNING][0m django.server: "GET /PrivacyPolicy HTTP/1.1" 404 3155
+17-03-2024 22:28:18 [38;5;25m[INFO][0m django.server: "GET /register/ HTTP/1.1" 200 4624
+17-03-2024 22:28:19 [38;5;220m[WARNING][0m django.request: Not Found: /register/PrivacyPolicy
+17-03-2024 22:28:19 [38;5;220m[WARNING][0m django.server: "GET /register/PrivacyPolicy HTTP/1.1" 404 3246
+17-03-2024 22:29:41 [38;5;25m[INFO][0m django.utils.autoreload: C:\Users\downw\OneDrive\Documents\ECM2434_Group_Software_Engineering_Project\carbonCommuter\register\views.py changed, reloading.
+17-03-2024 22:29:41 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+17-03-2024 22:29:56 [38;5;25m[INFO][0m django.server: "GET /register/ HTTP/1.1" 200 4624
+17-03-2024 22:29:58 [38;5;220m[WARNING][0m django.request: Not Found: /register/PrivacyPolicy
+17-03-2024 22:29:58 [38;5;220m[WARNING][0m django.server: "GET /register/PrivacyPolicy HTTP/1.1" 404 3246
+17-03-2024 22:34:54 [38;5;25m[INFO][0m django.utils.autoreload: C:\Users\downw\OneDrive\Documents\ECM2434_Group_Software_Engineering_Project\carbonCommuter\carbonCommuter\urls.py changed, reloading.
+17-03-2024 22:34:54 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+17-03-2024 22:37:05 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+17-03-2024 22:37:17 [38;5;25m[INFO][0m django.utils.autoreload: C:\Users\downw\OneDrive\Documents\ECM2434_Group_Software_Engineering_Project\carbonCommuter\carbonCommuter\urls.py changed, reloading.
+17-03-2024 22:37:18 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+17-03-2024 22:37:36 [38;5;25m[INFO][0m django.utils.autoreload: C:\Users\downw\OneDrive\Documents\ECM2434_Group_Software_Engineering_Project\carbonCommuter\carbonCommuter\urls.py changed, reloading.
+17-03-2024 22:37:36 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+17-03-2024 22:37:42 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 200 2961
+17-03-2024 22:37:42 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 304 0
+17-03-2024 22:37:50 [38;5;25m[INFO][0m django.server: "GET /login/ HTTP/1.1" 200 4071
+17-03-2024 22:37:55 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 302 0
+17-03-2024 22:37:55 [38;5;25m[INFO][0m django.server: "GET /accounts/login/?next=/user/ HTTP/1.1" 200 4071
+17-03-2024 22:37:59 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 302 0
+17-03-2024 22:37:59 [38;5;25m[INFO][0m django.server: "GET /accounts/login/?next=/user/ HTTP/1.1" 200 4071
+17-03-2024 22:41:57 [38;5;25m[INFO][0m django.server: "GET /register/ HTTP/1.1" 200 4620
+17-03-2024 22:41:59 [38;5;220m[WARNING][0m django.request: Not Found: /register/views.PrivacyPolicy
+17-03-2024 22:41:59 [38;5;220m[WARNING][0m django.server: "GET /register/views.PrivacyPolicy HTTP/1.1" 404 3264
+17-03-2024 22:42:19 [38;5;220m[WARNING][0m django.request: Not Found: /register/views.PrivacyPolicy
+17-03-2024 22:42:19 [38;5;220m[WARNING][0m django.server: "GET /register/views.PrivacyPolicy HTTP/1.1" 404 3264
+17-03-2024 22:42:21 [38;5;220m[WARNING][0m django.request: Not Found: /register/views.PrivacyPolicy
+17-03-2024 22:42:21 [38;5;220m[WARNING][0m django.server: "GET /register/views.PrivacyPolicy HTTP/1.1" 404 3264
+17-03-2024 22:42:27 [38;5;220m[WARNING][0m django.request: Not Found: /register/PrivacyPolicy
+17-03-2024 22:42:27 [38;5;220m[WARNING][0m django.server: "GET /register/PrivacyPolicy HTTP/1.1" 404 3246
+17-03-2024 22:45:00 [38;5;25m[INFO][0m django.utils.autoreload: C:\Users\downw\OneDrive\Documents\ECM2434_Group_Software_Engineering_Project\carbonCommuter\carbonCommuter\urls.py changed, reloading.
+17-03-2024 22:45:01 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+17-03-2024 22:46:56 [38;5;25m[INFO][0m django.utils.autoreload: C:\Users\downw\OneDrive\Documents\ECM2434_Group_Software_Engineering_Project\carbonCommuter\register\views.py changed, reloading.
+17-03-2024 22:46:57 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+17-03-2024 22:48:05 [38;5;25m[INFO][0m django.utils.autoreload: C:\Users\downw\OneDrive\Documents\ECM2434_Group_Software_Engineering_Project\carbonCommuter\carbonCommuter\urls.py changed, reloading.
+17-03-2024 22:48:06 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+17-03-2024 22:48:47 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 200 2961
+17-03-2024 22:48:52 [38;5;25m[INFO][0m django.server: "GET /register/ HTTP/1.1" 200 4616
+17-03-2024 22:48:54 [38;5;220m[WARNING][0m django.request: Not Found: /PrivacyPolicy/
+17-03-2024 22:48:54 [38;5;220m[WARNING][0m django.server: "GET /PrivacyPolicy/ HTTP/1.1" 404 3158
+17-03-2024 22:49:13 [38;5;25m[INFO][0m django.server: "GET /register/ HTTP/1.1" 200 4614
+17-03-2024 22:49:16 [38;5;220m[WARNING][0m django.request: Not Found: /register/PrivacyPolicy
+17-03-2024 22:49:16 [38;5;220m[WARNING][0m django.server: "GET /register/PrivacyPolicy HTTP/1.1" 404 3246
+17-03-2024 22:49:31 [38;5;25m[INFO][0m django.utils.autoreload: C:\Users\downw\OneDrive\Documents\ECM2434_Group_Software_Engineering_Project\carbonCommuter\register\urls.py changed, reloading.
+17-03-2024 22:49:31 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+17-03-2024 22:49:33 [38;5;220m[WARNING][0m django.request: Not Found: /register/PrivacyPolicy
+17-03-2024 22:49:33 [38;5;220m[WARNING][0m django.server: "GET /register/PrivacyPolicy HTTP/1.1" 404 3439
+17-03-2024 22:49:34 [38;5;220m[WARNING][0m django.request: Not Found: /register/PrivacyPolicy
+17-03-2024 22:49:34 [38;5;220m[WARNING][0m django.server: "GET /register/PrivacyPolicy HTTP/1.1" 404 3439
+17-03-2024 22:49:41 [38;5;25m[INFO][0m django.utils.autoreload: C:\Users\downw\OneDrive\Documents\ECM2434_Group_Software_Engineering_Project\carbonCommuter\register\urls.py changed, reloading.
+17-03-2024 22:49:42 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+17-03-2024 22:49:44 [38;5;25m[INFO][0m django.server: "GET /register/PrivacyPolicy HTTP/1.1" 200 4607
+17-03-2024 22:51:27 [38;5;25m[INFO][0m django.server: "GET /register/PrivacyPolicy HTTP/1.1" 200 4651
+17-03-2024 22:51:31 [38;5;25m[INFO][0m django.server: "GET /register/ HTTP/1.1" 200 4614
+17-03-2024 22:52:04 [38;5;25m[INFO][0m django.server: "GET /register/PrivacyPolicy HTTP/1.1" 200 4651
+17-03-2024 22:52:06 [38;5;25m[INFO][0m django.server: "GET /register/ HTTP/1.1" 200 4614
+17-03-2024 22:52:10 [38;5;25m[INFO][0m django.server: "GET /register/PrivacyPolicy HTTP/1.1" 200 4651
+17-03-2024 22:52:12 [38;5;25m[INFO][0m django.server: "GET /register/ HTTP/1.1" 200 4614
+17-03-2024 22:54:46 [38;5;25m[INFO][0m django.utils.autoreload: C:\Users\downw\OneDrive\Documents\ECM2434_Group_Software_Engineering_Project\carbonCommuter\register\views.py changed, reloading.
+17-03-2024 22:54:47 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+17-03-2024 22:54:50 [38;5;25m[INFO][0m django.server: "GET /register/ HTTP/1.1" 200 4614
+17-03-2024 22:55:08 [38;5;25m[INFO][0m django.server: "POST /register/ HTTP/1.1" 200 4715
+17-03-2024 22:55:32 [38;5;9m[ERROR][0m django.request: Internal Server Error: /register/
+Traceback (most recent call last):
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\MySQLdb\cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\MySQLdb\cursors.py", line 330, in _query
+    db.query(q)
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\MySQLdb\connections.py", line 261, in query
+    _mysql.connection.query(self, query)
+MySQLdb.IntegrityError: (1364, "Field 'streak' doesn't have a default value")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "c:\Users\downw\OneDrive\Documents\ECM2434_Group_Software_Engineering_Project\carbonCommuter\register\views.py", line 74, in register
+    profile.save()
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\django\db\models\base.py", line 814, in save
+    self.save_base(
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\django\db\models\base.py", line 877, in save_base
+    updated = self._save_table(
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\django\db\models\base.py", line 1020, in _save_table
+    results = self._do_insert(
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\django\db\models\base.py", line 1061, in _do_insert
+    return manager._insert(
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\django\db\models\query.py", line 1805, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\django\db\models\sql\compiler.py", line 1822, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\MySQLdb\cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\MySQLdb\cursors.py", line 330, in _query
+    db.query(q)
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\MySQLdb\connections.py", line 261, in query
+    _mysql.connection.query(self, query)
+django.db.utils.IntegrityError: (1364, "Field 'streak' doesn't have a default value")
+17-03-2024 22:55:32 [38;5;9m[ERROR][0m django.server: "POST /register/ HTTP/1.1" 500 176582
+17-03-2024 22:56:03 [38;5;25m[INFO][0m django.server: "POST /register/ HTTP/1.1" 200 4694
+17-03-2024 22:56:08 [38;5;25m[INFO][0m django.server: "GET /login/ HTTP/1.1" 200 4071
+17-03-2024 22:56:11 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 302 0
+17-03-2024 22:56:11 [38;5;25m[INFO][0m django.server: "GET /accounts/login/?next=/user/ HTTP/1.1" 200 4071
