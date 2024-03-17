@@ -61,7 +61,7 @@ def home(request):
     queensOpac = determine_opacity("Queens", badgesList)
     sportsParkOpac = determine_opacity("Sports Park", badgesList)
     swiotOpac = determine_opacity("South West Institute of Technology", badgesList)
-    washingtonSinger = determine_opacity("Washington Singer", badgesList)
+    washingtonSingerOpac = determine_opacity("Washington Singer", badgesList)
     sevenDaysOpac = determine_opacity("7days", badgesList)
     fourteenDaysOpac = determine_opacity("14days", badgesList)
     thirtyDaysOpac = determine_opacity("30days", badgesList)
@@ -91,7 +91,7 @@ def home(request):
                          "queensOpac": queensOpac,
                          "sportsParkOpac": sportsParkOpac,
                          "swiotOpac": swiotOpac,
-                         "washingtonSinger": washingtonSinger}
+                         "washingtonSingerOpac": washingtonSingerOpac}
     return render(request, "user/home.html", context)
 
 

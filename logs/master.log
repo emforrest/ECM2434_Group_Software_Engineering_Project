@@ -939,3 +939,38 @@ TypeError: 'QuerySet' object cannot be interpreted as an integer
 16-03-2024 19:23:11 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 7797
 16-03-2024 19:24:14 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 7778
 16-03-2024 19:24:14 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 304 0
+16-03-2024 19:34:42 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 7775
+16-03-2024 19:34:42 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/dailyStreak.png HTTP/1.1" 304 0
+16-03-2024 19:34:42 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/14days.png HTTP/1.1" 304 0
+16-03-2024 19:34:42 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/7days.png HTTP/1.1" 304 0
+16-03-2024 19:34:42 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 200 9157
+16-03-2024 19:34:42 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/30days.png HTTP/1.1" 304 0
+16-03-2024 19:34:42 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/50days.png HTTP/1.1" 304 0
+16-03-2024 19:34:42 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/100days.png HTTP/1.1" 304 0
+16-03-2024 19:34:42 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/75days.png HTTP/1.1" 304 0
+16-03-2024 19:34:42 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Forum.png HTTP/1.1" 304 0
+16-03-2024 19:34:42 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Amory.png HTTP/1.1" 304 0
+16-03-2024 19:34:42 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/BusinessSchool.png HTTP/1.1" 304 0
+16-03-2024 19:34:42 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Harrison.png HTTP/1.1" 304 0
+16-03-2024 19:34:42 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/DevonshireHouse.png HTTP/1.1" 304 0
+16-03-2024 19:34:42 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Laver.png HTTP/1.1" 304 0
+16-03-2024 19:34:42 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/InnovationCentre.png HTTP/1.1" 304 0
+16-03-2024 19:34:42 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/LSI.png HTTP/1.1" 304 0
+16-03-2024 19:34:42 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Queens.png HTTP/1.1" 304 0
+16-03-2024 19:34:42 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/PeterChalk.png HTTP/1.1" 304 0
+16-03-2024 19:34:42 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Swiot.png HTTP/1.1" 304 0
+16-03-2024 19:34:42 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/SportsPark.png HTTP/1.1" 304 0
+16-03-2024 19:34:42 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/WashingtonSinger.png HTTP/1.1" 304 0
+16-03-2024 19:34:42 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Leaderboard/TopLeaderboard.png HTTP/1.1" 304 0
+16-03-2024 19:34:42 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Leaderboard/1monthLeaderboard.png HTTP/1.1" 304 0
+16-03-2024 19:34:42 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Leaderboard/1weekLeaderboard.png HTTP/1.1" 304 0
+16-03-2024 19:35:22 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 7774
+16-03-2024 19:35:44 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 304 0
+16-03-2024 19:36:56 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 7744
+16-03-2024 19:36:56 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 304 0
+16-03-2024 19:38:38 [38;5;25m[INFO][0m django.utils.autoreload: /Users/abihinton/Documents/Uni/Year 2/Group Software Engineering Project/ECM2434_Group_Software_Engineering_Project/carbonCommuter/user/views.py changed, reloading.
+16-03-2024 19:38:38 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+16-03-2024 19:38:58 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 304 0
+16-03-2024 19:39:32 [38;5;25m[INFO][0m django.utils.autoreload: /Users/abihinton/Documents/Uni/Year 2/Group Software Engineering Project/ECM2434_Group_Software_Engineering_Project/carbonCommuter/user/views.py changed, reloading.
+16-03-2024 19:39:32 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+16-03-2024 19:39:38 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 7748
