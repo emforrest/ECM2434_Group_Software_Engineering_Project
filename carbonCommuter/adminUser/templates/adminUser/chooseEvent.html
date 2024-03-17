@@ -2,8 +2,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- A HTML document that produces the home page for admin users. -->
-<!-- authors: Abi Hinton, Eleanor Forrest -->
+<!-- A HTML document that produces the choose event page for admin users. -->
+<!-- authors: Eleanor Forrest -->
 
 <head>
     <meta charset="UTF-8">
@@ -14,6 +14,7 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
+
 <body>
     <header>
         <!--The navbar, consistent across the site-->
@@ -48,21 +49,29 @@
     <br>
     <div class="wrapper">
     <div class="column">
-        <!-- the text to show the user they have reached the admin page -->
-        <h1>CarbonCommuter Admin</h1>
-        <p></p>
-        <p>As an admin, you can control groups, validate journeys and create events.</p>
-        <br>
-        <a href="/adminUser/chooseEvent/"><button type="submit" class="btn">Create Event</button></a> <!--should not work if an event is already active-->
+        <h1>Select an event:</h1>
+        <br><br>
+        <button type="submit" class="btn" onclick="redirect(1)">Save X kg of CO2</button>
+        <br><br>
+        <button type="submit" class="btn" onclick="redirect(2)">Log X total journeys</button>
+        <br><br>
+        <button type="submit" class="btn" onclick="redirect(3)">Visit one building X times</button>
+        <br><br>
+        <button type="submit" class="btn" onclick="redirect(4)">Visit every building at least once</button>
+        <br><br>
+        <a href="/adminUser/"><button type="submit" class="btn">Back</button></a>
     </div>
-    </div>  
+    </div>
+    <script>
+        function redirect(eventID){
+            window.location.href = "{% url 'confirmEvent' %}?eventID=" + String(eventID);
+        }
+    </script>
+
     <br>
-    
 
     <!--The footer, consistent across the site-->
     <div class="footer">
         <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
     </div>
-
 </body>
-</html>

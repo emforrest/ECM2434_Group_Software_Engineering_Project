@@ -1,11 +1,18 @@
-
-"""Defines the Django Models associated with the groups app.
-
-Each Django model is releated to one database table, and can be linked with
-other models. This class defines the datatypes of each attribute (column) 
-and any additonal methods that relate to that table.
-"""
-
 from django.db import models
+from django.contrib.auth.models import Group, User
 
-# Create your models here.
+
+class GroupProfile(models.Model):
+    group = models.OneToOneField(Group, on_delete=models.CASCADE)
+    leader = models.ForeignKey(User, on_delete=models.CASCADE, related_name='led_groups')
+    is_private = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.group.name} led by {self.leader.username}"
+
+
+class GroupJoinRequest(models.Model):
+    objects = None
+    group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name='join_requests')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='join_requests')
+    created_at = models.DateTimeField(auto_now_add=True)

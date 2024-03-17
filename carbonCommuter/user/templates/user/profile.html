@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!--A HTML document that produces a public user profile, displaying public information including username and badges.-->
+<!--A HTML document that produces a public user profile, displaying public information and allowing users to follow others.-->
 <!--authors: Eleanor Forrest-->
 
     <head>
@@ -27,13 +27,13 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="/logout/">Logout</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/register/">Register</a>
+                            <a class="nav-link" href="{% url 'user_groups_home_page' %}">Groups</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/leaderboard/">Leaderboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout/">Logout</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
@@ -46,31 +46,44 @@
         <br>
         <br>
         <br>
-        
-        <div class="row">
-            <div class="column">
-                <div class="column-box">
-                    <h1>{{username}}</h1>
-                    <br>
-                    <p>Carbon Saved: <i>{{co2Saved}}</i></p>
-                    <p><p1>Join Date: </p1><i>{{ dateJoined }}</i></p>
-                    <p>Badges:</p>
-                    <p><i>This user currently has no badges.</i></p>
-                    <br>
-                    {% if isCurrentUser %}
-                        <!-- If it is the user's public profile a back button is displayed -->
-                        <a href="/user/"><button type="submit" class="btn">Back</button></a>
-                    {% else %}
-                        <!-- Otherwise a Follow button is displayed (follow/unfollow) -->
-                        <button type="submit" class="btn"> Follow</button>
-                    {% endif %}
+        <div class="container">
+            <!--Set up the public profile information box-->
+            <div class="row">
+                <div class="column">
+                    <div class="column-box">
+                        <h1>{{username}}</h1>
+                        <br>
+                        <p>Carbon Saved: <i>{{co2Saved}}</i></p>
+                        <p><p1>Join Date: </p1><i>{{ dateJoined }}</i></p>
+                        <p>Badges:</p>
+                        <p><i>This user currently has no badges.</i></p>
+                        <br>
+                        {% if isCurrentUser %}
+                            <!-- If it is the user's public profile a back button is displayed -->
+                            <a href="/user/"><button type="back" class="btn">Back</button></a>
+                        {% else %}
+                            <!-- Otherwise a Follow button is displayed (follow/unfollow) -->
+                            <form action="/user/follow/" method="POST">
+                            {% csrf_token %}
+                            {% if followingUser %}
+                                <button type="submit" class="btn" name="follow" value="unfollow">Unfollow</button>
+                            {% else %}
+                                <button type="submit" class="btn" name="follow" value="follow">Follow</button>
+                            {% endif %}
+                            <input type="hidden" id="followedUser" name="followedUser" value="{{ userToFollow }}">
+                            </form>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
+            <br>
+            <div class="footer">
+                <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
+            </div>
         </div>
-        <br>
-        <br>
-        <div class="footer">
-            <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
-        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     </body>
 </html>
