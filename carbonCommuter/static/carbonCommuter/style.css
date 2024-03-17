@@ -94,8 +94,8 @@ main.main-table {
 }
 
 /*Leaderboard table style*/
-.leaderboard_header {
-    height: 10%; 
+.column.leaderboard_header {
+    height: 15%; 
     width: 100%;
     font-family: "Poppins", sans-serif;
     background-color: rgba(215, 215, 215, 0.267);
@@ -104,7 +104,7 @@ main.main-table {
 
 }
 
-.leaderboard_body {
+.column.leaderboard_body {
     width: 100%;
     background-color: rgba(219, 219, 219, 0.733);
 
@@ -112,10 +112,10 @@ main.main-table {
     border-radius: .6rem;
 }
 
-main.table {
-    width: 45%;
+.table {
+    width: 100%;
     max-width: 419px;
-    height: 8%;
+    height: 100%;
     max-height: 700px;
     background-color: rgba(239, 239, 239, 0.459);
     margin: auto;
@@ -125,6 +125,8 @@ main.table {
     border-radius: .6rem;
     overflow: auto;
 }
+
+
 
 table, th, td {
     padding: 1rem;
@@ -150,7 +152,7 @@ tbody tr:nth-child(n + 11) {
 }
     
 @media (max-width: 310px) {
-    main.table {
+    div.table {
         width: 40%;
     }
 
@@ -160,7 +162,7 @@ tbody tr:nth-child(n + 11) {
 }
 
 @media (max-height: 700px) {
-    main.table {
+    div.table {
         height: 10%;
     }
 }
