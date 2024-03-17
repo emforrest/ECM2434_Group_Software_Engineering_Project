@@ -782,3 +782,4 @@ AttributeError: 'User' object has no attribute 'totalCo2Saved'
 16-03-2024 13:57:31 [38;5;220m[WARNING][0m django.server: "GET /favicon.ico HTTP/1.1" 404 3149
 16-03-2024 13:57:34 [38;5;25m[INFO][0m django.server: "GET /login/ HTTP/1.1" 200 4071
 16-03-2024 13:57:45 [38;5;25m[INFO][0m django.server: "GET /leaderboard/ HTTP/1.1" 200 8864
+16-03-2024 14:02:06 [38;5;25m[INFO][0m django.server: "GET /leaderboard/ HTTP/1.1" 200 8860
