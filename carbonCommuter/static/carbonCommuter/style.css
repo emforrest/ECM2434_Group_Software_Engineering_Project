@@ -81,7 +81,7 @@ h1 {
 .main-wrapper {
     margin: auto;
     width: 90%;
-    background-color:rgba(255, 255, 255, .6);
+    background:rgba(255, 255, 255, .6);
     border: 2px solid rgba(255, 255, 255, .2);
     backdrop-filter: blur(20px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
@@ -94,7 +94,7 @@ h1 {
     height: 15%; 
     width: 100%;
     font-family: "Poppins", sans-serif;
-    background-color: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.5);
     padding: .8rem 1rem;
     text-align: center;
     border-radius: .6rem;
@@ -104,7 +104,7 @@ h1 {
 .main-description {
     width: 660px;
     max-height: 100%;
-    background-color: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.5);
 
     margin: .8rem auto;
     border-radius: .6rem;
@@ -236,7 +236,7 @@ tbody tr:nth-child(n + 11) {
 .wrapper {
     margin: auto;
     width: 420px;
-    background: transparent;
+    background: rgba(255, 255, 255, 0.2);
     border: 2px solid rgba(255, 255, 255, .2);
     backdrop-filter: blur(20px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
@@ -332,7 +332,7 @@ tbody tr:nth-child(n + 11) {
 .column-box {
     margin: 10px;
     width: 420px;
-    background: transparent;
+    background: rgba(255, 255, 255, 0.2);
     border: 2px solid rgba(255, 255, 255, .2);
     backdrop-filter: blur(20px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
@@ -385,7 +385,7 @@ tbody tr:nth-child(n + 11) {
 .column-box2 {
     margin: 10px;
     width: 100%;
-    background: transparent;
+    background: rgba(255, 255, 255, 0.2);
     border: 2px solid rgba(255, 255, 255, .2);
     backdrop-filter: blur(20px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
@@ -444,7 +444,7 @@ tbody tr:nth-child(n + 11) {
     width: 40%;
     height: 200px;
     margin: 10px;
-    background: transparent;
+    background: rgba(255, 255, 255, 0.2);
     border: 2px solid rgba(255, 255, 255, .2);
     backdrop-filter: blur(20px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
@@ -541,7 +541,7 @@ tbody tr:nth-child(n + 11) {
     transform: translateX(-50%);
     width: 420px;
     height: 40px;
-    background: transparent;
+    background: rgba(255, 255, 255, 0.2);
     border: 2px solid rgba(255, 255, 255, .2);
     backdrop-filter: blur(20px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
