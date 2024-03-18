@@ -63,6 +63,10 @@ def backup_logs():
                     if file.endswith(".log"):
                         zip.write(f"../logs/{file}")
 
+# Create logs directory if one is missing
+if not("logs" in os.listdir("..")):
+    os.mkdir("../logs")
+
 # Trigger backup
 backup_logs()
 
@@ -83,7 +87,7 @@ LOGGING = {
             "class": "logging.handlers.RotatingFileHandler",
             "level": "INFO",
             "filename": "../logs/master.log",
-            "mode": "w",
+            "mode": "a",
             "encoding": "utf-8",
             "maxBytes": 6708864, # 64MB
             "backupCount": 10,
@@ -93,7 +97,7 @@ LOGGING = {
             "class": "logging.handlers.RotatingFileHandler",
             "level": "DEBUG",
             "filename": "../logs/debug.log",
-            "mode": "w",
+            "mode": "a",
             "encoding": "utf-8",
             "maxBytes": 6708864, # 64MB
             "backupCount": 10,
