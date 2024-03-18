@@ -611,6 +611,6 @@ tbody tr:nth-child(n + 11) {
 
 @media (min-width: 0px) {
     .navbar navbar-expand-lg navbar-light bg-light {
-        width: 100vw; /* Set navbar width to 100% of viewport width */
+        width: 100%; /* Set navbar width to 100% of viewport width */
     }
 }
