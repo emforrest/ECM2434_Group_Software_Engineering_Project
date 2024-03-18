@@ -69,6 +69,10 @@ def home(request):
     seventyFiveDaysOpac = determine_opacity("75days", badgesList)
     hundredDaysOpac = determine_opacity("100days", badgesList)
 
+     #get a list of users this user is following
+    followingUsers = User.objects.filter(followers__follower=request.user).values_list('username', flat=True)
+
+
     #adding opacity of badges to context so can be displayed correctly to the user
     context = context = {"full_name": name,
                          "co2Saved": co2Saved,
@@ -91,7 +95,8 @@ def home(request):
                          "queensOpac": queensOpac,
                          "sportsParkOpac": sportsParkOpac,
                          "swiotOpac": swiotOpac,
-                         "washingtonSingerOpac": washingtonSingerOpac}
+                         "washingtonSingerOpac": washingtonSingerOpac,
+                         "followingUsers": followingUsers}
     return render(request, "user/home.html", context)
 
 

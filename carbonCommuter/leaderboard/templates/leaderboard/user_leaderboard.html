@@ -59,13 +59,13 @@
                         <tr>
                         <td>{{user.position}}</td>
                             {% if user.position == 1 %}
-                            <td>{{user.name}} 🥇</td>
+                            <td><a href="{% url 'profile' username=user.username %}">{{user.name}}</a> 🥇</td>
                             {% elif user.position == 2 %}
-                            <td>{{user.name}} 🥈</td>
+                            <td><a href="{% url 'profile' username=user.username %}">{{user.name}}</a> 🥈</td>
                             {% elif user.position == 3 %}
-                            <td>{{user.name}} 🥉</td>
+                            <td><a href="{% url 'profile' username=user.username %}">{{user.name}}</a> 🥉</td>
                             {% else %}
-                            <td>{{user.name}}</td>
+                            <td><a href="{% url 'profile' username=user.username %}">{{user.name}}</a></td>
                             {% endif %}
                             <td>{{user.totalCo2Saved}}</th>
                         </tr>
@@ -96,13 +96,13 @@
                         <tr>
                             <td>{{user.position}}</td>
                             {% if user.position == 1 %}
-                            <td>{{user.name}} 🥇</td>
+                            <td><a href="{% url 'profile' username=user.username %}">{{user.name}}</a> 🥇</td>
                             {% elif user.position == 2 %}
-                            <td>{{user.name}} 🥈</td>
+                            <td><a href="{% url 'profile' username=user.username %}">{{user.name}}</a> 🥈</td>
                             {% elif user.position == 3 %}
-                            <td>{{user.name}} 🥉</td>
+                            <td><a href="{% url 'profile' username=user.username %}">{{user.name}}</a> 🥉</td>
                             {% else %}
-                            <td>{{user.name}}</td>
+                            <td><a href="{% url 'profile' username=user.username %}">{{user.name}}</a></td>
                             {% endif %}
                             <td>{{user.totalCo2Saved}}</th>
                         </tr>
@@ -172,13 +172,13 @@
                         <tr>
                             <td>{{follower.position}}</td>
                             {% if follower.position == 1 %}
-                            <td>{{follower.name}} 🥇</td>
+                            <td><a href="{% url 'profile' username=follower.username %}">{{follower.name}}</a> 🥇</td>
                             {% elif follower.position == 2 %}
-                            <td>{{follower.name}} 🥈</td>
+                            <td><a href="{% url 'profile' username=follower.username %}">{{follower.name}}</a> 🥈</td>
                             {% elif follower.position == 3 %}
-                            <td>{{follower.name}} 🥉</td>
+                            <td><a href="{% url 'profile' username=follower.username %}">{{follower.name}}</a> 🥉</td>
                             {% else %}
-                            <td>{{follower.name}}</td>
+                            <td><a href="{% url 'profile' username=follower.username %}">{{follower.name}}</a></td>
                             {%endif%}
                             <td>{{follower.totalCo2Saved}}</th>
                         </tr>
