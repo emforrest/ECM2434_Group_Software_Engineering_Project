@@ -215,7 +215,7 @@ tbody tr:nth-child(n + 11) {
     }
 }
 
-@media (height: 700px) {
+@media (max-height: 700px) {
     div.table {
         height: 10%;
     }
@@ -290,12 +290,6 @@ tbody tr:nth-child(n + 11) {
 .wrapper .btn:hover {
     background-color: #a1d6ffd5;
     color:black;
-}
-
-@media only screen and (max-width: 600px) {
-    wrapper .btn {
-        width: 100%; /* Make buttons full width on mobile screens */
-    }
 }
 
 .wrapper .link {
@@ -613,10 +607,4 @@ tbody tr:nth-child(n + 11) {
 .main-footer p {
     text-align: center;
     color: black;
-}
-
-@media (min-width: 0px) {
-    .navbar {
-        width: 100vw; /* Set navbar width to 100% of viewport width */
-    }
 }
