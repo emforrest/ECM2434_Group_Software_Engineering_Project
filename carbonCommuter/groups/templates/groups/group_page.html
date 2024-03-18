@@ -93,7 +93,7 @@
             <!-- Group Leader and Members Section -->
             <div class="wrapper">
                 <h2>Group Leader</h2>
-                <p>{{ leader.username }}</p>
+                <a href="{% url 'profile' username=leader.username %}">{{ leader.username }}</a>
             </div>
             <br>
             <!-- Members List Section -->
@@ -101,7 +101,7 @@
                 <h1>Group Members</h1>
                 {% for member in members %}
                 <div>
-                    <span>{{ member.username }}</span>
+                    <a href="{% url 'profile' username=member.username %}">{{ member.username }}</a>
                     {% if leader.username == request.user.username and member != leader %}
                     <form action="{% url 'remove_member' group.id member.id %}" method="post" style="display: inline;">
                         {% csrf_token %}

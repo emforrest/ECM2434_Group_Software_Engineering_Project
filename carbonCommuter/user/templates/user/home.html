@@ -3,7 +3,7 @@
 <html lang="en">
 
 <!--A HTML document that produces the user home webpage, which display's a user's personal information and total savings so far.-->
-<!--authors: Giulia Brown-->
+<!--authors: Giulia Brown, Eleanor Forrest-->
 
     <head>
         <meta charset="UTF-8">
@@ -95,9 +95,16 @@
                         {% endif %}
                     </div>
                     <div class="column-box">
-                        <h1>Badges</h1>
-                        <br>
-                        <p>You haven't earned any badges. Better get exploring!</p> <!--Display the user's badges here-->
+                        <h1>Following</h1>
+                        {% if not followingUsers %}
+                        <p>You aren't following anyone.</p>
+                        {% else %}
+                            {% for member in followingUsers %}
+                            <div>
+                                <a href="{% url 'profile' username=member %}">{{ member }}</a>
+                            </div>
+                            {% endfor %}
+                        {%endif%}
                     </div>
                 </div>
             </div>
