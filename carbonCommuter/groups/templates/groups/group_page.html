@@ -1,74 +1,61 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{{ group.name }} Group Page</title>
-        <link rel="stylesheet" href="{% static 'carbonCommuter/style.css' %}">
-        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    </head>
-    <body>
-        <header>
-            <!-- Navigation bar from home.html -->
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="/">CarbonCommuter</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+{% extends "base.html" %}
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto">
-                        {% if request.user.is_authenticated %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'user_groups_home_page' %}">Groups</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/leaderboard/user_leaderboard">Leaderboard</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/logout/">Logout</a>
-                            </li>
-                        {% else %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="/leaderboard/">Leaderboard</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/login/">Login</a>
-                            </li>
-                        {%endif%}
-                        <li class="nav-item">
-                            <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
+{% block title %}{{ group.name }} Group Page{% endblock%}
 
-        <div class="container">
-            <br>
-            <!-- Group name and description -->
-            <h1>{{ group.name }}</h1>
-            <br>
-            <!-- Membership and group management options -->
-            <div class="wrapper">
-                {% if is_member %}
-                    {% if leader.username != request.user.username %}
-                        <p>You are a member of this group.</p>
-                        <form action="{% url 'leave_group' group.id %}" method="post">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-danger">Leave Group</button>
-                        </form>
-                    {% else %}
-                        <!-- This branch is for the leader -->
-                        <p>You are the leader of this group.</p>
-                        <!-- Display the delete option only to the group leader -->
-                        <form action="{% url 'delete_group' group.id %}" method="post" style="margin-top: 10px;">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-warning">Delete Group</button>
-                        </form>
-                    {% endif %}
+{% block navbar %}
+    {% if request.user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'user_groups_home_page' %}">Groups</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/leaderboard/user_leaderboard">Leaderboard</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/logout/">Logout</a>
+        </li>
+    {% else %}
+        <li class="nav-item">
+            <a class="nav-link" href="/leaderboard/">Leaderboard</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/login/">Login</a>
+        </li>
+    {%endif%}
+    <li class="nav-item">
+    <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
+    </li>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <br>
+    <!-- Group name and description -->
+    <h1>{{ group.name }}</h1>
+    <br>
+    <!-- Membership and group management options -->
+    <div class="wrapper">
+        {% if is_member %}
+            {% if leader.username != request.user.username %}
+                <p>You are a member of this group.</p>
+                <form action="{% url 'leave_group' group.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Leave Group</button>
+                </form>
+            {% else %}
+                <!-- This branch is for the leader -->
+                <p>You are the leader of this group.</p>
+                <!-- Display the delete option only to the group leader -->
+                <form action="{% url 'delete_group' group.id %}" method="post" style="margin-top: 10px;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-warning">Delete Group</button>
+                </form>
+            {% endif %}
+        {% else %}
+            <p>You are not a member of this group.</p>
+            {% if group_profile.is_private %}
+                {% if has_requested_join %}
+                    <p>Your request to join this group is pending approval.</p>
+                    <button class="btn btn-secondary" disabled>Join Pending</button>
                 {% else %}
                     <p>You are not a member of this group.</p>
                     {% if group_profile.is_private %}
@@ -104,44 +91,70 @@
                     <a href="{% url 'profile' username=member.username %}">{{ member.username }}</a>
                     {% if leader.username == request.user.username and member != leader %}
                     <form action="{% url 'remove_member' group.id member.id %}" method="post" style="display: inline;">
+                    <!-- not sure if we need this -->
+                    <form action="{% url 'request_join_group' group.id %}" method="post">
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-sm btn-warning">Remove</button>
+                        <button type="submit" class="btn btn-primary">Request to Join</button>
                     </form>
-                    {% endif %}
-                </div>
-                {% endfor %}
-            </div>
-            <br>
-            <!-- Join Requests Section Visible Only to the Group Leader -->
-            {% if group_profile.is_private and leader.username == request.user.username %}
-            <div class="wrapper">
-                <h2>Join Requests</h2>
-                {% if join_requests %}
-                    {% for request in join_requests %}
-                    <div>
-                        {{ request.user.username }}
-                        <form action="{% url 'accept_join_request' group.id request.id %}" method="post" style="display: inline;">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-success btn-sm">Accept</button>
-                        </form>
-                        <form action="{% url 'reject_join_request' group.id request.id %}" method="post" style="display: inline;">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-danger btn-sm">Reject</button>
-                        </form>
-                    </div>
-                    {% endfor %}
-                {% else %}
-                    <p>No join requests at the moment.</p>
-                {% endif %} <!-- Ensure this endif is closing the if join_requests -->
-            </div>
+                {% endif %}
+            {% else %}
+                <form action="{% url 'join_group' group.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary">Join Group</button>
+                </form>
+            {% endif %}
+        {% endif %} <!-- This closes the first if is_member condition -->
+    </div>
+    <br>
+    <!-- Group Leader and Members Section -->
+    <div class="wrapper">
+        <h2>Group Leader</h2>
+        <p>{{ leader.username }}</p>
+    </div>
+    <br>
+    <!-- Members List Section -->
+    <div class="wrapper">
+        <h1>Group Members</h1>
+        {% for member in members %}
+        <div>
+            <span>{{ member.username }}</span>
+            {% if leader.username == request.user.username and member != leader %}
+            <form action="{% url 'remove_member' group.id member.id %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-sm btn-warning">Remove</button>
+            </form>
             {% endif %}
         </div>
-        <br>
-        <div class="footer">
-            <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
-        </div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    </body>
-</html>
+        {% endfor %}
+    </div>
+    <br>
+    <!-- Join Requests Section Visible Only to the Group Leader -->
+    {% if group_profile.is_private and leader.username == request.user.username %}
+    <div class="wrapper">
+        <h2>Join Requests</h2>
+        {% if join_requests %}
+            {% for request in join_requests %}
+            <br>
+            <div>
+                {{ request.user.username }}
+                <form action="{% url 'accept_join_request' group.id request.id %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-success btn-sm">Accept</button>
+                </form>
+                <form action="{% url 'reject_join_request' group.id request.id %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger btn-sm">Reject</button>
+                </form>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>No join requests at the moment.</p>
+        {% endif %} <!-- Ensure this endif is closing the if join_requests -->
+    </div>
+    {% endif %}
+</div>
+<br>
+<div class="footer">
+    <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
+</div>
+{% endblock %}

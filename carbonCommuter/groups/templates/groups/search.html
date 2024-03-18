@@ -1,91 +1,66 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Search Groups</title>
-        <link rel="stylesheet" href="{% static 'carbonCommuter/style.css' %}">
-        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    </head>
-    <body>
-        <header>
-            <!-- Navigation bar with Bootstrap classes for styling -->
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="/">CarbonCommuter</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+{% extends "base.html" %}
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Existing navigation links -->
-                        {% if request.user.is_authenticated %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'user_groups_home_page' %}">Groups</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/leaderboard/user_leaderboard">Leaderboard</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/logout/">Logout</a>
-                            </li>
-                        {% else %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="/leaderboard/">Leaderboard</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/login/">Login</a>
-                            </li>
-                        {%endif%}
-                        <li class="nav-item">
-                            <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
+{% block title %}Search Groups Page{% endblock%}
 
-        <div class="container">
-            <br>
-            <!-- for search bar -->
-            <div class="wrapper">
-                <form action="{% url 'search_groups' %}" method="get" class="form-inline my-2 my-lg-0">
-                    <div class="input-box">
-                        <input type="search" placeholder="Search for groups..." name="q" aria-label="Search" value="{{ query }}" style="color: black;">
+{% block navbar %}
+    {% if request.user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'user_groups_home_page' %}">Groups</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/leaderboard/user_leaderboard">Leaderboard</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/logout/">Logout</a>
+        </li>
+    {% else %}
+        <li class="nav-item">
+            <a class="nav-link" href="/leaderboard/">Leaderboard</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/login/">Login</a>
+        </li>
+    {%endif%}
+    <li class="nav-item">
+    <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
+    </li>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <br>
+    <!-- for search bar -->
+    <div class="wrapper">
+        <form action="{% url 'search_groups' %}" method="get" class="form-inline my-2 my-lg-0">
+            <div class="input-box">
+                <input type="search" placeholder="Search for groups..." name="q" aria-label="Search" value="{{ query }}" style="color: black;">
+            </div>
+            <button class="btn" type="submit">Search</button>
+        </form>
+    </div>
+    <!-- for search results -->
+    <br>
+    <div class="wrapper">
+        <h2>Search Results</h2>
+        <!-- Display the search results -->
+        {% if groups %}
+            {% for group in groups %}
+                <div class="card mb-3">
+                    <div class="card-header" style="color: black;">
+                        {{ group.name }}
                     </div>
-                    <button class="btn" type="submit">Search</button>
-                </form>
-            </div>
-            <!-- for search results -->
-            <br>
-            <div class="wrapper">
-                <h2>Search Results</h2>
-                <!-- Display the search results -->
-                {% if groups %}
-                    {% for group in groups %}
-                        <div class="card mb-3">
-                            <div class="card-header" style="color: black;">
-                                {{ group.name }}
-                            </div>
-                            <div class="card-body">
-                                <a href="{% url 'group_page' group.id %}" class="btn btn-primary">View Group</a>
-                            </div>
-                        </div>
-                    {% endfor %}
-                {% else %}
-                    <p>No groups found.</p>
-                {% endif %}
-            </div>
-        </div>
-        <br>
-        <div class="footer">
-            <p>&copy; 2024 Your Website. All Rights Reserved.</p>
-        </div>
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    </body>
-</html>
+                    <div class="card-body">
+                        <a href="{% url 'group_page' group.id %}" class="btn btn-primary">View Group</a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No groups found.</p>
+        {% endif %}
+    </div>
+</div>
+<br>
+<div class="footer">
+    <p>&copy; 2024 Your Website. All Rights Reserved.</p>
+</div>
+{% endblock %}
