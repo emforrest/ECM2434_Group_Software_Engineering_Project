@@ -24,15 +24,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/register/">Register</a>
+                        <a class="nav-link" href="{% url 'user_groups_home_page' %}">Groups</a>
                     </li>
                     <li class="nav-item">
-                        <!-- putting login or logout in the navbar depending on whether the user is already logged in -->
-                        {% if not request.user.is_authenticated %}
-                            <a class="nav-link" href="/login/">Login</a>
-                        {% else %}
-                            <a class="nav-link" href="/logout/">Logout</a>
-                        {% endif %}
+                        <a class="nav-link" href="/logout/">Logout</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
@@ -44,77 +39,156 @@
 
     <br>
     <!-- The table for the leaderboard-->
-    <main class="table">
-        <section class="leaderboard_header">
-            <h1>Alltime Leaderboard</h1>
-        </section>
-        <section class="leaderboard_body">
-            <table>
-                <thead>
-                    <tr> 
-                        <!-- The top row uses the &nbsp which represents blank space to allocate enough coloumn width to each user -->
-                        <th>Position &nbsp &nbsp  </th>
-                        <th>Username &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</th>
-                        <th>Co2 Saved &nbsp </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!--Here, the django for loop displays each user, with a medal for the top users-->
-                    {%for user in total_users%}
-                    <tr>
+    <div class="row">
+        <div class = "column">
+        <div class="table">
+            <section class="leaderboard_header">
+                <h1>Leaderboard</h1>
+            </section>
+            <section class="leaderboard_body">                    <table>
+                    <thead>
+                        <tr> 
+                            <!-- The top row uses the &nbsp which represents blank space to allocate enough coloumn width to each user -->
+                            <th>Position &nbsp &nbsp  </th>
+                            <th>Username &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</th>
+                            <th>Co2 Saved &nbsp </th>                            </tr>
+                    </thead>
+                    <tbody>
+                        <!--Here, the django for loop displays each user, with a medal for the top users-->
+                        {%for user in users%}
+                        <tr>
                         <td>{{user.position}}</td>
-                        {% if user.position == 1 %}
-                        <td>{{user.name}} 🥇</td>
-                        {% elif user.position == 2 %}
-                        <td>{{user.name}} 🥈</td>
-                        {% elif user.position == 3 %}
-                        <td>{{user.name}} 🥉</td>
-                        {% else %}
-                        <td>{{user.name}}</td>
-                        {% endif %}
-                        <td>{{user.totalCo2Saved}}</th>
-                    </tr>
-                    {%endfor%}
-                </tbody>
-            </table>
-        </section>
-    </main>
-
-    <main class="table">
-        <section class="leaderboard_header">
-            <h1>Weekly Leaderboard</h1>
-        </section>
-        <section class="leaderboard_body">
-            <table>
-                <thead>
-                    <tr> 
-                        <!-- The top row uses the &nbsp which represents blank space to allocate enough coloumn width to each user -->
-                        <th>Position &nbsp &nbsp  </th>
-                        <th>Username &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</th>
-                        <th>Co2 Saved &nbsp </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!--Here, the django for loop displays each user, with a medal for the top users-->
-                    {%for user in weekly_users%}
-                    <tr>
-                        <td>{{user.position}}</td>
-                        {% if user.position == 1 %}
-                        <td>{{user.name}} 🥇</td>
-                        {% elif user.position == 2 %}
-                        <td>{{user.name}} 🥈</td>
-                        {% elif user.position == 3 %}
-                        <td>{{user.name}} 🥉</td>
-                        {% else %}
-                        <td>{{user.name}}</td>
-                        {% endif %}
-                        <td>{{user.totalCo2Saved}}</th>
-                    </tr>
-                    {%endfor%}
-                </tbody>
-            </table>
-        </section>
-    </main>
+                            {% if user.position == 1 %}
+                            <td><a href="{% url 'profile' username=user.username %}">{{user.name}}</a> 🥇</td>
+                            {% elif user.position == 2 %}
+                            <td><a href="{% url 'profile' username=user.username %}">{{user.name}}</a> 🥈</td>
+                            {% elif user.position == 3 %}
+                            <td><a href="{% url 'profile' username=user.username %}">{{user.name}}</a> 🥉</td>
+                            {% else %}
+                            <td><a href="{% url 'profile' username=user.username %}">{{user.name}}</a></td>
+                            {% endif %}
+                            <td>{{user.totalCo2Saved}}</th>
+                        </tr>
+                        {%endfor%}
+                    </tbody>
+                </table>
+            </section>
+        </div>
+        </div>
+        <div class = "column">
+        <div class="table">
+            <section class="leaderboard_header">
+                <h1>Weekly Leaderboard</h1>
+            </section>
+            <section class="leaderboard_body">
+                <table>
+                    <thead>
+                        <tr> 
+                            <!-- The top row uses the &nbsp which represents blank space to allocate enough coloumn width to each user -->
+                            <th>Position &nbsp &nbsp  </th>
+                            <th>Username &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</th>
+                            <th>Co2 Saved &nbsp </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--Here, the django for loop displays each user, with a medal for the top users-->
+                        {%for user in weekly_users%}
+                        <tr>
+                            <td>{{user.position}}</td>
+                            {% if user.position == 1 %}
+                            <td><a href="{% url 'profile' username=user.username %}">{{user.name}}</a> 🥇</td>
+                            {% elif user.position == 2 %}
+                            <td><a href="{% url 'profile' username=user.username %}">{{user.name}}</a> 🥈</td>
+                            {% elif user.position == 3 %}
+                            <td><a href="{% url 'profile' username=user.username %}">{{user.name}}</a> 🥉</td>
+                            {% else %}
+                            <td><a href="{% url 'profile' username=user.username %}">{{user.name}}</a></td>
+                            {% endif %}
+                            <td>{{user.totalCo2Saved}}</th>
+                        </tr>
+                        {%endfor%}
+                    </tbody>
+                </table>
+            </section>
+        </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class = "column">
+        <div class="table">
+            <section class="leaderboard_header">
+                <h1>Group Leaderboard</h1>
+            </section>
+            <section class="leaderboard_body">
+                <table>
+                    <thead>
+                        <tr> 
+                            <!-- The top row uses the &nbsp which represents blank space to allocate enough coloumn width to each user -->
+                            <th>Position &nbsp &nbsp  </th>
+                            <th>Username &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</th>
+                            <th>Co2 Saved &nbsp </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--Here, the django for loop displays each user, with a medal for the top users-->
+                        {%for group in groups%}
+                        <tr>
+                            <td>{{group.position}}</td>
+                            {% if group.position == 1 %}
+                            <td>{{group.name}} 🥇</td>
+                            {% elif group.position == 2 %}
+                            <td>{{group.name}} 🥈</td>
+                            {% elif group.position == 3 %}
+                            <td>{{group.name}} 🥉</td>
+                            {% else %}
+                            <td>{{group.name}}</td>
+                            {%endif%}
+                            <td>{{group.totalCo2Saved}}</th>
+                        </tr>
+                        {%endfor%}
+                    </tbody>
+                </table>
+            </section>
+        </div>
+        </div>
+        <div class = "column">
+        <div class="table">
+            <section class="leaderboard_header">
+                <h1>Follower Leaderboard</h1>
+            </section>
+            <section class="leaderboard_body">
+                <table>
+                    <thead>
+                        <tr> 
+                            <!-- The top row uses the &nbsp which represents blank space to allocate enough coloumn width to each user -->
+                            <th>Position &nbsp &nbsp  </th>
+                            <th>Username &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</th>
+                            <th>Co2 Saved &nbsp </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--Here, the django for loop displays each user, with a medal for the top users-->
+                        {%for follower in followers%}
+                        <tr>
+                            <td>{{follower.position}}</td>
+                            {% if follower.position == 1 %}
+                            <td><a href="{% url 'profile' username=follower.username %}">{{follower.name}}</a> 🥇</td>
+                            {% elif follower.position == 2 %}
+                            <td><a href="{% url 'profile' username=follower.username %}">{{follower.name}}</a> 🥈</td>
+                            {% elif follower.position == 3 %}
+                            <td><a href="{% url 'profile' username=follower.username %}">{{follower.name}}</a> 🥉</td>
+                            {% else %}
+                            <td><a href="{% url 'profile' username=follower.username %}">{{follower.name}}</a></td>
+                            {%endif%}
+                            <td>{{follower.totalCo2Saved}}</th>
+                        </tr>
+                        {%endfor%}
+                    </tbody>
+                </table>
+            </section>
+        </div>
+        </div>
+    </div>
     <!--Footer unversal to the program-->
     <br>
     <div class="l-footer">
