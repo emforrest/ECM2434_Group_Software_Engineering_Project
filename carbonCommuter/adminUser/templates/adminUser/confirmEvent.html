@@ -50,7 +50,7 @@
     <div class="wrapper">
     <div class="column">
 
-        <form action="/submitEvent/" method="POST">
+        <form action="{% url 'submitEvent' %}" method="POST">
             {% csrf_token %}
             <!--Display the relevant fields for the user to input the targets-->
             {% for field, info in fieldsInfo.items %}
@@ -94,8 +94,9 @@
         <br>
 
         <label>Enter an end date for this event:</label>
-        <input type = 'date'> 
+        <input type = 'date' id = 'endDate' name="endDate"> 
         <br>
+        <input type="hidden" name="eventID" value="{{ eventType }}">
         <br>
         <a href="/adminUser/chooseEvent/"><button type="button" class="btn" style="display: inline-block; width: 49%">Back</button></a>
         <button type="submit" class="btn" style="display: inline-block; width: 49%">Create Event</button>
