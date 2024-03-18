@@ -18,8 +18,8 @@ urlpatterns = [
     # Handling join requests for private groups
     path('request_join/<int:group_id>/', views.request_join_group, name='request_join_group'),
     path('view_requests/<int:group_id>/', views.view_join_requests, name='view_join_requests'),
-    path('accept_request/<int:group_id>/<int:user_id>/', views.accept_join_request, name='accept_join_request'),
-    path('reject_request/<int:group_id>/<int:user_id>/', views.reject_join_request, name='reject_join_request'),
+    path('accept_request/<int:group_id>/<int:request_id>/', views.accept_join_request, name='accept_join_request'),
+    path('reject_request/<int:group_id>/<int:request_id>/', views.reject_join_request, name='reject_join_request'),
 
     # Additional URLs for group searching or other functionalities
     path('search/', views.search_groups, name='search_groups'),
