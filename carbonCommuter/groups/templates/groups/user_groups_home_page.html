@@ -1,104 +1,77 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>User Groups Home Page</title>
-        <!-- Import styling -->
-        <link rel="stylesheet" href="{% static 'carbonCommuter/style.css' %}">
-        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    </head>
+{% block title %}User Groups Home Page{% endblock%}
 
-    <body>
-        <header>
-            <!-- Navigation bar as seen on every webpage -->
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="/">CarbonCommuter</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+{% block navbar %}
+    {% if request.user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'user_groups_home_page' %}">Groups</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/leaderboard/user_leaderboard">Leaderboard</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/logout/">Logout</a>
+        </li>
+    {% else %}
+        <li class="nav-item">
+            <a class="nav-link" href="/leaderboard/">Leaderboard</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/login/">Login</a>
+        </li>
+    {%endif%}
+    <li class="nav-item">
+    <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
+    </li>
+{% endblock %}
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto">
-                        {% if request.user.is_authenticated %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'user_groups_home_page' %}">Groups</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/leaderboard/user_leaderboard">Leaderboard</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/logout/">Logout</a>
-                            </li>
-                        {% else %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="/leaderboard/">Leaderboard</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/login/">Login</a>
-                            </li>
-                        {%endif%}
-                        <li class="nav-item">
-                            <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
-
-        <div class="container">
-            <div class="row">
-                <div class="column">
-                    <!-- Group List Column -->
-                    <div class="column-box">
-                        <h1>Your Groups</h1>
-                        <!-- Loop through the user's groups -->
-                        {% for group in request.user.groups.all %}
-                        <div class="card mb-3">
-                            <div class="card-header" style="color: black;">
-                                {{ group.name }}
-                            </div>
-                            <div class="card-body">
-                                <a href="{% url 'group_page' group.id %}"><button type="submit" class="btn-primary">View Group</button></a>
-                            </div>
-                        </div>
-                        {% empty %}
-                        <p>You are not in any groups.</p>
-                        {% endfor %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="column">
+            <!-- Group List Column -->
+            <div class="column-box">
+                <h1>Your Groups</h1>
+                <!-- Loop through the user's groups -->
+                {% for group in request.user.groups.all %}
+                <div class="card mb-3">
+                    <div class="card-header" style="color: black;">
+                        {{ group.name }}
+                    </div>
+                    <div class="card-body">
+                        <a href="{% url 'group_page' group.id %}"><button type="submit" class="btn-primary">View Group</button></a>
                     </div>
                 </div>
-
-                <div class="column">
-                    <!-- Search Groups Section -->
-                    <div class="column-box">
-                        <h1>Search for Groups</h1>
-                        <a href="{% url 'search_groups' %}"><button type="submit" class="btn-info">Search for Groups</button></a>
-                    </div>
-                    <!-- Create Group Column -->
-                    <div class="column-box">
-                        <h1>Create a New Group</h1>
-                        <form action="{% url 'create_group' %}" method="post">
-                            {% csrf_token %}
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Group Name" id="groupName" name="group_name" required>
-                                <label for="is_private">Private Group:</label>
-                                <input type="checkbox" id="is_private" name="is_private" value="on">
-                            </div>
-                            <button type="submit" class="btn-success">Create Group</button>
-                        </form>
-                    </div>
-                </div>
+                {% empty %}
+                <p>You are not in any groups.</p>
+                {% endfor %}
             </div>
         </div>
-        <div class="footer">
-            <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
-        </div>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    </body>
-</html>
+        <div class="column">
+            <!-- Search Groups Section -->
+            <div class="column-box">
+                <h1>Search for Groups</h1>
+                <a href="{% url 'search_groups' %}"><button type="submit" class="btn-info">Search for Groups</button></a>
+            </div>
+            <!-- Create Group Column -->
+            <div class="column-box">
+                <h1>Create a New Group</h1>
+                <form action="{% url 'create_group' %}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Group Name" id="groupName" name="group_name" required>
+                        <label for="is_private">Private Group:</label>
+                        <input type="checkbox" id="is_private" name="is_private" value="on">
+                    </div>
+                    <button type="submit" class="btn-success">Create Group</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
+</div>
+{% endblock %}

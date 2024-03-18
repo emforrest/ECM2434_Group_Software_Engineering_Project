@@ -1,62 +1,78 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Jack Skinner">
-    <title>Leaderboard</title>
-    <!-- Import the 3 main style sheets, the static sustainibilitygame we made, the boxicons stylesheet and the bootstraps stylesheet used for different things-->
-    <link rel="stylesheet" href= "{% static 'carbonCommuter/style.css' %}">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<!-- author: Jack Skinner -->
+{% extends "base.html" %}
 
-</head>
-<body>
-    <!-- The header bar that's universal for the website -->
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="/">CarbonCommuter</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+{% block title %}Leaderboard{% endblock%}
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'user_groups_home_page' %}">Groups</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/logout/">Logout</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
+{% block navbar %}
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'user_groups_home_page' %}">Groups</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/logout/">Logout</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
+    </li>
+{% endblock %}
 
-    <br>
-    <!-- The table for the leaderboard-->
-    <div class="row">
-        <div class = "column">
-        <div class="table">
-            <section class="leaderboard_header">
-                <h1>Leaderboard</h1>
-            </section>
-            <section class="leaderboard_body">                    <table>
-                    <thead>
-                        <tr> 
-                            <!-- The top row uses the &nbsp which represents blank space to allocate enough coloumn width to each user -->
-                            <th>Position &nbsp &nbsp  </th>
-                            <th>Username &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</th>
-                            <th>Co2 Saved &nbsp </th>                            </tr>
-                    </thead>
-                    <tbody>
-                        <!--Here, the django for loop displays each user, with a medal for the top users-->
-                        {%for user in users%}
-                        <tr>
+{% block content %}
+<br>
+<!-- The table for the leaderboard-->
+<div class="row">
+    <div class = "column">
+    <div class="table">
+        <section class="leaderboard_header">
+            <h1>Leaderboard</h1>
+        </section>
+        <section class="leaderboard_body">                    <table>
+                <thead>
+                    <tr> 
+                        <!-- The top row uses the &nbsp which represents blank space to allocate enough coloumn width to each user -->
+                        <th>Position &nbsp &nbsp  </th>
+                        <th>Username &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</th>
+                        <th>Co2 Saved &nbsp </th>                            </tr>
+                </thead>
+                <tbody>
+                    <!--Here, the django for loop displays each user, with a medal for the top users-->
+                    {%for user in users%}
+                    <tr>
+                    <td>{{user.position}}</td>
+                        {% if user.position == 1 %}
+                        <td>{{user.name}} 🥇</td>
+                        {% elif user.position == 2 %}
+                        <td>{{user.name}} 🥈</td>
+                        {% elif user.position == 3 %}
+                        <td>{{user.name}} 🥉</td>
+                        {% else %}
+                        <td>{{user.name}}</td>
+                        {% endif %}
+                        <td>{{user.totalCo2Saved}}</th>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </section>
+    </div>
+    </div>
+    <div class = "column">
+    <div class="table">
+        <section class="leaderboard_header">
+            <h1>Weekly Leaderboard</h1>
+        </section>
+        <section class="leaderboard_body">
+            <table>
+                <thead>
+                    <tr> 
+                        <!-- The top row uses the &nbsp which represents blank space to allocate enough coloumn width to each user -->
+                        <th>Position &nbsp &nbsp  </th>
+                        <th>Username &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</th>
+                        <th>Co2 Saved &nbsp </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!--Here, the django for loop displays each user, with a medal for the top users-->
+                    {%for user in weekly_users%}
+                    <tr>
                         <td>{{user.position}}</td>
                             {% if user.position == 1 %}
                             <td><a href="{% url 'profile' username=user.username %}">{{user.name}}</a> 🥇</td>
@@ -188,14 +204,10 @@
             </section>
         </div>
         </div>
-    </div>
-    <!--Footer unversal to the program-->
-    <br>
-    <div class="l-footer">
-        <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
-    </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>    
-</body>
-</html>
+</div>
+<!--Footer unversal to the program-->
+<br>
+<div class="l-footer">
+    <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
+</div>
+{% endblock %}

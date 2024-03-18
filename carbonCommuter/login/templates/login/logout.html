@@ -1,70 +1,44 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-
 <!-- A HTML document that produces the logout page, to allow the user to logout of their account. -->
 <!-- authors: Jack Skinner, Giulia Brown, Abi Hinton -->
-    
-    <head>
-        <title>Registration page</title>
-        <!-- import styling -->
-        <link rel="stylesheet" href="{% static 'carbonCommuter/style.css' %}">
-        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    </head>
+{% extends "base.html" %}
 
-    <body>
-        <header>
-            <!--The navbar, consistent across the site-->
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="/">CarbonCommuter</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-    
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/leaderboard/user_leaderboard">Leaderboard</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
+{% block title %}Logout page{% endblock%}
 
-        <br>
-        <div class="container">
-            <div class = "wrapper">
-                <!-- ensuring the user is logged into an account to be logged out of -->
-                {% if request.user.is_authenticated %}
-                <form action="" method='POST'>
-                    {% csrf_token %} <!-- for security of the inputs of the POST form -->
-                    <!-- checking the user definitely wants to log out. Once user clicks button, will logout -->
-                    <p>Are you sure you want to logout?</p>
-                    <button type='submit' class="btn">Yes, logout.</button>
+{% block navbar %}
+    <li class="nav-item">
+        <a class="nav-link" href="/leaderboard/user_leaderboard">Leaderboard</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
+    </li>
+{% endblock %}
 
-                </form>
-                {% else %}
-                <!-- if the user isn't already logged in to an account, will allow the user to either login or register -->
-                <p>You're not logged in. Would you like to <a href="/login/">login</a>?</p>
-                <div class="register-link">
-                    <p>Don't have an account? <a href="/register/">Register</a></p>
-                </div>
-                {% endif %}
-            </div>
+{% block content %}
+<br>
+<div class="container">
+    <div class = "wrapper">
+        <!-- ensuring the user is logged into an account to be logged out of -->
+        {% if request.user.is_authenticated %}
+        <form action="" method='POST'>
+            {% csrf_token %} <!-- for security of the inputs of the POST form -->
+            <!-- checking the user definitely wants to log out. Once user clicks button, will logout -->
+            <p>Are you sure you want to logout?</p>
+            <button type='submit' class="btn">Yes, logout.</button>
 
-            <br>
-            <!--The footer, consistent across the site-->
-            <div class="footer">
-                <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
-            </div>
+        </form>
+        {% else %}
+        <!-- if the user isn't already logged in to an account, will allow the user to either login or register -->
+        <p>You're not logged in. Would you like to <a href="/login/">login</a>?</p>
+        <div class="register-link">
+            <p>Don't have an account? <a href="/register/">Register</a></p>
         </div>
-        
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    </body>
-</html>
+        {% endif %}
+    </div>
+
+    <br>
+    <!--The footer, consistent across the site-->
+    <div class="footer">
+        <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
+    </div>
+</div>
+{% endblock %}
