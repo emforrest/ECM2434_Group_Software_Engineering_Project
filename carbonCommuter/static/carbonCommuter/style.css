@@ -75,10 +75,6 @@ h1 {
     .container{
         max-width: 100%;
     }
-
-    .column-box{
-
-    }
 }
 
 /*Main Page Table */
@@ -376,6 +372,28 @@ tbody tr:nth-child(n + 11) {
     text-decoration: underline;
 }
 
+.streak {
+    position: absolute;
+    text-align: center;
+    color: white;
+    font-family: "chewy";
+    top: 0;
+    right: 0;
+    width: 110px;
+    height: 110px;
+}
+.streak img {
+    width: 100px;
+    height: 100px;
+    margin: 5px;
+}
+.streakText {
+    position: absolute;
+    font-size: 50px;
+    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+    top: 30%;
+    left: 40%;
+}
 .column-box2 {
     margin: 10px;
     width: 100%;
