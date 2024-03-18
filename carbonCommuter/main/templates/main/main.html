@@ -1,13 +1,26 @@
+<!-- A HTML document that produces the main home page. -->
+<!-- authors: Jack Skinner, Giulia Brown -->
 {% extends "base.html" %}
 
 {% block title %}CO2 Saving Website{% endblock%}
 
+{% block navbar %}
+    <li class="nav-item">
+        <a class="nav-link" href="/register/">Register</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/login/">Login</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/leaderboard/">Leaderboard</a>
+    </li>
+{% endblock %}
+
 {% block content %}
-<!-- A HTML document that produces the main home page. -->
-<!-- authors: Jack Skinner, Giulia Brown -->
     <br>
     <!-- Main page table with a brief description of the app and the buttons to register, login and leaderboard-->
     <div class="container">
+        <!-- The main wrapper -->
         <div class="main-wrapper">
             <div class="main-header">
                 <h1>Welcome to CarbonCommuter</h1>
