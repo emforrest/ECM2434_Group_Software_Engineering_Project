@@ -23,12 +23,24 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/leaderboard/">Leaderboard</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/logout/">Logout</a>
-                        </li>
+                        {% if request.user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'user_groups_home_page' %}">Groups</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/leaderboard/user_leaderboard">Leaderboard</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/logout/">Logout</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="/leaderboard/">Leaderboard</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/login/">Login</a>
+                            </li>
+                        {%endif%}
                         <li class="nav-item">
                             <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
                         </li>

@@ -1158,3 +1158,55 @@ AttributeError: 'NoneType' object has no attribute 'weekday'
 18-03-2024 13:31:01 [38;5;25m[INFO][0m django.server: "GET /leaderboard/ HTTP/1.1" 200 10523
 18-03-2024 13:33:14 [38;5;25m[INFO][0m django.utils.autoreload: C:\Users\downw\OneDrive\Documents\ECM2434_Group_Software_Engineering_Project\carbonCommuter\carbonCommuter\urls.py changed, reloading.
 18-03-2024 13:33:15 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+18-03-2024 16:45:24 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+18-03-2024 16:45:38 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 302 0
+18-03-2024 16:45:38 [38;5;25m[INFO][0m django.server: "GET /accounts/login/?next=/user/ HTTP/1.1" 200 3984
+18-03-2024 16:45:38 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 200 11701
+18-03-2024 16:45:48 [38;5;25m[INFO][0m django.server: "POST /accounts/login/?next=/user/ HTTP/1.1" 302 0
+18-03-2024 16:45:51 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 8280
+18-03-2024 16:45:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/7days.png HTTP/1.1" 304 0
+18-03-2024 16:45:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/dailyStreak.png HTTP/1.1" 200 129296
+18-03-2024 16:45:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/14days.png HTTP/1.1" 200 138906
+18-03-2024 16:45:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/50days.png HTTP/1.1" 304 0
+18-03-2024 16:45:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/30days.png HTTP/1.1" 200 137733
+18-03-2024 16:45:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/100days.png HTTP/1.1" 200 134634
+18-03-2024 16:45:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Amory.png HTTP/1.1" 304 0
+18-03-2024 16:45:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/75days.png HTTP/1.1" 200 148547
+18-03-2024 16:45:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/BusinessSchool.png HTTP/1.1" 304 0
+18-03-2024 16:45:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/DevonshireHouse.png HTTP/1.1" 304 0
+18-03-2024 16:45:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Forum.png HTTP/1.1" 304 0
+18-03-2024 16:45:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/InnovationCentre.png HTTP/1.1" 304 0
+18-03-2024 16:45:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Harrison.png HTTP/1.1" 200 177966
+18-03-2024 16:45:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Laver.png HTTP/1.1" 304 0
+18-03-2024 16:45:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/LSI.png HTTP/1.1" 304 0
+18-03-2024 16:45:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/PeterChalk.png HTTP/1.1" 304 0
+18-03-2024 16:45:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Queens.png HTTP/1.1" 304 0
+18-03-2024 16:45:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/SportsPark.png HTTP/1.1" 200 175221
+18-03-2024 16:45:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Swiot.png HTTP/1.1" 304 0
+18-03-2024 16:45:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/WashingtonSinger.png HTTP/1.1" 304 0
+18-03-2024 16:45:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Leaderboard/TopLeaderboard.png HTTP/1.1" 304 0
+18-03-2024 16:45:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Leaderboard/1weekLeaderboard.png HTTP/1.1" 304 0
+18-03-2024 16:45:51 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Leaderboard/1monthLeaderboard.png HTTP/1.1" 304 0
+18-03-2024 16:46:10 [38;5;25m[INFO][0m django.server: "GET /leaderboard/user_leaderboard HTTP/1.1" 200 12371
+18-03-2024 16:46:24 [38;5;25m[INFO][0m django.server: "GET /groups/ HTTP/1.1" 200 4233
+18-03-2024 16:46:27 [38;5;220m[WARNING][0m django.request: Not Found: /leaderboard/user_leaderboard/
+18-03-2024 16:46:27 [38;5;220m[WARNING][0m django.server: "GET /leaderboard/user_leaderboard/ HTTP/1.1" 404 3596
+18-03-2024 16:46:41 [38;5;220m[WARNING][0m django.request: Not Found: /leaderboard/user_leaderboard/
+18-03-2024 16:46:41 [38;5;220m[WARNING][0m django.server: "GET /leaderboard/user_leaderboard/ HTTP/1.1" 404 3596
+18-03-2024 16:46:57 [38;5;25m[INFO][0m django.server: "GET /leaderboard/user_leaderboard HTTP/1.1" 200 12371
+18-03-2024 16:47:21 [38;5;25m[INFO][0m django.server: "GET /groups/ HTTP/1.1" 200 4232
+18-03-2024 16:47:36 [38;5;25m[INFO][0m django.server: "GET /leaderboard/user_leaderboard HTTP/1.1" 200 12371
+18-03-2024 16:47:51 [38;5;25m[INFO][0m django.server: "GET /groups/ HTTP/1.1" 200 4232
+18-03-2024 16:48:00 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 8280
+18-03-2024 16:48:06 [38;5;25m[INFO][0m django.server: "GET /user/journeys/create HTTP/1.1" 200 7358
+18-03-2024 16:48:06 [38;5;25m[INFO][0m django.server: "GET /media/loading/pikachu.gif HTTP/1.1" 200 442458
+18-03-2024 16:48:07 [38;5;25m[INFO][0m django.server: "GET /static/js/upload.js HTTP/1.1" 200 5142
+18-03-2024 16:48:34 [38;5;25m[INFO][0m django.server: "GET /register/ HTTP/1.1" 200 4847
+18-03-2024 16:48:38 [38;5;25m[INFO][0m django.server: "GET /register/PrivacyPolicy HTTP/1.1" 200 4810
+18-03-2024 16:49:36 [38;5;25m[INFO][0m django.server: "GET /register HTTP/1.1" 301 0
+18-03-2024 16:49:37 [38;5;25m[INFO][0m django.server: "GET /register/ HTTP/1.1" 200 4847
+18-03-2024 16:49:39 [38;5;25m[INFO][0m django.server: "GET /register/ HTTP/1.1" 200 4847
+18-03-2024 16:51:56 [38;5;25m[INFO][0m django.server: "GET /register/PrivacyPolicy HTTP/1.1" 200 4657
+18-03-2024 16:52:41 [38;5;25m[INFO][0m django.server: "GET /register/PrivacyPolicy HTTP/1.1" 200 4657
+18-03-2024 16:52:54 [38;5;25m[INFO][0m django.server: "GET /register/ HTTP/1.1" 200 4847
+18-03-2024 16:52:55 [38;5;25m[INFO][0m django.server: "GET /register/ HTTP/1.1" 200 4847
