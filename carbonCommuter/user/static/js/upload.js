@@ -3,6 +3,7 @@ function onLoad() {
     window.attempts = 0;
     window.last_accuracy = "0";
     window.current_tab = 1;
+    getLocation();
 }
 
 function showManualInput() {
