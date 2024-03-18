@@ -1,6 +1,8 @@
 from .base import *
-from .logging import *
 import os
+
+if os.environ.get('DJANGO_LOGGING') != 'False':
+    from .logging import *
 
 # Load the correct config according to the type of environment config
 if os.environ.get("DJANGO_ENV") == 'production':
