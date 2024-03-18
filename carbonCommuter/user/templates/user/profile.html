@@ -60,7 +60,7 @@
                         <br>
                         {% if isCurrentUser %}
                             <!-- If it is the user's public profile a back button is displayed -->
-                            <a href="/user/"><button type="back" class="btn">Back</button></a>
+                            <a href="javascript:window.history.back();"><button type="back" class="btn">Back</button></a>
                         {% else %}
                             <!-- Otherwise a Follow button is displayed (follow/unfollow) -->
                             <form action="/user/follow/" method="POST">
