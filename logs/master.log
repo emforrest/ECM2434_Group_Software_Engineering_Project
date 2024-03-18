@@ -942,3 +942,217 @@ django.db.utils.IntegrityError: (1364, "Field 'streak' doesn't have a default va
 17-03-2024 22:56:11 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 302 0
 17-03-2024 22:56:11 [38;5;25m[INFO][0m django.server: "GET /accounts/login/?next=/user/ HTTP/1.1" 200 4071
 17-03-2024 22:56:13 [38;5;25m[INFO][0m django.server: - Broken pipe from ('127.0.0.1', 57950)
+18-03-2024 12:20:07 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+18-03-2024 12:20:33 [38;5;25m[INFO][0m django.server: "GET /leaderboard/ HTTP/1.1" 200 10484
+18-03-2024 12:29:55 [38;5;25m[INFO][0m django.server: "GET /leaderboard/ HTTP/1.1" 200 11477
+18-03-2024 12:30:05 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 302 0
+18-03-2024 12:30:05 [38;5;25m[INFO][0m django.server: "GET /accounts/login/?next=/user/ HTTP/1.1" 200 4254
+18-03-2024 12:30:18 [38;5;25m[INFO][0m django.server: "POST /accounts/login/?next=/user/ HTTP/1.1" 302 0
+18-03-2024 12:30:21 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 7865
+18-03-2024 12:30:21 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/14days.png HTTP/1.1" 200 137526
+18-03-2024 12:30:21 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/30days.png HTTP/1.1" 200 129224
+18-03-2024 12:30:21 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Amory.png HTTP/1.1" 200 190873
+18-03-2024 12:30:21 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/7days.png HTTP/1.1" 200 143056
+18-03-2024 12:30:21 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/BusinessSchool.png HTTP/1.1" 200 184323
+18-03-2024 12:30:21 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/DevonshireHouse.png HTTP/1.1" 200 196478
+18-03-2024 12:30:21 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Forum.png HTTP/1.1" 200 202350
+18-03-2024 12:30:21 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Harrison.png HTTP/1.1" 200 180110
+18-03-2024 12:30:21 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/InnovationCentre.png HTTP/1.1" 200 186886
+18-03-2024 12:30:21 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Laver.png HTTP/1.1" 200 197293
+18-03-2024 12:30:21 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/LSI.png HTTP/1.1" 200 206471
+18-03-2024 12:30:21 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/PeterChalk.png HTTP/1.1" 200 182142
+18-03-2024 12:30:21 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Queens.png HTTP/1.1" 200 196906
+18-03-2024 12:30:21 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/SportsPark.png HTTP/1.1" 200 176504
+18-03-2024 12:30:21 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Swiot.png HTTP/1.1" 200 161776
+18-03-2024 12:30:21 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/WashingtonSinger.png HTTP/1.1" 200 209215
+18-03-2024 12:30:21 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Leaderboard/TopLeaderboard.png HTTP/1.1" 200 126194
+18-03-2024 12:30:21 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Leaderboard/1weekLeaderboard.png HTTP/1.1" 200 144189
+18-03-2024 12:30:21 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Leaderboard/1monthLeaderboard.png HTTP/1.1" 200 142964
+18-03-2024 12:30:22 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/75days.png HTTP/1.1" 200 142434
+18-03-2024 12:30:22 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/100days.png HTTP/1.1" 200 126404
+18-03-2024 12:30:22 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/50days.png HTTP/1.1" 200 138645
+18-03-2024 12:30:30 [38;5;25m[INFO][0m django.server: "GET /user/profile/xyz123 HTTP/1.1" 200 3451
+18-03-2024 12:30:41 [38;5;25m[INFO][0m django.server: "GET /user/profile/jskinner HTTP/1.1" 200 3884
+18-03-2024 12:30:47 [38;5;25m[INFO][0m django.server: "POST /user/follow/ HTTP/1.1" 302 0
+18-03-2024 12:30:49 [38;5;25m[INFO][0m django.server: "GET /user/profile/jskinner HTTP/1.1" 200 3888
+18-03-2024 12:31:05 [38;5;25m[INFO][0m django.server: "GET /leaderboard/ HTTP/1.1" 200 11478
+18-03-2024 12:31:22 [38;5;25m[INFO][0m django.utils.autoreload: C:\Users\downw\OneDrive\Documents\ECM2434_Group_Software_Engineering_Project\carbonCommuter\leaderboard\views.py changed, reloading.
+18-03-2024 12:31:23 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+18-03-2024 12:31:39 [38;5;9m[ERROR][0m django.request: Internal Server Error: /leaderboard/
+Traceback (most recent call last):
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "c:\Users\downw\OneDrive\Documents\ECM2434_Group_Software_Engineering_Project\carbonCommuter\leaderboard\views.py", line 101, in leaderboard
+    users_followers.append(next(x for x in users_total if x["id"] == user.id ))
+  File "c:\Users\downw\OneDrive\Documents\ECM2434_Group_Software_Engineering_Project\carbonCommuter\leaderboard\views.py", line 101, in <genexpr>
+    users_followers.append(next(x for x in users_total if x["id"] == user.id ))
+TypeError: 'Leaderboard_Entry' object is not subscriptable
+18-03-2024 12:31:39 [38;5;9m[ERROR][0m django.server: "GET /leaderboard/ HTTP/1.1" 500 79949
+18-03-2024 12:34:48 [38;5;25m[INFO][0m django.utils.autoreload: C:\Users\downw\OneDrive\Documents\ECM2434_Group_Software_Engineering_Project\carbonCommuter\leaderboard\views.py changed, reloading.
+18-03-2024 12:34:49 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+18-03-2024 12:35:05 [38;5;9m[ERROR][0m django.request: Internal Server Error: /leaderboard/
+Traceback (most recent call last):
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "c:\Users\downw\OneDrive\Documents\ECM2434_Group_Software_Engineering_Project\carbonCommuter\leaderboard\views.py", line 102, in leaderboard
+    follower_entry.name = user.first_name + " " + user.last_name
+AttributeError: 'Follower' object has no attribute 'first_name'
+18-03-2024 12:35:05 [38;5;9m[ERROR][0m django.server: "GET /leaderboard/ HTTP/1.1" 500 76196
+18-03-2024 12:35:40 [38;5;25m[INFO][0m django.utils.autoreload: C:\Users\downw\OneDrive\Documents\ECM2434_Group_Software_Engineering_Project\carbonCommuter\leaderboard\views.py changed, reloading.
+18-03-2024 12:35:41 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+18-03-2024 12:35:56 [38;5;9m[ERROR][0m django.request: Internal Server Error: /leaderboard/
+Traceback (most recent call last):
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "c:\Users\downw\OneDrive\Documents\ECM2434_Group_Software_Engineering_Project\carbonCommuter\leaderboard\views.py", line 102, in leaderboard
+    follower_entry.name = user.name
+AttributeError: 'Follower' object has no attribute 'name'
+18-03-2024 12:35:56 [38;5;9m[ERROR][0m django.server: "GET /leaderboard/ HTTP/1.1" 500 76096
+18-03-2024 12:37:48 [38;5;25m[INFO][0m django.utils.autoreload: C:\Users\downw\OneDrive\Documents\ECM2434_Group_Software_Engineering_Project\carbonCommuter\leaderboard\views.py changed, reloading.
+18-03-2024 12:37:49 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+18-03-2024 12:38:08 [38;5;25m[INFO][0m django.utils.autoreload: C:\Users\downw\OneDrive\Documents\ECM2434_Group_Software_Engineering_Project\carbonCommuter\leaderboard\views.py changed, reloading.
+18-03-2024 12:38:09 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+18-03-2024 12:38:23 [38;5;25m[INFO][0m django.server: "GET /leaderboard/ HTTP/1.1" 200 11478
+18-03-2024 12:39:25 [38;5;25m[INFO][0m django.utils.autoreload: C:\Users\downw\OneDrive\Documents\ECM2434_Group_Software_Engineering_Project\carbonCommuter\leaderboard\views.py changed, reloading.
+18-03-2024 12:39:26 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+18-03-2024 12:39:41 [38;5;9m[ERROR][0m django.request: Internal Server Error: /leaderboard/
+Traceback (most recent call last):
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "c:\Users\downw\OneDrive\Documents\ECM2434_Group_Software_Engineering_Project\carbonCommuter\leaderboard\views.py", line 121, in leaderboard
+    users_followers.sort(key=lambda x: x.totalCo2Saved, reverse=True)
+  File "c:\Users\downw\OneDrive\Documents\ECM2434_Group_Software_Engineering_Project\carbonCommuter\leaderboard\views.py", line 121, in <lambda>
+    users_followers.sort(key=lambda x: x.totalCo2Saved, reverse=True)
+AttributeError: 'Leaderboard_Entry' object has no attribute 'totalCo2Saved'
+18-03-2024 12:39:42 [38;5;9m[ERROR][0m django.server: "GET /leaderboard/ HTTP/1.1" 500 80081
+18-03-2024 12:40:29 [38;5;25m[INFO][0m django.utils.autoreload: C:\Users\downw\OneDrive\Documents\ECM2434_Group_Software_Engineering_Project\carbonCommuter\leaderboard\views.py changed, reloading.
+18-03-2024 12:40:30 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+18-03-2024 12:40:49 [38;5;9m[ERROR][0m django.request: Internal Server Error: /leaderboard/
+Traceback (most recent call last):
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "c:\Users\downw\OneDrive\Documents\ECM2434_Group_Software_Engineering_Project\carbonCommuter\leaderboard\views.py", line 103, in leaderboard
+    if follower.id == user.user_id:
+AttributeError: 'Follower' object has no attribute 'user_id'
+18-03-2024 12:40:49 [38;5;25m[INFO][0m django.server: - Broken pipe from ('127.0.0.1', 59951)
+18-03-2024 12:42:05 [38;5;9m[ERROR][0m django.request: Internal Server Error: /leaderboard/
+Traceback (most recent call last):
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "c:\Users\downw\OneDrive\Documents\ECM2434_Group_Software_Engineering_Project\carbonCommuter\leaderboard\views.py", line 103, in leaderboard
+    if follower.id == user.user_id:
+AttributeError: 'Follower' object has no attribute 'user_id'
+18-03-2024 12:42:05 [38;5;9m[ERROR][0m django.server: "GET /leaderboard/ HTTP/1.1" 500 76335
+18-03-2024 12:43:33 [38;5;25m[INFO][0m django.utils.autoreload: C:\Users\downw\OneDrive\Documents\ECM2434_Group_Software_Engineering_Project\carbonCommuter\leaderboard\views.py changed, reloading.
+18-03-2024 12:43:34 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+18-03-2024 12:44:14 [38;5;25m[INFO][0m django.utils.autoreload: C:\Users\downw\OneDrive\Documents\ECM2434_Group_Software_Engineering_Project\carbonCommuter\leaderboard\views.py changed, reloading.
+18-03-2024 12:44:14 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+18-03-2024 12:44:30 [38;5;9m[ERROR][0m django.request: Internal Server Error: /leaderboard/
+Traceback (most recent call last):
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "c:\Users\downw\OneDrive\Documents\ECM2434_Group_Software_Engineering_Project\carbonCommuter\leaderboard\views.py", line 103, in leaderboard
+    if follower.id == user.followeduser.id:
+AttributeError: 'Follower' object has no attribute 'followeduser'
+18-03-2024 12:44:30 [38;5;9m[ERROR][0m django.server: "GET /leaderboard/ HTTP/1.1" 500 76373
+18-03-2024 12:45:20 [38;5;25m[INFO][0m django.utils.autoreload: C:\Users\downw\OneDrive\Documents\ECM2434_Group_Software_Engineering_Project\carbonCommuter\leaderboard\views.py changed, reloading.
+18-03-2024 12:45:21 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+18-03-2024 12:45:37 [38;5;25m[INFO][0m django.server: "GET /leaderboard/ HTTP/1.1" 200 11756
+18-03-2024 12:45:37 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 200 11306
+18-03-2024 12:46:00 [38;5;25m[INFO][0m django.server: - Broken pipe from ('127.0.0.1', 60025)
+18-03-2024 12:51:43 [38;5;25m[INFO][0m django.utils.autoreload: C:\Users\downw\OneDrive\Documents\ECM2434_Group_Software_Engineering_Project\carbonCommuter\leaderboard\views.py changed, reloading.
+18-03-2024 12:51:43 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+18-03-2024 12:52:02 [38;5;9m[ERROR][0m django.request: Internal Server Error: /leaderboard/
+Traceback (most recent call last):
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "c:\Users\downw\OneDrive\Documents\ECM2434_Group_Software_Engineering_Project\carbonCommuter\leaderboard\views.py", line 108, in leaderboard
+    follower_entry.username = follower.username
+AttributeError: 'Leaderboard_Entry' object has no attribute 'username'
+18-03-2024 12:52:02 [38;5;9m[ERROR][0m django.server: "GET /leaderboard/ HTTP/1.1" 500 76445
+18-03-2024 12:52:50 [38;5;25m[INFO][0m django.utils.autoreload: C:\Users\downw\OneDrive\Documents\ECM2434_Group_Software_Engineering_Project\carbonCommuter\leaderboard\models.py changed, reloading.
+18-03-2024 12:52:51 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+18-03-2024 12:53:10 [38;5;9m[ERROR][0m django.request: Internal Server Error: /leaderboard/
+Traceback (most recent call last):
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "c:\Users\downw\OneDrive\Documents\ECM2434_Group_Software_Engineering_Project\carbonCommuter\leaderboard\views.py", line 108, in leaderboard
+    follower_entry.username = follower.username
+AttributeError: 'Leaderboard_Entry' object has no attribute 'username'
+18-03-2024 12:53:10 [38;5;9m[ERROR][0m django.server: "GET /leaderboard/ HTTP/1.1" 500 76443
+18-03-2024 13:19:08 [38;5;9m[ERROR][0m django.request: Internal Server Error: /leaderboard/
+Traceback (most recent call last):
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "c:\Users\downw\OneDrive\Documents\ECM2434_Group_Software_Engineering_Project\carbonCommuter\leaderboard\views.py", line 108, in leaderboard
+    follower_entry.username = follower.username
+AttributeError: 'Leaderboard_Entry' object has no attribute 'username'
+18-03-2024 13:19:08 [38;5;9m[ERROR][0m django.server: "GET /leaderboard/ HTTP/1.1" 500 76443
+18-03-2024 13:19:21 [38;5;25m[INFO][0m django.utils.autoreload: C:\Users\downw\OneDrive\Documents\ECM2434_Group_Software_Engineering_Project\carbonCommuter\common\utils.py changed, reloading.
+18-03-2024 13:19:21 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+18-03-2024 13:19:37 [38;5;25m[INFO][0m django.server: "GET /leaderboard/ HTTP/1.1" 200 11756
+18-03-2024 13:19:37 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 304 0
+18-03-2024 13:21:43 [38;5;25m[INFO][0m django.server: "GET /leaderboard/ HTTP/1.1" 200 11832
+18-03-2024 13:26:49 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 7881
+18-03-2024 13:26:49 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/14days.png HTTP/1.1" 304 0
+18-03-2024 13:26:49 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/30days.png HTTP/1.1" 304 0
+18-03-2024 13:26:49 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/75days.png HTTP/1.1" 304 0
+18-03-2024 13:26:49 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/100days.png HTTP/1.1" 304 0
+18-03-2024 13:26:49 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Harrison.png HTTP/1.1" 304 0
+18-03-2024 13:26:49 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/SportsPark.png HTTP/1.1" 304 0
+18-03-2024 13:26:51 [38;5;220m[WARNING][0m django.request: Not Found: /leaderboard/user_leaderboard
+18-03-2024 13:26:51 [38;5;220m[WARNING][0m django.server: "GET /leaderboard/user_leaderboard HTTP/1.1" 404 3267
+18-03-2024 13:27:05 [38;5;25m[INFO][0m django.utils.autoreload: C:\Users\downw\OneDrive\Documents\ECM2434_Group_Software_Engineering_Project\carbonCommuter\leaderboard\urls.py changed, reloading.
+18-03-2024 13:27:05 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+18-03-2024 13:27:18 [38;5;9m[ERROR][0m django.request: Internal Server Error: /leaderboard/user_leaderboard
+Traceback (most recent call last):
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "c:\Users\downw\OneDrive\Documents\ECM2434_Group_Software_Engineering_Project\carbonCommuter\leaderboard\views.py", line 30, in user_leaderboard
+    journey_week_monday = journey.time_finished - timedelta(days=journey.time_finished.weekday())
+AttributeError: 'NoneType' object has no attribute 'weekday'
+18-03-2024 13:27:18 [38;5;9m[ERROR][0m django.server: "GET /leaderboard/user_leaderboard HTTP/1.1" 500 77696
+18-03-2024 13:28:54 [38;5;9m[ERROR][0m django.request: Internal Server Error: /leaderboard/user_leaderboard
+Traceback (most recent call last):
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\downw\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.10_qbz5n2kfra8p0\LocalCache\local-packages\Python310\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "c:\Users\downw\OneDrive\Documents\ECM2434_Group_Software_Engineering_Project\carbonCommuter\leaderboard\views.py", line 30, in user_leaderboard
+    journey_week_monday = journey.time_finished - timedelta(days=journey.time_finished.weekday())
+AttributeError: 'NoneType' object has no attribute 'weekday'
+18-03-2024 13:28:54 [38;5;9m[ERROR][0m django.server: "GET /leaderboard/user_leaderboard HTTP/1.1" 500 77698
+18-03-2024 13:29:11 [38;5;25m[INFO][0m django.utils.autoreload: C:\Users\downw\OneDrive\Documents\ECM2434_Group_Software_Engineering_Project\carbonCommuter\leaderboard\views.py changed, reloading.
+18-03-2024 13:29:11 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+18-03-2024 13:29:29 [38;5;25m[INFO][0m django.server: "GET /leaderboard/user_leaderboard HTTP/1.1" 200 10523
+18-03-2024 13:29:29 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 304 0
+18-03-2024 13:30:25 [38;5;25m[INFO][0m django.utils.autoreload: C:\Users\downw\OneDrive\Documents\ECM2434_Group_Software_Engineering_Project\carbonCommuter\leaderboard\views.py changed, reloading.
+18-03-2024 13:30:26 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+18-03-2024 13:30:41 [38;5;25m[INFO][0m django.server: "GET /leaderboard/user_leaderboard HTTP/1.1" 200 11832
+18-03-2024 13:31:01 [38;5;25m[INFO][0m django.server: "GET /leaderboard/ HTTP/1.1" 200 10523

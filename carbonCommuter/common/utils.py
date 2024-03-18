@@ -237,6 +237,7 @@ def leaderboardData(users_journeys):
             user_entry.name = journey.user.first_name + " " + journey.user.last_name
             user_entry.totalCo2Saved = 0
             user_entry.id = current_id
+            user_entry.username = journey.user.username
         try:
             user_entry.totalCo2Saved += journey.carbon_savings
         except:
