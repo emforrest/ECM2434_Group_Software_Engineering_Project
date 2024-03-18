@@ -1210,3 +1210,209 @@ AttributeError: 'NoneType' object has no attribute 'weekday'
 18-03-2024 16:52:41 [38;5;25m[INFO][0m django.server: "GET /register/PrivacyPolicy HTTP/1.1" 200 4657
 18-03-2024 16:52:54 [38;5;25m[INFO][0m django.server: "GET /register/ HTTP/1.1" 200 4847
 18-03-2024 16:52:55 [38;5;25m[INFO][0m django.server: "GET /register/ HTTP/1.1" 200 4847
+18-03-2024 19:35:18 [38;5;25m[INFO][0m django.utils.autoreload: Watching for file changes with StatReloader
+18-03-2024 19:35:27 [38;5;25m[INFO][0m django.server: code 400, message Bad request version ('rÁ2à"ö0tÉ/Z@ï¦y3él\x9bÑí\x88¸ó$+k³æÊ\xadZ\x00')
+18-03-2024 19:35:27 [38;5;9m[ERROR][0m django.server: You're accessing the development server over HTTPS, but it only supports HTTP.
+18-03-2024 19:35:27 [38;5;25m[INFO][0m django.server: code 400, message Bad request version ('::\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x01\xadúú\x00\x00\x00#\x00\x00\x00\x12\x00\x00\x00')
+18-03-2024 19:35:27 [38;5;9m[ERROR][0m django.server: You're accessing the development server over HTTPS, but it only supports HTTP.
+18-03-2024 19:35:30 [38;5;25m[INFO][0m django.server: code 400, message Bad request version ("D`e©3a'Å`\x8eÒQÈÏ\x9e²ìja8B\x1bXÿÌëzYi([ò\x91÷-7D\x00")
+18-03-2024 19:35:30 [38;5;9m[ERROR][0m django.server: You're accessing the development server over HTTPS, but it only supports HTTP.
+18-03-2024 19:35:30 [38;5;25m[INFO][0m django.server: code 400, message Bad request syntax ('\x16\x03\x01\x02\x00\x01\x00\x01ü\x03\x03-mu\xadJ')
+18-03-2024 19:35:30 [38;5;9m[ERROR][0m django.server: You're accessing the development server over HTTPS, but it only supports HTTP.
+18-03-2024 19:35:43 [38;5;25m[INFO][0m django.server: code 400, message Bad request version ('\x00\x02\x01\x00\x00')
+18-03-2024 19:35:43 [38;5;9m[ERROR][0m django.server: You're accessing the development server over HTTPS, but it only supports HTTP.
+18-03-2024 19:35:43 [38;5;25m[INFO][0m django.server: code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x02\x1a\x01\x00\x02\x16\x03\x03Ïã8Sè\x92Ë\x97ÿûÏÿZ×±ù\x0f¼³ÛyòÃEäçÑØì1óÏ')
+18-03-2024 19:35:43 [38;5;9m[ERROR][0m django.server: You're accessing the development server over HTTPS, but it only supports HTTP.
+18-03-2024 19:35:56 [38;5;25m[INFO][0m django.server: code 400, message Bad request version ('\x00')
+18-03-2024 19:35:56 [38;5;9m[ERROR][0m django.server: You're accessing the development server over HTTPS, but it only supports HTTP.
+18-03-2024 19:35:56 [38;5;25m[INFO][0m django.server: code 400, message Bad request version ("U×.ò\xad'")
+18-03-2024 19:35:56 [38;5;9m[ERROR][0m django.server: You're accessing the development server over HTTPS, but it only supports HTTP.
+18-03-2024 19:36:07 [38;5;25m[INFO][0m django.server: code 400, message Bad request version ('\x00\x12\x00\x10\x04\x03\x08\x04\x04\x01\x05\x03\x08\x05\x05\x01\x08\x06\x06\x01\x00\x1b\x00\x03\x02\x00\x02\x00')
+18-03-2024 19:36:07 [38;5;25m[INFO][0m django.server: code 400, message Bad request version ('/Ú\x00')
+18-03-2024 19:36:07 [38;5;9m[ERROR][0m django.server: You're accessing the development server over HTTPS, but it only supports HTTP.
+18-03-2024 19:36:07 [38;5;9m[ERROR][0m django.server: You're accessing the development server over HTTPS, but it only supports HTTP.
+18-03-2024 19:36:07 [38;5;25m[INFO][0m django.server: code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x02\x00\x01\x00\x01ü\x03\x03¦\x12\\o1=ÜF\x7fPÕ{}\x80Dà\xad\x9c=æÊî#l\x19Ö\x02ýà\x7f´\x04')
+18-03-2024 19:36:07 [38;5;25m[INFO][0m django.server: code 400, message Bad request version ('Äõ\x94ÎD\x96·Ê\x18\x1b·7¹\x91ãçÛ¿§m¨\x94#k!èè¡÷úbu¶,i\x91\x05úµa.y\x8b\x03\x7f\x86ÀæÕô:3?8Ø\x82-Øy\x84LV\x9d+\x97´ççdl\x006\\Ä\x80\x995')
+18-03-2024 19:36:07 [38;5;9m[ERROR][0m django.server: You're accessing the development server over HTTPS, but it only supports HTTP.
+18-03-2024 19:36:07 [38;5;9m[ERROR][0m django.server: You're accessing the development server over HTTPS, but it only supports HTTP.
+18-03-2024 19:36:10 [38;5;25m[INFO][0m django.server: code 400, message Bad request version ('¹¤v\x88×G\x83\x18\x1a')
+18-03-2024 19:36:10 [38;5;9m[ERROR][0m django.server: You're accessing the development server over HTTPS, but it only supports HTTP.
+18-03-2024 19:36:10 [38;5;25m[INFO][0m django.server: code 400, message Bad request version ("\xadÂjÞK\x8b\x10ÓW\x05ÆáÞ\x82c\x07'\x10ê")
+18-03-2024 19:36:10 [38;5;9m[ERROR][0m django.server: You're accessing the development server over HTTPS, but it only supports HTTP.
+18-03-2024 19:36:16 [38;5;25m[INFO][0m django.server: code 400, message Bad request version ('ÀÞ\x99¸\x8c\x90Ô°Ï_\x0eÈ2iQCÉÿ³0')
+18-03-2024 19:36:16 [38;5;25m[INFO][0m django.server: code 400, message Bad request version ('\x00\x02\x01\x00Di\x00\x05\x00\x03\x02h2\x00+\x00\x07\x06ÊÊ\x03\x04\x03\x03\x00\x12\x00\x00\x00')
+18-03-2024 19:36:16 [38;5;9m[ERROR][0m django.server: You're accessing the development server over HTTPS, but it only supports HTTP.
+18-03-2024 19:36:16 [38;5;9m[ERROR][0m django.server: You're accessing the development server over HTTPS, but it only supports HTTP.
+18-03-2024 19:36:16 [38;5;25m[INFO][0m django.server: code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x02\x00\x01\x00\x01ü\x03\x03¯y¬\x87nüîÉÇ¢\x9aMÏÃL¸N\x12\x88_ËúÚÏl')
+18-03-2024 19:36:16 [38;5;25m[INFO][0m django.server: code 400, message Bad request version ('¯D,Æ\x80(')
+18-03-2024 19:36:16 [38;5;9m[ERROR][0m django.server: You're accessing the development server over HTTPS, but it only supports HTTP.
+18-03-2024 19:36:16 [38;5;9m[ERROR][0m django.server: You're accessing the development server over HTTPS, but it only supports HTTP.
+18-03-2024 19:36:20 [38;5;25m[INFO][0m django.server: code 400, message Bad request version ('Ï\x00\x17\x00\x00\x00')
+18-03-2024 19:36:20 [38;5;25m[INFO][0m django.server: code 400, message Bad request version ('\x06\x03N~LX\x83m')
+18-03-2024 19:36:20 [38;5;9m[ERROR][0m django.server: You're accessing the development server over HTTPS, but it only supports HTTP.
+18-03-2024 19:36:20 [38;5;9m[ERROR][0m django.server: You're accessing the development server over HTTPS, but it only supports HTTP.
+18-03-2024 19:36:20 [38;5;25m[INFO][0m django.server: code 400, message Bad request version ('ó\x17Óº¶{')
+18-03-2024 19:36:20 [38;5;25m[INFO][0m django.server: code 400, message Bad request version ('\x17\x14è{\\ûNj\x03YfåZ#4\x9fæo')
+18-03-2024 19:36:20 [38;5;9m[ERROR][0m django.server: You're accessing the development server over HTTPS, but it only supports HTTP.
+18-03-2024 19:36:20 [38;5;9m[ERROR][0m django.server: You're accessing the development server over HTTPS, but it only supports HTTP.
+18-03-2024 19:36:37 [38;5;25m[INFO][0m django.server: code 400, message Bad request version ('\x9c=iiW\x00')
+18-03-2024 19:36:37 [38;5;9m[ERROR][0m django.server: You're accessing the development server over HTTPS, but it only supports HTTP.
+18-03-2024 19:36:37 [38;5;25m[INFO][0m django.server: code 400, message Bad request version ('\x8a\x8a\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x01\x93êê\x00\x00ÿ\x01\x00\x01\x00\x00')
+18-03-2024 19:36:37 [38;5;9m[ERROR][0m django.server: You're accessing the development server over HTTPS, but it only supports HTTP.
+18-03-2024 19:36:40 [38;5;25m[INFO][0m django.server: code 400, message Bad request version ('0')
+18-03-2024 19:36:40 [38;5;9m[ERROR][0m django.server: You're accessing the development server over HTTPS, but it only supports HTTP.
+18-03-2024 19:36:40 [38;5;25m[INFO][0m django.server: code 400, message Bad request version ('ÑÔï<Di\x00\x05\x00\x03\x02h2\x00#\x00\x00\x00')
+18-03-2024 19:36:40 [38;5;9m[ERROR][0m django.server: You're accessing the development server over HTTPS, but it only supports HTTP.
+18-03-2024 19:36:51 [38;5;25m[INFO][0m django.server: "GET / HTTP/1.1" 302 0
+18-03-2024 19:36:53 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 8258
+18-03-2024 19:36:53 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 200 11861
+18-03-2024 19:36:53 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/dailyStreak.png HTTP/1.1" 200 129296
+18-03-2024 19:36:53 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/7days.png HTTP/1.1" 200 143056
+18-03-2024 19:36:53 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/14days.png HTTP/1.1" 200 138906
+18-03-2024 19:36:53 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/50days.png HTTP/1.1" 200 138645
+18-03-2024 19:36:53 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/30days.png HTTP/1.1" 200 137733
+18-03-2024 19:36:53 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/75days.png HTTP/1.1" 200 148547
+18-03-2024 19:36:53 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Amory.png HTTP/1.1" 200 190873
+18-03-2024 19:36:53 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Streaks/100days.png HTTP/1.1" 200 134634
+18-03-2024 19:36:53 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/BusinessSchool.png HTTP/1.1" 200 184323
+18-03-2024 19:36:53 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/DevonshireHouse.png HTTP/1.1" 200 196478
+18-03-2024 19:36:53 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Forum.png HTTP/1.1" 200 202350
+18-03-2024 19:36:53 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Harrison.png HTTP/1.1" 200 177966
+18-03-2024 19:36:53 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/InnovationCentre.png HTTP/1.1" 200 186886
+18-03-2024 19:36:53 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Laver.png HTTP/1.1" 200 197293
+18-03-2024 19:36:53 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/LSI.png HTTP/1.1" 200 206471
+18-03-2024 19:36:53 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/PeterChalk.png HTTP/1.1" 200 182142
+18-03-2024 19:36:53 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Queens.png HTTP/1.1" 200 196906
+18-03-2024 19:36:53 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/Swiot.png HTTP/1.1" 200 161776
+18-03-2024 19:36:53 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/WashingtonSinger.png HTTP/1.1" 200 209215
+18-03-2024 19:36:53 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Locations/SportsPark.png HTTP/1.1" 200 175221
+18-03-2024 19:36:53 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Leaderboard/TopLeaderboard.png HTTP/1.1" 200 126194
+18-03-2024 19:36:53 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/forum.jpg HTTP/1.1" 304 0
+18-03-2024 19:36:53 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Leaderboard/1weekLeaderboard.png HTTP/1.1" 200 144189
+18-03-2024 19:36:53 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/CarbonCommuter%20images/Leaderboard/1monthLeaderboard.png HTTP/1.1" 200 142964
+18-03-2024 19:36:54 [38;5;220m[WARNING][0m django.request: Not Found: /favicon.ico
+18-03-2024 19:36:54 [38;5;220m[WARNING][0m django.server: "GET /favicon.ico HTTP/1.1" 404 3275
+18-03-2024 19:37:10 [38;5;25m[INFO][0m django.server: "GET /user/journeys/create HTTP/1.1" 200 7696
+18-03-2024 19:37:10 [38;5;25m[INFO][0m django.server: "GET /media/loading/pikachu.gif HTTP/1.1" 304 0
+18-03-2024 19:37:10 [38;5;25m[INFO][0m django.server: "GET /static/js/upload.js HTTP/1.1" 200 5218
+18-03-2024 19:37:44 [38;5;25m[INFO][0m django.server: "GET /user/ HTTP/1.1" 200 8258
+18-03-2024 19:37:49 [38;5;9m[ERROR][0m django.request: Internal Server Error: /user/journeys/create
+Traceback (most recent call last):
+  File "C:\Users\Sam Townley\OneDrive\Documents\University\Group Software Project\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Sam Townley\OneDrive\Documents\University\Group Software Project\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Sam Townley\OneDrive\Documents\University\Group Software Project\env\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Sam Townley\OneDrive\Documents\University\Group Software Project\carbonCommuter\user\views.py", line 239, in start_journey
+    return render(request, "user/start_journey.html")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Sam Townley\OneDrive\Documents\University\Group Software Project\env\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Sam Townley\OneDrive\Documents\University\Group Software Project\env\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Sam Townley\OneDrive\Documents\University\Group Software Project\env\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Sam Townley\OneDrive\Documents\University\Group Software Project\env\Lib\site-packages\django\template\backends\django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Sam Townley\OneDrive\Documents\University\Group Software Project\env\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Sam Townley\OneDrive\Documents\University\Group Software Project\env\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Sam Townley\OneDrive\Documents\University\Group Software Project\env\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Sam Townley\OneDrive\Documents\University\Group Software Project\env\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "C:\Users\Sam Townley\OneDrive\Documents\University\Group Software Project\env\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Sam Townley\OneDrive\Documents\University\Group Software Project\env\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    return parser.parse()
+           ^^^^^^^^^^^^^^
+  File "C:\Users\Sam Townley\OneDrive\Documents\University\Group Software Project\env\Lib\site-packages\django\template\base.py", line 481, in parse
+    raise self.error(token, e)
+  File "C:\Users\Sam Townley\OneDrive\Documents\University\Group Software Project\env\Lib\site-packages\django\template\base.py", line 479, in parse
+    filter_expression = self.compile_filter(token.contents)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Sam Townley\OneDrive\Documents\University\Group Software Project\env\Lib\site-packages\django\template\base.py", line 597, in compile_filter
+    return FilterExpression(token, self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Sam Townley\OneDrive\Documents\University\Group Software Project\env\Lib\site-packages\django\template\base.py", line 694, in __init__
+    self.args_check(filter_name, filter_func, args)
+  File "C:\Users\Sam Townley\OneDrive\Documents\University\Group Software Project\env\Lib\site-packages\django\template\base.py", line 756, in args_check
+    raise TemplateSyntaxError(
+django.template.exceptions.TemplateSyntaxError: default requires 2 arguments, 1 provided
+18-03-2024 19:37:49 [38;5;9m[ERROR][0m django.server: "GET /user/journeys/create HTTP/1.1" 500 177669
+18-03-2024 19:38:04 [38;5;9m[ERROR][0m django.request: Internal Server Error: /user/journeys/create
+Traceback (most recent call last):
+  File "C:\Users\Sam Townley\OneDrive\Documents\University\Group Software Project\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Sam Townley\OneDrive\Documents\University\Group Software Project\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Sam Townley\OneDrive\Documents\University\Group Software Project\env\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Sam Townley\OneDrive\Documents\University\Group Software Project\carbonCommuter\user\views.py", line 239, in start_journey
+    return render(request, "user/start_journey.html")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Sam Townley\OneDrive\Documents\University\Group Software Project\env\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Sam Townley\OneDrive\Documents\University\Group Software Project\env\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Sam Townley\OneDrive\Documents\University\Group Software Project\env\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Sam Townley\OneDrive\Documents\University\Group Software Project\env\Lib\site-packages\django\template\backends\django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Sam Townley\OneDrive\Documents\University\Group Software Project\env\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Sam Townley\OneDrive\Documents\University\Group Software Project\env\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Sam Townley\OneDrive\Documents\University\Group Software Project\env\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Sam Townley\OneDrive\Documents\University\Group Software Project\env\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "C:\Users\Sam Townley\OneDrive\Documents\University\Group Software Project\env\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Sam Townley\OneDrive\Documents\University\Group Software Project\env\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    return parser.parse()
+           ^^^^^^^^^^^^^^
+  File "C:\Users\Sam Townley\OneDrive\Documents\University\Group Software Project\env\Lib\site-packages\django\template\base.py", line 481, in parse
+    raise self.error(token, e)
+  File "C:\Users\Sam Townley\OneDrive\Documents\University\Group Software Project\env\Lib\site-packages\django\template\base.py", line 479, in parse
+    filter_expression = self.compile_filter(token.contents)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Sam Townley\OneDrive\Documents\University\Group Software Project\env\Lib\site-packages\django\template\base.py", line 597, in compile_filter
+    return FilterExpression(token, self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Sam Townley\OneDrive\Documents\University\Group Software Project\env\Lib\site-packages\django\template\base.py", line 694, in __init__
+    self.args_check(filter_name, filter_func, args)
+  File "C:\Users\Sam Townley\OneDrive\Documents\University\Group Software Project\env\Lib\site-packages\django\template\base.py", line 756, in args_check
+    raise TemplateSyntaxError(
+django.template.exceptions.TemplateSyntaxError: default_if_none requires 2 arguments, 1 provided
+18-03-2024 19:38:04 [38;5;9m[ERROR][0m django.server: "GET /user/journeys/create HTTP/1.1" 500 177924
+18-03-2024 19:38:25 [38;5;25m[INFO][0m django.server: "GET /user/journeys/create HTTP/1.1" 200 7696
+18-03-2024 19:38:25 [38;5;25m[INFO][0m django.server: "GET /static/carbonCommuter/style.css HTTP/1.1" 304 0
+18-03-2024 19:38:25 [38;5;25m[INFO][0m django.server: "GET /static/js/upload.js HTTP/1.1" 304 0
+18-03-2024 19:38:32 [38;5;25m[INFO][0m django.server: "GET /user/journeys/create HTTP/1.1" 200 7697

@@ -1,8 +1,9 @@
 
-function onLoad() {
+function onLoad(tab = 1) {
     window.attempts = 0;
     window.last_accuracy = "0";
-    window.current_tab = 1;
+    window.current_tab = tab;
+    document.getElementById(`tab${tab}`).style.display = "block";
     getLocation();
 }
 

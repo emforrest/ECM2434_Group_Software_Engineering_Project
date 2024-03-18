@@ -27,7 +27,7 @@
     </script>
 </head>
 
-    <body onload="onLoad()">
+    <body onload="onLoad( '{{ tab|escapejs|default:1 }}' )">
         <header>
             <!--The navbar, consistent across the site-->
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -73,11 +73,11 @@
                     <h1>Start A New Journey</h1>
 
                     <!--These hidden inputs are used to convert the user's off-campus location into latitude and longitude coordinates and pass them through-->
-                    <input type="hidden" id="lat" name="lat" value="">
-                    <input type="hidden" id="long" name="long" value="">
-                    <input type="hidden" id="address" name="address" value="">
+                    <input type="hidden" id="lat" name="lat" value="{{ lat|escape }}">
+                    <input type="hidden" id="long" name="long" value="{{ long|escape }}">
+                    <input type="hidden" id="address" name="address" value="{{ address|escape }}">
 
-                    <div id="tab1" style="text-align: center;">
+                    <div id="tab1" style="text-align: center; display: none;">
                         <h3>Getting your current location</h3>
                         <br>
                         <div style="margin: auto; width: 50%">
@@ -90,7 +90,7 @@
                      <div id="tab2" style="display: none">
                         <h4>Where are you starting your journey from today?</h4>
                         <br>
-                        <button type="button" class="btn" onclick="getLocation();">Get My Location</button>
+                        <button type="button" class="btn" onclick="getLocation();">Re-fetch Location</button>
                         <br>
                         
                         <br>
@@ -134,7 +134,7 @@
                         <br>
                         <div>
                             <button type="button" class="btn" style="display: inline-block; width: 49%" onclick="prevTab();">Go Back</button>
-                            <button type="submit" class="btn" style="display: inline-block; width: 49%">Confirm Transport</button>
+                            <button type="submit" id="btn_submit" class="btn" style="display: inline-block; width: 49%">Confirm Transport</button>
                         </div>
                     </div>
                 </form>
