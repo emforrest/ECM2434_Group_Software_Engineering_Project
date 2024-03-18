@@ -57,6 +57,41 @@
                     <p>Your request to join this group is pending approval.</p>
                     <button class="btn btn-secondary" disabled>Join Pending</button>
                 {% else %}
+                    <p>You are not a member of this group.</p>
+                    {% if group_profile.is_private %}
+                        {% if has_requested_join %}
+                            <p>Your request to join this group is pending approval.</p>
+                            <button class="btn btn-secondary" disabled>Join Pending</button>
+                        {% else %}
+                            <form action="{% url 'request_join_group' group.id %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-primary">Request to Join</button>
+                            </form>
+                        {% endif %}
+                    {% else %}
+                        <form action="{% url 'join_group' group.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary">Join Group</button>
+                        </form>
+                    {% endif %}
+                {% endif %} <!-- This closes the first if is_member condition -->
+            </div>
+            <br>
+            <!-- Group Leader and Members Section -->
+            <div class="wrapper">
+                <h2>Group Leader</h2>
+                <a href="{% url 'profile' username=leader.username %}">{{ leader.username }}</a>
+            </div>
+            <br>
+            <!-- Members List Section -->
+            <div class="wrapper">
+                <h1>Group Members</h1>
+                {% for member in members %}
+                <div>
+                    <a href="{% url 'profile' username=member.username %}">{{ member.username }}</a>
+                    {% if leader.username == request.user.username and member != leader %}
+                    <form action="{% url 'remove_member' group.id member.id %}" method="post" style="display: inline;">
+                    <!-- not sure if we need this -->
                     <form action="{% url 'request_join_group' group.id %}" method="post">
                         {% csrf_token %}
                         <button type="submit" class="btn btn-primary">Request to Join</button>
