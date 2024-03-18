@@ -31,6 +31,7 @@ def register(request):
         username = request.POST.get("username")
         password1 = request.POST.get("password1")
         password2 = request.POST.get("password2")
+        privacypolicy = request.POST.get("Privacy Policy")
 
         #checking whether the passwords match
         if password1 != password2:
@@ -56,6 +57,11 @@ def register(request):
         except ValidationError as error:
             context = {"error": error}
             return render(request, "register/register.html", context)
+    
+        #checking if user has accepted Privacy Policy
+        if privacypolicy != "Accept": 
+            context = {"error": "You need to read and accept the Privacy Policy"}
+            return render(request, "register/register.html", context)
         
         #creating the new user and redirecting to user home page
         newUser = User.objects.create_user(first_name=first_name, 
@@ -73,4 +79,7 @@ def register(request):
         return redirect("/user/")
     
     return render(request, "register/register.html")
+
+def PrivacyPolicy (request):
+    return render(request, "register/PrivacyPolicy.html")
 
