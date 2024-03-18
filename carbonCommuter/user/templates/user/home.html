@@ -86,9 +86,16 @@
                         {% endif %}
                     </div>
                     <div class="column-box">
-                        <h1>Badges</h1>
-                        <br>
-                        <p>You haven't earned any badges. Better get exploring!</p> <!--Display the user's badges here-->
+                        <h1>Following</h1>
+                        {% if followingUsers.length == 0 %}
+                        <p>You aren't following anyone.</p>
+                        {% else %}
+                            {% for member in followingUsers %}
+                            <div>
+                                <a href="{% url 'profile' username=member.username %}">{{ member.username }}</a>
+                            </div>
+                            {% endfor %}
+                        {%endif%}
                     </div>
                 </div>
             </div>
