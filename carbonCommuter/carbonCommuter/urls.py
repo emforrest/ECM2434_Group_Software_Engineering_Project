@@ -16,9 +16,12 @@ Including another URLconf
 
 Authors:
 - Eleanor Forrest
+- Sam Townley
 """
 from django.contrib import admin
+from django.conf import settings
 from django.urls import include, path
+from django.conf.urls.static import static
 from login import views
 
 urlpatterns = [
@@ -33,3 +36,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("adminUser/", include("adminUser.urls")),
 ]
+
+if settings.DEBUG:
+    # handling media in Debug mode (images, gifs, etc.)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

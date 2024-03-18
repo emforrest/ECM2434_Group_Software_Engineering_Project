@@ -63,6 +63,10 @@ def backup_logs():
                     if file.endswith(".log"):
                         zip.write(f"../logs/{file}")
 
+# Create logs directory if one is missing
+if not("logs" in os.listdir("..")):
+    os.mkdir("../logs")
+
 # Trigger backup
 backup_logs()
 
