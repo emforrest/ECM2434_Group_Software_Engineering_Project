@@ -1,19 +1,8 @@
 
-function onLoad(tab = "") {
+function onLoad() {
     window.attempts = 0;
     window.last_accuracy = "0";
-    
-    if (tab != "") {
-        window.current_tab = parseInt(tab);
-    } else {
-        window.current_tab = 1;
-    }
-
-    if (window.current_tab > 0) {
-        window.current_tab = 0;
-        nextTab();
-        getLocation();
-    }
+    window.current_tab = 1;
 }
 
 function showManualInput() {
@@ -55,7 +44,7 @@ function checkAccuracy(position) {
         showPosition(position);
     } else if (parseFloat(position.coords.accuracy) < 300) {
         showPosition(position);
-        setTimeout(nextTab, 2000);
+        setTimeout(nextTab, 3000);
     } else {
         window.attempts++;
         if (window.attempts >= 3 && Math.abs(parseFloat(window.last_accuracy) - parseFloat(position.coords.accuracy)) <= 0.001) {
