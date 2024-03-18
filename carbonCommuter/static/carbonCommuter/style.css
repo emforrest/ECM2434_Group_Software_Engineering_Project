@@ -215,7 +215,7 @@ tbody tr:nth-child(n + 11) {
     }
 }
 
-@media (max-height: 700px) {
+@media (height: 700px) {
     div.table {
         height: 10%;
     }
