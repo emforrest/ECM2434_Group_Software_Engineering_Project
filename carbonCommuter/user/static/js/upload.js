@@ -117,6 +117,24 @@ function getAddress(position) {
     };
 }
 
+function verifyAddress() {
+    if (document.getElementById("lat").value == "") {
+        window.error = "An address must be provided before continuing!";
+        showError();
+        return false;
+    } else if (document.getElementById("long").value == "") {
+        window.error = "An address must be provided before continuing!";
+        showError();
+        return false;
+    } else if (document.getElementById("address").value == "") {
+        window.error = "An address must be provided before continuing!";
+        showError();
+        return false;
+    } else {
+        return true;
+    }
+}
+
 let autocomplete;
 function initAutocomplete(){
     autocomplete = new google.maps.places.Autocomplete(
