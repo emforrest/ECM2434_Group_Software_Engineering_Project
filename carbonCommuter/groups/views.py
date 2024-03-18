@@ -46,6 +46,7 @@ def group_page(request, group_id):
     is_member = request.user.groups.filter(id=group_id).exists()
     members = group.user_set.all()
     join_requests = GroupJoinRequest.objects.filter(group=group).all() if group_profile.is_private else None
+    has_requested_join = GroupJoinRequest.objects.filter(group=group, user=request.user).exists()
 
     context = {
         'group': group,
@@ -54,6 +55,7 @@ def group_page(request, group_id):
         'members': members,
         'leader': group_profile.leader,
         'join_requests': join_requests,  # Make sure to pass this to the template
+        'has_requested_join': has_requested_join,
     }
     return render(request, 'groups/group_page.html', context)
 
@@ -205,9 +207,15 @@ def accept_join_request(request, group_id, request_id):
     if request.user != group_profile.leader:
         return HttpResponseForbidden("You are not authorized to perform this action.")
 
+    # Add the user to the group
     join_request.user.groups.add(join_request.group)
+    # Delete the join request as it's been handled
     join_request.delete()
-    return redirect('view_join_requests', group_id=group_id)
+    # Optionally, show a success message
+    messages.success(request, "Join request accepted.")
+
+    # Redirect to the group page
+    return redirect('group_page', group_id=group_id)
 
 
 @login_required
@@ -218,6 +226,12 @@ def reject_join_request(request, group_id, request_id):
     if request.user != group_profile.leader:
         return HttpResponseForbidden("You are not authorized to perform this action.")
 
+    # Delete the join request as it's been handled
     join_request.delete()
-    return redirect('view_join_requests', group_id=group_id)
+    # Optionally, show a success message
+    messages.success(request, "Join request rejected.")
+
+    # Redirect to the group page
+    return redirect('group_page', group_id=group_id)
+
 

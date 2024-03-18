@@ -62,12 +62,23 @@
                     {% endif %}
                 {% else %}
                     <p>You are not a member of this group.</p>
-                    <!-- Adjusted to 'join_group' for public groups or to request to join for private groups -->
-                    <form action="{% url 'join_group' group.id %}" method="post">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-primary">Request to Join</button>
-                    </form>
-                {% endif %}
+                    {% if group_profile.is_private %}
+                        {% if has_requested_join %}
+                            <p>Your request to join this group is pending approval.</p>
+                            <button class="btn btn-secondary" disabled>Join Pending</button>
+                        {% else %}
+                            <form action="{% url 'request_join_group' group.id %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-primary">Request to Join</button>
+                            </form>
+                        {% endif %}
+                    {% else %}
+                        <form action="{% url 'join_group' group.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary">Join Group</button>
+                        </form>
+                    {% endif %}
+                {% endif %} <!-- This closes the first if is_member condition -->
             </div>
             <br>
             <!-- Group Leader and Members Section -->
@@ -119,9 +130,5 @@
         <div class="footer">
             <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
         </div>
-        
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     </body>
 </html>
