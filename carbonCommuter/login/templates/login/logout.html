@@ -36,30 +36,33 @@
         </header>
 
         <br>
-        <div class = "wrapper">
-            <!-- ensuring the user is logged into an account to be logged out of -->
-            {% if request.user.is_authenticated %}
-            <form action="" method='POST'>
-                {% csrf_token %} <!-- for security of the inputs of the POST form -->
-                <!-- checking the user definitely wants to log out. Once user clicks button, will logout -->
-                <p>Are you sure you want to logout?</p>
-                <button type='submit' class="btn">Yes, logout.</button>
+        <div class="container">
+            <div class = "wrapper">
+                <!-- ensuring the user is logged into an account to be logged out of -->
+                {% if request.user.is_authenticated %}
+                <form action="" method='POST'>
+                    {% csrf_token %} <!-- for security of the inputs of the POST form -->
+                    <!-- checking the user definitely wants to log out. Once user clicks button, will logout -->
+                    <p>Are you sure you want to logout?</p>
+                    <button type='submit' class="btn">Yes, logout.</button>
 
-            </form>
-            {% else %}
-            <!-- if the user isn't already logged in to an account, will allow the user to either login or register -->
-            <p>You're not logged in. Would you like to <a href="/login/">login</a>?</p>
-            <div class="register-link">
-                <p>Don't have an account? <a href="/register/">Register</a></p>
+                </form>
+                {% else %}
+                <!-- if the user isn't already logged in to an account, will allow the user to either login or register -->
+                <p>You're not logged in. Would you like to <a href="/login/">login</a>?</p>
+                <div class="register-link">
+                    <p>Don't have an account? <a href="/register/">Register</a></p>
+                </div>
+                {% endif %}
             </div>
-            {% endif %}
-        </div>
 
-        <br>
-        <!--The footer, consistent across the site-->
-        <div class="footer">
-            <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
+            <br>
+            <!--The footer, consistent across the site-->
+            <div class="footer">
+                <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
+            </div>
         </div>
+        
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
