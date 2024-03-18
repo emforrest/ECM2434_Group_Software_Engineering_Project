@@ -4,6 +4,7 @@ from . import views
 
 urlpatterns = [
     path("", views.mainAdmin, name="mainAdmin"),
-    path("createEvent/", views.createEvent, name = "createEvent")
+    path("chooseEvent/", views.chooseEvent, name = "chooseEvent"),
+    path("confirmEvent/", views.confirmEvent, name="confirmEvent")
 
 ]

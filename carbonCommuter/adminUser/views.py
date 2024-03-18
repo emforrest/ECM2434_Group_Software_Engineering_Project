@@ -19,6 +19,24 @@ def mainAdmin(request):
     """
     return render(request, "adminUser/mainAdmin.html")
 
-def createEvent(request):
-    return render(request, "adminUser/createEvent.html")
+def chooseEvent(request):
+    return render(request, "adminUser/chooseEvent.html")
+
+def confirmEvent(request):
+    eventType = request.GET.get('eventID')
+    fieldsInfo = {}
+    if eventType == '1':
+        fieldsInfo = {'field1': {'label': 'Enter a target amount of CO2 to be saved:', 'type':'text'}}
+    elif eventType == '2':
+        fieldsInfo = {'field1': {'label': 'Enter a target number of total journeys:', 'type':'text'}}
+    elif eventType == '3':
+        fieldsInfo = {'field1':{'label':'Select a building:', 'type':'dropdown'}, 'field2':{'label':'Enter a target number of times to visit the building:', 'type':'text'}}
+    elif eventType == '4':
+        fieldsInfo = {}
+    else:
+        return HttpResponse(status=404)
+    return render(request, "adminUser/confirmEvent.html", {'fieldsInfo': fieldsInfo})
+
+def submitEvent(request):
+    pass
 

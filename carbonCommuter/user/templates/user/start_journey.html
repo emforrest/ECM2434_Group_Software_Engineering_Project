@@ -24,44 +24,48 @@
     </script>
 </head>
 
-<body onload="onLoad('{{ tab|escapejs }}');">
-    <header>
-        <!--The navbar, consistent across the site-->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="/">CarbonCommuter</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+    <body onload="onLoad('{{ tab|escapejs }}');">
+        <header>
+            <!--The navbar, consistent across the site-->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="/">CarbonCommuter</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/logout/">Logout</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/leaderboard/">Leaderboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'user_groups_home_page' %}">Groups</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/leaderboard/">Leaderboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout/">Logout</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
 
-    <br>
-    <div class="wrapper">
-        <!--The form object takes the user's selections and passes them to the upload function-->
-        <form name="start" id="start_journey" action="/user/journeys/create" method="post">
-            {% csrf_token %}
-            <h1>Start A New Journey</h1>
+        <br>
+        <div class="container">
+            <div class="wrapper">
+                <!--The form object takes the user's selections and passes them to the upload function-->
+                <form name="start" id="start_journey" action="/user/journeys/create" method="post">
+                    {% csrf_token %}
+                    <h1>Start A New Journey</h1>
 
-            <!--These hidden inputs are used to convert the user's off-campus location into latitude and longitude coordinates and pass them through-->
-            <input type="hidden" id="lat" name="lat" value="">
-            <input type="hidden" id="long" name="long" value="">
-            <input type="hidden" id="address" name="address" value="">
-
-            <div id="tab0" style="text-align: center;">
+                    <!--These hidden inputs are used to convert the user's off-campus location into latitude and longitude coordinates and pass them through-->
+                    <input type="hidden" id="lat" name="lat" value="">
+                    <input type="hidden" id="long" name="long" value="">
+                    <input type="hidden" id="address" name="address" value="">
+     
+                    <div id="tab0" style="text-align: center;">
                 <p>GDPR stuff goes here</p>
             </div>
 
@@ -76,41 +80,41 @@
             </div>
            
             <div id="tab2" style="display: none">
-                <h4>Where are you starting your journey from today?</h4>
-                <br>
-                <button type="button" class="btn" onclick="getLocation();">Get My Location</button>
-                <br>
+                        <h4>Where are you starting your journey from today?</h4>
+                        <br>
+                        <button type="button" class="btn" onclick="getLocation();">Get My Location</button>
+                        <br>
+                        
+                        <br>
+                        <div id="map">
+                            <iframe id="google_map" width="350" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=720&amp;height=600&amp;hl=en&amp;q=Exeter&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+                        </div>
+
+                        <br>
+                        <span>
+                            Your current address is:
+                            <span id="display_address">N/A</span>
+                        </span>
+
+                        <br>
+                        <div id="manual_select" style="display: none">
+                            <br>
+                            <h6>Enter a new location below:</h6>
+                            <input type="text" id="autocomplete" name="autocomplete" placeholder="Enter a location...">
+                        </div>
+
+                        <br>
+                        <div>
+                            <button type="button" id="btn_input" class="btn" style="display: inline-block; width: 49%" onclick="showManualInput();">Enter Manually</button>
+                            <button type="button" id="btn_continue" class="btn" style="display: inline-block; width: 49%" onclick="nextTab();hideManualInput();">Confirm Location</button>
+                        </div>
                 
                 <br>
-                <div id="map">
-                    <iframe id="google_map" width="350" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=720&amp;height=600&amp;hl=en&amp;q=Exeter&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
-                </div>
+                    </div>
 
-                <br>
-                <span>
-                    Your current address is:
-                    <span id="display_address">N/A</span>
-                </span>
-
-                <br>
-                <div id="manual_select" style="display: none">
-                    <br>
-                    <h6>Enter a new location below:</h6>
-                    <input type="text" id="autocomplete" name="autocomplete" placeholder="Enter a location...">
-                </div>
-
-                <br>
-                <div>
-                    <button type="button" id="btn_input" class="btn" style="display: inline-block; width: 49%" onclick="showManualInput();">Enter Manually</button>
-                    <button type="button" id="btn_continue" class="btn" style="display: inline-block; width: 49%" onclick="nextTab();hideManualInput();">Confirm Location</button>
-                </div>
-                
-                <br>
-            </div>
-
-            <div id="tab3" style="display: none">
-                <h4>Select the mode of transport you plan to use:</h4>
-                <br>
+                    <div id="tab3" style="display: none">
+                        <h4>Select the mode of transport you plan to use:</h4>
+                        <br>
 
                 <select name="transport" id="transport">
                     <option value = "Bus">Bus</option>
