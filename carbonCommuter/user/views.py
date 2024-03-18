@@ -202,17 +202,14 @@ def start_journey(request):
             context['lat'] = request.POST.get('lat')
             context['long'] = request.POST.get('long')
             context['address'] = request.POST.get('address')
-            return render(request, "user/start_journey.html", context=context)
+            return render(request, "upload/start_journey.html", context=context)
        
         # Check the POST request contains a valid latitude and longitude or address
         if request.POST.get('lat') in ["", None] or request.POST.get('long') in ["", None] or request.POST.get('address') in ["", None]:
             LOGGER.warning(f"Missing location information on form submission!")
             context["error"] = "Please enter a valid location before trying to start your journey!"
             context["tab"] = 2
-            context['lat'] = request.POST.get('lat')
-            context['long'] = request.POST.get('long')
-            context['address'] = request.POST.get('address')
-            return render(request, "user/start_journey.html", context=context)
+            return render(request, "upload/start_journey.html", context=context)
 
         # Get the closest building to campus
         try:
@@ -222,7 +219,7 @@ def start_journey(request):
             LOGGER.exception(ex)
             context["error"] = "Sorry, something went wrong with our calculations. Please try getting your location again!"
             context["tab"] = 2
-            return render(request, "user/start_journey.html", context=context)
+            return render(request, "upload/start_journey.html", context=context)
         
         # Check if it's within an acceptable range (300m)
         if distance <= 0.3:
@@ -243,7 +240,7 @@ def start_journey(request):
                 LOGGER.exception(ex)
                 context["error"] = "Sorry, something went wrong on our end! Please try getting your location again."
                 context["tab"] = 2
-                return render(request, "user/start_journey.html", context=context)
+                return render(request, "upload/start_journey.html", context=context)
         
         # Add the location badge to the user if location on campus
         if (building != None):
@@ -263,7 +260,7 @@ def start_journey(request):
     
     # Render the form if visited by a GET request
     else:
-        return render(request, "user/start_journey.html", context=context)
+        return render(request, "upload/start_journey.html", context=context)
         
 
 @login_required
@@ -296,6 +293,13 @@ def end_journey(request):
     # If method is POST, handle form submission
     if request.method == "POST":
         
+        # Check the POST request contains a valid latitude and longitude or address
+        if request.POST.get('lat') in ["", None] or request.POST.get('long') in ["", None] or request.POST.get('address') in ["", None]:
+            LOGGER.warning(f"Missing location information on form submission!")
+            context["error"] = "Please enter a valid location before trying to end your journey!"
+            context["tab"] = 2
+            return render(request, "upload/end_journey.html", context=context)
+        
         # Get the closest building to campus
         try:
             building, distance = get_distance_to_campus(float(request.POST.get('lat')), float(request.POST.get('long')))
@@ -304,7 +308,7 @@ def end_journey(request):
             LOGGER.exception(ex)
             context["error"] = "Sorry, something went wrong with our calculations. Please try getting your location again!"
             context["tab"] = 2
-            return render(request, "user/end_journey.html", context=context)
+            return render(request, "upload/end_journey.html", context=context)
         
         # Get (or create) a Location object for the specified location if off campus
         if distance <= 0.3:
@@ -325,7 +329,7 @@ def end_journey(request):
                 LOGGER.exception(ex)
                 context["error"] = "Sorry, something went wrong on our end! Please try getting your location again."
                 context["tab"] = 2
-                return render(request, "user/end_journey.html", context=context)
+                return render(request, "upload/end_journey.html", context=context)
         
         # add the location badge to the user if location on campus
         if (building != None):
@@ -346,7 +350,7 @@ def end_journey(request):
             LOGGER.exception(ex)
             context["error"] = "Sorry, something went wrong with our calculations. Please try getting your location again!"
             context["tab"] = 2
-            return render(request, "user/end_journey.html", context=context)
+            return render(request, "upload/end_journey.html", context=context)
         
         # Save calculations and final timestamp to current journey
         journey.destination = location
@@ -386,7 +390,7 @@ def end_journey(request):
     
     # Render the form if visited by a GET request
     else:
-        return render(request, "user/end_journey.html")
+        return render(request, "upload/end_journey.html")
     
 
 @login_required
@@ -416,7 +420,7 @@ def journey_created(request, journey_id: int):
         "transport": TravelType.from_str(journey.transport).to_str(),
         "time_taken": format_time_between(journey.time_finished, journey.time_started)
     }
-    return render(request, "user/success.html", context)
+    return render(request, "upload/success.html", context)
 
 
 @login_required
