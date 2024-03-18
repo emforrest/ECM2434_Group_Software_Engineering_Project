@@ -17,6 +17,7 @@ CarbonCommuter is a free-to-use website that tracks carbon savings from students
 
 ### Documents
 
+- Technical Documents: https://github.com/emforrest/ECM2434_Group_Software_Engineering_Project
 - Process Documents: https://trello.com/b/yyfAlINB/the-ceiling-fans
   - Meeting Notes: [docs/Meeting Notes.docx](./docs/Meeting%20Notes.docx)
   - Kanban Snapshots: [docs/kanban-snapshots](./docs/kanban-snapshots/)

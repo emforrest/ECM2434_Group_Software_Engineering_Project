@@ -5,27 +5,36 @@
 <!--A HTML document that produces the upload webpage, so users can input the start and end coordinates of their journey and the mode of transport used.-->
 <!--authors: Eleanor Forrest, Jack Skinner, Giulia Brown, Sam Townley-->
 
-    <head>
-        <!--Import styling-->
-        <title>End Your Journey</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="{% static 'carbonCommuter/style.css' %}">
-        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <!--Set up the connection to the Google Maps API-->
-        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIZe4j6_6bvgDSdz4rjX_29_r6C6FGi1Y&libraries=places&callback=initAutocomplete&loading=async">
-        </script> 
-    </head>
+<head>
+    <!--Import styling-->
+    <title>End Your Journey</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'carbonCommuter/style.css' %}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!--Set up the connection to the Google Maps API-->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIZe4j6_6bvgDSdz4rjX_29_r6C6FGi1Y&libraries=places&callback=initAutocomplete&loading=async"></script>
+    <script type="text/javascript" src="{% static 'js/upload.js' %}"></script> 
+    <script>
+        window.error='{{ error|escapejs }}';
+        if (window.error != "") {
+            showError();
+        }
+    </script>
+</head>
 
-    <body>
-        <header>
-            <!--The navbar, consistent across the site-->
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="/">CarbonCommuter</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+<body onload="onLoad()">
+    <header>
+        <!--The navbar, consistent across the site-->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/">CarbonCommuter</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
@@ -58,144 +67,57 @@
                     <input type="hidden" id="lat" name="lat" value="">
                     <input type="hidden" id="long" name="long" value="">
                     <input type="hidden" id="address" name="address" value="">
-                
-                    <h4>Where are you finishing your journey today?</h4>
-                    <br>
-                    <button type="button" class="btn" onclick="getLocation()">Get My Location</button>
-                    <br>
-
-                    <br>
-                    <div id="map">
-                        <iframe id="google_map" width="350" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=720&amp;height=600&amp;hl=en&amp;q=Exeter&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
-                    </div>
-
-                    <br>
-                    <span>
-                        Your current address is:
-                        <span id="display_address">N/A</span>
-                    </span>
-
-                    <br>
-                    <div id="manual_select" style="display: none">
+     
+                    <div id="tab1" style="text-align: center;">
+                        <h3>Getting your current location</h3>
                         <br>
-                        <h6>Enter a new location below:</h6>
-                        <input type="text" id="autocomplete" name="autocomplete" placeholder="Enter a location...">
+                        <div style="margin: auto; width: 50%">
+                            <img src="/media/loading/pikachu.gif"/>
+                        </div>
+                        <br>
+                        <i id="loading">This could take up to 30 seconds...</i>
                     </div>
-
-                    <br>
-                    <div>
-                        <button type="button" id="btn_input" class="btn" style="display: inline-block; width: 49%" onclick="showManualInput()">Enter Manually</button>
-                        <button type="submit" id="btn_submit" class="btn" style="display: inline-block; width: 49%" >Confirm Location</button>
-                    </div>
-
-                    {% if error %}
-                        <p style='color:red'>{{ error }}</p>
-                    {% endif %}
-                </form>
-            </div>
-
-            <script>
-                function showManualInput() {
-                    document.getElementById("manual_select").style.display = "block";
-                    document.getElementById("btn_input").style.display = "none";
-                    document.getElementById("btn_submit").style.width = "100%"
-                }
-
-                function hideManualInput() {
-                    document.getElementById("manual_select").style.display = "none";
-                    document.getElementById("btn_input").style.display = "inline-block";
-                    document.getElementById("btn_submit").style.width = "49%"
-                }
-
-                function getLocation() {
-                    if (navigator.geolocation) {
-                        navigator.geolocation.getCurrentPosition(showPosition, showError);
-                    } else { 
-                        alert("Geolocation is not supported by this browser.");
-                    }
-                }
-
-                function getAddress(position) {
-                    const xhr = new XMLHttpRequest();
-                    xhr.open("GET", `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=AIzaSyCVEKGGBT_8WryClHT64tPqFONldHdY35Y`);
-                    xhr.send();
-                    xhr.responseType = "json";
-                    xhr.onload = () => {
-                        if (xhr.readyState == 4 && xhr.status == 200) {
-                            const results = xhr.response;
-                            setAddress(results['results'][0]['formatted_address']);
-                        } else {
-                            console.log(`Error: ${xhr.status}`);
-                        }
-                    };
-                }
-
-                function showPosition(position) {
-                    setLatLong(position.coords.latitude, position.coords.longitude);
-                    getAddress(position);
-                }
-
-                function showError(error) {
-                    switch(error.code) {
-                        case error.PERMISSION_DENIED:
-                            alert("User denied the request for Geolocation.")
-                            break;
-                        case error.POSITION_UNAVAILABLE:
-                            alert("Location information is unavailable.")
-                            break;
-                        case error.TIMEOUT:
-                            alert("The request to get user location timed out.")
-                            break;
-                        case error.UNKNOWN_ERROR:
-                            alert("An unknown error occurred.")
-                            break;
-                    }
-                }
-
-                let autocomplete;
-                function initAutocomplete(){
-                    autocomplete = new google.maps.places.Autocomplete(
-                        document.getElementById('autocomplete'),
-                        {
-                        types:['address'],
-                        componentRestrictions: {'country': ['gb']},
-                        fields : ['geometry', 'formatted_address'],
-                        strictBounds: true
-                        }
-                    );
-                    autocomplete.addListener('place_changed', onPlaceChanged);
-                }
             
-                function onPlaceChanged(){
-                    var place = autocomplete.getPlace();
-                    if (place.geometry) {
-                        console.log(place.formatted_address);
-                        setAddress(place.formatted_address);
-                        setLatLong(place.geometry.location.lat().toString(), place.geometry.location.lng().toString());
-                        hideManualInput();
-                    }
-                }
+                    <div id="tab2" style="display: none">
+                        <h4>Where are you finishing your journey today?</h4>
+                        <br>
+                        <button type="button" class="btn" onclick="getLocation()">Re-fetch Location</button>
+                        <br>
 
-                function setAddress(address) {
-                    document.getElementById('address').value = address;
-                    document.getElementById('display_address').innerHTML = address;
-                }
+                        <br>
+                        <div id="map">
+                            <iframe id="google_map" width="350" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=720&amp;height=600&amp;hl=en&amp;q=Exeter&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+                        </div>
 
-                function setLatLong(lat, long) {
-                    document.getElementById('lat').value = lat;
-                    document.getElementById('long').value = long;
-                    document.getElementById('google_map').setAttribute('src', `https://maps.google.co.uk?q=${lat},${long}&output=embed`);
-                }
-                </script>
-                    
-            <br>
-            <div class="footer">
-                <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
+                        <br>
+                        <span>
+                            Your current address is:
+                            <span id="display_address">N/A</span>
+                        </span>
+
+                        <br>
+                        <div id="manual_select" style="display: none">
+                            <br>
+                            <h6>Enter a new location below:</h6>
+                            <input type="text" id="autocomplete" name="autocomplete" placeholder="Enter a location...">
+                        </div>
+
+                        <br>
+                        <div>
+                            <button type="button" id="btn_input" class="btn" style="display: inline-block; width: 49%" onclick="showManualInput()">Enter Manually</button>
+                            <button type="submit" id="btn_submit" class="btn" style="display: inline-block; width: 49%" >Confirm Location</button>
+                        </div>
+                    </div>
+
+                </form>
+                
+                <p id="error" style='color: red; display: none; text-align: center;'>An unknown error has occured...</p>
             </div>
         </div>
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+            
+        <br>
+        <div class="footer">
+            <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
+        </div>
     </body>
 </html>
