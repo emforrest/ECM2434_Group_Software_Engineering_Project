@@ -10,6 +10,7 @@ from django.shortcuts import render
 
 from django.http import HttpResponse
 from adminUser.models import Event
+from datetime import datetime
 
 NUM_BUILDINGS = 27
 
@@ -112,13 +113,13 @@ def success(request):
             return HttpResponse(status=400)
         else:
             if eventType == '1':
-                message = f"Save {request.POST.get('field1')} kilograms of CO2 by {request.POST.get('endDate')}."
+                message = f"Save {request.POST.get('field1')} kilograms of CO2 by {datetime.strptime(request.POST.get('endDate'), '%Y-%m-%d').strftime('%d-%m-%Y')}."
             elif eventType == '2':
-                message = f"Log {request.POST.get('field1')} total journeys by {request.POST.get('endDate')}."
+                message = f"Log {request.POST.get('field1')} total journeys by {datetime.strptime(request.POST.get('endDate'), '%Y-%m-%d').strftime('%d-%m-%Y')}."
             elif eventType == '3':
-                message = f"Visit {request.POST.get('oncampus')}, {request.POST.get('field2')} times by {request.POST.get('endDate')}." 
+                message = f"Visit {request.POST.get('oncampus')}, {request.POST.get('field2')} times by {datetime.strptime(request.POST.get('endDate'), '%Y-%m-%d').strftime('%d-%m-%Y')}." 
             else:
-                message = f"Visit every location on campus by {request.POST.get('endDate')}."
+                message = f"Visit every location on campus by {datetime.strptime(request.POST.get('endDate'), '%Y-%m-%d').strftime('%d-%m-%Y')}."
             return render(request, "adminUser/success.html", context={'eventMessage' : message})
     else:
         return HttpResponse(status=405)
