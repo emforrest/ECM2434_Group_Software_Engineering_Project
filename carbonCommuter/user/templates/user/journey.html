@@ -30,19 +30,38 @@
 <br>
 <div class="container">
     <div class="wrapper">
-        <h1>Your Journey</h1>
+        <h1>About Your Journey</h1>
+        <p>
+            You travelled {{ journey.distance }}km in just {{ time_taken }}!
+            <br>
+            You saved {{ journey.carbon_savings }}kg of CO2 by {{ transport }}.
+        </p>
+        {% if not journey.has_location %}
+        <h5>Location data is unavailable!</h5>
         <br>
-        <p>You travelled {{ journey.distance }}km in just {{ time_taken }}!</p>
-        <p>By {{ transport }}, you have saved {{ journey.carbon_savings }}kg of CO2!</p>
-        <br>
-        <button type="button" class="btn" id="btn_home">Go home</button>
-
-        <script>
-            document.getElementById("btn_home").onclick = function () {
-                location.href = "/user/";
-            };
-        </script>
-
+        {% endif %}
+        <div>
+            <div style="display: inline-block; width: 49%;">
+                {% if journey.has_location %}
+                <h4>Origin</h4>
+                <p>{{ journey.origin.address }}</p>
+                {% endif %}
+                <h4>Started</h4>
+                <p>{{ journey.format_time_started }}</p>
+            </div>
+            <div style="display: inline-block; width: 49%;">
+                {% if journey.has_location %}
+                <h4>Destination</h4>
+                <p>{{ journey.destination.address }}</p>
+                {% endif %}
+                <h4>Finished</h4>
+                <p>{{ journey.format_time_finished }}</p>
+            </div>
+        </div>
+        <div>
+            <button type="button" class="btn" id="btn_home" onclick="history.back()" style="display: inline-block; width: 49%">Go back</button>
+            <button type="button" class="btn" id="btn_delete" onclick="location.href='/user/journeys/delete?id={{ journey.id }}'" style="display: inline-block; width: 49%">Delete Journey</button>
+        </div>
     </div>
     <br>
     <div class="footer">
