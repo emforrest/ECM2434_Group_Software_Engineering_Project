@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Success{% endblock%}
+
+{% block navbar %}
+    {% if request.user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'user_groups_home_page' %}">Groups</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/leaderboard/user_leaderboard">Leaderboard</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/logout/">Logout</a>
+        </li>
+    {% else %}
+        <li class="nav-item">
+            <a class="nav-link" href="/leaderboard/">Leaderboard</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/login/">Login</a>
+        </li>
+    {%endif%}
+    <li class="nav-item">
+    <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
+    </li>
+{% endblock %}
+
+{% block content %}
+<br>
+<div class="container">
+    <div class="wrapper">
+        <h1>Congrats on finishing your journey!</h1>
+        <br>
+        <p>You travelled {{ journey.distance }}km in just {{ time_taken }}!</p>
+        <p>By {{ transport }}, you have saved {{ journey.carbon_savings }}kg of CO2!</p>
+        <br>
+        <div>
+            <button type="button" class="btn" id="btn_info" style="display: inline-block; width: 49%">View Journey</button>
+            <button type="button" class="btn" id="btn_home" style="display: inline-block; width: 49%">Go home</button>
+        </div>
+
+        <script>
+            document.getElementById("btn_home").onclick = function () {
+                location.href = "/user/";
+            };
+            document.getElementById("btn_info").onclick = function () {
+                location.href = "/journeys/{{ journey.id }}/"
+            }
+        </script>
+
+    </div>
+    <br>
+    <div class="footer">
+        <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
+    </div>
+</div>
+{% endblock %}

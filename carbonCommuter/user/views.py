@@ -256,7 +256,12 @@ def start_journey(request):
         # Update the users active journey
         request.user.profile.active_journey = journey
         request.user.profile.save()
-        return redirect("dashboard")
+        
+        # Render success page
+        context = {
+            "CO2_Savings": round(abs(TravelType.CAR.value - transport.value), 2)
+        }
+        return render(request, "upload/finished.html", context=context)
     
     # Render the form if visited by a GET request
     else:
@@ -387,15 +392,22 @@ def end_journey(request):
         # Reset user's active journey flag by setting active journey to none
         request.user.profile.active_journey = None
         request.user.profile.save()
-        return redirect("journey", journey_id=journey.id)
+        
+        # Render success page
+        context = {
+            "journey": journey,
+            "transport": TravelType.from_str(journey.transport).to_str(),
+            "time_taken": format_time_between(journey.time_finished, journey.time_started)
+        }
+        return render(request, "upload/finished.html", context=context)
     
     # Render the form if visited by a GET request
     else:
-        return render(request, "upload/end_journey.html")
+        return render(request, "upload/end_journey.html", context=context)
     
 
 @login_required
-def journey_created(request, journey_id: int):
+def journey(request, journey_id: int):
     """Displays information about a completed journey once it's been submitted successfully to the system.
 
     Args:
@@ -421,7 +433,32 @@ def journey_created(request, journey_id: int):
         "transport": TravelType.from_str(journey.transport).to_str(),
         "time_taken": format_time_between(journey.time_finished, journey.time_started)
     }
-    return render(request, "upload/success.html", context)
+    return render(request, "user/journey.html", context)
+
+
+@login_required
+def delete_journey(request):
+    
+    if request.method == "POST":
+        # Check the journey exists
+        id = request.POST.get('id')
+        journey = Journey.objects.get(id=id)
+    
+        if journey is None:
+            return HttpResponse(status=404)
+        
+        print("deleted")
+        return redirect("dashboard")
+        
+    else:
+        # Check the journey exists
+        id = request.GET.get('id')
+        journey = Journey.objects.get(id=id)
+    
+        if journey is None:
+            return HttpResponse(status=404)
+    
+        return render(request, "upload/delete.html", context={"id": journey.id})
 
 
 @login_required
