@@ -136,6 +136,17 @@ h1 {
     border-radius: 20px;
 }
 
+/* Media query for smaller screens */
+@media screen and (max-width: 600px) {
+    .main-links {
+        width: 100%; /* Adjusted width for smaller screens */
+    }
+    
+    .main-links .btn {
+        width: 90%; /* Adjusted width for smaller screens */
+    }
+}
+
 /*add hover effects to the buttons in the main home page*/
 .btn:hover {
     background-color: #a1d6ffd5;
@@ -611,6 +622,6 @@ tbody tr:nth-child(n + 11) {
 
 @media (min-width: 0px) {
     .navbar navbar-expand-lg navbar-light bg-light {
-        width: 100%; /* Set navbar width to 100% of viewport width */
+        width: 110%; /* Set navbar width to 100% of viewport width */
     }
 }
