@@ -123,13 +123,18 @@
                         <h4>Select the mode of transport you plan to use:</h4>
                         <br>
 
-                        <select name="transport" id="transport">
+                        <select name="transport" id="transport" onchange="showInfo(this.value)">
+                            <option selected disabled>Select transport</option>
                             <option value = "Bus">Bus</option>
                             <option value = "Train">Train</option>
                             <option value = "Bike">Bike</option>
                             <option value = "Walk">Walk</option>
                         </select>
                         <br>
+                        <br>
+                        <div id="additional-info" style="display: none">
+                            <!-- Additional information will be displayed here -->
+                        </div>
                         
                         <br>
                         <div>
