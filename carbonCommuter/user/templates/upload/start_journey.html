@@ -1,0 +1,154 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<!--A HTML document that produces the upload webpage, so users can input the start and end coordinates of their journey and the mode of transport used.-->
+<!--authors: Eleanor Forrest, Jack Skinner, Giulia Brown, Sam Townley-->
+
+<head>
+    <!--Import styling-->
+    <title>Start A Journey</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'carbonCommuter/style.css' %}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!--Set up the connection to the Google Maps API-->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIZe4j6_6bvgDSdz4rjX_29_r6C6FGi1Y&libraries=places&callback=initAutocomplete&loading=async"></script>
+    <script type="text/javascript" src="{% static 'carboncommuter/upload.js' %}"></script> 
+    <script>
+        window.error='{{ error|escapejs }}';
+        if (window.error != "") {
+            showError();
+        }
+    </script>
+</head>
+
+    <body onload="onLoad( '{{ tab|escapejs|default:1 }}' )">
+        <header>
+            <!--The navbar, consistent across the site-->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="/">CarbonCommuter</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto" style="text-align: right; float: right;">
+                        {% if request.user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'user_groups_home_page' %}">Groups</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/leaderboard/user_leaderboard">Leaderboard</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/logout/">Logout</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="/leaderboard/">Leaderboard</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/login/">Login</a>
+                            </li>
+                        {%endif%}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <br>
+        <div class="container">
+            <div class="wrapper">
+                <!--The form object takes the user's selections and passes them to the upload function-->
+                <form name="start" id="start_journey" action="/user/journeys/create" method="post">
+                    {% csrf_token %}
+                    <h1>Start A New Journey</h1>
+
+                    <!--These hidden inputs are used to convert the user's off-campus location into latitude and longitude coordinates and pass them through-->
+                    <input type="hidden" id="lat" name="lat" value="{{ lat|escape }}">
+                    <input type="hidden" id="long" name="long" value="{{ long|escape }}">
+                    <input type="hidden" id="address" name="address" value="{{ address|escape }}">
+
+                    <div id="tab1" style="text-align: center; display: none;">
+                        <h3>Getting your current location</h3>
+                        <br>
+                        <div style="margin: auto; width: 50%">
+                            <img src="/media/loading/pikachu.gif"/>
+                        </div>
+                        <br>
+                        <i id="loading">This could take up to 30 seconds...</i>
+                    </div>
+           
+                     <div id="tab2" style="display: none">
+                        <h4>Where are you starting your journey from today?</h4>
+                        <br>
+                        <button type="button" class="btn" onclick="getLocation();">Re-fetch Location</button>
+                        <br>
+                        
+                        <br>
+                        <div id="map">
+                            <iframe id="google_map" width="350" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=720&amp;height=600&amp;hl=en&amp;q=Exeter&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+                        </div>
+
+                        <br>
+                        <span>
+                            Your current address is:
+                            <span id="display_address">N/A</span>
+                        </span>
+
+                        <br>
+                        <div id="manual_select" style="display: none">
+                            <br>
+                            <h6>Enter a new location below:</h6>
+                            <input type="text" id="autocomplete" name="autocomplete" placeholder="Enter a location...">
+                        </div>
+
+                        <br>
+                        <div>
+                            <button type="button" id="btn_input" class="btn" style="display: inline-block; width: 49%" onclick="showManualInput();">Enter Manually</button>
+                            <button type="button" id="btn_continue" class="btn" style="display: inline-block; width: 49%" onclick="if (verifyAddress()) {nextTab();hideManualInput();};">Confirm Location</button>
+                        </div>
+                        <br>
+                    </div>
+
+                    <div id="tab3" style="display: none">
+                        <h4>Select the mode of transport you plan to use:</h4>
+                        <br>
+
+                        <select name="transport" id="transport">
+                            <option value = "Bus">Bus</option>
+                            <option value = "Train">Train</option>
+                            <option value = "Bike">Bike</option>
+                            <option value = "Walk">Walk</option>
+                        </select>
+                        <br>
+                        
+                        <br>
+                        <div>
+                            <button type="button" class="btn" style="display: inline-block; width: 49%" onclick="prevTab();">Go Back</button>
+                            <button type="submit" id="btn_submit" class="btn" style="display: inline-block; width: 49%">Confirm Transport</button>
+                        </div>
+                    </div>
+                </form>
+        
+                <p id="error" style='color: red; display: none; text-align: center;'>An unknown error has occured...</p>
+            </div>
+        </div>
+
+        <br>
+        <div class="footer">
+            <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </body>
+</html>
