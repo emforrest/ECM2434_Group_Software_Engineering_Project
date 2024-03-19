@@ -128,5 +128,5 @@ def success(request):
     else:
         return HttpResponse(status=405)
 
-Event.objects.all().delete() 
+##Event.objects.all().delete() 
 ##print(Event.objects.all())

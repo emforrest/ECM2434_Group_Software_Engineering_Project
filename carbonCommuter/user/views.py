@@ -76,11 +76,22 @@ def home(request):
     followingUsers = User.objects.filter(followers__follower=request.user).values_list('username', flat=True)
 
     #get information about the current event
+    eventMessage = ''
+    eventProgress = -1
     activeEventExists = Event.objects.filter(endDate__gt=timezone.now()).exists()
     if activeEventExists:
         event = Event.objects.filter(endDate__gt=timezone.now())
-            
-
+        eventType = event.type
+        eventProgress = event.progress
+        eventTarget = event.target
+        if eventType == '1':
+            eventMessage = f"Save {event.target} kilograms of CO2 by {datetime.strptime(event.endDate, '%Y-%m-%d').strftime('%d-%m-%Y')}."
+        elif eventType == '2':
+            eventMessage = f"Log {event.target} total journeys by {datetime.strptime(event.endDate, '%Y-%m-%d').strftime('%d-%m-%Y')}."
+        elif eventType == '3':
+            eventMessage = f"Visit {event.building}, {event.target} times by {datetime.strptime(event.endDate, '%Y-%m-%d').strftime('%d-%m-%Y')}." 
+        else:
+            eventMessage = f"Visit every location on campus by {datetime.strptime(event.endDate, '%Y-%m-%d').strftime('%d-%m-%Y')}."
 
     #adding opacity of badges to context so can be displayed correctly to the user
     context = context = {"full_name": name,
@@ -105,7 +116,11 @@ def home(request):
                          "sportsParkOpac": sportsParkOpac,
                          "swiotOpac": swiotOpac,
                          "washingtonSingerOpac": washingtonSingerOpac,
-                         "followingUsers": followingUsers}
+                         "followingUsers": followingUsers,
+                         "eventMessage" : eventMessage,
+                         "eventProgress" : eventProgress,
+                         "eventTarget" : eventTarget
+                         }
     return render(request, "user/home.html", context)
 
 
@@ -419,6 +434,7 @@ def end_journey(request):
             
             elif eventType == 4:
                 #visit every building once
+                ##test once upload works again
                 progressCount = 0
                 startDate = event.startDate
                 locationIDs = Location.objects.filter(on_campus = True).values_list('id', flat=True)
