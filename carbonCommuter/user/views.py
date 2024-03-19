@@ -368,6 +368,7 @@ def end_journey(request):
         journey.carbon_savings = savings
         journey.time_finished = datetime.now()
         journey.save()
+        check_validity(journey)
 
         # Add to streak of the user
         pastJourneys = Journey.objects.all().filter(user_id=request.user.id) #accessing all the past journeys the user has made
@@ -623,3 +624,29 @@ def add_badge(badge, user):
             #if the badge does not already exist for the user
             newBadge = UserBadge(user_id=user.id, badge_id=badge)
             newBadge.save()
+            
+            
+def check_validity(journey):
+    # Initalise variables for validation checks
+    flagged = False
+    reason = ""
+    
+    # Check that the distance is valid based on the mode of transport
+    if journey.distance >= 40 and journey.transport == "train":
+        flagged = True
+        reason += "Distance by train is too long! "
+    elif journey.distance >= 20 and journey.transport == "bus":
+        flagged = True
+        reason += "Distance by bus is too long! "
+    elif journey.distance >= 10 and journey.transport == "bike":
+        flagged = True
+        reason += "Distance cycled is too long! "
+    elif journey.distance >= 5 and journey.transport == "walk":
+        flagged = True
+        reason += "Distance walked is too long! "
+    
+    # Save changes to the journey if it's been flagged for review
+    if flagged:
+        journey.flagged = True
+        journey.reason = reason
+        journey.save()

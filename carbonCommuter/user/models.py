@@ -77,6 +77,8 @@ class Journey(models.Model):
         time_started (datetime): The time the journey was started in the system.
         time_finished (datetime): The time the journey was marked as finished.
         estimated_time (float): The time the journey was estimated to take (in minutes), not accounting for traffic. Used for verification only.
+        flagged (bool): A flag to indicate whether the journey is considered to be suspicious and should be manually reviewed.
+        reason (str): A reason for why the journey is considered suspicious.
         objects (JourneyManager): Overwrite the default model manager with our custom manager defined above.
     """
     id = models.AutoField(primary_key=True, auto_created=True, unique=True)
@@ -89,6 +91,8 @@ class Journey(models.Model):
     time_started = models.DateTimeField(null=False, blank=False)
     time_finished = models.DateTimeField(null=True, blank=True)
     estimated_time = models.FloatField(null=True, blank=True)
+    flagged = models.BooleanField(null=False, blank=True, default=False)
+    reason = models.CharField(max_length=255, blank=True, null=True)
     objects = JourneyManager()
     
     
