@@ -152,6 +152,7 @@ h1 {
     color: black;
     border-radius: 10px;
     padding: 15px;
+    font-size: 0.9em;
 }
 
 .main-header {
@@ -162,7 +163,20 @@ h1 {
     text-align: center;
     border-radius: .6rem;
     word-wrap: break-word; /* Ensure header text wraps on smaller screens */
-    font-size: 0.8em;
+}
+
+.main-header h1 {
+    font-size: 1.9em;
+}
+
+.main-info {
+    width: 100%;
+    font-family: "Poppins", sans-serif;
+    background: rgba(255, 255, 255, 0.5);
+    padding: .8rem 1rem;
+    text-align: center;
+    border-radius: .6rem;
+    word-wrap: break-word; /* Ensure header text wraps on smaller screens */
 }
 
 .main-description {
