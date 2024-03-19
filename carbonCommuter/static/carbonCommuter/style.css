@@ -144,7 +144,7 @@ h1 {
 .main-wrapper {
     margin: auto;
     width: 90%;
-    min-width: 400px;
+    min-width: 320px; /* Minimum width for the main wrapper */
     background-color: rgba(255, 255, 255, .6) !important;
     border: 2px solid rgba(255, 255, 255, .2);
     backdrop-filter: blur(20px);
@@ -155,18 +155,18 @@ h1 {
 }
 
 .main-header {
-    height: 15%;
     width: 100%;
     font-family: "Poppins", sans-serif;
     background: rgba(255, 255, 255, 0.5);
     padding: .8rem 1rem;
     text-align: center;
     border-radius: .6rem;
+    word-wrap: break-word; /* Ensure header text wraps on smaller screens */
 }
 
 .main-description {
     width: 660px;
-    max-height: 100%;
+    max-width: 100%;
     background: rgba(255, 255, 255, 0.5);
     margin: .8rem auto;
     border-radius: .6rem;
@@ -176,7 +176,6 @@ h1 {
 
 .main-links {
     width: 100%; /* Adjusted width for smaller screens */
-    min-height: 300px;
     margin: auto;
     border-radius: .6rem;
     overflow: auto;
@@ -185,13 +184,21 @@ h1 {
 
 /* Set the style of the buttons in the table of the main home page */
 .main-links .btn {
-    width: 60%;
+    width: 100%; /* Adjusted width for smaller screens */
+    max-width: 200px; /* Set a max-width for the buttons */
     height: 50px;
     background: #edf7ff;
     border: none;
     outline: none;
     margin: 5px; /* Adjusted margin for smaller screens */
     border-radius: 20px;
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 600px) {
+    .main-links .btn {
+        width: 90%; /* Adjusted width for smaller screens */
+    }
 }
 
 /* Media query for smaller screens */
