@@ -77,6 +77,22 @@ h1 {
     }
 }
 
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    .container{
+        max-width: 100%;
+    }
+    
+}
+
+/* Smartphones (landscape) ----------- */
+@media only screen and (min-width : 321px) {
+    .container{
+        max-width: 100%;
+    }
+
+}
+
 /*Main Page Table */
 /*set the style of each section of the table in the main home page*/
 .main-wrapper {
