@@ -14,10 +14,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.utils import timezone
 
-
 import logging
-from datetime import datetime
-
 
 from user.models import Journey, Follower
 from user.models import Badges, UserBadge
@@ -213,7 +210,7 @@ def start_journey(request):
     journey = request.user.profile.active_journey
     if journey is not None:
         LOGGER.warning(f"User [{request.user.username}:{request.user.id}]: Tried to access the start journey page with an active journey.")
-        return redirect('end_journey')
+        return redirect('end')
     
     # If method is POST, handle form submission
     if request.method == "POST":
@@ -275,7 +272,7 @@ def start_journey(request):
         journey = Journey(user = request.user,
                           origin = location, 
                           transport = str(transport),
-                          time_started = datetime.now())
+                          time_started = timezone.now())
         journey.save()
         
         # Update the users active journey
@@ -286,7 +283,7 @@ def start_journey(request):
         context = {
             "CO2_Savings": round(abs(TravelType.CAR.value - transport.value), 2)
         }
-        return render(request, "upload/finished.html", context=context)
+        return render(request, "upload/started.html", context=context)
     
     # Render the form if visited by a GET request
     else:
@@ -318,7 +315,7 @@ def end_journey(request):
     journey = request.user.profile.active_journey
     if journey is None:
         LOGGER.warning(f"User [{request.user.username}:{request.user.id}]: Tried to access the end journey page without an active journey.")
-        return redirect('start_journey')
+        return redirect('start')
     
     # If method is POST, handle form submission
     if request.method == "POST":
@@ -387,13 +384,13 @@ def end_journey(request):
         journey.distance = distance
         journey.estimated_time = time
         journey.carbon_savings = savings
-        journey.time_finished = datetime.now()
+        journey.time_finished = timezone.now()
         journey.save()
         check_validity(journey)
 
         # Add to streak of the user
         pastJourneys = Journey.objects.all().filter(user_id=request.user.id) #accessing all the past journeys the user has made
-        dateNow = datetime.now().astimezone()
+        dateNow = timezone.now()
         checkStreak = False #boolean to check if a streak still exists
         for pastJourney in reversed(pastJourneys):
             #looping through past journeys in reverse so the most recent is first
