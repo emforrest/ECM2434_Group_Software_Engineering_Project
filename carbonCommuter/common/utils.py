@@ -269,7 +269,7 @@ def leaderboadWeeklyWinner(users_journeys):
             continue
     return user_entry
 
-def leaderboadWeeklyWinner(users_journeys):
+def leaderboadMonthlyWinner(users_journeys):
     topUser = Leaderboard_Entry()
     current_id = - 1
     for journey in users_journeys:
