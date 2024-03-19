@@ -62,14 +62,6 @@
                 <div class="column">
                     <div class="column-box">
                         <h1>Profile</h1>
-                        <div class="streak">
-                            <img src="{% static 'carbonCommuter/CarbonCommuter images/Streaks/dailyStreak.png' %}" alt="Daily streak">
-                            {% if request.user.profile.streak > 10 %}
-                                <div style="left: 25%" class="streakText">{{ request.user.profile.streak }}</div>
-                            {% else %}
-                                <div class="streakText">{{ request.user.profile.streak }}</div>
-                            {% endif %}
-                        </div>
                         <br>
                         <p><p1>Name: </p1><i>{{ full_name }}</i></p>
                         <br>
@@ -117,6 +109,15 @@
                 <div class="column-box2">
                     <h1>Badges</h1>
                     <br>
+                    <br>
+                    <div class="streak">
+                        <img src="{% static 'carbonCommuter/CarbonCommuter images/Streaks/dailyStreak.png' %}" alt="Daily streak">
+                        {% if request.user.profile.streak > 10 %}
+                            <div style="left: 25%" class="streakText">{{ request.user.profile.streak }}</div>
+                        {% else %}
+                            <div class="streakText">{{ request.user.profile.streak }}</div>
+                        {% endif %}
+                    </div>
                     <h4>Streaks:</h4>
                     <img style="opacity: {{ sevenDaysOpac }}" src="{% static 'carbonCommuter/CarbonCommuter images/Streaks/7days.png' %}" alt="7 Days">
                     <img style="opacity: {{ fourteenDaysOpac }}" src="{% static 'carbonCommuter/CarbonCommuter images/Streaks/14days.png' %}" alt="14 Days">
