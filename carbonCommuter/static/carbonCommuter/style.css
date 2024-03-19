@@ -166,7 +166,7 @@ h1 {
 }
 
 .main-header h1 {
-    font-size: 1.8em;
+    font-size: 2em;
 }
 
 .main-info {
@@ -214,9 +214,6 @@ h1 {
 
 /* Media query for smaller screens */
 @media screen and (max-width: 600px) {
-    .main-header h1 {
-        font-size: 1.8em; /* Adjusted font size for smaller screens */
-    }
     .main-links .btn {
         width: 90%; /* Adjusted width for smaller screens */
     }
