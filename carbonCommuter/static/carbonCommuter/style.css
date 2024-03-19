@@ -109,63 +109,106 @@ h1 {
 
 }
 
-/*Main Page Table */
-/*set the style of each section of the table in the main home page*/
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    .container{
+        max-width: 100%;
+    }
+
+    .wrapper {
+        width: auto;
+    }
+
+    .column-box {
+        width: auto;
+    }
+
+    .footer {
+        width: auto;
+    }
+
+    .l-footer {
+        width: auto;
+    }
+
+}
+
+/* Smartphones (landscape) ----------- */
+@media only screen and (min-width : 321px) {
+    .container{
+        max-width: 100%;
+    }
+
+}
+
 .main-wrapper {
     margin: auto;
     width: 90%;
-    background-color:rgba(255, 255, 255, .6) !important;
+    min-width: 320px; /* Minimum width for the main wrapper */
+    background-color: rgba(255, 255, 255, .6) !important;
     border: 2px solid rgba(255, 255, 255, .2);
     backdrop-filter: blur(20px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
     color: black;
     border-radius: 10px;
-    padding: 15px 15px;
+    padding: 15px;
 }
 
 .main-header {
-    height: 15%; 
     width: 100%;
     font-family: "Poppins", sans-serif;
     background: rgba(255, 255, 255, 0.5);
     padding: .8rem 1rem;
     text-align: center;
     border-radius: .6rem;
-
+    word-wrap: break-word; /* Ensure header text wraps on smaller screens */
 }
 
 .main-description {
     width: 660px;
-    max-height: 100%;
+    max-width: 100%;
     background: rgba(255, 255, 255, 0.5);
-
     margin: .8rem auto;
     border-radius: .6rem;
-
     overflow: auto;
     font-size: 20px;
 }
 
 .main-links {
-    width: 400px;
-    min-height: 300px;
-
+    width: 100%; /* Adjusted width for smaller screens */
     margin: auto;
     border-radius: .6rem;
-
     overflow: auto;
     text-align: center;
 }
 
-/*set the style of the buttons in the table of the main home page*/
+/* Set the style of the buttons in the table of the main home page */
 .main-links .btn {
-    width: 60%;
+    width: 100%; /* Adjusted width for smaller screens */
+    max-width: 200px; /* Set a max-width for the buttons */
     height: 50px;
     background: #edf7ff;
     border: none;
     outline: none;
-    margin: 10px;
+    margin: 5px; /* Adjusted margin for smaller screens */
     border-radius: 20px;
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 600px) {
+    .main-links .btn {
+        width: 90%; /* Adjusted width for smaller screens */
+    }
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 600px) {
+    .main-links .btn {
+        width: 90%; /* Adjusted width for smaller screens */
+    }
+    .main-wrapper {
+        width: 100%
+    }
 }
 
 /*add hover effects to the buttons in the main home page*/
@@ -620,6 +663,6 @@ tbody tr:nth-child(n + 11) {
 
 @media (min-width: 0px) {
     .navbar navbar-expand-lg navbar-light bg-light {
-        width: 100%; /* Set navbar width to 100% of viewport width */
+        width: 110%; /* Set navbar width to 100% of viewport width */
     }
 }

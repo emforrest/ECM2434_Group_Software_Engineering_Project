@@ -53,7 +53,16 @@
         <p></p>
         <p>As an admin, you can create global events.</p>
         <br>
-        <a href="/adminUser/chooseEvent/"><button type="submit" class="btn">Create Event</button></a> <!--should not work if an event is already active-->
+        {% if not activeEvent %}
+            <button type="submit" class="btn" id="createButton" onclick="redirect('true')">Create Event</button>
+        {% else %}
+            <p>There is already an active event, please wait until it ends.</p>
+        {% endif %}
+        <script>
+            function redirect(buttonClicked){
+                window.location.href = "{% url 'chooseEvent' %}?buttonClicked=" + String(buttonClicked)
+            }
+        </script>
     </div>
     </div>  
     <br>
