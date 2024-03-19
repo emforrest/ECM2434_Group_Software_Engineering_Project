@@ -199,6 +199,9 @@ h1 {
     .main-links .btn {
         width: 90%; /* Adjusted width for smaller screens */
     }
+    .main-wrapper {
+        width: 100%
+    }
 }
 
 /*add hover effects to the buttons in the main home page*/
