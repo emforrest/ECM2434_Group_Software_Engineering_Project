@@ -4,6 +4,6 @@
 .vscode
 **/venv
 .DS_Store
-logs/debug.log
-logs/master.log
+logs/debug.log**
+logs/master.log**
 logs/backups
