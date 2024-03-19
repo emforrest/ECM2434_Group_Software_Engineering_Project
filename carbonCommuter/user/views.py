@@ -4,6 +4,7 @@
 Authors: 
 - Sam Townley
 - Eleanor Forrest
+- Abi Hinton
 """
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
@@ -11,15 +12,17 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
+from django.utils import timezone
 
 
 import logging
 from datetime import datetime
 
+
 from user.models import Journey, Follower
-from user.models import Journey
 from user.models import Badges, UserBadge
 from main.models import Location
+from adminUser.models import Event
 from common.travelTypes import TravelType
 from common.utils import get_route, calculate_co2, get_distance_to_campus, format_time_between
 
@@ -71,6 +74,12 @@ def home(request):
 
      #get a list of users this user is following
     followingUsers = User.objects.filter(followers__follower=request.user).values_list('username', flat=True)
+
+    #get information about the current event
+    activeEventExists = Event.objects.filter(endDate__gt=timezone.now()).exists()
+    if activeEventExists:
+        event = Event.objects.filter(endDate__gt=timezone.now())
+            
 
 
     #adding opacity of badges to context so can be displayed correctly to the user
@@ -324,7 +333,49 @@ def end_journey(request):
 
         #check if user has earned any streak badges
         check_streak(request.user)
-        
+
+        #Add progres to the current event if there is one
+        activeEventExists = Event.objects.filter(endDate__gt=timezone.now()).exists()
+        if activeEventExists:
+            event = Event.objects.filter(endDate__gt=timezone.now())
+            eventType = event.type
+            if eventType == 1:
+                #target amount of CO2 saved
+                event.progress += savings
+
+            elif eventType == 2:
+                #total number of journeys
+                event.progress += 1
+
+            elif eventType == 3:
+                #visit one building a number of times
+                campusBuilding1 = 'none'
+                campusBuilding2 = 'none'
+                if journey.origin.on_campus:
+                    campusBuilding1 = journey.origin.name
+                if journey.destination.on_campus:
+                    campusBuilding2 = journey.destination.name
+
+                if event.building == campusBuilding1 or event.building == campusBuilding2:
+                    event.progress +=1
+            
+            elif eventType == 4:
+                #visit every building once
+                progressCount = 0
+                startDate = event.startDate
+                locationIDs = Location.objects.filter(on_campus = True).values_list('id', flat=True)
+                recentJourneys = Journey.objects.filter(time_started > startDate)
+                for id in locationIDs:
+                    for j in recentJourneys:
+                        if j.origin_id == id or j.destination_id == id:
+                            progressCount += 1
+                            break
+                
+                event.progress = progressCount
+                            
+
+          
+
         # Reset user's active journey flag by setting active journey to none
         request.user.profile.active_journey = None
         request.user.profile.save()

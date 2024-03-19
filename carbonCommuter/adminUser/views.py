@@ -11,6 +11,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from adminUser.models import Event
 from datetime import datetime
+from django.utils import timezone
 
 NUM_BUILDINGS = 27
 
@@ -22,7 +23,9 @@ def mainAdmin(request):
     Return:
     The function returns the rendering of the admin home webpage
     """
-    return render(request, "adminUser/mainAdmin.html")
+    #Check if there is an active event
+    activeEvent = Event.objects.filter(endDate__gt=timezone.now()).exists()
+    return render(request, "adminUser/mainAdmin.html", {'activeEvent': activeEvent})
 
 def chooseEvent(request):
     """Return the adminUser/chooseEvent page with buttons for each event type
@@ -31,9 +34,14 @@ def chooseEvent(request):
         request: The HTTP request 
     
     Returns:
-        The function returns the rendering of the chooseEvent webpage
+        render - The function returns the rendering of the chooseEvent webpage
+        HttpResponse - Error code 403 if the user accessed this page incorrectly
     """
-    return render(request, "adminUser/chooseEvent.html")
+    buttonClicked = request.GET.get('buttonClicked')
+    if buttonClicked:
+        return render(request, "adminUser/chooseEvent.html")
+    else:
+        return HttpResponse(status = 403)
 
 def confirmEvent(request):
     """Produce the confirmEvent page based on which button was selected in chooseEvent, where users can choose related targets
@@ -69,9 +77,7 @@ def submitEvent(request):
         HttpResponse : Error code 400 is returned if there is no eventType, or 405 if the method is not POST
     """
     if request.method=="POST":
-        print(request.POST)
         eventType = request.POST.get('eventID')
-        print(eventType)
         if eventType == '1' or eventType == '2':
             target = request.POST.get('field1')
             endDate = request.POST.get('endDate')
@@ -92,7 +98,6 @@ def submitEvent(request):
             return success(request)
 
         else:
-            print('a')
             return HttpResponse(status=400)
     else:
         return HttpResponse(status=405) 
@@ -109,7 +114,6 @@ def success(request):
     if request.method=="POST":
         eventType = request.POST.get('eventID')
         if eventType not in ['1', '2', '3', '4']:
-            print('b')
             return HttpResponse(status=400)
         else:
             if eventType == '1':
@@ -123,3 +127,6 @@ def success(request):
             return render(request, "adminUser/success.html", context={'eventMessage' : message})
     else:
         return HttpResponse(status=405)
+
+Event.objects.all().delete() 
+##print(Event.objects.all())
