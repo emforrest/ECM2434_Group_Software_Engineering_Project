@@ -1,7 +1,4 @@
-import os
 import logging
-from zipfile import ZipFile
-
 
 # Create Custom Coloured Formatter
 class ColouredFormat(logging.Formatter):
@@ -34,43 +31,6 @@ class ColouredFormat(logging.Formatter):
         return formatter.format(record)
 
 
-# Backup last session log files into zip format
-
-def backup_logs():
-    # Set the maximum number of backups to keep
-    MAX_BACKUPS = 10
-    
-    # Create a backups directory to store the zip files if one doesn't already exist
-    if not("backups" in os.listdir("../logs")):
-            os.mkdir("../logs/backups")
-    
-    # Loop through backups folder in reverse order, incrementing each session record
-    if "master.log" in os.listdir("../logs/"):
-            sortedFiles = sorted(os.listdir("../logs/backups"), key = lambda x: int(x.split(".")[1]) if x.split(".")[1].isdecimal() else 0, reverse=True)
-            for file in sortedFiles:
-                if file != "session.zip":
-                    count = int(file.split(".")[1])
-                    if count >= MAX_BACKUPS:
-                        os.remove(f"../logs/backups/{file}")
-                    else:
-                        os.rename(f"../logs/backups/{file}", f"../logs/backups/session.{count+1}.zip")
-            if "session.zip" in "../logs/backups/":
-                os.rename("../logs/backups/session.zip", "../logs/backups/session.1.zip")
-            
-            # Zip log files & move zip file into backups folder & delete previous log files
-            with ZipFile("../logs/backups/session.zip", 'w') as zip:
-                for file in os.listdir("../logs/"):
-                    if file.endswith(".log"):
-                        zip.write(f"../logs/{file}")
-
-# Create logs directory if one is missing
-if not("logs" in os.listdir("..")):
-    os.mkdir("../logs")
-
-# Trigger backup
-backup_logs()
-
-
 # Config for the logging module
 # https://docs.djangoproject.com/en/5.0/topics/logging/
 
@@ -84,23 +44,19 @@ LOGGING = {
             "formatter": "custom"
         },
         "master": {
-            "class": "logging.handlers.RotatingFileHandler",
+            "class": "logging.FileHandler",
             "level": "INFO",
             "filename": "../logs/master.log",
             "mode": "a",
-            "encoding": "utf-8",
-            "maxBytes": 6708864, # 64MB
-            "backupCount": 10,
+            "encoding": "UTF-8",
             "formatter": "custom"
         },
         "debug": {
-            "class": "logging.handlers.RotatingFileHandler",
+            "class": "logging.FileHandler",
             "level": "DEBUG",
             "filename": "../logs/debug.log",
             "mode": "a",
-            "encoding": "utf-8",
-            "maxBytes": 6708864, # 64MB
-            "backupCount": 10,
+            "encoding": "UTF-8",
             "formatter": "custom"
         }
     },
@@ -119,4 +75,4 @@ LOGGING = {
         "handlers": ["console", "master", "debug"],
         "level": "DEBUG",
     }
-}
+} 
