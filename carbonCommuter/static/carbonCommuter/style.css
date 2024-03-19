@@ -459,7 +459,7 @@ tbody tr:nth-child(n + 11) {
 }
 
 .streak {
-    position: absolute;
+    position: relative;
     text-align: center;
     color: white;
     font-family: "chewy";
