@@ -1,8 +1,9 @@
 
-function onLoad() {
+function onLoad(tab = 1) {
     window.attempts = 0;
     window.last_accuracy = "0";
-    window.current_tab = 1;
+    window.current_tab = tab;
+    document.getElementById(`tab${tab}`).style.display = "block";
     getLocation();
 }
 
@@ -114,6 +115,24 @@ function getAddress(position) {
             console.log(`Error: ${xhr.status}`);
         }
     };
+}
+
+function verifyAddress() {
+    if (document.getElementById("lat").value == "") {
+        window.error = "An address must be provided before continuing!";
+        showError();
+        return false;
+    } else if (document.getElementById("long").value == "") {
+        window.error = "An address must be provided before continuing!";
+        showError();
+        return false;
+    } else if (document.getElementById("address").value == "") {
+        window.error = "An address must be provided before continuing!";
+        showError();
+        return false;
+    } else {
+        return true;
+    }
 }
 
 let autocomplete;

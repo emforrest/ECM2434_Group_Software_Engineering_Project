@@ -179,10 +179,16 @@ def start_journey(request):
         Redirect: The form was submitted correctly and the user was redirected to the dashboard upon completion.
         Render: A get request was recieved and the form was rendered.
     """
+    # Set any context required for rendering the template
+    context = {
+        "tab": 1
+    }
+    
     # Check the user has an active journey, and if so, return an unauthorized error
     journey = request.user.profile.active_journey
     if journey is not None:
-        return HttpResponse(status=403)
+        LOGGER.warning(f"User [{request.user.username}:{request.user.id}]: Tried to access the start journey page with an active journey.")
+        return redirect('end_journey')
     
     # If method is POST, handle form submission
     if request.method == "POST":
@@ -190,21 +196,35 @@ def start_journey(request):
         # Convert the string representation of the transport type to a TravelType object.
         transport = TravelType.from_str(request.POST.get('transport'))
         if transport is None:
-            LOGGER.error("Transport not found!")
-            raise RuntimeError("Transport not found!")
+            LOGGER.error(f"Transport method '{request.POST.get('transport')}' doesn't exist!")
+            context["error"] = "Method of transport doesn't exist!"
+            context["tab"] = 3
+            context['lat'] = request.POST.get('lat')
+            context['long'] = request.POST.get('long')
+            context['address'] = request.POST.get('address')
+            return render(request, "upload/start_journey.html", context=context)
        
         # Check the POST request contains a valid latitude and longitude or address
-        if request.POST.get('lat') in ["", None] or request.POST.get('long') in ["", None]:
-           raise RuntimeError("Missing latitude and longitude!")
-        elif request.POST.get('address') in ["", None]:
-            raise RuntimeError("Missing address string!")
+        if request.POST.get('lat') in ["", None] or request.POST.get('long') in ["", None] or request.POST.get('address') in ["", None]:
+            LOGGER.warning(f"Missing location information on form submission!")
+            context["error"] = "Please enter a valid location before trying to start your journey!"
+            context["tab"] = 2
+            return render(request, "upload/start_journey.html", context=context)
 
-        # Get the closest building to campus and check if it's within an acceptable range (300m)
-        building, distance = get_distance_to_campus(float(request.POST.get('lat')), float(request.POST.get('long')))
+        # Get the closest building to campus
+        try:
+            building, distance = get_distance_to_campus(float(request.POST.get('lat')), float(request.POST.get('long')))
+        except Exception as ex:
+            LOGGER.error("Failed to get closest building to start location.")
+            LOGGER.exception(ex)
+            context["error"] = "Sorry, something went wrong with our calculations. Please try getting your location again!"
+            context["tab"] = 2
+            return render(request, "upload/start_journey.html", context=context)
+        
+        # Check if it's within an acceptable range (300m)
         if distance <= 0.3:
             location = Location.objects.get(name=building)
         else:
-            #set building to None as location not on campus
             building = None
 
             # Get (or create) a Location object for the specified location if off campus
@@ -216,9 +236,13 @@ def start_journey(request):
                                                    address = request.POST.get('address'))
                 location.save()
             except Exception as ex:
-                raise ex
+                LOGGER.error("Failed to get/create a new location object outside of campus.")
+                LOGGER.exception(ex)
+                context["error"] = "Sorry, something went wrong on our end! Please try getting your location again."
+                context["tab"] = 2
+                return render(request, "upload/start_journey.html", context=context)
         
-        # add the location badge to the user if location on campus
+        # Add the location badge to the user if location on campus
         if (building != None):
             check_location(building, request.user)
 
@@ -236,7 +260,7 @@ def start_journey(request):
     
     # Render the form if visited by a GET request
     else:
-        return render(request, "user/start_journey.html")
+        return render(request, "upload/start_journey.html", context=context)
         
 
 @login_required
@@ -255,21 +279,43 @@ def end_journey(request):
         Redirect: The form was submitted correctly and the user was redirected to the success page upon completion.
         Render: A get request was recieved and the form was rendered.
     """
+    # Set any context required for rendering the template
+    context = {
+        "tab": 1
+    }
+    
     # Check the user has an active journey, and if not, return an unauthorized error
     journey = request.user.profile.active_journey
     if journey is None:
-        return HttpResponse(status=403)
+        LOGGER.warning(f"User [{request.user.username}:{request.user.id}]: Tried to access the end journey page without an active journey.")
+        return redirect('start_journey')
     
     # If method is POST, handle form submission
     if request.method == "POST":
         
-        # Get the closest building to campus and check if it's within an acceptable range (300m)
-        building, distance = get_distance_to_campus(float(request.POST.get('lat')), float(request.POST.get('long')))
+        # Check the POST request contains a valid latitude and longitude or address
+        if request.POST.get('lat') in ["", None] or request.POST.get('long') in ["", None] or request.POST.get('address') in ["", None]:
+            LOGGER.warning(f"Missing location information on form submission!")
+            context["error"] = "Please enter a valid location before trying to end your journey!"
+            context["tab"] = 2
+            return render(request, "upload/end_journey.html", context=context)
+        
+        # Get the closest building to campus
+        try:
+            building, distance = get_distance_to_campus(float(request.POST.get('lat')), float(request.POST.get('long')))
+        except Exception as ex:
+            LOGGER.error("Failed to get closest building to end location.")
+            LOGGER.exception(ex)
+            context["error"] = "Sorry, something went wrong with our calculations. Please try getting your location again!"
+            context["tab"] = 2
+            return render(request, "upload/end_journey.html", context=context)
+        
+        # Get (or create) a Location object for the specified location if off campus
         if distance <= 0.3:
             location = Location.objects.get(name=building)
         else:
-            #set building to None as location not on campus
             building = None
+            
             # Get (or create) a Location object for the specified location if off campus
             try:
                 location = Location.objects.get(address = request.POST.get('address'))
@@ -279,7 +325,11 @@ def end_journey(request):
                                                    address = request.POST.get('address'))
                 location.save()
             except Exception as ex:
-                raise ex
+                LOGGER.error("Failed to get/create a new location object outside of campus.")
+                LOGGER.exception(ex)
+                context["error"] = "Sorry, something went wrong on our end! Please try getting your location again."
+                context["tab"] = 2
+                return render(request, "upload/end_journey.html", context=context)
         
         # add the location badge to the user if location on campus
         if (building != None):
@@ -288,11 +338,19 @@ def end_journey(request):
         # Convert the string representation of the transport type to a TravelType object.
         transport = TravelType.from_str(journey.transport)
         if transport is None:
-           raise RuntimeError("Transport not found!")
+           LOGGER.critical("Uncaught exception: Transport type is not found during end journey function!")
+           return HttpResponse(code=500)
         
         # Convert both sets of latitude/longitude coordinates to a distance, and then calculate the carbon saved based on that distance, using the methods defined in common/utils.py
-        distance, time = get_route(journey.origin.lat, journey.origin.lng, location.lat, location.lng, transport)
-        savings = calculate_co2(distance, transport)
+        try:
+            distance, time = get_route(journey.origin.lat, journey.origin.lng, location.lat, location.lng, transport)
+            savings = calculate_co2(distance, transport)
+        except Exception as ex:
+            LOGGER.error("Failed to calculate route and carbon savings.")
+            LOGGER.exception(ex)
+            context["error"] = "Sorry, something went wrong with our calculations. Please try getting your location again!"
+            context["tab"] = 2
+            return render(request, "upload/end_journey.html", context=context)
         
         # Save calculations and final timestamp to current journey
         journey.destination = location
@@ -332,7 +390,7 @@ def end_journey(request):
     
     # Render the form if visited by a GET request
     else:
-        return render(request, "user/end_journey.html")
+        return render(request, "upload/end_journey.html")
     
 
 @login_required
@@ -362,7 +420,7 @@ def journey_created(request, journey_id: int):
         "transport": TravelType.from_str(journey.transport).to_str(),
         "time_taken": format_time_between(journey.time_finished, journey.time_started)
     }
-    return render(request, "user/success.html", context)
+    return render(request, "upload/success.html", context)
 
 
 @login_required
@@ -405,6 +463,7 @@ def profile(request, username:str):
         return render(request, "user/profile.html", context)
     else:
         return HttpResponse(status=404)
+
 
 def follow(request):
     """Handles the logic of following another user
@@ -475,7 +534,8 @@ def check_location(location, user):
         add_badge(badgeID, user)
     else:
         print("Invalid location")
-    
+
+
 def check_streak(user):
     """Adding the streak badge to the Badges table if the user has achieved a new high streak.
     
@@ -499,6 +559,7 @@ def check_streak(user):
     if badgeID != None:
         #if the user has achieved a streak listed, will add the badge
         add_badge(badgeID, user)
+
 
 def add_badge(badge, user):
     """Adding the corresponding badge to the database
