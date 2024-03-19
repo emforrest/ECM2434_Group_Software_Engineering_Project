@@ -46,42 +46,34 @@
     </header>
 
     <br>
-    <div class="wrapper">
-        <div class="column">
-            <!-- the text to show the user they have reached the admin page -->
-            <div class="table">
-                <section class="leaderboard_header">
-                    <h1>Review Suspicious Journeys:</h1>
-                </section>
-                <section class="leaderboard_body">                    
-                    <table>
-                        <thead>
-                            <tr> 
-                                <!-- Headers for the table -->
-                                <th>User</th>
-                                <th>Date</th>
-                                <th>Time</th>
-                                <th>Reason</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!--Here, the django for loop displays each user, with a medal for the top users-->
-                            {%for journey in journeys %}
-                            <tr>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                            </tr>
-                            {%endfor%}
-                        </tbody>
-                    </table>
-                </section>
-            </div>
-        </div>
-    </div>  
+    <div class="wrapper" style="width: 30%; min-width: 400px;">
+        <h1>Review suspicious journeys:</h1>
+        <div class="table">
+            <table>
+                <tr> 
+                    <!-- Headers for the table -->
+                    <th>User</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Reason</th>
+                    <th>Actions</th>
+                </tr>
+                <!--Here, the django for loop displays each user, with a medal for the top users-->
+                {%for journey in journeys %}
+                <tr>
+                    <td>{{ journey.user.username }}</td>
+                    <td>{{ journey.format_date }}</td>
+                    <td>{{ journey.format_time }}</td>
+                    <td>{{ journey.reason }}</td>
+                    <td>
+                        <button class="icon-btn"><img src="/media/icons/checkmark.png" alt="Approve" width="30px"/></button>
+                        <button class="icon-btn"><img src="/media/icons/cross.png" alt="Delete" width="30px"/></button>
+                    </td>
+                </tr>
+                {%endfor%}
+            </table>
+        </div> 
+    </div>
     <br>
     
 

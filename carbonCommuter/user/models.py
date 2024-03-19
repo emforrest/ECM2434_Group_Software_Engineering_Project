@@ -95,6 +95,12 @@ class Journey(models.Model):
     reason = models.CharField(max_length=255, blank=True, null=True)
     objects = JourneyManager()
     
+    def format_date(self):
+        return self.time_finished.strftime('%d-%m-%Y')
+    
+    def format_time(self):
+        return self.time_finished.strftime('%H:%M')
+    
     
 class Profile(models.Model):
     """Contains any information about a user that isn't related to authentication.

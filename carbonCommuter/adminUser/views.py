@@ -12,6 +12,8 @@ from django.http import HttpResponse
 from adminUser.models import Event
 from datetime import datetime
 
+from user.models import Journey
+
 NUM_BUILDINGS = 27
 
 def mainAdmin(request):
@@ -123,3 +125,8 @@ def success(request):
             return render(request, "adminUser/success.html", context={'eventMessage' : message})
     else:
         return HttpResponse(status=405)
+    
+
+def verify_suspicious_journey(request):
+    context = {'journeys': Journey.objects.filter(flagged=True)}
+    return render(request, "adminUser/verify_journey.html", context=context)
