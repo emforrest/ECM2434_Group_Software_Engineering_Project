@@ -215,7 +215,7 @@ tbody tr:nth-child(n + 11) {
     }
 }
 
-@media (max-height: 700px) {
+@media (height: 700px) {
     div.table {
         height: 10%;
     }
@@ -607,4 +607,10 @@ tbody tr:nth-child(n + 11) {
 .main-footer p {
     text-align: center;
     color: black;
+}
+
+@media (min-width: 0px) {
+    .navbar navbar-expand-lg navbar-light bg-light {
+        width: 100%; /* Set navbar width to 100% of viewport width */
+    }
 }

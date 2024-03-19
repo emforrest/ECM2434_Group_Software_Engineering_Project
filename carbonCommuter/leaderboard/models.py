@@ -12,5 +12,7 @@ class Leaderboard_Entry:
     position : int
     name : str
     totalCo2Saved : float 
+    id : int
+    username : str
 
 # Create your models here.

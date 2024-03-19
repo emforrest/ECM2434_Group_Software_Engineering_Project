@@ -1,56 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CO2 Saving Website</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="/">CarbonCommuter</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+{% extends "base.html" %}
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/register/">Register</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/login/">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/leaderboard/">Leaderboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/user/">User Profile</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/groups/">Groups</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
+{% block title %}CO2 Saving Website{% endblock%}
 
-    <div class="container mt-5">
-        <h1>CarbonCommuter Admin</h1>
-        <p></p>
-        <p>Register now to start tracking your carbon emissions, join groups, and compete with others to see who can make the most significant impact!</p>
-        <p>As an admin, you can control these groups, and ensure carbon emission inputs are valid for all users, and remove them if they are not.</p>
-    </div>
+{% block navbar %}
+    <li class="nav-item">
+        <a class="nav-link" href="/register/">Register</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/login/">Login</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/leaderboard/">Leaderboard</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/user/">User Profile</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/groups/">Groups</a>
+    </li> 
+{% endblock %}
 
-    <footer class="mt-5">
-        <div class="container text-center">
-            <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
-        </div>
-    </footer>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+{% block content %}
+<div class="container">
+    <h1>CarbonCommuter Admin</h1>
+    <p></p>
+    <p>Register now to start tracking your carbon emissions, join groups, and compete with others to see who can make the most significant impact!</p>
+    <p>As an admin, you can control these groups, and ensure carbon emission inputs are valid for all users, and remove them if they are not.</p>
+</div>
+<br>
+<!--The footer, consistent across the site-->
+<div class="footer">
+    <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
+</div>
+{% endblock %}
