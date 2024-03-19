@@ -6,7 +6,13 @@ import sys
 
 def main():
     """Run administrative tasks."""
+    # Create logs directory if one is missing
+    if not("logs" in os.listdir("..")):
+        os.mkdir("../logs")
+
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'carbonCommuter.settings')
+    if sys.argv[1] == "backuplogs":
+        os.environ.setdefault('DJANGO_LOGGING', 'False')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:

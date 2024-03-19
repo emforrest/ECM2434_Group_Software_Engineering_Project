@@ -27,7 +27,8 @@ LOGGER = logging.getLogger(__name__)
 
 @login_required
 def home(request):
-    """Return the /user/home page with the information about the current user such as their name and email address.
+    """Return the /user/home page with the information about the current user such as their 
+    name and email address, and any badges they have earned.
     
     Args:
         request: The HTTP request containing information about the current user
@@ -42,13 +43,12 @@ def home(request):
 
     #setting values for opacity to show if user has the badges
     userBadge = UserBadge.get_badges(request.user)
-    #userBadge = request.userBadge.get_badges()
     badgesList = []
     for badge in userBadge:
+        #for every badge retrieved earlier, adding their name into list so can add the correct opacity
         badgeName = Badges.objects.get(id=badge.badge_id).name
         badgesList.append(badgeName)
-        print(Badges.objects.get(id=badge.badge_id).name)
-    #userBadges = userBadge.get_badges()
+    #determine opacity of all badges
     amoryOpac = determine_opacity("Amory", badgesList)
     businessSchoolOpac = determine_opacity("Business School - Building One", badgesList)
     devonshireHouseOpac = determine_opacity("Devonshire House", badgesList)
@@ -61,24 +61,28 @@ def home(request):
     queensOpac = determine_opacity("Queens", badgesList)
     sportsParkOpac = determine_opacity("Sports Park", badgesList)
     swiotOpac = determine_opacity("South West Institute of Technology", badgesList)
-    washingtonSinger = determine_opacity("Washington Singer", badgesList)
-    '''sevenDaysOpac = determine_opacity(userBadges.sevenDays)
-    fourteenDaysOpac = determine_opacity(userBadges.fourteenDays)
-    thirtyDaysOpac = determine_opacity(userBadges.thirtyDays)
-    fiftyDaysOpac = determine_opacity(userBadges.fiftyDays)
-    seventyFiveDaysOpac = determine_opacity(userBadges.seventyFiveDays)
-    hundredDaysOpac = determine_opacity(userBadges.hundredDays)'''
+    washingtonSingerOpac = determine_opacity("Washington Singer", badgesList)
+    sevenDaysOpac = determine_opacity("7days", badgesList)
+    fourteenDaysOpac = determine_opacity("14days", badgesList)
+    thirtyDaysOpac = determine_opacity("30days", badgesList)
+    fiftyDaysOpac = determine_opacity("50days", badgesList)
+    seventyFiveDaysOpac = determine_opacity("75days", badgesList)
+    hundredDaysOpac = determine_opacity("100days", badgesList)
+
+     #get a list of users this user is following
+    followingUsers = User.objects.filter(followers__follower=request.user).values_list('username', flat=True)
 
 
+    #adding opacity of badges to context so can be displayed correctly to the user
     context = context = {"full_name": name,
                          "co2Saved": co2Saved,
                          "started": started,
-                         "sevenDaysOpac": 0.15,
-                         "fourteenDaysOpac": 0.15,
-                         "thirtyDaysOpac": 0.15,
-                         "fiftyDaysOpac": 1,
-                         "seventyFiveDaysOpac": 1,
-                         "hundredDaysOpac": 1, 
+                         "sevenDaysOpac": sevenDaysOpac,
+                         "fourteenDaysOpac": fourteenDaysOpac,
+                         "thirtyDaysOpac": thirtyDaysOpac,
+                         "fiftyDaysOpac": fiftyDaysOpac,
+                         "seventyFiveDaysOpac": seventyFiveDaysOpac,
+                         "hundredDaysOpac": hundredDaysOpac, 
                          "amoryOpac": amoryOpac, 
                          "businessSchoolOpac": businessSchoolOpac, 
                          "devonshireHouseOpac": devonshireHouseOpac, 
@@ -91,15 +95,24 @@ def home(request):
                          "queensOpac": queensOpac,
                          "sportsParkOpac": sportsParkOpac,
                          "swiotOpac": swiotOpac,
-                         "washingtonSinger": washingtonSinger}
+                         "washingtonSingerOpac": washingtonSingerOpac,
+                         "followingUsers": followingUsers}
     return render(request, "user/home.html", context)
 
 
 def determine_opacity(badge, badgesList):
+    """Returns the opacity integer for the badge, depending on whether the user has already earned the badge
+
+    Args:
+        badge: The name of the badge being checked
+        badgesList: The list of badges the user has collected 
+    Returns:
+        opacity: the opacity of the badge depending on whether the user has collected it
+    """
     if badge in badgesList:
-        opacity = 1
+        opacity = 1 #completely visible to user
     else:
-        opacity = 0.15
+        opacity = 0.15 #blurred to the user
     return opacity
 
 
@@ -288,6 +301,29 @@ def end_journey(request):
         journey.carbon_savings = savings
         journey.time_finished = datetime.now()
         journey.save()
+
+        # Add to streak of the user
+        pastJourneys = Journey.objects.all().filter(user_id=request.user.id) #accessing all the past journeys the user has made
+        dateNow = datetime.now().astimezone()
+        checkStreak = False #boolean to check if a streak still exists
+        for pastJourney in reversed(pastJourneys):
+            #looping through past journeys in reverse so the most recent is first
+            pastJourneyDate = pastJourney.time_finished
+            difference = dateNow-pastJourneyDate
+            if difference.seconds/60 > 1440:
+                #if the difference between the last journey is more than 1440 minutes (24 hours), there is no streak
+                break
+            if (dateNow.weekday() - pastJourneyDate.weekday()) == 1:
+                #checking there is a days difference between journeys
+                checkStreak = True
+                request.user.profile.streak = request.user.profile.streak + 1 
+                break
+        if not checkStreak:
+            #if streak has been broken, set back to 0
+            request.user.profile.streak = 0
+
+        #check if user has earned any streak badges
+        check_streak(request.user)
         
         # Reset user's active journey flag by setting active journey to none
         request.user.profile.active_journey = None
@@ -399,12 +435,6 @@ def follow(request):
         return HttpResponse(status = 405)
     
 
-
-
-
-
-    
-
 def check_location(location, user):
     """Adding the location badge to the Badges table if the user has travelled to that location.
 
@@ -412,7 +442,6 @@ def check_location(location, user):
         location: The location the user has logged, to add as a badge
         user: The user to be able to get the badges for that specific user
     """
-    print("location = ", location)
     badgeLocation = False
     if location == "Amory":
         badgeLocation = True
@@ -441,34 +470,44 @@ def check_location(location, user):
     elif location == "Washington Singer":
         badgeLocation = True
     if badgeLocation:
-        newBadge = UserBadge(user_id=user.id, badge_id=Badges.objects.get(name=location).id)
-        newBadge.save()
+        #if badgeLocation is valid, then will add the badge to the users collection
+        badgeID = Badges.objects.get(name=location).id
+        add_badge(badgeID, user)
     else:
         print("Invalid location")
-    '''userBadges = Badges.objects.get(user=user)
-    if location == "Amory":
-        userBadges.amory = True
-    elif location == "BusinessSchool":
-        userBadges.businessSchool = True
-    elif location == "DevonshireHouse":
-        userBadges.devonshireHouse = True
-    elif location == "Forum":
-        userBadges.forum = True
-    elif location == "Harrison":
-        userBadges.harrison = True
-    elif location == "InnovationCentre":
-        userBadges.innovationCentre = True
-    elif location == "Laver":
-        userBadges.laver = True
-    elif location == "LSI":
-        userBadges.lsi = True
-    elif location == "PeterChalk":
-        userBadges.peterChalk = True
-    elif location == "Queens":
-        userBadges.queens = True
-    elif location == "SportsPark":
-        userBadges.sportsPark = True
-    elif location == "Swiot":
-        userBadges.swiot = True
-    elif location == "WashingtonSinger":
-        userBadges.washingtonSinger = True'''
+    
+def check_streak(user):
+    """Adding the streak badge to the Badges table if the user has achieved a new high streak.
+    
+    Args: 
+        user: The user to be able to get the badges for that specific user
+    """
+    streak = user.profile.streak
+    badgeID = None
+    if streak == 7:
+        badgeID = Badges.objects.get(name="7days").id
+    elif streak == 14:
+        badgeID = Badges.objects.get(name="14days").id
+    elif streak == 30:
+        badgeID = Badges.objects.get(name="30days").id
+    elif streak == 50:
+        badgeID = Badges.objects.get(name="50days").id
+    elif streak == 75:
+        badgeID = Badges.objects.get(name="75days").id
+    elif streak == 100:
+        badgeID = Badges.objects.get(name="100days").id
+    if badgeID != None:
+        #if the user has achieved a streak listed, will add the badge
+        add_badge(badgeID, user)
+
+def add_badge(badge, user):
+    """Adding the corresponding badge to the database
+
+    Args:
+        badge: The badge to be added to the database
+        user: The user to be able to get the badges for that specific user
+    """
+    if not UserBadge.objects.filter(user_id=user.id, badge_id=badge).exists():
+            #if the badge does not already exist for the user
+            newBadge = UserBadge(user_id=user.id, badge_id=badge)
+            newBadge.save()

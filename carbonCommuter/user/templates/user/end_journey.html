@@ -1,67 +1,85 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-
 <!--A HTML document that produces the upload webpage, so users can input the start and end coordinates of their journey and the mode of transport used.-->
 <!--authors: Eleanor Forrest, Jack Skinner, Giulia Brown, Sam Townley-->
+{% extends "base.html" %}
 
-    <head>
-        <!--Import styling-->
-        <title>End Your Journey</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="{% static 'carbonCommuter/style.css' %}">
-        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <!--Set up the connection to the Google Maps API-->
-        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIZe4j6_6bvgDSdz4rjX_29_r6C6FGi1Y&libraries=places&callback=initAutocomplete&loading=async">
-        </script> 
-    </head>
+{% block title %}End Your Journey{% endblock%}
 
-    <body>
-        <header>
-            <!--The navbar, consistent across the site-->
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="/">CarbonCommuter</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+{% block script %}
+    <!--Set up the connection to the Google Maps API-->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIZe4j6_6bvgDSdz4rjX_29_r6C6FGi1Y&libraries=places&callback=initAutocomplete&loading=async"></script>
+    <script>
+        window.error='{{ error|escapejs }}';
+        if (window.error != "") {
+            showError();
+        }
+    </script>
+{% endblock %}
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto">
+{% block body %}
+<body onload="onLoad()">
+    <header>
+        <!--The navbar, consistent across the site-->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/">CarbonCommuter</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto" style="text-align: right; float: right;">
+                    {% if request.user.is_authenticated %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'user_groups_home_page' %}">Groups</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/leaderboard/">Leaderboard</a>
+                            <a class="nav-link" href="/leaderboard/user_leaderboard">Leaderboard</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/logout/">Logout</a>
                         </li>
+                    {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
+                            <a class="nav-link" href="/leaderboard/">Leaderboard</a>
                         </li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login/">Login</a>
+                        </li>
+                    {%endif%}
+                    <li class="nav-item">
+                    <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
 
-        <br>
-        <div class="container">
-            <div class="wrapper">
-                <!--The form object takes the user's selections and passes them to the upload function-->
-                <form name="end" id="end_journey" action="/user/journeys/finish" method="post">
-                    {% csrf_token %}
-                    <h1>End Your Current Journey</h1>
-            
-                    <!--These hidden inputs are used to convert the user's off-campus location into latitude and longitude coordinates and pass them through-->
-                    <input type="hidden" id="lat" name="lat" value="">
-                    <input type="hidden" id="long" name="long" value="">
-                    <input type="hidden" id="address" name="address" value="">
-                
+    <br>
+    <div class="container">
+        <div class="wrapper">
+            <!--The form object takes the user's selections and passes them to the upload function-->
+            <form name="end" id="end_journey" action="/user/journeys/finish" method="post">
+                {% csrf_token %}
+                <h1>End Your Current Journey</h1>
+        
+                <!--These hidden inputs are used to convert the user's off-campus location into latitude and longitude coordinates and pass them through-->
+                <input type="hidden" id="lat" name="lat" value="">
+                <input type="hidden" id="long" name="long" value="">
+                <input type="hidden" id="address" name="address" value="">
+
+                <div id="tab1" style="text-align: center;">
+                    <h3>Getting your current location</h3>
+                    <br>
+                    <div style="margin: auto; width: 50%">
+                        <img src="/media/loading/pikachu.gif"/>
+                    </div>
+                    <br>
+                    <i id="loading">This could take up to 30 seconds...</i>
+                </div>
+        
+                <div id="tab2" style="display: none">
                     <h4>Where are you finishing your journey today?</h4>
                     <br>
-                    <button type="button" class="btn" onclick="getLocation()">Get My Location</button>
+                    <button type="button" class="btn" onclick="getLocation()">Re-fetch Location</button>
                     <br>
 
                     <br>
@@ -87,115 +105,17 @@
                         <button type="button" id="btn_input" class="btn" style="display: inline-block; width: 49%" onclick="showManualInput()">Enter Manually</button>
                         <button type="submit" id="btn_submit" class="btn" style="display: inline-block; width: 49%" >Confirm Location</button>
                     </div>
+                </div>
 
-                    {% if error %}
-                        <p style='color:red'>{{ error }}</p>
-                    {% endif %}
-                </form>
-            </div>
-
-            <script>
-                function showManualInput() {
-                    document.getElementById("manual_select").style.display = "block";
-                    document.getElementById("btn_input").style.display = "none";
-                    document.getElementById("btn_submit").style.width = "100%"
-                }
-
-                function hideManualInput() {
-                    document.getElementById("manual_select").style.display = "none";
-                    document.getElementById("btn_input").style.display = "inline-block";
-                    document.getElementById("btn_submit").style.width = "49%"
-                }
-
-                function getLocation() {
-                    if (navigator.geolocation) {
-                        navigator.geolocation.getCurrentPosition(showPosition, showError);
-                    } else { 
-                        alert("Geolocation is not supported by this browser.");
-                    }
-                }
-
-                function getAddress(position) {
-                    const xhr = new XMLHttpRequest();
-                    xhr.open("GET", `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=AIzaSyCVEKGGBT_8WryClHT64tPqFONldHdY35Y`);
-                    xhr.send();
-                    xhr.responseType = "json";
-                    xhr.onload = () => {
-                        if (xhr.readyState == 4 && xhr.status == 200) {
-                            const results = xhr.response;
-                            setAddress(results['results'][0]['formatted_address']);
-                        } else {
-                            console.log(`Error: ${xhr.status}`);
-                        }
-                    };
-                }
-
-                function showPosition(position) {
-                    setLatLong(position.coords.latitude, position.coords.longitude);
-                    getAddress(position);
-                }
-
-                function showError(error) {
-                    switch(error.code) {
-                        case error.PERMISSION_DENIED:
-                            alert("User denied the request for Geolocation.")
-                            break;
-                        case error.POSITION_UNAVAILABLE:
-                            alert("Location information is unavailable.")
-                            break;
-                        case error.TIMEOUT:
-                            alert("The request to get user location timed out.")
-                            break;
-                        case error.UNKNOWN_ERROR:
-                            alert("An unknown error occurred.")
-                            break;
-                    }
-                }
-
-                let autocomplete;
-                function initAutocomplete(){
-                    autocomplete = new google.maps.places.Autocomplete(
-                        document.getElementById('autocomplete'),
-                        {
-                        types:['address'],
-                        componentRestrictions: {'country': ['gb']},
-                        fields : ['geometry', 'formatted_address'],
-                        strictBounds: true
-                        }
-                    );
-                    autocomplete.addListener('place_changed', onPlaceChanged);
-                }
+            </form>
             
-                function onPlaceChanged(){
-                    var place = autocomplete.getPlace();
-                    if (place.geometry) {
-                        console.log(place.formatted_address);
-                        setAddress(place.formatted_address);
-                        setLatLong(place.geometry.location.lat().toString(), place.geometry.location.lng().toString());
-                        hideManualInput();
-                    }
-                }
-
-                function setAddress(address) {
-                    document.getElementById('address').value = address;
-                    document.getElementById('display_address').innerHTML = address;
-                }
-
-                function setLatLong(lat, long) {
-                    document.getElementById('lat').value = lat;
-                    document.getElementById('long').value = long;
-                    document.getElementById('google_map').setAttribute('src', `https://maps.google.co.uk?q=${lat},${long}&output=embed`);
-                }
-                </script>
-                    
-            <br>
-            <div class="footer">
-                <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
-            </div>
+            <p id="error" style='color: red; display: none; text-align: center;'>An unknown error has occured...</p>
         </div>
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    </body>
-</html>
+    </div>
+        
+    <br>
+    <div class="footer">
+        <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
+    </div>
+</body>
+{% endblock %}

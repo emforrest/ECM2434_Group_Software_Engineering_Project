@@ -1,101 +1,76 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-
 <!-- A HTML document that produces the register page, to allow the user to create their account. -->
 <!-- authors: Jack Skinner, Giulia Brown, Abi Hinton -->
+{% extends "base.html" %}
 
-    <head>
-        <title>Register - CO2 Saving Website</title>
-        <!-- import styling -->
-        <link rel="stylesheet" href="{% static 'carbonCommuter/style.css' %}">
-        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    </head>
-    <body>
-        <header>
-            <!--The navbar, consistent across the site-->
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="/">CarbonCommuter</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+{% block title %}Register - CO2 Saving Website{% endblock%}
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <!-- putting login or logout in the navbar depending on whether the user is already logged in -->
-                            {% if not request.user.is_authenticated %}
-                                <a class="nav-link" href="/login/">Login</a>
-                            {% else %}
-                                <a class="nav-link" href="/logout/">Logout</a>
-                            {% endif %} 
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/leaderboard/">Leaderboard</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
+{% block navbar %}
+    {% if not request.user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link" href="/login/">Login</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/leaderboard/user_leaderboard">Leaderboard</a>
+        </li>
+    {% else %}
+        <li class="nav-item">
+            <a class="nav-link" href="/logout/">Logout</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/leaderboard/">Leaderboard</a>
+        </li>
+    {% endif %} 
+{% endblock %}
 
-    <br>
-    <div class="wrapper">
-        <!-- POST form to retrieve the details of the user to create an account -->
-        <form action="/register/" method="POST">
-            <h1>Register</h1>
-            {% csrf_token %} <!-- for security of the inputs of the POST form -->
-            <!-- if an input was invalid, an error will be produced and printed on screen below for the user to re-enter their details correctly -->
-            {% if error %}
-                <p style='color:red'>{{ error }}</p>
-            {% endif %}
-            <!-- all the input boxes -->
-            <div class="input-box">
-                <input type="text" placeholder="first name" id="first_name" name="first_name" required>
-            </div>
-            <div class="input-box">
-                <input type="text" placeholder="surname" id="last_name" name="last_name" required>
-            </div>
-            <div class="input-box">
-                <input type="text" placeholder="username" id="username" name="username" required>
-                <i class='bx bxs-user'></i>
-            </div>
-            <div class="input-box">
-                <input type="text" placeholder="email" id="email" name="email" required>
-                <i class='bx bxs-envelope'></i>
-            </div>
-            <div class="input-box">
-                <input type="password" placeholder="password" id="password1" name="password1" required>
-                <i class='bx bxs-lock-alt'></i>
-            </div>
-            <div class="input-box">
-                <input type="password" placeholder="re-enter password" id="password2" name="password2" required>
-                <i class='bx bxs-lock-alt'></i>
-            </div>
-            <div class="checkbox">
-            <input type="checkbox" id="Privacy Policy" name="Privacy Policy" value="Accept">
-                <label for="Privacy Policy"> I have read and accept the <a href="PrivacyPolicy">Privacy Policy</a></label><br>
-            </div>
-            <button type="submit" class="btn">Register</button>
-
-                    <!-- if the user is already registered, can click to login -->
-                    <div class="link">
-                        <p>Already registered? <a href="/login/">Login</a></p>
-                    </div>
-                </form>
-            </div>
-            <br>
-            <!--The footer, consistent across the site-->
-            <div class="footer">
-                <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
-            </div>
+{% block content %}
+<br>
+<div class="wrapper">
+    <!-- POST form to retrieve the details of the user to create an account -->
+    <form action="/register/" method="POST">
+        <h1>Register</h1>
+        {% csrf_token %} <!-- for security of the inputs of the POST form -->
+        <!-- if an input was invalid, an error will be produced and printed on screen below for the user to re-enter their details correctly -->
+        {% if error %}
+            <p style='color:red'>{{ error }}</p>
+        {% endif %}
+        <!-- all the input boxes -->
+        <div class="input-box">
+            <input type="text" placeholder="first name" id="first_name" name="first_name" required>
         </div>
-        
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    </body>
-</html>
+        <div class="input-box">
+            <input type="text" placeholder="surname" id="last_name" name="last_name" required>
+        </div>
+        <div class="input-box">
+            <input type="text" placeholder="username" id="username" name="username" required>
+            <i class='bx bxs-user'></i>
+        </div>
+        <div class="input-box">
+            <input type="text" placeholder="email" id="email" name="email" required>
+            <i class='bx bxs-envelope'></i>
+        </div>
+        <div class="input-box">
+            <input type="password" placeholder="password" id="password1" name="password1" required>
+            <i class='bx bxs-lock-alt'></i>
+        </div>
+        <div class="input-box">
+            <input type="password" placeholder="re-enter password" id="password2" name="password2" required>
+            <i class='bx bxs-lock-alt'></i>
+        </div>
+        <div class="checkbox">
+        <input type="checkbox" id="Privacy Policy" name="Privacy Policy" value="Accept">
+            <label for="Privacy Policy"> I have read and accept the <a href="PrivacyPolicy">Privacy Policy</a></label><br>
+        </div>
+        <button type="submit" class="btn">Register</button>
+
+        <!-- if the user is already registered, can click to login -->
+        <div class="link">
+            <p>Already registered? <a href="/login/">Login</a></p>
+        </div>
+    </form>
+</div>
+<br>
+<!--The footer, consistent across the site-->
+<div class="footer">
+    <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
+</div>
+{% endblock %}
