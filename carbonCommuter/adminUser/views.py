@@ -5,9 +5,7 @@ Authors:
 """
 
 from django.shortcuts import render
-
-# Render user webpages here
-
+from main.models import Location
 from django.http import HttpResponse
 from adminUser.models import Event
 from datetime import datetime
@@ -23,6 +21,7 @@ def mainAdmin(request):
     Return:
     The function returns the rendering of the admin home webpage
     """
+    Event.objects.all().delete() 
     #Check if there is an active event
     activeEvent = Event.objects.filter(endDate__gt=timezone.now()).exists()
     return render(request, "adminUser/mainAdmin.html", {'activeEvent': activeEvent})
@@ -65,7 +64,7 @@ def confirmEvent(request):
         fieldsInfo = {}
     else:
         return HttpResponse(status=400)
-    return render(request, "adminUser/confirmEvent.html", {'fieldsInfo': fieldsInfo, 'eventType': eventType})
+    return render(request, "adminUser/confirmEvent.html", {'fieldsInfo': fieldsInfo, 'eventType': eventType, 'locations': Location.objects.filter(on_campus=True)})
 
 def submitEvent(request):
     """Uses the provided information to create a new event
@@ -85,7 +84,7 @@ def submitEvent(request):
             return success(request)
 
         elif eventType == '3':
-            target = request.POST.get('field1')
+            target = request.POST.get('field2')
             building = request.POST.get('oncampus')
             endDate = request.POST.get('endDate')
             Event.objects.create(type=eventType, target=target,building=building, endDate=endDate)
