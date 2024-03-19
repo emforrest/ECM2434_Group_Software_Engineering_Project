@@ -77,6 +77,38 @@ h1 {
     }
 }
 
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    .container{
+        max-width: 100%;
+    }
+
+    .wrapper {
+        width: auto;
+    }
+
+    .column-box {
+        width: auto;
+    }
+
+    .footer {
+        width: auto;
+    }
+
+    .l-footer {
+        width: auto;
+    }
+
+}
+
+/* Smartphones (landscape) ----------- */
+@media only screen and (min-width : 321px) {
+    .container{
+        max-width: 100%;
+    }
+
+}
+
 /*Main Page Table */
 /*set the style of each section of the table in the main home page*/
 .main-wrapper {
@@ -134,6 +166,17 @@ h1 {
     outline: none;
     margin: 10px;
     border-radius: 20px;
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 600px) {
+    .main-links {
+        width: 100%; /* Adjusted width for smaller screens */
+    }
+    
+    .main-links .btn {
+        width: 90%; /* Adjusted width for smaller screens */
+    }
 }
 
 /*add hover effects to the buttons in the main home page*/
@@ -451,29 +494,6 @@ tbody tr:nth-child(n + 11) {
     background-color: #3e8e41;
 }
 
-/*Profile page style*/
-.profile-wrapper {
-    width: 40%;
-    height: 200px;
-    margin: 10px;
-    background-color: rgba(255, 255, 255, 0.2);
-    border: 2px solid rgba(255, 255, 255, .2);
-    backdrop-filter: blur(20px);
-    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
-    color: white;
-    border-radius: 10px;
-    padding: 30px 40px;
-}
-
-.profile-wrapper h1 {
-    font-size: 36px;
-    color: white;
-}
-
-.profile-wrapper p i {
-    text-align: left;
-}
-
 .wrapper p1 {
     font-weight: bold;
 }
@@ -611,7 +631,7 @@ tbody tr:nth-child(n + 11) {
 
 @media (min-width: 0px) {
     .navbar navbar-expand-lg navbar-light bg-light {
-        width: 100%; /* Set navbar width to 100% of viewport width */
+        width: 110%; /* Set navbar width to 100% of viewport width */
     }
 }
 
