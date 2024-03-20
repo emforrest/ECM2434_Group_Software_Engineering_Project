@@ -34,6 +34,11 @@
     
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto" style="text-align: right; float: right;">
+                        {%if request.user.profile.gamemaster%}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/">Admin</a>
+                        </li>           
+                        {%endif%}   
                         {% block navbar %}    
                             <!-- this block will be overridden in specific templates -->
                         {% endblock %}
