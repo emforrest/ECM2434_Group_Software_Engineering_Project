@@ -63,7 +63,6 @@
                 <a  href="{% url 'profile' username=request.user.username %}"><button type="submit" class="btn">View Public Profile</button></a>  
             </div>
         </div>
-        <br>
         <div class="column">
             {% if eventBool %}
             <div class="column-box">
@@ -102,7 +101,8 @@
                 {%endif%}
             </div>
         </div>
-        <br>
+    </div>
+    <div class="row">
         <div class="column">
             <!-- Adding another column to display the user badges -->
             <div class="column-box2">
