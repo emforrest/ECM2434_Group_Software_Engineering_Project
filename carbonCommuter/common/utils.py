@@ -225,24 +225,19 @@ def format_time_between(time1: datetime, time2: datetime) -> str:
         formatted += "1 minute"
     return formatted
 
-def leaderboardData(users_journeys):
+def leaderboardData(journeys_by_id):
     users = []
     current_id = -1
-    for journey in users_journeys:
-        if journey.user.id != current_id: 
-            if current_id != -1:
-                users.append(user_entry)
+    for journey in journeys_by_id:
+        if journey['user__id'] != current_id:
             user_entry = Leaderboard_Entry()
-            current_id = journey.user_id
-            user_entry.name = journey.user.first_name + " " + journey.user.last_name
+            user_entry.name = journey['user__first_name'] + " " + journey['user__last_name']
             user_entry.totalCo2Saved = 0
+            current_id = journey['user__id']
             user_entry.id = current_id
-            user_entry.username = journey.user.username
-        try:
-            user_entry.totalCo2Saved += journey.carbon_savings
-        except:
-            user_entry.totalCo2Saved += 0
-    users.append(user_entry)
+            user_entry.username = journey['user__username']
+            user_entry.totalCo2Saved = journey['total_carbon_saved']
+            users.append(user_entry)
     return users
 
 def leaderboardWinner(users_journeys):
