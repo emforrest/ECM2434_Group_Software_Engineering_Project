@@ -76,20 +76,22 @@ def home(request):
     followingUsers = User.objects.filter(followers__follower=request.user).values_list('username', flat=True)
 
     #get information about the current event
+    eventBool = False
     eventMessage = ''
     eventProgress = -1
     eventTarget = -1
     activeEventExists = Event.objects.filter(endDate__gt=timezone.now()).exists()
     if activeEventExists:
+        eventBool = True
         event = Event.objects.filter(endDate__gt=timezone.now())[0]
         eventType = event.type
         eventProgress = event.progress
         eventTarget = event.target
-        if eventType == '1':
+        if eventType == 1:
             eventMessage = f"Save {event.target} kilograms of CO2 by {event.endDate.strftime('%d-%m-%Y')}."
-        elif eventType == '2':
+        elif eventType == 2:
             eventMessage = f"Log {event.target} total journeys by {event.endDate.strftime('%d-%m-%Y')}."
-        elif eventType == '3':
+        elif eventType == 3:
             eventMessage = f"Visit {event.building}, {event.target} times by {event.endDate.strftime('%d-%m-%Y')}." 
         else:
             eventMessage = f"Visit every location on campus by {event.endDate.strftime('%d-%m-%Y')}."
@@ -120,7 +122,8 @@ def home(request):
                          "followingUsers": followingUsers,
                          "eventMessage" : eventMessage,
                          "eventProgress" : eventProgress,
-                         "eventTarget" : eventTarget
+                         "eventTarget" : eventTarget,
+                         "eventBool" : eventBool
                          }
     return render(request, "user/home.html", context)
 

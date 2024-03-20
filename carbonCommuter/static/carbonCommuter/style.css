@@ -1,4 +1,4 @@
-/*Authors: Giulia Brown, Jack Skinner*/
+/*Authors: Giulia Brown, Jack Skinner, Eleanor Forrest*/
 /*general style*/
 * {
     margin: 0;
@@ -623,3 +623,30 @@ tbody tr:nth-child(n + 11) {
         width: 100%; /* Set navbar width to 100% of viewport width */
     }
 }
+
+.progress-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+  }
+  
+  .progress-bar {
+    display: block;
+    width: 100%;
+    height: 20px; 
+    background-color: #5181e7; 
+    border-radius: 10px; 
+    text-align: center; 
+    line-height: 20px;
+    color: white; 
+    font-weight: bold; 
+  }
+
+  .progress-bar span {
+    position: absolute;
+    display: inline-block;
+    color: white;
+    text-align: right;
+  }
+  
