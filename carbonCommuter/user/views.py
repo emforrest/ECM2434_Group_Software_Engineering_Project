@@ -524,6 +524,10 @@ def journey(request, journey_id: int):
     if journey is None:
         return HttpResponse(status=404)
     
+    # Check if the user has admin or is the user that created the journey
+    if (journey.user.id != request.user.id) and (request.user.profile.gamemaster != True):
+        return HttpResponse(status=403)
+    
     # Calculate which number of the user's journeys it is
     journeys = list(Journey.objects.filter(user=journey.user).values_list('id', flat=True))
     journey_no = journeys.index(journey.id) + 1
@@ -552,8 +556,8 @@ def delete_journey(request):
     if journey is None:
         return HttpResponse(status=404)
 
-    # Check if the user is authorized to delete the journey
-    if journey.user != request.user:
+    # Check if the user is authorized to delete the journey or is an admin
+    if (journey.user != request.user) and (request.user.profile.gamemaster != True):
         return HttpResponse(status=403)
     
     if request.method == "POST":
@@ -775,6 +779,30 @@ def check_validity(journey):
     elif journey.distance >= 5 and journey.transport == "walk":
         flagged = True
         reason += "Distance walked is too long! "
+        
+    # Check that the actual time taken isn't significantly shorter than the estimated time as per google maps
+    if journey.transport in ["train", "bus"] and (journey.estimated_time - journey.calculate_duration()) >= 5:
+        flagged = True
+        reason += f"Estimated duration ({journey.estimated_time}) doesn't match actual duration ({round(journey.calculate_duration(), 1)})! "
+    elif journey.transport in ["walk", "bike"] and journey.estimated_time <= 10 and(journey.estimated_time - journey.calculate_duration()) >= 2:
+        flagged = True
+        reason += f"Estimated duration ({journey.estimated_time}) doesn't match actual duration ({round(journey.calculate_duration(), 1)})! "
+    elif journey.transport in ["walk", "bike"] and journey.estimated_time <= 30 and(journey.estimated_time - journey.calculate_duration()) >= 5:
+        flagged = True
+        reason += f"Estimated duration ({journey.estimated_time}) doesn't match actual duration ({round(journey.calculate_duration(), 1)})! "
+    elif journey.transport in ["walk", "bike"] and journey.estimated_time <= 60 and(journey.estimated_time - journey.calculate_duration()) >= 10:
+        flagged = True
+        reason += f"Estimated duration ({journey.estimated_time}) doesn't match actual duration ({round(journey.calculate_duration(), 1)})! "
+    elif journey.transport in ["walk", "bike"] and (journey.estimated_time - journey.calculate_duration()) >= 20:
+        flagged = True
+        reason += f"Estimated duration ({journey.estimated_time}) doesn't match actual duration ({round(journey.calculate_duration(), 1)})! "
+    
+    # Check that the user hasn't uploaded a journey in the last 5 minutes
+    journeys = Journey.objects.filter(user=journey.user).order_by("-time_finished")
+    diff = journeys[1].time_finished - journey.time_started
+    if diff.seconds >= 300:
+        flagged = True
+        reason += f"The user finished a journey {diff.seconds}s before starting this journey!"
     
     # Save changes to the journey if it's been flagged for review
     if flagged:

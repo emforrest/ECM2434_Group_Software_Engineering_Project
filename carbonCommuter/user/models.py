@@ -28,7 +28,11 @@ class JourneyManager(models.Manager):
         Returns:
             float: The total amount of CO2 saved measured in KG.
         """
-        return self.filter(user=user).aggregate(models.Sum('carbon_savings'))['carbon_savings__sum']
+        savings = self.filter(user=user).aggregate(models.Sum('carbon_savings'))['carbon_savings__sum']
+        if savings is not None:
+            return savings
+        else:
+            return 0
     
     def get_weekly_savings(self, user: User) -> float:
         """Calculates the total amount of CO2 saved for all journeys made in the current week, starting from Monday.
@@ -42,7 +46,11 @@ class JourneyManager(models.Manager):
         # Get a date for the monday of the current week, and the sunday of the same week.
         start = date.today() - timedelta(days=date.today().weekday())
         end = start + timedelta(days=6)
-        return self.filter(user=user, time_started__range=(start, end)).aggregate(models.Sum('carbon_savings'))['carbon_savings__sum']
+        savings = self.filter(user=user, time_started__range=(start, end)).aggregate(models.Sum('carbon_savings'))['carbon_savings__sum']
+        if savings is not None:
+            return savings
+        else:
+            return 0
     
     def get_monthly_savings(self, user: User) -> float:
         """Calculates the total amount of CO2 saved for all journeys made in the current month, starting from the first day of the month.
@@ -56,7 +64,11 @@ class JourneyManager(models.Manager):
         # Get a date for the first day of the current month, and the last day of the current month.
         start = date.today().replace(day=1)
         end = start + timedelta(months=1) - timedelta(days=1)
-        return self.filter(user=user, time_started__range=(start, end)).aggregate(models.Sum('carbon_savings'))['carbon_savings__sum']
+        savings = self.filter(user=user, time_started__range=(start, end)).aggregate(models.Sum('carbon_savings'))['carbon_savings__sum']
+        if savings is not None:
+            return savings
+        else:
+            return 0
     
  
 class Journey(models.Model):
@@ -95,23 +107,41 @@ class Journey(models.Model):
     reason = models.CharField(max_length=255, blank=True, null=True)
     objects = JourneyManager()
     
-    def format_date(self):
+    def format_date(self) -> str:
         return self.time_finished.strftime('%d-%m-%Y')
     
-    def format_time(self):
+    def format_time(self) -> str:
         return self.time_finished.strftime('%H:%M')
     
-    def format_time_started(self):
+    def format_time_started(self) -> str:
         return self.time_started.strftime('%H:%M %d-%m-%Y')
     
-    def format_time_finished(self):
+    def format_time_finished(self) -> str:
         return self.time_finished.strftime('%H:%M %d-%m-%Y')
     
-    def has_location(self):
+    def has_location(self) -> bool:
         if (self.origin == None) or (self.destination == None):
             return False
         else:
             return True
+    
+    def calculate_duration(self) -> int|None:
+        # Check journey is complete
+        if not(self.is_complete()):
+            return None
+        
+        # Calculate the hours and minutes between the two datetimes
+        diff = self.time_finished - self.time_started
+        minutes = (diff.seconds % 3600) // 60
+        return minutes
+        
+    def is_complete(self) -> bool:
+        # Check if a finish time is present
+        if self.time_finished is not None:
+            return True
+        else:
+            return False
+        
     
 class Profile(models.Model):
     """Contains any information about a user that isn't related to authentication.
