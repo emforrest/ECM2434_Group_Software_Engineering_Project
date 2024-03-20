@@ -33,12 +33,8 @@
                         <a class="nav-link" href="/logout/">Logout</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/register/">Register</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/leaderboard/">Leaderboard</a>
-                    </li>
-                    <li class="nav-item">
+                        <a class="nav-link" href="/leaderboard/user_leaderboard">Leaderboard</a>
+                    </li>="nav-item">
                         <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
                     </li>
                 </ul>
@@ -49,49 +45,51 @@
     <br>
     <div class="wrapper">
     <div class="column">
-
-        <form action="{% url 'submitEvent' %}" method="POST">
-            {% csrf_token %}
-            <!--Display the relevant fields for the user to input the targets-->
-            {% for field, info in fieldsInfo.items %}
-            <br>
-            <label for="{{ field }}">{{ info.label }}</label>
-            {% if info.type == 'range' %}
-                <!--Create a slider-->
-                <input type="range" id="{{ field }}" name="{{ field }}" max="{{info.max}}" min="1" value="1" class ="slider">
-                <label for="{{ field }}"><span id = "output"></span></label>
-                <script>
-                    var slider = document.getElementById("{{ field }}");
-                    var output = document.getElementById("output");
-                    output.innerHTML = slider.value;
-
-                    slider.oninput = function() {
-                    output.innerHTML = this.value;
-                    }
-                </script>
+        {% if user.profile.gamemaster %}
+            <form action="{% url 'submitEvent' %}" method="POST">
+                {% csrf_token %}
+                <!--Display the relevant fields for the user to input the targets-->
+                {% for field, info in fieldsInfo.items %}
                 <br>
-            {% elif info.type == 'dropdown' %}
-            <!--the user can select from many locations on campus-->
-            <select name="oncampus" id="oncampus">
-                {% for location in locations %}
-                <option value = "{{ location.name }}">{{ location.name }}</option>
-                {% endfor %}
-            </select>
+                <label for="{{ field }}">{{ info.label }}</label>
+                {% if info.type == 'range' %}
+                    <!--Create a slider-->
+                    <input type="range" id="{{ field }}" name="{{ field }}" max="{{info.max}}" min="1" value="1" class ="slider">
+                    <label for="{{ field }}"><span id = "output"></span></label>
+                    <script>
+                        var slider = document.getElementById("{{ field }}");
+                        var output = document.getElementById("output");
+                        output.innerHTML = slider.value;
+
+                        slider.oninput = function() {
+                        output.innerHTML = this.value;
+                        }
+                    </script>
+                    <br>
+                {% elif info.type == 'dropdown' %}
+                <!--the user can select from many locations on campus-->
+                <select name="oncampus" id="oncampus">
+                    {% for location in locations %}
+                    <option value = "{{ location.name }}">{{ location.name }}</option>
+                    {% endfor %}
+                </select>
+                <br>
+                {% endif %}
+            {% endfor %}
             <br>
-            {% endif %}
-        {% endfor %}
-        <br>
 
-        <label>Enter an end date for this event:</label>
-        <input type = 'date' id = 'endDate' name="endDate"> 
-        <br>
-        <input type="hidden" name="eventID" value="{{ eventType }}">
-        <br>
-        <a href="/adminUser/"><button type="button" class="btn" style="display: inline-block; width: 49%">Back</button></a>
-        <button type="submit" class="btn" style="display: inline-block; width: 49%">Create Event</button>
-        </form>
-        <br>
-
+            <label>Enter an end date for this event:</label>
+            <input type = 'date' id = 'endDate' name="endDate"> 
+            <br>
+            <input type="hidden" name="eventID" value="{{ eventType }}">
+            <br>
+            <a href="/adminUser/"><button type="button" class="btn" style="display: inline-block; width: 49%">Back</button></a>
+            <button type="submit" class="btn" style="display: inline-block; width: 49%">Create Event</button>
+            </form>
+            <br>
+        {% else %}
+            <p>This page is for gamemasters only</p>
+        {% endif %}
     </div>
     </div>
 

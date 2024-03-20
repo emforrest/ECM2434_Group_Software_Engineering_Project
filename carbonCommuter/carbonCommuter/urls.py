@@ -33,8 +33,8 @@ urlpatterns = [
     path("leaderboard/", include("leaderboard.urls")),
     path("user/", include("user.urls")),
     path("groups/", include("groups.urls")),
-    path("admin/", admin.site.urls),
-    path("adminUser/", include("adminUser.urls")),
+    path("dev/", admin.site.urls),
+    path("admin/", include("adminUser.urls")),
 ]
 
 if settings.DEBUG:

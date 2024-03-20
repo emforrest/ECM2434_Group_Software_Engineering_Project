@@ -33,10 +33,7 @@
                         <a class="nav-link" href="/logout/">Logout</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/register/">Register</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/leaderboard/">Leaderboard</a>
+                        <a class="nav-link" href="/leaderboard/user_leaderboard">Leaderboard</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
@@ -49,17 +46,21 @@
     <br>
     <div class="wrapper">
     <div class="column">
-        <h1>Select an event:</h1>
-        <br><br>
-        <button type="submit" class="btn" onclick="redirect(1)">Save X kg of CO2</button>
-        <br><br>
-        <button type="submit" class="btn" onclick="redirect(2)">Log X total journeys</button>
-        <br><br>
-        <button type="submit" class="btn" onclick="redirect(3)">Visit one building X times</button>
-        <br><br>
-        <button type="submit" class="btn" onclick="redirect(4)">Visit every building at least once</button>
-        <br><br>
-        <a href="/adminUser/"><button type="submit" class="btn">Back</button></a>
+        {% if user.profile.gamemaster %}
+            <h1>Select an event:</h1>
+            <br><br>
+            <button type="submit" class="btn" onclick="redirect(1)">Save X kg of CO2</button>
+            <br><br>
+            <button type="submit" class="btn" onclick="redirect(2)">Log X total journeys</button>
+            <br><br>
+            <button type="submit" class="btn" onclick="redirect(3)">Visit one building X times</button>
+            <br><br>
+            <button type="submit" class="btn" onclick="redirect(4)">Visit every building at least once</button>
+            <br><br>
+            <a href="/adminUser/"><button type="submit" class="btn">Back</button></a>
+        {% else %}
+            <p>This page is for gamemasters only</p>
+        {% endif %}
     </div>
     </div>
     <script>

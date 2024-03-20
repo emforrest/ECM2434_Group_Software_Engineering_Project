@@ -6,7 +6,7 @@ Authors:
 - Eleanor Forrest
 - Abi Hinton
 """
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
@@ -87,17 +87,17 @@ def home(request):
     eventProgress = -1
     eventTarget = -1
     eventComplete = False
-    activeEventExists = Event.objects.filter(endDate__gt=timezone.now()).exists()
+    activeEventExists = Event.objects.filter(complete=False).exists()
     if activeEventExists:
         eventBool = True
-        event = Event.objects.filter(endDate__gt=timezone.now()).last()
+        event = Event.objects.filter(complete=False).last()
         eventType = event.type
         eventProgress = event.progress
         eventTarget = event.target
         eventComplete = event.complete
         if not eventComplete:
             #Check if the event is now complete
-            if eventProgress >= eventTarget:
+            if eventProgress >= eventTarget or event.endDate < timezone.now().date():
                 eventComplete = True
                 event.complete = True
                 event.save()
@@ -232,7 +232,8 @@ def start_journey(request):
     """
     # Set any context required for rendering the template
     context = {
-        "tab": 1
+        "tab": 1,
+        "locations": Location.objects.filter(on_campus=True)
     }
     
     # Check the user has an active journey, and if so, return an unauthorized error
@@ -337,7 +338,8 @@ def end_journey(request):
     """
     # Set any context required for rendering the template
     context = {
-        "tab": 1
+        "tab": 1,
+        "locations": Location.objects.filter(on_campus=True)
     }
     
     # Check the user has an active journey, and if not, return an unauthorized error
@@ -533,39 +535,30 @@ def journey(request, journey_id: int):
 
 
 @login_required
-def delete_journey(request):
-    
-    # Get id of journey to delete
-    if request.method == "POST":
-        id = request.POST.get('id')
-    else:
-        id = request.GET.get('id')
-    
-    # Check the journey exists
-    journey = Journey.objects.get(id=id)
-    if journey is None:
-        return HttpResponse(status=404)
-    
-    # Check if the user is authorised to delete the journey
-    if journey.user.id != request.user.id:
+def delete_journey(request, journey_id):
+    # Attempt to get the journey object, ensuring it belongs to the current user
+    journey = get_object_or_404(Journey, id=journey_id, user=request.user)
+
+    # Check if the user is authorized to delete the journey
+    if journey.user != request.user:
         return HttpResponse(status=403)
-    
-    if request.method == "POST":
-        # Delete active journey if the user has one
-        if journey.id == request.user.profile.active_journey.id:
-            request.user.profile.active_journey = None
-            request.user.profile.save()
-            
-        # Delete the journey and redirect to the user home page
-        journey.delete()
-        return redirect("dashboard")
-    
-    # Render template based on if the journey is being cancelled or not
-    else:
-        if journey.id == request.user.profile.active_journey.id:
-            return render(request, "upload/cancel.html", context={"id": journey.id})
-        else:
-            return render(request, "upload/delete.html", context={"id": journey.id})
+
+    # For a GET request, consider showing a confirmation page
+    if request.method == "GET":
+        # Logic to show confirmation could go here
+        pass  # Replace or remove this with your actual logic
+
+    # Proceed with deletion
+    # Check if the journey being deleted is the user's active journey
+    if request.user.profile.active_journey and journey.id == request.user.profile.active_journey.id:
+        request.user.profile.active_journey = None
+        request.user.profile.save()
+
+    # Delete the journey
+    journey.delete()
+
+    # Redirect to a preferred URL after deletion
+    return redirect("journeys")  # Adjust redirect as needed
 
 
 @login_required
@@ -586,7 +579,7 @@ def profile(request, username:str):
     if userFilter.exists():
         user = userFilter[0]
         users_journeys =Journey.objects.filter(id = request.user.id).values('user__id').annotate(total_carbon_saved=Sum('carbon_savings'))
-        co2Saved = users_journeys['carbon_savings']
+        co2Saved = users_journeys[0]['total_carbon_saved']
         co2Saved = round(co2Saved, 2)
         #Work out the context
         if request.user.username == username:
@@ -777,6 +770,33 @@ def check_validity(journey):
         journey.save()
 
 
+@login_required
+def journeys(request):
+    user_journeys = Journey.objects.filter(user=request.user).order_by('-time_started')
+    context = {'user_journeys': user_journeys}
+
+    # Fetch the user's journeys, ordered by the start time
+    user_journeys = Journey.objects.filter(user=request.user).order_by('-time_started')
+
+    # Format journeys for the template
+    formatted_journeys = []
+    for journey in user_journeys:
+        formatted_journeys.append({
+            'id': journey.id,
+            'start_time': journey.format_time_started(),
+            'end_time': journey.format_time_finished() if journey.time_finished else 'In Progress',
+            'distance': journey.distance,
+            'carbon_savings': journey.carbon_savings,
+            'origin': journey.origin.address if journey.origin else 'Unknown',
+            'destination': journey.destination.address if journey.destination else 'Unknown',
+            'transport': journey.transport,
+        })
+
+    # Add the journeys to the context
+    context['user_journeys'] = formatted_journeys
+    return render(request, 'user/journeys.html', context)
+
+  
 def getBadgeImage(badgeName):
     if badgeName == "Amory":
         return "/media/badges/locations/amory.png"
@@ -824,3 +844,4 @@ def getBadgeImage(badgeName):
         return "/media/badges/leaderboard/monthly.png"
     else:
         return None
+
