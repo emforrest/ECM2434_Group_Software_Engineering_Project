@@ -18,4 +18,6 @@ urlpatterns = [
     path("follow/", views.follow, name="follow"),
     path("journeys/delete", views.delete_journey, name="delete"),
     path("journeys/delete/<int:journey_id>/", views.delete_journey, name="delete"),
+
+    path("journeys/", views.journeys, name="journeys"),
 ]
