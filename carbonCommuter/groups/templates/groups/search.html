@@ -1,8 +1,12 @@
+<!-- Extends the base layout to ensure consistency across the site. -->
 {% extends "base.html" %}
 
+<!-- Sets the title for the search groups page dynamically. -->
 {% block title %}Search Groups Page{% endblock%}
 
+<!-- Defines the navigation bar with different items based on user authentication. -->
 {% block navbar %}
+    <!-- Display navigation options for authenticated users, including links to groups, leaderboard, and logout. -->
     {% if request.user.is_authenticated %}
         <li class="nav-item">
             <a class="nav-link" href="{% url 'user_groups_home_page' %}">Groups</a>
@@ -14,22 +18,24 @@
             <a class="nav-link" href="/logout/">Logout</a>
         </li>
     {% else %}
+        <!-- Display navigation options for guests, including links to the leaderboard and login page. -->
         <li class="nav-item">
             <a class="nav-link" href="/leaderboard/">Leaderboard</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/login/">Login</a>
         </li>
-    {%endif%}
+    {% endif %}
     <li class="nav-item">
-    <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
+        <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
     </li>
 {% endblock %}
 
+<!-- Main content block for the search groups page. -->
 {% block content %}
 <div class="container">
     <br>
-    <!-- for search bar -->
+    <!-- Search bar to allow users to search for groups. -->
     <div class="wrapper">
         <form action="{% url 'search_groups' %}" method="get" class="form-inline my-2 my-lg-0">
             <div class="input-box">
@@ -38,11 +44,11 @@
             <button class="btn" type="submit">Search</button>
         </form>
     </div>
-    <!-- for search results -->
     <br>
+    <!-- Section to display search results. -->
     <div class="wrapper">
         <h2>Search Results</h2>
-        <!-- Display the search results -->
+        <!-- Conditionally display search results or a message indicating no results were found. -->
         {% if groups %}
             {% for group in groups %}
                 <div class="card mb-3">
@@ -59,6 +65,7 @@
         {% endif %}
     </div>
     <br>
+    <!-- Footer section to display copyright notice. -->
     <div class="footer">
         <p>&copy; 2024 Your Website. All Rights Reserved.</p>
     </div>

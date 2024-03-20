@@ -903,6 +903,7 @@ def getBadgeImage(badgeName):
     else:
         return None
 
+
 @login_required
 def delete_account(request):
     if request.method == "POST":
