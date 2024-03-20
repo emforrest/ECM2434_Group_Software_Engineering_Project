@@ -35,6 +35,7 @@ LOGGER = logging.getLogger(__name__)
 
 @login_required
 def home(request):
+    #return HttpResponse(code=404)
     """Return the /user/home page with the information about the current user such as their 
     name and email address, and any badges they have earned.
     
