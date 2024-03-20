@@ -813,28 +813,9 @@ def check_validity(journey):
 
 @login_required
 def journeys(request):
-    user_journeys = Journey.objects.filter(user=request.user).order_by('-time_started')
-    context = {'user_journeys': user_journeys}
-
     # Fetch the user's journeys, ordered by the start time
-    user_journeys = Journey.objects.filter(user=request.user).order_by('-time_started')
-
-    # Format journeys for the template
-    formatted_journeys = []
-    for journey in user_journeys:
-        formatted_journeys.append({
-            'id': journey.id,
-            'start_time': journey.format_time_started(),
-            'end_time': journey.format_time_finished() if journey.time_finished else 'In Progress',
-            'distance': journey.distance,
-            'carbon_savings': journey.carbon_savings,
-            'origin': journey.origin.address if journey.origin else 'Unknown',
-            'destination': journey.destination.address if journey.destination else 'Unknown',
-            'transport': journey.transport,
-        })
-
-    # Add the journeys to the context
-    context['user_journeys'] = formatted_journeys
+    journeys = Journey.objects.filter(user=request.user).order_by('-time_started')
+    context = {'journeys': journeys}
     return render(request, 'user/journeys.html', context)
 
   

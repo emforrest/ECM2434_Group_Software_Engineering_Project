@@ -14,6 +14,7 @@ from django.db import models
 from main.models import Location
 from datetime import date, timedelta
 from django.contrib.auth.models import User
+from common.travelTypes import TravelType
 
 
 class JourneyManager(models.Manager):
@@ -114,10 +115,10 @@ class Journey(models.Model):
         return self.time_finished.strftime('%H:%M')
     
     def format_time_started(self) -> str:
-        return self.time_started.strftime('%H:%M %d-%m-%Y')
+        return self.time_started.strftime('%H:%M %d/%m/%Y')
     
     def format_time_finished(self) -> str:
-        return self.time_finished.strftime('%H:%M %d-%m-%Y')
+        return self.time_finished.strftime('%H:%M %d/%m/%Y')
     
     def has_location(self) -> bool:
         if (self.origin == None) or (self.destination == None):
@@ -142,6 +143,17 @@ class Journey(models.Model):
         else:
             return False
         
+    def get_number(self) -> int:
+        # Calculate which number of the user's journeys it is
+        journeys = list(Journey.objects.filter(user=self.user).values_list('id', flat=True))
+        return (journeys.index(self.id) + 1)
+    
+    def get_rounded_distance(self) -> float:
+        return round(self.distance, 2)
+        
+    def get_formatted_transport(self) -> str:
+        return TravelType.from_str(self.transport).to_str().title()
+
     
 class Profile(models.Model):
     """Contains any information about a user that isn't related to authentication.

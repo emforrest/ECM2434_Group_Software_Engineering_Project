@@ -32,33 +32,29 @@
             <div class="column">
                 <div class="column-box-journeys">
                     <h1>Your Journeys</h1>
-                    <table class="table">
+                    <table class="table clickable">
                         <thead>
                             <tr>
-                                <th>Start Time</th>
-                                <th>End Time</th>
-                                <th>Distance (km)</th>
-                                <th>CO2 Savings (kg)</th>
-                                <th>Origin</th>
-                                <th>Destination</th>
+                                <th>Journey Number</th>
+                                <th>Date</th>
+                                <th>Distance (KM)</th>
+                                <th>CO2 Savings (KG)</th>
                                 <th>Transport</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% for journey in user_journeys %}
-                                <tr>
-                                    <td>{{ journey.start_time }}</td>
-                                    <td>{{ journey.end_time }}</td>
-                                    <td>{{ journey.distance }}</td>
-                                    <td>{{ journey.carbon_savings }}</td>
-                                    <td>{{ journey.origin }}</td>
-                                    <td>{{ journey.destination }}</td>
-                                    <td>{{ journey.transport }}</td>
-                                    <td>
-                                        <a href="/user/journeys/delete?id={{ journey.id }}" class="btn btn-danger">Delete</a>
-                                    </td>
-                                </tr>
+                            {% for journey in journeys %}
+                                    <tr class='clickable-row' data-href='/user/journeys/{{ journey.id }}/'>
+                                        <td>{{ journey.get_number }}</td>
+                                        <td>{{ journey.format_time_started }}</td>
+                                        <td>{{ journey.get_rounded_distance }}</td>
+                                        <td>{{ journey.carbon_savings }}</td>
+                                        <td>{{ journey.get_formatted_transport }}</td>
+                                        <td>
+                                            <a href="/user/journeys/delete?id={{ journey.id }}"><button class="icon-btn"><img src="/media/icons/delete.png" alt="Delete" width="30px"/></button></a>
+                                        </td>
+                                    </tr>
                                 {% empty %}
                                 <tr>
                                     <td colspan="8">No journeys recorded yet.</td>
@@ -70,4 +66,12 @@
             </div>
         </div>
     </div>
+
+    <script>
+        jQuery(document).ready(function($) {
+            $(".clickable-row").click(function() {
+                window.location = $(this).data("href");
+            });
+        });
+    </script>
 {% endblock %}
