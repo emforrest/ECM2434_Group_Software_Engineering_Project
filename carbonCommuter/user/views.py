@@ -535,9 +535,18 @@ def journey(request, journey_id: int):
 
 
 @login_required
-def delete_journey(request, journey_id):
-    # Attempt to get the journey object, ensuring it belongs to the current user
-    journey = get_object_or_404(Journey, id=journey_id, user=request.user)
+def delete_journey(request):
+    
+    # Get id of journey to delete
+    if request.method == "POST":
+        id = request.POST.get('id')
+    else:
+        id = request.GET.get('id')
+    
+    # Check the journey exists
+    journey = Journey.objects.get(id=id)
+    if journey is None:
+        return HttpResponse(status=404)
 
     # Check if the user is authorized to delete the journey
     if journey.user != request.user:
