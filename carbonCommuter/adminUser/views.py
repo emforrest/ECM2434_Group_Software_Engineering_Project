@@ -26,6 +26,7 @@ def mainAdmin(request):
     activeEvent = Event.objects.filter(endDate__gt=timezone.now()).filter(complete=False).exists()
     return render(request, "adminUser/mainAdmin.html", {'activeEvent': activeEvent})
 
+
 def chooseEvent(request):
     """Return the adminUser/chooseEvent page with buttons for each event type
     
@@ -41,6 +42,7 @@ def chooseEvent(request):
         return render(request, "adminUser/chooseEvent.html")
     else:
         return HttpResponse(status = 403)
+
 
 def confirmEvent(request):
     """Produce the confirmEvent page based on which button was selected in chooseEvent, where users can choose related targets
@@ -65,6 +67,7 @@ def confirmEvent(request):
     else:
         return HttpResponse(status=400)
     return render(request, "adminUser/confirmEvent.html", {'fieldsInfo': fieldsInfo, 'eventType': eventType, 'locations': Location.objects.filter(on_campus=True)})
+
 
 def submitEvent(request):
     """Uses the provided information to create a new event
@@ -102,6 +105,7 @@ def submitEvent(request):
             return HttpResponse(status=400)
     else:
         return HttpResponse(status=405) 
+
 
 def success(request):
     """Produce a success page based on the created event
@@ -162,7 +166,7 @@ def approve_journey(request):
             return HttpResponse(status=400)
         
         # Return 404 if the journey object cannot be found
-        journey = Journey.objects.filter(id=id)
+        journey = Journey.objects.get(id=id)
         if journey is None:
             return HttpResponse(status=404)
         

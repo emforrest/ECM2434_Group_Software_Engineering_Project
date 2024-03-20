@@ -27,6 +27,35 @@
 {% endblock %}
 
 {% block content %}
+    <script>
+        jQuery(document).ready(function($) {
+            $(".clickable-row").on('click', 'td', function() {
+                if ($(this).index() < 4) {
+                    window.location = $(this).closest("tr").attr("data-href");
+                }
+            });
+
+            $(".icon-btn").click(function() {
+                if ($(this).attr("id") == "btn_approve") {
+                    const xhr = new XMLHttpRequest();
+                    xhr.open("POST", "/admin/verify/approve");
+                    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                    xhr.send(`id=${$(this).attr("data-jid")}&csrfmiddlewaretoken={{ csrf_token }}`);
+                    xhr.onload = () => {
+                        if (xhr.readyState == 4 && xhr.status == 201) {
+                            console.log("Approved");
+                            $(this).closest("tr").remove();
+                        } else {
+                            console.log(`Error: ${xhr.response}`);
+                        }
+                    };
+                } else if ($(this).attr("id") == "btn_delete") {
+                    window.location = `/user/journeys/delete?id=${$(this).attr("data-jid")}`;
+                }
+            });
+        });
+    </script>
+
     <div class="container">
         <div class="row">
             <div class="column">
@@ -52,8 +81,8 @@
                                     <td>{{ journey.format_time }}</td>
                                     <td>{{ journey.reason }}</td>
                                     <td>
-                                        <button id="btn_approve" class="icon-btn"><img src="/media/icons/checkmark.png" alt="Approve" width="30px"/></button>
-                                        <button id="btn_delete" class="icon-btn"><img src="/media/icons/cross.png" alt="Delete" width="30px"/></button>
+                                        <button id="btn_approve" type="button" class="icon-btn" data-jid="{{ journey.id }}"><img src="/media/icons/checkmark.png" alt="Approve" width="30px"/></button>
+                                        <button id="btn_delete" type="button" class="icon-btn" data-jid="{{ journey.id }}"><img src="/media/icons/cross.png" alt="Delete" width="30px"/></button>
                                     </td>
                                 </tr>
                             {% endfor %}
@@ -66,10 +95,6 @@
     <br>
     
     <script>
-        jQuery(document).ready(function($) {
-            $(".clickable-row").click(function() {
-                window.location = $(this).data("href");
-            });
-        });
+        
     </script>
 {% endblock %}
