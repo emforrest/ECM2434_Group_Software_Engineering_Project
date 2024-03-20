@@ -554,7 +554,7 @@ def delete_journey(request):
     
     if request.method == "POST":
         # Delete active journey if the user has one
-        if journey.id == request.user.profile.active_journey.id:
+        if (request.user.profile.active_journey is not None) and (journey.id == request.user.profile.active_journey.id):
             request.user.profile.active_journey = None
             request.user.profile.save()
             
@@ -564,7 +564,7 @@ def delete_journey(request):
     
     # Render template based on if the journey is being cancelled or not
     else:
-        if journey.id == request.user.profile.active_journey.id:
+        if (request.user.profile.active_journey is not None) and (journey.id == request.user.profile.active_journey.id):
             return render(request, "upload/cancel.html", context={"id": journey.id})
         else:
             return render(request, "upload/delete.html", context={"id": journey.id})
