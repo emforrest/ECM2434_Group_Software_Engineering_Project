@@ -479,6 +479,7 @@ def end_journey(request):
             if (dateNow.weekday() - pastJourneyDate.weekday()) == 1:
                 #checking there is a days difference between journeys
                 checkStreak = True
+
                 request.user.profile.streak = request.user.profile.streak + 1 
                 break
             elif (dateNow.weekday() - pastJourneyDate.weekday()) == 0:
