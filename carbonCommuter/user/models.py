@@ -95,6 +95,23 @@ class Journey(models.Model):
     reason = models.CharField(max_length=255, blank=True, null=True)
     objects = JourneyManager()
     
+    def format_date(self):
+        return self.time_finished.strftime('%d-%m-%Y')
+    
+    def format_time(self):
+        return self.time_finished.strftime('%H:%M')
+    
+    def format_time_started(self):
+        return self.time_started.strftime('%H:%M %d-%m-%Y')
+    
+    def format_time_finished(self):
+        return self.time_finished.strftime('%H:%M %d-%m-%Y')
+    
+    def has_location(self):
+        if (self.origin == None) or (self.destination == None):
+            return False
+        else:
+            return True
     
 class Profile(models.Model):
     """Contains any information about a user that isn't related to authentication.
