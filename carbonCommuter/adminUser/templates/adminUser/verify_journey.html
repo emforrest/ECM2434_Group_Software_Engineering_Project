@@ -1,87 +1,76 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<!-- A HTML document that produces the home page for admin users. -->
-<!-- authors: Sam Townley -->
+{% block title %}Verify Journeys{% endblock%}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <!--Import styling-->
-    <link rel="stylesheet" href="{% static 'carbonCommuter/style.css' %}">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
-    <header>
-        <!--The navbar, consistent across the site-->
-         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="/">CarbonCommuter</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+{% block navbar %}
+    {% if request.user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'user_groups_home_page' %}">Groups</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/leaderboard/user_leaderboard">Leaderboard</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/logout/">Logout</a>
+        </li>
+    {% else %}
+        <li class="nav-item">
+            <a class="nav-link" href="/leaderboard/">Leaderboard</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/login/">Login</a>
+        </li>
+    {%endif%}
+    <li class="nav-item">
+        <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
+    </li> 
+{% endblock %}
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'user_groups_home_page' %}">Groups</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/logout/">Logout</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/leaderboard/user_leaderboard">Leaderboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="column">
+                <div class="column-box-journeys">
+                  <h1>Review suspicious journeys:</h1>
+                  {% if request.user.profile.gamemaster %}
+                  <div class="table">
+                      <table>
+                          <tr> 
+                              <!-- Headers for the table -->
+                              <th>User</th>
+                              <th>Date</th>
+                              <th>Time</th>
+                              <th>Reason</th>
+                              <th>Actions</th>
+                          </tr>
+                          <!--Here, the django for loop displays each user, with a medal for the top users-->
+                          {% for journey in journeys %}
+                          <tr>
+                              <td>{{ journey.user.username }}</td>
+                              <td>{{ journey.format_date }}</td>
+                              <td>{{ journey.format_time }}</td>
+                              <td>{{ journey.reason }}</td>
+                              <td>
+                                  <button class="icon-btn"><img src="/media/icons/checkmark.png" alt="Approve" width="30px"/></button>
+                                  <button class="icon-btn"><img src="/media/icons/cross.png" alt="Delete" width="30px"/></button>
+                              </td>
+                          </tr>
+                          {% endfor %}
+                      </table>
+                  </div> 
+                  {% else %}
+                      <p>This page is for gamemasters only.</p>
+                  {% endif %}
 
-    <br>
-    <div class="wrapper" style="width: 30%; min-width: 400px;">
-        <h1>Review suspicious journeys:</h1>
-        {% if request.user.profile.gamemaster %}
-        <div class="table">
-            <table>
-                <tr> 
-                    <!-- Headers for the table -->
-                    <th>User</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Reason</th>
-                    <th>Actions</th>
-                </tr>
-                <!--Here, the django for loop displays each user, with a medal for the top users-->
-                {% for journey in journeys %}
-                <tr>
-                    <td>{{ journey.user.username }}</td>
-                    <td>{{ journey.format_date }}</td>
-                    <td>{{ journey.format_time }}</td>
-                    <td>{{ journey.reason }}</td>
-                    <td>
-                        <button class="icon-btn"><img src="/media/icons/checkmark.png" alt="Approve" width="30px"/></button>
-                        <button class="icon-btn"><img src="/media/icons/cross.png" alt="Delete" width="30px"/></button>
-                    </td>
-                </tr>
-                {% endfor %}
-            </table>
-        </div> 
-        {% else %}
-            <p>This page is for gamemasters only.</p>
-        {% endif %}
-    </div>
-    <br>
-    
-
-    <!--The footer, consistent across the site-->
-    <div class="footer">
-        <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
-    </div>
-
-</body>
-</html>
+              </div>
+          </div>
+      </div>
+</div>
+    <script>
+        jQuery(document).ready(function($) {
+            $(".clickable-row").click(function() {
+                window.location = $(this).data("href");
+            });
+        });
+    </script>
+{% endblock %}

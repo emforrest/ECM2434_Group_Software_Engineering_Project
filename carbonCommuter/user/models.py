@@ -109,7 +109,7 @@ class Journey(models.Model):
     objects = JourneyManager()
     
     def format_date(self) -> str:
-        return self.time_finished.strftime('%d-%m-%Y')
+        return self.time_finished.strftime('%d/%m/%Y')
     
     def format_time(self) -> str:
         return self.time_finished.strftime('%H:%M')

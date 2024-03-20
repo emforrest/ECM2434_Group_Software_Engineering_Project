@@ -42,10 +42,8 @@
                     <table class="table clickable">
                         <thead>
                             <tr>
-                                <th>Journey Number</th>
                                 <th>Date</th>
-                                <th>Distance (KM)</th>
-                                <th>CO2 Savings (KG)</th>
+                                <th>Savings</th>
                                 <th>Transport</th>
                                 <th>Actions</th>
                             </tr>
@@ -53,9 +51,7 @@
                         <tbody>
                             {% for journey in journeys %}
                                 <tr class='clickable-row' data-href='/user/journeys/{{ journey.id }}/'>
-                                    <td>{{ journey.get_number }}</td>
                                     <td>{{ journey.format_time_started }}</td>
-                                    <td>{{ journey.get_rounded_distance }}</td>
                                     <td>{{ journey.carbon_savings }}</td>
                                     <td>{{ journey.get_formatted_transport }}</td>
                                     <td>
