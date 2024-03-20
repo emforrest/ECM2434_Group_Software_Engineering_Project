@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Delete Journey{% endblock%}
+
+{% block navbar %}
+    <li class="nav-item">
+        <a class="nav-link" href="/leaderboard/user_leaderboard">Leaderboard</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
+    </li>
+{% endblock %}
+
+{% block content %}
+<br>
+<div class="container">
+    <div class = "wrapper">
+        <h2>Cancel Active Journey</h2>
+        <form action="/user/journeys/delete" method='POST'>
+            {% csrf_token %}
+            <input type="hidden" name="id" value="{{ id}}"/>
+            <p>Are you sure you want to cancel your active journey? This action is irreversible!</p>
+            <div>
+                <button type="button" class="btn" onclick="history.back()" style="display: inline-block; width: 49%">Go Back</button>
+                <button type='submit' class="btn" style="display: inline-block; width: 49%">Confirm Deletion</button>
+            </div>
+        </form>
+    </div>
+
+    <br>
+    <!--The footer, consistent across the site-->
+    <div class="footer">
+        <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
+    </div>
+</div>
+{% endblock %}

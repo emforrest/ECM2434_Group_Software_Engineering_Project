@@ -14,6 +14,7 @@ import json
 import math
 import requests
 from typing import Union
+from django.contrib.auth.models import User
 from datetime import datetime, timedelta
 from common.travelTypes import TravelType
 from leaderboard.models import Leaderboard_Entry
@@ -242,68 +243,20 @@ def leaderboardData(journeys_by_id):
 
 def leaderboardWinner(users_journeys):
     topUser = Leaderboard_Entry()
+    topUser.totalCo2Saved = 0
     current_id = -1
     for journey in users_journeys:
-        if journey.user.id != current_id: 
-            if current_id != -1 or topUser.totalCo2Saved < user_entry.totalCo2Saved:
-                topUser = user_entry
+        if journey['user__id'] != current_id:
             user_entry = Leaderboard_Entry()
             current_id = journey.user_id
             user_entry.totalCo2Saved = 0
             user_entry.id = current_id
         try:
-            user_entry.totalCo2Saved += journey.carbon_savings
+            user_entry.totalCo2Saved += journey['total_carbon_saved']
         except:
             user_entry.totalCo2Saved += 0
-    if topUser.totalCo2Saved < user_entry.totalCo2Saved:
-        topUser = user_entry
+        if topUser.totalCo2Saved < user_entry.totalCo2Saved:
+            topUser = user_entry
+    topUser = User.objects.filter(id = topUser.id)
     return topUser
 
-def leaderboadWeeklyWinner(users_journeys):
-    topUser = Leaderboard_Entry()
-    current_id = -1
-    for journey in users_journeys:
-        if journey.user.id != current_id: 
-            if current_id != -1 or topUser.totalCo2Saved < user_entry.totalCo2Saved:
-                topUser = user_entry
-            user_entry = Leaderboard_Entry()
-            current_id = journey.user_id
-            user_entry.totalCo2Saved = 0
-            user_entry.id = current_id
-            user_entry.username = journey.user.username
-        now = datetime.now()
-        this_monday = now - timedelta(days=now.weekday())
-        try:
-            journey_week_monday = journey.time_finished - timedelta(days=journey.time_finished.weekday())
-            if (this_monday.date() == journey_week_monday.date()): 
-                user_entry.totalCo2Saved += journey.carbon_savings
-        except: 
-            #If journey is in progress, ignore it. 
-            continue
-    if topUser.totalCo2Saved < user_entry.totalCo2Saved:
-        topUser = user_entry
-    return topUser
-
-def leaderboadMonthlyWinner(users_journeys):
-    topUser = Leaderboard_Entry()
-    current_id = - 1
-    for journey in users_journeys:
-        if journey.user.id != current_id: 
-            if current_id != -1 or topUser.totalCo2Saved < user_entry.totalCo2Saved:
-                topUser = user_entry
-            user_entry = Leaderboard_Entry()
-            current_id = journey.user_id
-            user_entry.totalCo2Saved = 0
-            user_entry.id = current_id
-        now = datetime.now()
-        first_month = now - timedelta(days=now.day())
-        try:
-            journey_week_month = journey.time_finished - timedelta(days=journey.time_finished.day())
-            if (first_month.date() == journey_week_month.date()): 
-                user_entry.totalCo2Saved += journey.carbon_savings
-        except: 
-            #If journey is in progress, ignore it. 
-            continue
-    if topUser.totalCo2Saved < user_entry.totalCo2Saved:
-        topUser = user_entry
-    return topUser

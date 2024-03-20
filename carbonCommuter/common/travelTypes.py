@@ -60,6 +60,8 @@ class TravelType(Enum):
         Returns:
             Enum: A TravelType enum mapping to the string argument.
         """
+        if string is None:
+            return None
         if string.lower() in ["bus", "by bus", "using the bus"]:
             return TravelType.BUS
         elif string.lower() in ["train", "by train", "using the train"]:

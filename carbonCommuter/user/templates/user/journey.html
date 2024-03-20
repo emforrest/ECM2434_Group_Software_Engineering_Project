@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}Success{% endblock%}
+
+{% block navbar %}
+    {% if request.user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'user_groups_home_page' %}">Groups</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/leaderboard/user_leaderboard">Leaderboard</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/logout/">Logout</a>
+        </li>
+    {% else %}
+        <li class="nav-item">
+            <a class="nav-link" href="/leaderboard/">Leaderboard</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/login/">Login</a>
+        </li>
+    {%endif%}
+    <li class="nav-item">
+    <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
+    </li>
+{% endblock %}
+
+{% block content %}
+<br>
+<div class="container">
+    <div class="wrapper">
+        {% if journey.user.id == request.user.id %}
+            <h1>Your Journey #{{ journey_no }}</h1>
+        {% else %}
+            <h1>{{ journey.user.username }}'s Journey #{{ journey_no }}</h1>
+        {% endif %}
+        <p>
+            You travelled {{ journey.distance }}km in just {{ time_taken }}!
+            <br>
+            You saved {{ journey.carbon_savings }}kg of CO2 by {{ transport }}.
+        </p>
+        {% if not journey.has_location %}
+        <h5>Location data is unavailable!</h5>
+        <br>
+        {% endif %}
+        <div>
+            <div style="display: inline-block; width: 49%;">
+                {% if journey.has_location %}
+                <h4>Origin</h4>
+                <p>{{ journey.origin.address }}</p>
+                {% endif %}
+                <h4>Started</h4>
+                <p>{{ journey.format_time_started }}</p>
+            </div>
+            <div style="display: inline-block; width: 49%;">
+                {% if journey.has_location %}
+                <h4>Destination</h4>
+                <p>{{ journey.destination.address }}</p>
+                {% endif %}
+                <h4>Finished</h4>
+                <p>{{ journey.format_time_finished }}</p>
+            </div>
+        </div>
+        <div>
+            <button type="button" class="btn" id="btn_home" onclick="history.back()" style="display: inline-block; width: 49%">Go back</button>
+            <button type="button" class="btn" id="btn_delete" onclick="location.href='/user/journeys/delete?id={{ journey.id }}'" style="display: inline-block; width: 49%">Delete Journey</button>
+        </div>
+    </div>
+    <br>
+    <div class="footer">
+        <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
+    </div>
+</div>
+{% endblock %}
