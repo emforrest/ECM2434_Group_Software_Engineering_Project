@@ -47,7 +47,9 @@ function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(checkAccuracy, handleError, {enableHighAccuracy: true, maximumAge: 1000});
     } else { 
-        alert("Geolocation is not supported by this browser.");
+        window.error = "Geolocation is not supported by this browser. Please switch browser to keep using the service!"
+        showError();
+        showLocationOff();
     }
 }
 
@@ -91,21 +93,30 @@ function hideError() {
     document.getElementById("error").style.display = "none";
 }
 
+function showLocationOff() {
+    document.getElementById("loading").style.display = "none";
+    document.getElementById("animation").style.display = "none";
+    document.getElementById("location").style.display = "block";
+    document.getElementById("btn_failed").style.display = "block";
+}
+
 function handleError(error) {
     switch(error.code) {
         case error.PERMISSION_DENIED:
-            alert("User denied the request for Geolocation.")
+            window.error = "It seems you have your location turned off. CarbonCommuter requires location data for verifying journeys! Please allow location services and try again!";
             break;
         case error.POSITION_UNAVAILABLE:
-            alert("Location information is unavailable.")
+            window.error = "We're sorry, it seems location information is unavailable right now. Please try again later!";
             break;
         case error.TIMEOUT:
-            alert("The request to get user location timed out.")
+            window.error = "The request to get user location timed out. Please try again!";
             break;
         case error.UNKNOWN_ERROR:
-            alert("An unknown error occurred.")
+            window.error = "We're sorry, an unknown error occurred whilst fetching your location. Please try again.";
             break;
-    }
+    };
+    showError();
+    showLocationOff();
 }
 
 function getAddress(position) {
