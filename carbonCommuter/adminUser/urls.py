@@ -15,4 +15,5 @@ urlpatterns = [
     path("confirmEvent/", views.confirmEvent, name="confirmEvent"),
     path("submitEvent/", views.submitEvent, name="submitEvent"),
     path("verify/", views.verify_suspicious_journey, name="suspiciousJourney"),
+    path("verify/approve", views.approve_journey, name="approve")
 ]

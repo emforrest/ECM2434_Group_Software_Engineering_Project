@@ -1,9 +1,13 @@
-{% extends 'base.html' %}
+<!-- A HTML document that displays user journeys and allows deletion of journeys. -->
+<!-- Authors: Eleanor Forrest -->
 
-{% block title %}Leaderboard{% endblock%}
+{% extends 'base.html' %} <!-- Extend base.html template -->
+
+{% block title %}Leaderboard{% endblock%} <!-- Set page title -->
 
 {% block navbar %}
     {% if request.user.is_authenticated %}
+        <!-- Navigation links for authenticated users -->
         <li class="nav-item">
             <a class="nav-link" href="{% url 'user_groups_home_page' %}">Groups</a>
         </li>
@@ -14,48 +18,49 @@
             <a class="nav-link" href="/logout/">Logout</a>
         </li>
     {% else %}
+        <!-- Navigation links for non-authenticated users -->
         <li class="nav-item">
             <a class="nav-link" href="/leaderboard/">Leaderboard</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/login/">Login</a>
         </li>
-    {%endif%}
+    {% endif %}
     <li class="nav-item">
         <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
     </li> 
 {% endblock %}
 
 {% block content %}
+    <!-- Main content section -->
     <div class="container">
         <div class="row">
             <div class="column">
                 <div class="column-box-journeys">
+                    <!-- Display user journeys -->
                     <h1>Your Journeys</h1>
                     <table class="table clickable">
                         <thead>
                             <tr>
-                                <th>Journey Number</th>
                                 <th>Date</th>
-                                <th>Distance (KM)</th>
-                                <th>CO2 Savings (KG)</th>
+                                <th>Savings</th>
                                 <th>Transport</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for journey in journeys %}
-                                    <tr class='clickable-row' data-href='/user/journeys/{{ journey.id }}/'>
-                                        <td>{{ journey.get_number }}</td>
-                                        <td>{{ journey.format_time_started }}</td>
-                                        <td>{{ journey.get_rounded_distance }}</td>
-                                        <td>{{ journey.carbon_savings }}</td>
-                                        <td>{{ journey.get_formatted_transport }}</td>
-                                        <td>
-                                            <a href="/user/journeys/delete?id={{ journey.id }}"><button class="icon-btn"><img src="/media/icons/delete.png" alt="Delete" width="30px"/></button></a>
-                                        </td>
-                                    </tr>
-                                {% empty %}
+                                <tr class='clickable-row' data-href='/user/journeys/{{ journey.id }}/'>
+                                    <td>{{ journey.format_time_started }}</td>
+                                    <td>{{ journey.carbon_savings }}</td>
+                                    <td>{{ journey.get_formatted_transport }}</td>
+                                    <td>
+                                        <!-- Delete journey button -->
+                                        <a href="/user/journeys/delete?id={{ journey.id }}"><button class="icon-btn"><img src="/media/icons/delete.png" alt="Delete" width="30px"/></button></a>
+                                    </td>
+                                </tr>
+                            {% empty %}
+                                <!-- Display message if no journeys recorded -->
                                 <tr>
                                     <td colspan="8">No journeys recorded yet.</td>
                                 </tr>
@@ -67,6 +72,7 @@
         </div>
     </div>
 
+    <!-- JavaScript to make table rows clickable -->
     <script>
         jQuery(document).ready(function($) {
             $(".clickable-row").click(function() {

@@ -1,105 +1,84 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-
 <!-- A HTML document that produces the choose event page for admin users. -->
 <!-- authors: Eleanor Forrest -->
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <!--Import styling-->
-    <link rel="stylesheet" href="{% static 'carbonCommuter/style.css' %}">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
+{% block title %}Dashboard{% endblock%}
 
-<body>
-    <header>
-        <!--The navbar, consistent across the site-->
-         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="/">CarbonCommuter</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+{% block navbar %}
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'user_groups_home_page' %}">Groups</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/logout/">Logout</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/leaderboard/user_leaderboard">Leaderboard</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
+    </li>
+{% endblock %}
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'user_groups_home_page' %}">Groups</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/logout/">Logout</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/leaderboard/user_leaderboard">Leaderboard</a>
-                    </li>="nav-item">
-                        <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-
-    <br>
-    <div class="wrapper">
-    <div class="column">
-        {% if user.profile.gamemaster %}
-            <form action="{% url 'submitEvent' %}" method="POST">
-                {% csrf_token %}
-                <!--Display the relevant fields for the user to input the targets-->
-                {% for field, info in fieldsInfo.items %}
+{% block content %}
+<br>
+<div class="wrapper">
+<div class="column">
+    {% if user.profile.gamemaster %}
+        <form action="{% url 'submitEvent' %}" method="POST">
+            {% csrf_token %}
+            <!--Display the relevant fields for the user to input the targets-->
+            {% for field, info in fieldsInfo.items %}
+            <br>
+            <label for="{{ field }}">{{ info.label }}</label>
+            {% if info.type == 'range' %}
+                <!--Create a slider-->
+                <input type="range" id="{{ field }}" name="{{ field }}" max="{{info.max}}" min="1" value="1" class ="slider">
+                <label for="{{ field }}"><span id = "output"></span></label>
+                <script>
+                    //Display the value alongside the slider
+                    var slider = document.getElementById("{{ field }}");
+                    var output = document.getElementById("output");
+                    output.innerHTML = slider.value;
+                    slider.oninput = function() {
+                    output.innerHTML = this.value;
+                    }
+                </script>
                 <br>
-                <label for="{{ field }}">{{ info.label }}</label>
-                {% if info.type == 'range' %}
-                    <!--Create a slider-->
-                    <input type="range" id="{{ field }}" name="{{ field }}" max="{{info.max}}" min="1" value="1" class ="slider">
-                    <label for="{{ field }}"><span id = "output"></span></label>
-                    <script>
-                        //Display the value alongside the slider
-                        var slider = document.getElementById("{{ field }}");
-                        var output = document.getElementById("output");
-                        output.innerHTML = slider.value;
-                        slider.oninput = function() {
-                        output.innerHTML = this.value;
-                        }
-                    </script>
-                    <br>
-                {% elif info.type == 'dropdown' %}
-                <!--the user can select from many locations on campus-->
-                <select name="oncampus" id="oncampus">
-                    {% for location in locations %}
-                    <option value = "{{ location.name }}">{{ location.name }}</option>
-                    {% endfor %}
-                </select>
-                <br>
-                {% endif %}
-            {% endfor %}
+            {% elif info.type == 'dropdown' %}
+            <!--the user can select from many locations on campus-->
+            <select name="oncampus" id="oncampus">
+                {% for location in locations %}
+                <option value = "{{ location.name }}">{{ location.name }}</option>
+                {% endfor %}
+            </select>
             <br>
+            {% endif %}
+        {% endfor %}
+        <br>
 
-            <label>Enter an end date for this event:</label>
-            <input type = 'date' id = 'endDate' name="endDate"> 
-            <br>
-            <input type="hidden" name="eventID" value="{{ eventType }}">
-            <br>
-            <a href="/admin/"><button type="button" class="btn" style="display: inline-block; width: 49%">Back</button></a>
-            <button type="submit" class="btn" style="display: inline-block; width: 49%">Create Event</button>
-            </form>
-            <br>
-        {% else %}
-            <p>This page is for gamemasters only</p>
-        {% endif %}
-    </div>
-    </div>
+        <label>Enter an end date for this event:</label>
+        <input type = 'date' id = 'endDate' name="endDate"> 
+        <br>
+        <input type="hidden" name="eventID" value="{{ eventType }}">
+        <br>
+        <a href="/admin/"><button type="button" class="btn" style="display: inline-block; width: 49%">Back</button></a>
+        <button type="submit" class="btn" style="display: inline-block; width: 49%">Create Event</button>
+        </form>
+        <br>
+    {% else %}
+        <p>This page is for gamemasters only</p>
+    {% endif %}
+</div>
+</div>
 
-    <script>
+<script>
 
-    </script>
+</script>
 
-    <br>
+<br>
 
-    <!--The footer, consistent across the site-->
-    <div class="footer">
-        <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
-    </div>
+<!--The footer, consistent across the site-->
+<div class="footer">
+    <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
+</div>
+{% endblock %}
