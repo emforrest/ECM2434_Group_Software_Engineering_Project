@@ -56,7 +56,7 @@
                     <th>Actions</th>
                 </tr>
                 <!--Here, the django for loop displays each user, with a medal for the top users-->
-                {%for journey in journeys %}
+                {% for journey in journeys %}
                 <tr>
                     <td>{{ journey.user.username }}</td>
                     <td>{{ journey.format_date }}</td>
@@ -67,7 +67,7 @@
                         <button class="icon-btn"><img src="/media/icons/cross.png" alt="Delete" width="30px"/></button>
                     </td>
                 </tr>
-                {%endfor%}
+                {% endfor %}
             </table>
         </div> 
     </div>

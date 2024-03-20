@@ -1,3 +1,10 @@
+"""Defines the URL patterns beginning /admin/ and links them to a function within views.py
+
+Authors:
+- Eleanor Forrest
+- Sam Townley
+"""
+
 from django.urls import path
 
 from . import views

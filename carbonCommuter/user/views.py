@@ -17,6 +17,8 @@ from django.db.models import Sum
 
 from common.utils import leaderboardWinner
 
+from django.contrib.auth import logout
+from django.contrib import messages
 
 import logging
 from datetime import datetime, timedelta
@@ -110,10 +112,10 @@ def home(request):
     eventProgress = -1
     eventTarget = -1
     eventComplete = False
-    activeEventExists = Event.objects.filter(complete=False).exists()
+    activeEventExists = Event.objects.filter(endDate__gt = timezone.now()).exists() #checks for an incomplete event
     if activeEventExists:
         eventBool = True
-        event = Event.objects.filter(complete=False).last()
+        event = Event.objects.filter(endDate__gt = timezone.now()).last()
         eventType = event.type
         eventProgress = event.progress
         eventTarget = event.target
@@ -124,6 +126,7 @@ def home(request):
                 eventComplete = True
                 event.complete = True
                 event.save()
+        #Determine a suitable message
         if eventComplete:
             eventMessage = "Event complete! You did it!"
         else:
@@ -504,6 +507,7 @@ def end_journey(request):
                 startDate = event.startDate
                 locationIDs = Location.objects.filter(on_campus = True).values_list('id', flat=True)
                 recentJourneys = Journey.objects.filter(time_started__gt = startDate)
+                #Check all journeys, if their start location or end location is a building that hasn't been visited then it is added to progressCount
                 for id in locationIDs:
                     for j in recentJourneys:
                         if j.origin_id == id or j.destination_id == id:
@@ -551,6 +555,10 @@ def journey(request, journey_id: int):
     if journey is None:
         return HttpResponse(status=404)
     
+    # Check if the user has admin or is the user that created the journey
+    if (journey.user.id != request.user.id) and (request.user.profile.gamemaster != True):
+        return HttpResponse(status=403)
+    
     # Calculate which number of the user's journeys it is
     journeys = list(Journey.objects.filter(user=journey.user).values_list('id', flat=True))
     journey_no = journeys.index(journey.id) + 1
@@ -566,30 +574,39 @@ def journey(request, journey_id: int):
 
 
 @login_required
-def delete_journey(request, journey_id):
-    # Attempt to get the journey object, ensuring it belongs to the current user
-    journey = get_object_or_404(Journey, id=journey_id, user=request.user)
+def delete_journey(request):
+    
+    # Get id of journey to delete
+    if request.method == "POST":
+        id = request.POST.get('id')
+    else:
+        id = request.GET.get('id')
+    
+    # Check the journey exists
+    journey = Journey.objects.get(id=id)
+    if journey is None:
+        return HttpResponse(status=404)
 
-    # Check if the user is authorized to delete the journey
-    if journey.user != request.user:
+    # Check if the user is authorized to delete the journey or is an admin
+    if (journey.user != request.user) and (request.user.profile.gamemaster != True):
         return HttpResponse(status=403)
-
-    # For a GET request, consider showing a confirmation page
-    if request.method == "GET":
-        # Logic to show confirmation could go here
-        pass  # Replace or remove this with your actual logic
-
-    # Proceed with deletion
-    # Check if the journey being deleted is the user's active journey
-    if request.user.profile.active_journey and journey.id == request.user.profile.active_journey.id:
-        request.user.profile.active_journey = None
-        request.user.profile.save()
-
-    # Delete the journey
-    journey.delete()
-
-    # Redirect to a preferred URL after deletion
-    return redirect("journeys")  # Adjust redirect as needed
+    
+    if request.method == "POST":
+        # Delete active journey if the user has one
+        if (request.user.profile.active_journey is not None) and (journey.id == request.user.profile.active_journey.id):
+            request.user.profile.active_journey = None
+            request.user.profile.save()
+            
+        # Delete the journey and redirect to the user home page
+        journey.delete()
+        return redirect("dashboard")
+    
+    # Render template based on if the journey is being cancelled or not
+    else:
+        if (request.user.profile.active_journey is not None) and (journey.id == request.user.profile.active_journey.id):
+            return render(request, "upload/cancel.html", context={"id": journey.id})
+        else:
+            return render(request, "upload/delete.html", context={"id": journey.id})
 
 
 @login_required
@@ -793,6 +810,30 @@ def check_validity(journey):
     elif journey.distance >= 5 and journey.transport == "walk":
         flagged = True
         reason += "Distance walked is too long! "
+        
+    # Check that the actual time taken isn't significantly shorter than the estimated time as per google maps
+    if journey.transport in ["train", "bus"] and (journey.estimated_time - journey.calculate_duration()) >= 5:
+        flagged = True
+        reason += f"Estimated duration ({journey.estimated_time}) doesn't match actual duration ({round(journey.calculate_duration(), 1)})! "
+    elif journey.transport in ["walk", "bike"] and journey.estimated_time <= 10 and(journey.estimated_time - journey.calculate_duration()) >= 2:
+        flagged = True
+        reason += f"Estimated duration ({journey.estimated_time}) doesn't match actual duration ({round(journey.calculate_duration(), 1)})! "
+    elif journey.transport in ["walk", "bike"] and journey.estimated_time <= 30 and(journey.estimated_time - journey.calculate_duration()) >= 5:
+        flagged = True
+        reason += f"Estimated duration ({journey.estimated_time}) doesn't match actual duration ({round(journey.calculate_duration(), 1)})! "
+    elif journey.transport in ["walk", "bike"] and journey.estimated_time <= 60 and(journey.estimated_time - journey.calculate_duration()) >= 10:
+        flagged = True
+        reason += f"Estimated duration ({journey.estimated_time}) doesn't match actual duration ({round(journey.calculate_duration(), 1)})! "
+    elif journey.transport in ["walk", "bike"] and (journey.estimated_time - journey.calculate_duration()) >= 20:
+        flagged = True
+        reason += f"Estimated duration ({journey.estimated_time}) doesn't match actual duration ({round(journey.calculate_duration(), 1)})! "
+    
+    # Check that the user hasn't uploaded a journey in the last 5 minutes
+    journeys = Journey.objects.filter(user=journey.user).order_by("-time_finished")
+    diff = journeys[1].time_finished - journey.time_started
+    if diff.seconds >= 300:
+        flagged = True
+        reason += f"The user finished a journey {diff.seconds}s before starting this journey!"
     
     # Save changes to the journey if it's been flagged for review
     if flagged:
@@ -803,28 +844,9 @@ def check_validity(journey):
 
 @login_required
 def journeys(request):
-    user_journeys = Journey.objects.filter(user=request.user).order_by('-time_started')
-    context = {'user_journeys': user_journeys}
-
     # Fetch the user's journeys, ordered by the start time
-    user_journeys = Journey.objects.filter(user=request.user).order_by('-time_started')
-
-    # Format journeys for the template
-    formatted_journeys = []
-    for journey in user_journeys:
-        formatted_journeys.append({
-            'id': journey.id,
-            'start_time': journey.format_time_started(),
-            'end_time': journey.format_time_finished() if journey.time_finished else 'In Progress',
-            'distance': journey.distance,
-            'carbon_savings': journey.carbon_savings,
-            'origin': journey.origin.address if journey.origin else 'Unknown',
-            'destination': journey.destination.address if journey.destination else 'Unknown',
-            'transport': journey.transport,
-        })
-
-    # Add the journeys to the context
-    context['user_journeys'] = formatted_journeys
+    journeys = Journey.objects.filter(user=request.user).order_by('-time_started')
+    context = {'journeys': journeys}
     return render(request, 'user/journeys.html', context)
 
   
@@ -881,3 +903,13 @@ def getBadgeImage(badgeName):
     else:
         return None
 
+@login_required
+def delete_account(request):
+    if request.method == "POST":
+        user = request.user
+        user.delete()
+        logout(request)
+        messages.success(request, "Your account has been successfully deleted.")
+        return redirect('login')
+    else:
+        return render(request, "user/confirm.html")

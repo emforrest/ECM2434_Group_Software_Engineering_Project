@@ -62,6 +62,14 @@
             <button type="submit" class="btn">Submit</button> 
         </form>
     </div>
+    <br>
+    <div class="input-box"> <!-- Use the same class as the other settings sections -->
+        <div class="wrapper">
+            <h2>Delete Account</h2>
+            <p>If you delete your account, you will lose all your data and this action cannot be undone.</p>
+            <a href="{% url 'delete_account' %}" class="btn btn-danger">Delete My Account</a>
+        </div>
+    </div>
 
     <br>
     <div class="footer">
