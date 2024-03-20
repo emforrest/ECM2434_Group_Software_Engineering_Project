@@ -4,6 +4,8 @@
 
 This is the repository for our sustainability-based web application: **CarbonCommuter**!
 
+You can visit the website here: https://www.carboncommuter.xyz/.
+
 CarbonCommuter is a free-to-use website that tracks carbon savings from students or staff on their commutes to/from campus. Users are then rewarded by encouraging competition and growing their profile, which in turn drives a sustainable outlook on the everyday activity that is a journey to/from the University.
 
 ### Team Members
