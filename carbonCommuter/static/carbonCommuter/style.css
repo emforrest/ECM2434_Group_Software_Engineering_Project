@@ -624,6 +624,10 @@ tbody tr:nth-child(n + 11) {
         width: auto;
     }
 
+    .wrapper .btn {
+        height: auto;
+    }
+
     .column-box {
         width: auto;
     }
