@@ -55,11 +55,10 @@ def user_leaderboard(request):
     following = request.user.following.all() 
     
     for user in following: 
-        followeruser = User.objects.get(id=user_id)
         follower_entry = Leaderboard_Entry()
-        follower_entry.name = followeruser.first_name + ' ' + followeruser.last_name
-        follower_entry.id = followeruser.id
-        follower_entry.username = followeruser.username
+        follower_entry.name = user.followedUser.first_name + ' ' + user.followedUser.last_name
+        follower_entry.id = user.followedUser.id
+        follower_entry.username = user.followedUser.username
         for follower in users_total:
             if follower.id == user.followedUser.id:
                 follower_entry.totalCo2Saved=follower.totalCo2Saved
