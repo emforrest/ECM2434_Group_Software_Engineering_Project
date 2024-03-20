@@ -163,6 +163,50 @@
                 </div>
             </div>
 
+            <div class="row">
+                <div class="column">
+                    <div class="column-box">
+                        <h1>Your Journeys</h1>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Start Time</th>
+                                    <th>End Time</th>
+                                    <th>Distance (km)</th>
+                                    <th>CO2 Savings (kg)</th>
+                                    <th>Origin</th>
+                                    <th>Destination</th>
+                                    <th>Transport</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for journey in user_journeys %}
+                                    <tr>
+                                        <td>{{ journey.start_time }}</td>
+                                        <td>{{ journey.end_time }}</td>
+                                        <td>{{ journey.distance }}</td>
+                                        <td>{{ journey.carbon_savings }}</td>
+                                        <td>{{ journey.origin }}</td>
+                                        <td>{{ journey.destination }}</td>
+                                        <td>{{ journey.transport }}</td>
+                                        <td>
+                                            <a href="{% url 'delete' journey.id %}" class="btn btn-danger">Delete</a>
+
+                                        </td>
+                                    </tr>
+                                {% empty %}
+                                    <tr>
+                                        <td colspan="8">No journeys recorded yet.</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
             <br>
             <div class="footer">
                 <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
