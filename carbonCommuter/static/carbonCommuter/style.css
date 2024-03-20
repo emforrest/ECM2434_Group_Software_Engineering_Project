@@ -695,3 +695,23 @@ tbody tr:nth-child(n + 11) {
     color: white;
     text-align: right;
   }
+
+.slider {
+    appearance: none;
+    width: 80%;
+    height: 20px;
+    background: #535353;
+    border-radius: 0;
+    outline: none;
+    opacity: 0.5;
+    transition: opacity .2s;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: rgb(0, 191, 0);
+    cursor: pointer;
+  }
