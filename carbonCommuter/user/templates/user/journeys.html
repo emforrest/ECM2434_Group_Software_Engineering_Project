@@ -27,45 +27,47 @@
 {% endblock %}
 
 {% block content %}
-            <div class="row">
-                <div class="column">
-                    <div class="column-box-journeys">
-                        <h1>Your Journeys</h1>
-                        <table class="table">
-                            <thead>
+    <div class="container">
+        <div class="row">
+            <div class="column">
+                <div class="column-box-journeys">
+                    <h1>Your Journeys</h1>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Start Time</th>
+                                <th>End Time</th>
+                                <th>Distance (km)</th>
+                                <th>CO2 Savings (kg)</th>
+                                <th>Origin</th>
+                                <th>Destination</th>
+                                <th>Transport</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for journey in user_journeys %}
                                 <tr>
-                                    <th>Start Time</th>
-                                    <th>End Time</th>
-                                    <th>Distance (km)</th>
-                                    <th>CO2 Savings (kg)</th>
-                                    <th>Origin</th>
-                                    <th>Destination</th>
-                                    <th>Transport</th>
-                                    <th>Actions</th>
+                                    <td>{{ journey.start_time }}</td>
+                                    <td>{{ journey.end_time }}</td>
+                                    <td>{{ journey.distance }}</td>
+                                    <td>{{ journey.carbon_savings }}</td>
+                                    <td>{{ journey.origin }}</td>
+                                    <td>{{ journey.destination }}</td>
+                                    <td>{{ journey.transport }}</td>
+                                    <td>
+                                        <a href="/user/journeys/delete?id={{ journey.id }}" class="btn btn-danger">Delete</a>
+                                    </td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                {% for journey in user_journeys %}
-                                    <tr>
-                                        <td>{{ journey.start_time }}</td>
-                                        <td>{{ journey.end_time }}</td>
-                                        <td>{{ journey.distance }}</td>
-                                        <td>{{ journey.carbon_savings }}</td>
-                                        <td>{{ journey.origin }}</td>
-                                        <td>{{ journey.destination }}</td>
-                                        <td>{{ journey.transport }}</td>
-                                        <td>
-                                            <a href="/user/journeys/delete?id={{ journey.id }}" class="btn btn-danger">Delete</a?
-                            </td>
-                        </tr>
-                    {% empty %}
-                        <tr>
-                            <td colspan="8">No journeys recorded yet.</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="8">No journeys recorded yet.</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 {% endblock %}
