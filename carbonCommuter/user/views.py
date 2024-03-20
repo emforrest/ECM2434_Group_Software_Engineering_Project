@@ -49,6 +49,29 @@ def home(request):
     co2Saved = request.user.profile.get_total_savings()
     started = request.user.profile.has_active_journey()
 
+    #set streak to 0 if no journey in the last day
+    dateNow = timezone.now()
+    twoDays = dateNow - timedelta(2)
+    pastJourneys = Journey.objects.all().filter(user_id=request.user.id, time_finished__gt=twoDays) #accessing the past journeys within two days
+    checkStreak = False #boolean to check if a streak still exists
+    for pastJourney in reversed(pastJourneys):
+        #looping through past journeys in reverse so the most recent is first
+        pastJourneyDate = pastJourney.time_finished
+        difference = dateNow-pastJourneyDate
+        if difference.seconds/60 > 1440:
+            #if the difference between the last journey is more than 1440 minutes (24 hours), there is no streak
+            break
+        if (dateNow.weekday() - pastJourneyDate.weekday()) == 1:
+            #checking there is a days difference between journeys
+            checkStreak = True
+            break
+        elif (dateNow.weekday() - pastJourneyDate.weekday()) == 0:
+            #if an event has already happened on the same day, keep the streak
+            checkStreak = True
+    if not checkStreak:
+        #if streak has been broken, set back to 0
+        request.user.profile.streak = 0
+
     #setting values for opacity to show if user has the badges
     userBadge = UserBadge.get_badges(request.user)
     badgesList = []
@@ -438,10 +461,18 @@ def end_journey(request):
                 checkStreak = True
                 request.user.profile.streak = request.user.profile.streak + 1 
                 break
+            elif (dateNow.weekday() - pastJourneyDate.weekday()) == 0:
+                #if an event has already happened on the same day, keep the streak
+                checkStreak = True
+        #if the first day of streak, set the streak to 1
+        dateNow = timezone.now()
+        pastDayJourneys = pastJourneys.filter(time_finished__gt=dateNow-timedelta(1))
+        if len(pastDayJourneys) == 1:
+            checkStreak = True
+            request.user.profile.streak = 1 
         if not checkStreak:
             #if streak has been broken, set back to 0
             request.user.profile.streak = 0
-
         #check if user has earned any streak badges
         check_streak(request.user)
 
@@ -608,7 +639,7 @@ def profile(request, username:str):
         else:
             followingUser = False
         #work out badges for user
-        userBadge = UserBadge.get_badges(request.user)
+        userBadge = UserBadge.get_badges(user)
         badgesList = []
         for badge in userBadge:
             #for every badge retrieved earlier, adding their name into list
@@ -730,21 +761,21 @@ def check_streak(user):
         add_badge(badgeID, user)
 
 def check_leaderboard():
+    """Adding weekly and monthly leaderboard badges to corresponding users
+    """
     today = datetime.now().astimezone()
+    #get the start and end times for the weekly and monthly leaderboard journeys
     startWeekDate = (today + timedelta(days=-today.weekday(), weeks=-1)).replace(hour=0, minute=0, second=0, microsecond=0)
     endWeekDate = (startWeekDate + timedelta(6)).replace(hour=0, minute=0, second=0, microsecond=0)
     endMonthDate = today.replace(day=1, hour=0, minute=0, second=0, microsecond=0) - timedelta(days=1)
     startMonthDate = today.replace(day=1, month=endMonthDate.month, hour=0, minute=0, second=0, microsecond=0) 
-    print("start week date: ", startWeekDate)
-    print("end week date: ", endWeekDate)
-    print("start month date: ", startMonthDate)
-    print("end month date: ", endMonthDate)
+    #get the journeys for the last week and the last month
     lastWeekJourneys = Journey.objects.filter(time_finished__gte=startWeekDate, time_finished__lte=endWeekDate).values('user__id').annotate(total_carbon_saved=Sum('carbon_savings')).order_by("-user_id")
     lastMonthJourneys = Journey.objects.filter(time_finished__gte=startMonthDate, time_finished__lte=endMonthDate).values('user__id').annotate(total_carbon_saved=Sum('carbon_savings')).order_by("-user_id")
+    #get the winners for the last week and the last month
     weeklyWinner = leaderboardWinner(lastWeekJourneys)
     monthlyWinner = leaderboardWinner(lastMonthJourneys)
-    print("weekly Winner: ", weeklyWinner[0])
-    print("monthly winner: ", monthlyWinner[0])
+    #give the badges to the winners
     add_badge(Badges.objects.get(name="weekLeaderboard").id, weeklyWinner[0])
     add_badge(Badges.objects.get(name="monthLeaderboard").id, monthlyWinner[0])
 
@@ -813,32 +844,18 @@ def check_validity(journey):
 
 @login_required
 def journeys(request):
-    user_journeys = Journey.objects.filter(user=request.user).order_by('-time_started')
-    context = {'user_journeys': user_journeys}
-
     # Fetch the user's journeys, ordered by the start time
-    user_journeys = Journey.objects.filter(user=request.user).order_by('-time_started')
-
-    # Format journeys for the template
-    formatted_journeys = []
-    for journey in user_journeys:
-        formatted_journeys.append({
-            'id': journey.id,
-            'start_time': journey.format_time_started(),
-            'end_time': journey.format_time_finished() if journey.time_finished else 'In Progress',
-            'distance': journey.distance,
-            'carbon_savings': journey.carbon_savings,
-            'origin': journey.origin.address if journey.origin else 'Unknown',
-            'destination': journey.destination.address if journey.destination else 'Unknown',
-            'transport': journey.transport,
-        })
-
-    # Add the journeys to the context
-    context['user_journeys'] = formatted_journeys
+    journeys = Journey.objects.filter(user=request.user).order_by('-time_started')
+    context = {'journeys': journeys}
     return render(request, 'user/journeys.html', context)
 
   
 def getBadgeImage(badgeName):
+    """Getting the image strings for the badges
+    
+    Args: 
+        badgeName: The badge to find the image string
+    """
     if badgeName == "Amory":
         return "/media/badges/locations/amory.png"
     elif badgeName == "Business School - Building One":
@@ -885,6 +902,7 @@ def getBadgeImage(badgeName):
         return "/media/badges/leaderboard/monthly.png"
     else:
         return None
+
 
 @login_required
 def delete_account(request):

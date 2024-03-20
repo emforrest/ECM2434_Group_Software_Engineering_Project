@@ -1,8 +1,12 @@
+<!-- Extends the base layout template to ensure consistency across the site. -->
 {% extends "base.html" %}
 
+<!-- Sets the title of the web page dynamically based on the group's name. -->
 {% block title %}{{ group.name }} Group Page{% endblock %}
 
+<!-- Defines the navigation bar, adjusting its items based on user authentication status. -->
 {% block navbar %}
+    <!-- Checks if the user is authenticated to display personalized navigation items. -->
     {% if request.user.is_authenticated %}
         <li class="nav-item">
             <a class="nav-link" href="{% url 'user_groups_home_page' %}">Groups</a>
@@ -14,6 +18,7 @@
             <a class="nav-link" href="/logout/">Logout</a>
         </li>
     {% else %}
+        <!-- Displays a limited set of navigation options for unauthenticated users. -->
         <li class="nav-item">
             <a class="nav-link" href="/leaderboard/">Leaderboard</a>
         </li>
@@ -26,12 +31,14 @@
     </li>
 {% endblock %}
 
+<!-- Main content block where the group details and member interactions are handled. -->
 {% block content %}
 <div class="container">
     <br>
     <h1>{{ group.name }}</h1>
     <br>
     <div class="wrapper">
+        <!-- Displays different options based on the visitor's membership status and role within the group. -->
         {% if is_member %}
             {% if leader.username != request.user.username %}
                 <p>You are a member of this group.</p>
@@ -48,6 +55,7 @@
             {% endif %}
         {% else %}
             <p>You are not a member of this group.</p>
+            <!-- Displays join options based on the group's privacy settings. -->
             {% if group_profile.is_private %}
                 {% if has_requested_join %}
                     <p>Your request to join this group is pending approval.</p>
@@ -74,6 +82,7 @@
     <br>
     <div class="wrapper">
         <h1>Group Members</h1>
+        <!-- Iterates over the group members to list them, providing removal options to the leader. -->
         {% for member in members %}
             <div>
                 <a href="{% url 'profile' username=member.username %}" style="color: black;">{{ member.username }}</a>
@@ -85,6 +94,7 @@
                 {% endif %}
             </div>
         {% empty %}
+            <!-- Displays a message if there are no members in the group. -->
             <p>No members in this group.</p>
         {% endfor %}
     </div>
@@ -92,6 +102,7 @@
         <br>
         <div class="wrapper">
             <h2>Join Requests</h2>
+            <!-- Displays pending join requests for the group leader to approve or reject. -->
             {% for request in join_requests %}
                 <div>
                     {{ request.user.username }}
@@ -105,12 +116,14 @@
                     </form>
                 </div>
             {% empty %}
+                <!-- Informs the leader that there are no current join requests. -->
                 <p>No join requests at the moment.</p>
             {% endfor %}
         </div>
     {% endif %}
     <br>
     <div class="footer">
+        <!-- Adds a footer note for copyright information. -->
         <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
     </div>
 </div>

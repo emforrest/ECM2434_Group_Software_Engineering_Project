@@ -202,6 +202,46 @@ tbody tr:nth-child(n + 11) {
     }
 }
 
+thead th {
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: rgba(196, 196, 196, 0.7);
+}
+
+tbody tr:nth-child(even) {
+    background-color: rgba(230, 230, 230, 0.7);
+}
+
+tbody tr:nth-child(odd) {
+    background-color: rgba(223, 223, 223, 0.7);
+}
+
+tbody tr:nth-child(n + 11) {
+    background-color: rgba(155, 155, 155, 0.7);
+}
+
+.table.clickable tr:hover td {
+    background: #b0b0b0;
+    cursor: pointer;
+  }
+    
+@media (max-width: 310px) {
+    div.table {
+        width: 40%;
+    }
+
+    th, td {
+        font-size: 25px;
+    }
+}
+
+@media (height: 700px) {
+    div.table {
+        height: 10%;
+    }
+}
+
 /*Login, Register pages*/
 /*set the wrapper style*/
 .wrapper {
