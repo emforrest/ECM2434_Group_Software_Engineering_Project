@@ -43,9 +43,10 @@
                 <p>Badges:</p>
                 <p>
                     <div class="badge-images">
-                        {% for badge in badgeImages %}
-                        <img src={{ badge }}>
-                        {% endfor %}
+                      {% for badge in badgeImages %}
+                          <!-- For every badge the user has, display on screen -->
+                          <img src={{ badge }}>
+                      {% endfor %}
                     </div>
                 </p>
                 <br>
