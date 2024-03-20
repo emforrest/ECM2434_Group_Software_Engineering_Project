@@ -10,6 +10,7 @@ from main.models import Location
 from django.http import HttpResponse
 from adminUser.models import Event
 from datetime import datetime
+from django.contrib.auth.decorators import login_required
 
 from user.models import Journey
 from django.utils import timezone
