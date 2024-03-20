@@ -4,6 +4,8 @@
 
 This is the repository for our sustainability-based web application: **CarbonCommuter**!
 
+You can visit the website here: https://www.carboncommuter.xyz/.
+
 CarbonCommuter is a free-to-use website that tracks carbon savings from students or staff on their commutes to/from campus. Users are then rewarded by encouraging competition and growing their profile, which in turn drives a sustainable outlook on the everyday activity that is a journey to/from the University.
 
 ### Team Members
@@ -33,7 +35,7 @@ The aim of this project was to build a game focused around sustainability. Our i
 
 A big part of the project is focused around the principle of gamificiation. This involves encouraging users to keep re-engaging with the service through the use of "game-like" elements. Taking this onboard, we chose to promote competition amongst the users through the use of a leaderboard. By repeatedly uploading journeys, users could see their progress reflect real-time on the leaderboard, and compare their savings to that of their peers. Another similar element is groups. Groups can be created by anyone, allowing societies and departments to compete amongst the members within the group, through a separate group leaderboard, as well as competing with other groups through the global group leaderboard. This should promote collaboration, and keep users interested in the service by leveraging their commitment to their favourite society.
 
-We also intend to give users the chance to show off their achievements through the use of public profiles. Here, users can earn badges from achievements, such as milestones in their total carbon savings, or uploading journeys for multiple days in a row. Badges have a rarity associated with them based on how many users own the badge, making them collectible. These are desgined to promote routine engagement with the application, encouring repeated daily uploads through badges, and sparking competition between students as to who has the most badges and better overall profile.
+We also give users the chance to show off their achievements through the use of public profiles. Here, users can earn badges from achievements, such as milestones in their total carbon savings, or uploading journeys for multiple days in a row. These are desgined to promote routine engagement with the application, encouring repeated daily uploads through badges, and sparking competition between students as to who has the better overall profile.
 
 ## Running the application
 
