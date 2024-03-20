@@ -53,6 +53,7 @@ def user_leaderboard(request):
         group_scores[x].totalCo2Saved = round(group_scores[x].totalCo2Saved,2)
 
     following = request.user.following.all() 
+    following[0].followedUser.first_name
     
     for user in following: 
         follower_entry = Leaderboard_Entry()
