@@ -504,26 +504,37 @@ def journey(request, journey_id: int):
 @login_required
 def delete_journey(request):
     
+    # Get id of journey to delete
     if request.method == "POST":
-        # Check the journey exists
         id = request.POST.get('id')
-        journey = Journey.objects.get(id=id)
-    
-        if journey is None:
-            return HttpResponse(status=404)
-        
-        print("deleted")
-        return redirect("dashboard")
-        
     else:
-        # Check the journey exists
         id = request.GET.get('id')
-        journey = Journey.objects.get(id=id)
     
-        if journey is None:
-            return HttpResponse(status=404)
+    # Check the journey exists
+    journey = Journey.objects.get(id=id)
+    if journey is None:
+        return HttpResponse(status=404)
     
-        return render(request, "upload/delete.html", context={"id": journey.id})
+    # Check if the user is authorised to delete the journey
+    if journey.user.id != request.user.id:
+        return HttpResponse(status=403)
+    
+    if request.method == "POST":
+        # Delete active journey if the user has one
+        if journey.id == request.user.profile.active_journey.id:
+            request.user.profile.active_journey = None
+            request.user.profile.save()
+            
+        # Delete the journey and redirect to the user home page
+        journey.delete()
+        return redirect("dashboard")
+    
+    # Render template based on if the journey is being cancelled or not
+    else:
+        if journey.id == request.user.profile.active_journey.id:
+            return render(request, "upload/cancel.html", context={"id": journey.id})
+        else:
+            return render(request, "upload/delete.html", context={"id": journey.id})
 
 
 @login_required
