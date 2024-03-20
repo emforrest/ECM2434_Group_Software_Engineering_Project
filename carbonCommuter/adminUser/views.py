@@ -22,8 +22,8 @@ def mainAdmin(request):
     The function returns the rendering of the admin home webpage
     """
     ##Event.objects.all().delete() 
-    #Check if there is an active event
-    activeEvent = Event.objects.filter(endDate__gt=timezone.now()).exists()
+    #Check if there is an active and incomplete event
+    activeEvent = Event.objects.filter(endDate__gt=timezone.now()).filter(complete=False).exists()
     return render(request, "adminUser/mainAdmin.html", {'activeEvent': activeEvent})
 
 def chooseEvent(request):

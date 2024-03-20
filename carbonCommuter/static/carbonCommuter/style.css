@@ -625,6 +625,7 @@ tbody tr:nth-child(n + 11) {
 }
 
 .progress-container {
+    appearance: none;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -643,10 +644,11 @@ tbody tr:nth-child(n + 11) {
     font-weight: bold; 
   }
 
-  .progress-bar span {
+  .progress-container span {
     position: absolute;
-    display: inline-block;
+    display: block;
     color: white;
     text-align: right;
   }
-  
+
+
