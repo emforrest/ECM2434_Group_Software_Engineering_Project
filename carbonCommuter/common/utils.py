@@ -236,7 +236,7 @@ def leaderboardData(journeys_by_id):
             current_id = journey['user__id']
             user_entry.id = current_id
             user_entry.username = journey['user__username']
-            user_entry.totalCo2Saved = journey['total_carbon_saved']
+            user_entry.totalCo2Saved = round(journey['total_carbon_saved'], 2)
             users.append(user_entry)
     return users
 
