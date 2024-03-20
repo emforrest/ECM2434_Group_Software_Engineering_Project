@@ -139,6 +139,7 @@ def home(request):
             else:
                 eventMessage = f"Visit every location on campus by {event.endDate.strftime('%d-%m-%Y')}."
 
+    #check for weekly and monthly leaderboard badges from previous week/month
     check_leaderboard()
 
     #adding opacity of badges to context so can be displayed correctly to the user
@@ -464,7 +465,7 @@ def end_journey(request):
             elif (dateNow.weekday() - pastJourneyDate.weekday()) == 0:
                 #if an event has already happened on the same day, keep the streak
                 checkStreak = True
-        #if the first day of streak, set the streak to 1
+        #if it is the first day of streak, set the streak to 1
         dateNow = timezone.now()
         pastDayJourneys = pastJourneys.filter(time_finished__gt=dateNow-timedelta(1))
         if len(pastDayJourneys) == 1:
@@ -575,7 +576,6 @@ def journey(request, journey_id: int):
 
 @login_required
 def delete_journey(request):
-    
     # Get id of journey to delete
     if request.method == "POST":
         id = request.POST.get('id')

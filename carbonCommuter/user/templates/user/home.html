@@ -45,6 +45,7 @@
                 <p1>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</p1>
                 <div class="streak">
                     <img src="/media/badges/streaks/daily.png" alt="Daily streak">
+                    <!-- Setting the location of text on the daily streak to be centered, depending whether single or double digits -->
                     {% if request.user.profile.streak > 10 %}
                         <div style="left: 25%" class="streakText">{{ request.user.profile.streak }}</div>
                     {% else %}
