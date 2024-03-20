@@ -12,7 +12,7 @@
 body {
     min-height: 100vh;
     max-width: 100%;
-    background: url('forum.jpg');
+    background: url('/media/images/forum.jpg');
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -695,3 +695,10 @@ tbody tr:nth-child(n + 11) {
     color: white;
     text-align: right;
   }
+
+
+.icon-btn {
+    border: none;
+    outline: none;
+    background: none;
+}

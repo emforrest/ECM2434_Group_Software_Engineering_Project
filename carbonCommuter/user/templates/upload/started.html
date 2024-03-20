@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Success{% endblock%}
+
+{% block navbar %}
+    {% if request.user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'user_groups_home_page' %}">Groups</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/leaderboard/user_leaderboard">Leaderboard</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/logout/">Logout</a>
+        </li>
+    {% else %}
+        <li class="nav-item">
+            <a class="nav-link" href="/leaderboard/">Leaderboard</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/login/">Login</a>
+        </li>
+    {%endif%}
+    <li class="nav-item">
+    <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
+    </li>
+{% endblock %}
+
+{% block content %}
+<br>
+<div class="container">
+    <div class="wrapper">
+        <h1>You just started a new adventure!</h1>
+        <br>
+        <p>It's time to get moving! Remember, for every KM you travel, you'll save {{ CO2_Savings }}KG of CO2. Way to go!</p>
+        <p>When you reach your destination, remember to visit the website again to end your journey, and secure the top spot on that leaderboard!</p>
+        <br>
+        <button type="button" class="btn" id="btn_home">Go home</button>
+
+        <script>
+            document.getElementById("btn_home").onclick = function () {
+                location.href = "/user/";
+            };
+        </script>
+
+    </div>
+    <br>
+    <div class="footer">
+        <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
+    </div>
+</div>
+{% endblock %}
