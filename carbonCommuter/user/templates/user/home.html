@@ -105,7 +105,7 @@
                     <div class="column-box">
                         <h1>Savings</h1>
                         <br>
-                        <p><p1>Total Saving: </p1><i>{{ co2Saved }}</i></p>
+                        <p><p1>Total Saving: &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</p1><i>{{ co2Saved }}</i></p>
                         <br>
                         {% if not started %}
                         <a href="/user/journeys/create"><button type="submit" class="btn">Start Journey</button></a>
@@ -155,9 +155,9 @@
                     <img style="opacity: '{{ swiotOpac }}'" src="{% static 'carbonCommuter/CarbonCommuter images/Locations/Swiot.png' %}" alt="Swiot">
                     <img style="opacity: '{{ washingtonSingerOpac }}'" src="{% static 'carbonCommuter/CarbonCommuter images/Locations/WashingtonSinger.png' %}" alt="WashingtonSinger">
                     <h4>Leaderboard:</h4>
-                    <img src="{% static 'carbonCommuter/CarbonCommuter images/Leaderboard/TopLeaderboard.png' %}" alt="Top of Leaderboard">
-                    <img src="{% static 'carbonCommuter/CarbonCommuter images/Leaderboard/1weekLeaderboard.png' %}" alt="Top of Leaderboard for 1 week">
-                    <img src="{% static 'carbonCommuter/CarbonCommuter images/Leaderboard/1monthLeaderboard.png' %}" alt="Top of Leaderboard for 1 month">
+                    <img style="opacity: {{ topLeaderboardOpac }}" src="{% static 'carbonCommuter/CarbonCommuter images/Leaderboard/TopLeaderboard.png' %}" alt="Top of Leaderboard">
+                    <img style="opacity: {{ weekLeaderboardOpac }}" src="{% static 'carbonCommuter/CarbonCommuter images/Leaderboard/1weekLeaderboard.png' %}" alt="Top of Leaderboard for 1 week">
+                    <img style="opacity: {{ monthLeaderboardOpac }}" src="{% static 'carbonCommuter/CarbonCommuter images/Leaderboard/1monthLeaderboard.png' %}" alt="Top of Leaderboard for 1 month">
                 </div>
                 </div>
             </div>

@@ -71,6 +71,9 @@ def home(request):
     fiftyDaysOpac = determine_opacity("50days", badgesList)
     seventyFiveDaysOpac = determine_opacity("75days", badgesList)
     hundredDaysOpac = determine_opacity("100days", badgesList)
+    topLeaderboardOpac = determine_opacity("topLeaderboard", badgesList)
+    weekLeaderboardOpac = determine_opacity("weekLeaderboard", badgesList)
+    monthLeaderboardOpac = determine_opacity("monthLeaderboard", badgesList)
 
      #get a list of users this user is following
     followingUsers = User.objects.filter(followers__follower=request.user).values_list('username', flat=True)
@@ -130,12 +133,16 @@ def home(request):
                          "sportsParkOpac": sportsParkOpac,
                          "swiotOpac": swiotOpac,
                          "washingtonSingerOpac": washingtonSingerOpac,
+                         "topLeaderboardOpac": topLeaderboardOpac,
+                         "weekLeaderboardOpac": weekLeaderboardOpac,
+                         "monthLeaderboardOpac": monthLeaderboardOpac, 
                          "followingUsers": followingUsers,
                          "eventMessage" : eventMessage,
                          "eventProgress" : eventProgress,
                          "eventTarget" : eventTarget,
                          "eventBool" : eventBool
                          }
+
     return render(request, "user/home.html", context)
 
 
@@ -652,9 +659,9 @@ def add_badge(badge, user):
         user: The user to be able to get the badges for that specific user
     """
     if not UserBadge.objects.filter(user_id=user.id, badge_id=badge).exists():
-            #if the badge does not already exist for the user
-            newBadge = UserBadge(user_id=user.id, badge_id=badge)
-            newBadge.save()
+        #if the badge does not already exist for the user
+        newBadge = UserBadge(user_id=user.id, badge_id=badge)
+        newBadge.save()
             
             
 def check_validity(journey):
@@ -681,3 +688,4 @@ def check_validity(journey):
         journey.flagged = True
         journey.reason = reason
         journey.save()
+

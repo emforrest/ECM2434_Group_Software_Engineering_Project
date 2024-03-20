@@ -5,7 +5,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
-    /*color: black;*/
+    color: black;
 }
 
 /*set the same background for all the pages*/
@@ -35,136 +35,74 @@ h1 {
     padding-right: 0.5rem;
 }
 
-/* 2xl */
-@media (max-width: 1536px){
-    .container{
-        max-width: 1280px;
-    }
-}
-
-/* xl */
-@media (max-width: 1280px){
-    .container{
-        max-width: 1024px;
-    }
-}
-
-/* lg */
-@media (max-width: 1024px){
-    .container{
-        max-width: 768px;
-    }
-}
-
-/* md */
-@media (max-width: 768px){
-    .container{
-        max-width: 640px;
-    }
-}
-
-/* sm */
-@media (max-width: 640px){
-    .container{
-        max-width: 475px;
-    }
-}
-
-/* xs */
-@media (max-width: 475px){
-    .container{
-        max-width: 100%;
-    }
-}
-
-/* Smartphones (portrait and landscape) ----------- */
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
-    .container{
-        max-width: 100%;
-    }
-
-    .wrapper {
-        width: auto;
-    }
-
-    .column-box {
-        width: auto;
-    }
-
-    .footer {
-        width: auto;
-    }
-
-    .l-footer {
-        width: auto;
-    }
-
-}
-
-/* Smartphones (landscape) ----------- */
-@media only screen and (min-width : 321px) {
-    .container{
-        max-width: 100%;
-    }
-
-}
-
-/*Main Page Table */
-/*set the style of each section of the table in the main home page*/
 .main-wrapper {
     margin: auto;
     width: 90%;
-    background-color:rgba(255, 255, 255, .6) !important;
+    min-width: 320px; /* Minimum width for the main wrapper */
+    background-color: rgba(255, 255, 255, .6);
     border: 2px solid rgba(255, 255, 255, .2);
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(100px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
     color: black;
     border-radius: 10px;
-    padding: 15px 15px;
+    padding: 15px;
+    font-size: 0.9em;
 }
 
 .main-header {
-    height: 15%; 
     width: 100%;
     font-family: "Poppins", sans-serif;
     background: rgba(255, 255, 255, 0.5);
     padding: .8rem 1rem;
     text-align: center;
     border-radius: .6rem;
+    word-wrap: break-word; /* Ensure header text wraps on smaller screens */
+}
 
+.main-header h1 {
+    font-size: 1.8em;
+}
+
+.main-info {
+    width: 100%;
+    font-family: "Poppins", sans-serif;
+    background: rgba(255, 255, 255, 0.5);
+    padding: .8rem 1rem;
+    text-align: center;
+    border-radius: .6rem;
+    word-wrap: break-word; /* Ensure header text wraps on smaller screens */
 }
 
 .main-description {
     width: 660px;
-    max-height: 100%;
+    max-width: 100%;
     background: rgba(255, 255, 255, 0.5);
-
     margin: .8rem auto;
     border-radius: .6rem;
-
     overflow: auto;
     font-size: 20px;
 }
 
 .main-links {
-    width: 400px;
-    min-height: 300px;
-
+    width: 100%; /* Adjusted width for smaller screens */
     margin: auto;
     border-radius: .6rem;
-
     overflow: auto;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-/*set the style of the buttons in the table of the main home page*/
+/* Set the style of the buttons in the table of the main home page */
 .main-links .btn {
-    width: 60%;
+    width: 100%; /* Adjusted width for smaller screens */
+    max-width: 200px; /* Set a max-width for the buttons */
     height: 50px;
     background: #edf7ff;
     border: none;
     outline: none;
-    margin: 10px;
+    margin: 5px; /* Adjusted margin for smaller screens */
     border-radius: 20px;
 }
 
@@ -258,11 +196,11 @@ tbody tr:nth-child(n + 11) {
 .wrapper {
     margin: auto;
     width: 420px;
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, .6);
     border: 2px solid rgba(255, 255, 255, .2);
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(100px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
-    color: #fff;
+    color: black;
     border-radius: 10px;
     padding: 15px 40px;
 }
@@ -270,7 +208,7 @@ tbody tr:nth-child(n + 11) {
 .wrapper h1 {
     font-size: 36px;
     text-align: center;
-    color: white;
+    color: black;
 }
 /*set the input-box features, and input button*/
 .wrapper .input-box {
@@ -278,6 +216,7 @@ tbody tr:nth-child(n + 11) {
     width: 100%;
     height: 50px;
     margin: 15px 0;
+
 }
 
 .input-box input {
@@ -286,15 +225,15 @@ tbody tr:nth-child(n + 11) {
     background: transparent;
     border: none;
     outline: none;
-    border: 2px solid rgba(255, 255, 255, .2);
+    border: 2px solid rgba(255, 255, 255, .6);
     border-radius: 40px;
     font-size: 16px;
-    color: #fff;
+    color: black;
     padding: 20px 45px 20px 20px ;
 }
 
 .input-box input::placeholder {
-    color: #fff;
+    color: black;
 }
 
 .input-box i {
@@ -312,7 +251,7 @@ tbody tr:nth-child(n + 11) {
     border: none;
     outline: none;
     border-radius: 50px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
     cursor: pointer;
     font-size: 16px;
     color: #333;
@@ -331,7 +270,7 @@ tbody tr:nth-child(n + 11) {
 }
 
 .link p a {
-    color: #fff;
+    color: black;
     text-decoration: none;
     font-weight: 600;
 }
@@ -354,11 +293,11 @@ tbody tr:nth-child(n + 11) {
 .column-box {
     margin: 10px;
     width: 420px;
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.6);
     border: 2px solid rgba(255, 255, 255, .2);
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(100px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
-    color: #fff;
+    color: black;
     border-radius: 10px;
     padding: 15px 40px;
 }
@@ -366,7 +305,7 @@ tbody tr:nth-child(n + 11) {
 .column-box h1 {
     font-size: 36px;
     text-align: center;
-    color: white;
+    color: black;
 }
 
 .column-box .btn {
@@ -395,7 +334,7 @@ tbody tr:nth-child(n + 11) {
 }
 
 .link p a {
-    color: #fff;
+    color: black;
     text-decoration: none;
     font-weight: 600;
 }
@@ -405,19 +344,20 @@ tbody tr:nth-child(n + 11) {
 }
 
 .streak {
-    position: absolute;
+    position: relative;
     text-align: center;
-    color: white;
+    color: black;
     font-family: "chewy";
     top: 0;
     right: 0;
     width: 110px;
     height: 110px;
+    margin: 0 auto; 
 }
 .streak img {
     width: 100px;
     height: 100px;
-    margin: 5px;
+    margin: 5px auto;
 }
 .streakText {
     position: absolute;
@@ -429,11 +369,11 @@ tbody tr:nth-child(n + 11) {
 .column-box2 {
     margin: 10px;
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.6);
     border: 2px solid rgba(255, 255, 255, .2);
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(100px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
-    color: #fff;
+    color: black;
     border-radius: 10px;
     padding: 15px 30px;
 }
@@ -559,11 +499,11 @@ tbody tr:nth-child(n + 11) {
     transform: translateX(-50%);
     width: 420px;
     height: 40px;
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.6);
     border: 2px solid rgba(255, 255, 255, .2);
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(100px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
-    color: #fff;
+    color: black;
     border-radius: 10px;
     padding: 5px 2px;
 }
@@ -582,9 +522,9 @@ tbody tr:nth-child(n + 11) {
     height: 40px;
     background-color:rgba(255, 255, 255, .6);
     border: 2px solid rgba(255, 255, 255, .2);
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(100px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
-    color: #fff;
+    color: black;
     border-radius: 10px;
     padding: 5px 2px;
     overflow: auto;
@@ -602,10 +542,10 @@ tbody tr:nth-child(n + 11) {
     margin: auto;
     width: 90%;
     height: 40px;
-    max-width: 90%;
-    background-color:rgba(255, 255, 255, .6);
+    min-width: 320px; /* Minimum width for the main wrapper */
+    background-color:rgba(255, 255, 255, 0.6);
     border: 2px solid rgba(255, 255, 255, .2);
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(100px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
     color: #fff;
     border-radius: 10px;
@@ -620,7 +560,112 @@ tbody tr:nth-child(n + 11) {
 
 @media (min-width: 0px) {
     .navbar navbar-expand-lg navbar-light bg-light {
-        width: 100%; /* Set navbar width to 100% of viewport width */
+        width: 110%; /* Set navbar width to 100% of viewport width */
+    }
+}
+
+/* 2xl */
+@media (max-width: 1536px){
+    .container{
+        max-width: 1280px;
+    }
+}
+
+/* xl */
+@media (max-width: 1280px){
+    .container{
+        max-width: 1024px;
+    }
+}
+
+/* lg */
+@media (max-width: 1024px){
+    .container{
+        max-width: 768px;
+    }
+}
+
+/* md */
+@media (max-width: 768px){
+    .container{
+        max-width: 640px;
+    }
+}
+
+/* sm */
+@media (max-width: 640px){
+    .container{
+        max-width: 475px;
+    }
+}
+
+/* Smartphones (landscape) ----------- */
+@media only screen and (min-width : 321px) {
+    .container{
+        max-width: 100%;
+    }
+
+}
+
+/* xs */
+@media (max-width: 475px){
+    .container{
+        max-width: 100%;
+    }
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    .container{
+        width: 100%;
+    }
+
+    .wrapper {
+        width: auto;
+        background-color: rgba(255, 255, 255, .85);
+    }
+
+    .wrapper .btn {
+        height: auto;
+    }
+
+    .column-box {
+        width: auto;
+        flex: 1;
+        background-color: rgba(255, 255, 255, .85);
+    }
+
+    .column-box2 {
+        width: auto;
+        background-color: rgba(255, 255, 255, .85);
+    }
+
+    .main-links .btn {
+        width: 100%; /* Adjusted width for smaller screens */
+    }
+
+    .main-wrapper {
+        width: 100%;
+        background-color: rgba(255, 255, 255, .85);
+    }
+
+    .main-footer {
+        width: 100%;
+        background-color: rgba(255, 255, 255, .85);
+    }
+
+    .footer {
+        width: 100%;
+        background-color: rgba(255, 255, 255, .85);
+    }
+
+    .l-footer {
+        width: 100%;
+        background-color: rgba(255, 255, 255, .85);
+    }
+
+    #google_map {
+        width: 90%;
     }
 }
 
@@ -650,5 +695,3 @@ tbody tr:nth-child(n + 11) {
     color: white;
     text-align: right;
   }
-
-
