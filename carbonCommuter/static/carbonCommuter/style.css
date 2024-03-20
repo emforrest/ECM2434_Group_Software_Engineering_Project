@@ -617,26 +617,23 @@ tbody tr:nth-child(n + 11) {
 /* Smartphones (portrait and landscape) ----------- */
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
     .container{
-        max-width: 100%;
+        width: 100%;
     }
 
     .wrapper {
         width: auto;
-        background-color: rgba(255, 255, 255, .6);
     }
 
     .column-box {
         width: auto;
-        background-color: rgba(255, 255, 255, .6);
     }
 
     .column-box2 {
         width: auto;
-        background-color: rgba(255, 255, 255, .6);
     }
 
     .main-links .btn {
-        width: 90%; /* Adjusted width for smaller screens */
+        width: 100%; /* Adjusted width for smaller screens */
     }
 
     .main-wrapper {
@@ -649,16 +646,9 @@ tbody tr:nth-child(n + 11) {
 
     .footer {
         width: 100%;
-        background-color: rgba(255, 255, 255, .6);
     }
 
     .l-footer {
         width: 100%;
-        background-color: rgba(255, 255, 255, .6);
     }
-}
-
-/* Media query for smaller screens */
-@media screen and (max-width: 600px) {
-    
 }
