@@ -70,6 +70,7 @@ def user_leaderboard(request):
         follower_entry.name = user.followedUser.first_name + ' ' + user.followedUser.last_name
         follower_entry.id = user.followedUser.id
         follower_entry.username = user.followedUser.username
+        follower_entry.totalCo2Saved = 0
         for follower in users_total:
             if follower.id == user.followedUser.id:
                 follower_entry.totalCo2Saved=follower.totalCo2Saved
