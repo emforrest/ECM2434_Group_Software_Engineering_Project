@@ -133,7 +133,7 @@ class Profile(models.Model):
         Returns:
             float: The total amount of CO2 saved measured in KG.
         """
-        return Journey.objects.get_all_time_savings(self.user)
+        return round(Journey.objects.get_all_time_savings(self.user),2)
     
     def has_active_journey(self) -> bool:
         """Checks if the current user object has an active journey associated with their account.
