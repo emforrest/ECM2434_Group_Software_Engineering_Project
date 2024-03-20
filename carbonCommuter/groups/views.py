@@ -93,7 +93,7 @@ def join_group(request, group_id):
     group = get_object_or_404(Group, id=group_id)
     request.user.groups.add(group)
     messages.success(request, "You have joined the group.")
-    return redirect('group_page')
+    return HttpResponseRedirect(reverse('group_page', args=[group_id]))
 
 
 @login_required

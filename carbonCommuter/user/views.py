@@ -470,7 +470,9 @@ def end_journey(request):
         check_validity(journey)
 
         # Add to streak of the user
-        pastJourneys = Journey.objects.all().filter(user_id=request.user.id) #accessing all the past journeys the user has made
+        dateNow = timezone.now()
+        oneDay = dateNow - timedelta(1)
+        pastJourneys = Journey.objects.all().filter(user_id=request.user.id, time_finished__gt=oneDay) #accessing all the past journeys the user has made
         dateNow = timezone.now()
         checkStreak = False #boolean to check if a streak still exists
         for pastJourney in reversed(pastJourneys):
@@ -483,6 +485,7 @@ def end_journey(request):
             if (dateNow.weekday() - pastJourneyDate.weekday()) == 1:
                 #checking there is a days difference between journeys
                 checkStreak = True
+
                 request.user.profile.streak = request.user.profile.streak + 1 
                 break
             elif (dateNow.weekday() - pastJourneyDate.weekday()) == 0:
