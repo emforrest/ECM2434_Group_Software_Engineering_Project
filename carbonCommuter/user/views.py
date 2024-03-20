@@ -35,6 +35,7 @@ LOGGER = logging.getLogger(__name__)
 
 @login_required
 def home(request):
+    #return HttpResponse(code=404)
     """Return the /user/home page with the information about the current user such as their 
     name and email address, and any badges they have earned.
     
@@ -137,8 +138,25 @@ def home(request):
             elif eventType == 3:
                 eventMessage = f"Visit {event.building}, {event.target} times by {event.endDate.strftime('%d-%m-%Y')}." 
             else:
+                #check current progress for this event
+                progressCount = 0
+                startDate = event.startDate
+                locationIDs = Location.objects.filter(on_campus = True).values_list('id', flat=True)
+                recentJourneys = Journey.objects.filter(time_started__gt = startDate)
+                #Check all journeys, if their start location or end location is a building that hasn't been visited then it is added to progressCount
+                for id in locationIDs:
+                    for j in recentJourneys:
+                        if j.origin_id == id or j.destination_id == id:
+                            if j.origin_id == id and j.destination_id == id:
+                                progressCount += 2
+                            else:
+                                progressCount += 1
+                            break
+                event.progress = progressCount
+                event.save()
                 eventMessage = f"Visit every location on campus by {event.endDate.strftime('%d-%m-%Y')}."
 
+    #check for weekly and monthly leaderboard badges from previous week/month
     check_leaderboard()
 
     #adding opacity of badges to context so can be displayed correctly to the user
@@ -464,7 +482,7 @@ def end_journey(request):
             elif (dateNow.weekday() - pastJourneyDate.weekday()) == 0:
                 #if an event has already happened on the same day, keep the streak
                 checkStreak = True
-        #if the first day of streak, set the streak to 1
+        #if it is the first day of streak, set the streak to 1
         dateNow = timezone.now()
         pastDayJourneys = pastJourneys.filter(time_finished__gt=dateNow-timedelta(1))
         if len(pastDayJourneys) == 1:
@@ -575,7 +593,6 @@ def journey(request, journey_id: int):
 
 @login_required
 def delete_journey(request):
-    
     # Get id of journey to delete
     if request.method == "POST":
         id = request.POST.get('id')
@@ -633,9 +650,7 @@ def profile(request, username:str):
     userFilter = User.objects.filter(username=username)
     if userFilter.exists():
         user = userFilter[0]
-        users_journeys =Journey.objects.filter(id = request.user.id).values('user__id').annotate(total_carbon_saved=Sum('carbon_savings'))
-        co2Saved = users_journeys[0]['total_carbon_saved']
-        co2Saved = round(co2Saved, 2)
+        co2Saved = user.profile.get_total_savings()
         #Work out the context
         if request.user.username == username:
             isCurrentUser = True

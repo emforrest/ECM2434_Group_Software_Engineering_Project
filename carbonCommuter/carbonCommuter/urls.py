@@ -22,13 +22,14 @@ from django.contrib import admin
 from django.conf import settings
 from django.urls import include, path
 from django.conf.urls.static import static
-from login import views
+from login import views as login_views
+
 
 urlpatterns = [
     path("", include("main.urls")),
     path("register/", include("register.urls")),
-    path('accounts/login/', views.login_view),
-    path('logout/', views.logout_view),
+    path('accounts/login/', login_views.login_view),
+    path('logout/', login_views.logout_view),
     path("login/", include("login.urls")),
     path("leaderboard/", include("leaderboard.urls")),
     path("user/", include("user.urls")),
@@ -36,6 +37,7 @@ urlpatterns = [
     path("dev/", admin.site.urls),
     path("admin/", include("adminUser.urls")),
 ]
+
 
 if settings.DEBUG:
     # handling media in Debug mode (images, gifs, etc.)

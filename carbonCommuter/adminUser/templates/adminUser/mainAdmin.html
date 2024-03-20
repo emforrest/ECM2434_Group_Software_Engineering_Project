@@ -1,46 +1,24 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-
 <!-- A HTML document that produces the home page for admin users. -->
 <!-- authors: Abi Hinton, Eleanor Forrest -->
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <!--Import styling-->
-    <link rel="stylesheet" href="{% static 'carbonCommuter/style.css' %}">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
-    <header>
-        <!--The navbar, consistent across the site-->
-         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="/">CarbonCommuter</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+{% block title %}Dashboard{% endblock%}
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'user_groups_home_page' %}">Groups</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/logout/">Logout</a>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/leaderboard/user_leaderboard">Leaderboard</a>
-                        </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
+{% block navbar %}
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'user_groups_home_page' %}">Groups</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/logout/">Logout</a>
+    <li class="nav-item">
+        <a class="nav-link" href="/leaderboard/user_leaderboard">Leaderboard</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
+    </li>
+{% endblock %}
 
+{% block content %}
     <br>
     <div class="wrapper">
     <div class="column">
@@ -61,21 +39,18 @@
                     window.location.href = "{% url 'chooseEvent' %}?buttonClicked=" + String(buttonClicked)
                 }
             </script>
+            <br>
+            <br>
+            <a href="/admin/verify/"><button type="button" class="btn">Verify Journeys</button></a>
         {% else %}
-            <p>This page is for gamemasters only</p>
+            <p>This page is for gamemasters only.</p>
         {% endif %}
-        <br>
-        <br>
-        <a href="/admin/verify/"><button type="button" class="btn">Verify Journeys</button></a>
+        
     </div>
     </div>  
     <br>
-    
-
     <!--The footer, consistent across the site-->
     <div class="footer">
         <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
     </div>
-
-</body>
-</html>
+{% endblock %}

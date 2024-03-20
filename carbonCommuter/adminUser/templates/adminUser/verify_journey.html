@@ -60,40 +60,41 @@
         <div class="row">
             <div class="column">
                 <div class="column-box-journeys">
-                    <h1>Review suspicious journeys:</h1>
-                    <table class="table clickable">
-                        <thead>
-                            <tr> 
-                                <!-- Headers for the table -->
-                                <th>User</th>
-                                <th>Date</th>
-                                <th>Time</th>
-                                <th>Reason</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        
-                        <tbody>
-                            {% for journey in journeys %}
-                                <tr class='clickable-row' data-href='/user/journeys/{{ journey.id }}/'>
-                                    <td>{{ journey.user.username }}</td>
-                                    <td>{{ journey.format_date }}</td>
-                                    <td>{{ journey.format_time }}</td>
-                                    <td>{{ journey.reason }}</td>
-                                    <td>
-                                        <button id="btn_approve" type="button" class="icon-btn" data-jid="{{ journey.id }}"><img src="/media/icons/checkmark.png" alt="Approve" width="30px"/></button>
-                                        <button id="btn_delete" type="button" class="icon-btn" data-jid="{{ journey.id }}"><img src="/media/icons/cross.png" alt="Delete" width="30px"/></button>
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-    <br>
-    
+                  <h1>Review suspicious journeys:</h1>
+                  {% if request.user.profile.gamemaster %}
+                  <div class="table clickable">
+                      <table>
+                          <tr> 
+                              <!-- Headers for the table -->
+                              <th>User</th>
+                              <th>Date</th>
+                              <th>Time</th>
+                              <th>Reason</th>
+                              <th>Actions</th>
+                          </tr>
+                          <!--Here, the django for loop displays each user, with a medal for the top users-->
+                          {% for journey in journeys %}
+                          <tr>
+                              <td>{{ journey.user.username }}</td>
+                              <td>{{ journey.format_date }}</td>
+                              <td>{{ journey.format_time }}</td>
+                              <td>{{ journey.reason }}</td>
+                              <td>
+                                  <button type="button" class="icon-btn" data-jid="{{ journey.id }}"><img src="/media/icons/checkmark.png" alt="Approve" width="30px"/></button>
+                                  <button type="button" class="icon-btn" data-jid="{{ journey.id }}"><img src="/media/icons/cross.png" alt="Delete" width="30px"/></button>
+                              </td>
+                          </tr>
+                          {% endfor %}
+                      </table>
+                  </div> 
+                  {% else %}
+                      <p>This page is for gamemasters only.</p>
+                  {% endif %}
+
+              </div>
+          </div>
+      </div>
+</div>
     <script>
         
     </script>
