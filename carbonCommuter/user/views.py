@@ -590,6 +590,10 @@ def delete_journey(request):
     # Check if the user is authorized to delete the journey or is an admin
     if (journey.user != request.user) and (request.user.profile.gamemaster != True):
         return HttpResponse(status=403)
+    elif journey.user != request.user:
+        OWNER = False
+    else:
+        OWNER = True
     
     if request.method == "POST":
         # Delete active journey if the user has one
@@ -597,9 +601,12 @@ def delete_journey(request):
             request.user.profile.active_journey = None
             request.user.profile.save()
             
-        # Delete the journey and redirect to the user home page
+        # Delete the journey and redirect to the corresponding page
         journey.delete()
-        return redirect("dashboard")
+        if OWNER:
+            return redirect("dashboard")
+        else:
+            return redirect("/admin/verify/")
     
     # Render template based on if the journey is being cancelled or not
     else:
