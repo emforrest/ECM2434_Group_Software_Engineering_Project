@@ -21,7 +21,7 @@ def user_leaderboard(request):
     users_weekly = []
     group_scores = []
     users_followers = []
-    users_journeys =Journey.objects.values('user__first_name', 'user__last_name', 'user__username', 'user__id').annotate(total_carbon_saved=Sum('carbon_savings'))
+    users_journeys =Journey.objects.values('user__first_name', 'user__last_name', 'user__username', 'user__id').annotate(total_carbon_saved=Sum('carbon_savings')).order_by("-user_id")
     users_total = leaderboardData(users_journeys)
 
     now = datetime.now()
@@ -97,7 +97,7 @@ def leaderboard(request):
     users_total = []
     users_weekly = []
     group_scores = []
-    users_journeys =Journey.objects.values('user__first_name', 'user__last_name', 'user__username', 'user__id').annotate(total_carbon_saved=Sum('carbon_savings'))
+    users_journeys =Journey.objects.values('user__first_name', 'user__last_name', 'user__username', 'user__id').annotate(total_carbon_saved=Sum('carbon_savings')).order_by("-user_id")
     users_total = leaderboardData(users_journeys)
 
     now = datetime.now()
