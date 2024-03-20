@@ -74,27 +74,27 @@
                           </tr>
                           <!--Here, the django for loop displays each user, with a medal for the top users-->
                           {% for journey in journeys %}
-                          <tr>
-                              <td>{{ journey.user.username }}</td>
-                              <td>{{ journey.format_date }}</td>
-                              <td>{{ journey.format_time }}</td>
-                              <td>{{ journey.reason }}</td>
-                              <td>
-                                  <button type="button" class="icon-btn" data-jid="{{ journey.id }}"><img src="/media/icons/checkmark.png" alt="Approve" width="30px"/></button>
-                                  <button type="button" class="icon-btn" data-jid="{{ journey.id }}"><img src="/media/icons/cross.png" alt="Delete" width="30px"/></button>
-                              </td>
-                          </tr>
+                            <tr class="clickable-row" data-href="/user/journeys/{{ journey.id }}/">
+                                <td>{{ journey.user.username }}</td>
+                                <td>{{ journey.format_date }}</td>
+                                <td>{{ journey.format_time }}</td>
+                                <td>{{ journey.reason }}</td>
+                                <td>
+                                    <button id="btn_approve" type="button" class="icon-btn" data-jid="{{ journey.id }}"><img src="/media/icons/checkmark.png" alt="Approve" width="30px"/></button>
+                                    <button id="btn_delete" type="button" class="icon-btn" data-jid="{{ journey.id }}"><img src="/media/icons/cross.png" alt="Delete" width="30px"/></button>
+                                </td>
+                            </tr>
                           {% endfor %}
                       </table>
                   </div> 
                   {% else %}
                       <p>This page is for gamemasters only.</p>
                   {% endif %}
-
-              </div>
-          </div>
-      </div>
-</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <script>
         
     </script>
