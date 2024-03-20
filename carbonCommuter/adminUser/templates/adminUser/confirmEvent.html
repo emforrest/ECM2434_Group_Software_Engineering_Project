@@ -56,8 +56,20 @@
             {% for field, info in fieldsInfo.items %}
             <br>
             <label for="{{ field }}">{{ info.label }}</label>
-            {% if info.type == 'text' %}
-                <input type="text" id="{{ field }}" name="{{ field }}"><br>
+            {% if info.type == 'range' %}
+                <!--Create a slider-->
+                <input type="range" id="{{ field }}" name="{{ field }}" max="{{info.max}}" min="1" value="1" class ="slider">
+                <label for="{{ field }}"><span id = "output"></span></label>
+                <script>
+                    var slider = document.getElementById("{{ field }}");
+                    var output = document.getElementById("output");
+                    output.innerHTML = slider.value;
+
+                    slider.oninput = function() {
+                    output.innerHTML = this.value;
+                    }
+                </script>
+                <br>
             {% elif info.type == 'dropdown' %}
             <!--the user can select from many locations on campus-->
             <select name="oncampus" id="oncampus">
@@ -65,7 +77,7 @@
                 <option value = "{{ location.name }}">{{ location.name }}</option>
                 {% endfor %}
             </select>
-
+            <br>
             {% endif %}
         {% endfor %}
         <br>
@@ -79,10 +91,13 @@
         <button type="submit" class="btn" style="display: inline-block; width: 49%">Create Event</button>
         </form>
         <br>
-        
+
     </div>
     </div>
 
+    <script>
+
+    </script>
 
     <br>
 
