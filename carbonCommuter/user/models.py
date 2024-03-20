@@ -149,6 +149,8 @@ class Profile(models.Model):
     Attributes:
         user (User): A one-to-one relationship with the built in User model.
         active_journey (Journey): A reference to an incomplete journey for the current user if one exists. Will be none otherwise.
+        streak : how many journys in a row a user has loged
+        gamemaster: Weather or not a user is a gamemaster and has access to admin pages.
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     active_journey = models.ForeignKey(Journey, on_delete=models.SET_NULL, null=True, blank=True)
@@ -161,7 +163,7 @@ class Profile(models.Model):
         Returns:
             float: The total amount of CO2 saved measured in KG.
         """
-        return Journey.objects.get_all_time_savings(self.user)
+        return round(Journey.objects.get_all_time_savings(self.user),2)
     
     def has_active_journey(self) -> bool:
         """Checks if the current user object has an active journey associated with their account.

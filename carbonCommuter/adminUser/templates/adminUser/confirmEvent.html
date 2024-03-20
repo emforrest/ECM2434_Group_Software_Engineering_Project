@@ -57,10 +57,10 @@
                     <input type="range" id="{{ field }}" name="{{ field }}" max="{{info.max}}" min="1" value="1" class ="slider">
                     <label for="{{ field }}"><span id = "output"></span></label>
                     <script>
+                        //Display the value alongside the slider
                         var slider = document.getElementById("{{ field }}");
                         var output = document.getElementById("output");
                         output.innerHTML = slider.value;
-
                         slider.oninput = function() {
                         output.innerHTML = this.value;
                         }
@@ -83,7 +83,7 @@
             <br>
             <input type="hidden" name="eventID" value="{{ eventType }}">
             <br>
-            <a href="/adminUser/"><button type="button" class="btn" style="display: inline-block; width: 49%">Back</button></a>
+            <a href="/admin/"><button type="button" class="btn" style="display: inline-block; width: 49%">Back</button></a>
             <button type="submit" class="btn" style="display: inline-block; width: 49%">Create Event</button>
             </form>
             <br>

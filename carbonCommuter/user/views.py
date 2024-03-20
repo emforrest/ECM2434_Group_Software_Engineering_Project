@@ -17,6 +17,8 @@ from django.db.models import Sum
 
 from common.utils import leaderboardWinner
 
+from django.contrib.auth import logout
+from django.contrib import messages
 
 import logging
 from datetime import datetime, timedelta
@@ -87,10 +89,10 @@ def home(request):
     eventProgress = -1
     eventTarget = -1
     eventComplete = False
-    activeEventExists = Event.objects.filter(complete=False).exists()
+    activeEventExists = Event.objects.filter(endDate__gt = timezone.now()).exists() #checks for an incomplete event
     if activeEventExists:
         eventBool = True
-        event = Event.objects.filter(complete=False).last()
+        event = Event.objects.filter(endDate__gt = timezone.now()).last()
         eventType = event.type
         eventProgress = event.progress
         eventTarget = event.target
@@ -101,6 +103,7 @@ def home(request):
                 eventComplete = True
                 event.complete = True
                 event.save()
+        #Determine a suitable message
         if eventComplete:
             eventMessage = "Event complete! You did it!"
         else:
@@ -473,6 +476,7 @@ def end_journey(request):
                 startDate = event.startDate
                 locationIDs = Location.objects.filter(on_campus = True).values_list('id', flat=True)
                 recentJourneys = Journey.objects.filter(time_started__gt = startDate)
+                #Check all journeys, if their start location or end location is a building that hasn't been visited then it is added to progressCount
                 for id in locationIDs:
                     for j in recentJourneys:
                         if j.origin_id == id or j.destination_id == id:
@@ -882,3 +886,13 @@ def getBadgeImage(badgeName):
     else:
         return None
 
+@login_required
+def delete_account(request):
+    if request.method == "POST":
+        user = request.user
+        user.delete()
+        logout(request)
+        messages.success(request, "Your account has been successfully deleted.")
+        return redirect('login')
+    else:
+        return render(request, "user/confirm.html")
