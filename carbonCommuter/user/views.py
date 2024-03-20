@@ -542,23 +542,23 @@ def delete_journey(request, journey_id):
     # Check if the user is authorized to delete the journey
     if journey.user != request.user:
         return HttpResponse(status=403)
-
-    # For a GET request, consider showing a confirmation page
-    if request.method == "GET":
-        # Logic to show confirmation could go here
-        pass  # Replace or remove this with your actual logic
-
-    # Proceed with deletion
-    # Check if the journey being deleted is the user's active journey
-    if request.user.profile.active_journey and journey.id == request.user.profile.active_journey.id:
-        request.user.profile.active_journey = None
-        request.user.profile.save()
-
-    # Delete the journey
-    journey.delete()
-
-    # Redirect to a preferred URL after deletion
-    return redirect("journeys")  # Adjust redirect as needed
+    
+    if request.method == "POST":
+        # Delete active journey if the user has one
+        if (request.user.profile.active_journey is not None) and (journey.id == request.user.profile.active_journey.id):
+            request.user.profile.active_journey = None
+            request.user.profile.save()
+            
+        # Delete the journey and redirect to the user home page
+        journey.delete()
+        return redirect("dashboard")
+    
+    # Render template based on if the journey is being cancelled or not
+    else:
+        if (request.user.profile.active_journey is not None) and (journey.id == request.user.profile.active_journey.id):
+            return render(request, "upload/cancel.html", context={"id": journey.id})
+        else:
+            return render(request, "upload/delete.html", context={"id": journey.id})
 
 
 @login_required
