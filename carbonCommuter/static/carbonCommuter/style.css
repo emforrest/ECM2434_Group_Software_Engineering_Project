@@ -615,6 +615,11 @@ tbody tr:nth-child(n + 11) {
 
 /* Smartphones (portrait and landscape) ----------- */
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 600px) {
     .container{
         max-width: 100%;
     }
@@ -626,17 +631,24 @@ tbody tr:nth-child(n + 11) {
     .column-box {
         width: auto;
     }
-}
 
-/* Media query for smaller screens */
-@media screen and (max-width: 600px) {
     .main-links .btn {
         width: 90%; /* Adjusted width for smaller screens */
     }
+
     .main-wrapper {
-        width: 100%
+        width: 100%;
     }
+
     .main-footer {
-        width: 100%
+        width: 100%;
+    }
+
+    .footer {
+        width: 100%;
+    }
+
+    .l-footer {
+        width: 100%;
     }
 }
