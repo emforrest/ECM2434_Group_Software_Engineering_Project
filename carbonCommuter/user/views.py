@@ -713,21 +713,21 @@ def check_streak(user):
         add_badge(badgeID, user)
 
 def check_leaderboard():
+    """Adding weekly and monthly leaderboard badges to corresponding users
+    """
     today = datetime.now().astimezone()
+    #get the start and end times for the weekly and monthly leaderboard journeys
     startWeekDate = (today + timedelta(days=-today.weekday(), weeks=-1)).replace(hour=0, minute=0, second=0, microsecond=0)
     endWeekDate = (startWeekDate + timedelta(6)).replace(hour=0, minute=0, second=0, microsecond=0)
     endMonthDate = today.replace(day=1, hour=0, minute=0, second=0, microsecond=0) - timedelta(days=1)
     startMonthDate = today.replace(day=1, month=endMonthDate.month, hour=0, minute=0, second=0, microsecond=0) 
-    print("start week date: ", startWeekDate)
-    print("end week date: ", endWeekDate)
-    print("start month date: ", startMonthDate)
-    print("end month date: ", endMonthDate)
+    #get the journeys for the last week and the last month
     lastWeekJourneys = Journey.objects.filter(time_finished__gte=startWeekDate, time_finished__lte=endWeekDate).values('user__id').annotate(total_carbon_saved=Sum('carbon_savings')).order_by("-user_id")
     lastMonthJourneys = Journey.objects.filter(time_finished__gte=startMonthDate, time_finished__lte=endMonthDate).values('user__id').annotate(total_carbon_saved=Sum('carbon_savings')).order_by("-user_id")
+    #get the winners for the last week and the last month
     weeklyWinner = leaderboardWinner(lastWeekJourneys)
     monthlyWinner = leaderboardWinner(lastMonthJourneys)
-    print("weekly Winner: ", weeklyWinner[0])
-    print("monthly winner: ", monthlyWinner[0])
+    #give the badges to the winners
     add_badge(Badges.objects.get(name="weekLeaderboard").id, weeklyWinner[0])
     add_badge(Badges.objects.get(name="monthLeaderboard").id, monthlyWinner[0])
 
@@ -798,6 +798,11 @@ def journeys(request):
 
   
 def getBadgeImage(badgeName):
+    """Getting the image strings for the badges
+    
+    Args: 
+        badgeName: The badge to find the image string
+    """
     if badgeName == "Amory":
         return "/media/badges/locations/amory.png"
     elif badgeName == "Business School - Building One":
