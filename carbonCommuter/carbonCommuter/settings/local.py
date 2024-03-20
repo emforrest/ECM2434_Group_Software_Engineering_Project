@@ -4,7 +4,6 @@ import os
 
 SECRET_KEY = 'django-insecure-jpdvh@2*xm2zlkf!i9bs9u55+8%_891p!g3jl%n8j36vm#_*^='
 DEBUG = True
-ALLOWED_HOSTS = []
 
 
 # Database
