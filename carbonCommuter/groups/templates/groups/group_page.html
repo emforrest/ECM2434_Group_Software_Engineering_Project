@@ -110,6 +110,7 @@
                         {% csrf_token %}
                         <button type="submit" class="btn btn-success btn-sm">Accept</button>
                     </form>
+                    <br><br>
                     <form action="{% url 'reject_join_request' group.id request.id %}" method="post" style="display: inline;">
                         {% csrf_token %}
                         <button type="submit" class="btn btn-danger btn-sm">Reject</button>
