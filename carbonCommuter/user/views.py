@@ -15,7 +15,12 @@ from django.urls import reverse
 from django.utils import timezone
 from django.db.models import Sum
 
+from common.utils import leaderboardWinner
+
+
 import logging
+from datetime import datetime, timedelta
+
 
 from user.models import Journey, Follower
 from user.models import Badges, UserBadge
@@ -108,6 +113,8 @@ def home(request):
             else:
                 eventMessage = f"Visit every location on campus by {event.endDate.strftime('%d-%m-%Y')}."
 
+    check_leaderboard()
+
     #adding opacity of badges to context so can be displayed correctly to the user
     context = context = {"full_name": name,
                          "co2Saved": co2Saved,
@@ -140,6 +147,26 @@ def home(request):
                          "eventTarget" : eventTarget,
                          "eventBool" : eventBool
                          }
+
+    # Fetch the user's journeys, ordered by the start time
+    user_journeys = Journey.objects.filter(user=request.user).order_by('-time_started')
+
+    # Format journeys for the template
+    formatted_journeys = []
+    for journey in user_journeys:
+        formatted_journeys.append({
+            'id': journey.id,
+            'start_time': journey.format_time_started(),
+            'end_time': journey.format_time_finished() if journey.time_finished else 'In Progress',
+            'distance': journey.distance,
+            'carbon_savings': journey.carbon_savings,
+            'origin': journey.origin.address if journey.origin else 'Unknown',
+            'destination': journey.destination.address if journey.destination else 'Unknown',
+            'transport': journey.transport,
+        })
+
+    # Add the journeys to the context
+    context['user_journeys'] = formatted_journeys
 
     return render(request, "user/home.html", context)
 
@@ -700,6 +727,23 @@ def check_streak(user):
         #if the user has achieved a streak listed, will add the badge
         add_badge(badgeID, user)
 
+def check_leaderboard():
+    #today = datetime.date.today()
+    today = datetime.now().astimezone()
+    startWeekDate = (today + timedelta(days=-today.weekday(), weeks=-1)).replace(hour=0, minute=0, second=0, microsecond=0)
+    endWeekDate = (startWeekDate + timedelta(6)).replace(hour=0, minute=0, second=0, microsecond=0)
+    endMonthDate = today.replace(day=1, hour=0, minute=0, second=0, microsecond=0) - timedelta(days=1)
+    startMonthDate = today.replace(day=1, month=endMonthDate.month, hour=0, minute=0, second=0, microsecond=0) 
+    print("start week date: ", startWeekDate)
+    print("end week date: ", endWeekDate)
+    print("start month date: ", startMonthDate)
+    print("end month date: ", endMonthDate)
+    lastWeekJourneys = Journey.objects.filter(time_finished__gte=startWeekDate, time_finished__lte=endWeekDate)
+    lastMonthJourneys = Journey.objects.filter(time_finished__gte=startMonthDate, time_finished__lte=endMonthDate)
+    '''weeklyWinner = leaderboardWinner(lastWeekJourneys)
+    monthlyWinner = leaderboardWinner(lastMonthJourneys)
+    add_badge("1weekLeaderboard", weeklyWinner)
+    add_badge("1monthLeaderboard", monthlyWinner)'''
 
 def add_badge(badge, user):
     """Adding the corresponding badge to the database

@@ -123,6 +123,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     active_journey = models.ForeignKey(Journey, on_delete=models.SET_NULL, null=True, blank=True)
     streak = models.IntegerField(default=0)
+    gamemaster = models.BooleanField(default=False)
     
     def get_total_savings(self) -> float:
         """Gets the total CO2 savings for the current user, using the JourneyManager.
