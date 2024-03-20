@@ -248,7 +248,7 @@ def leaderboardWinner(users_journeys):
     for journey in users_journeys:
         if journey['user__id'] != current_id:
             user_entry = Leaderboard_Entry()
-            current_id = journey.user_id
+            current_id = journey['user__id']
             user_entry.totalCo2Saved = 0
             user_entry.id = current_id
         try:
