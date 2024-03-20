@@ -28,7 +28,11 @@ class JourneyManager(models.Manager):
         Returns:
             float: The total amount of CO2 saved measured in KG.
         """
-        return self.filter(user=user).aggregate(models.Sum('carbon_savings'))['carbon_savings__sum']
+        savings = self.filter(user=user).aggregate(models.Sum('carbon_savings'))['carbon_savings__sum']
+        if savings is not None:
+            return savings
+        else:
+            return 0
     
     def get_weekly_savings(self, user: User) -> float:
         """Calculates the total amount of CO2 saved for all journeys made in the current week, starting from Monday.
@@ -42,7 +46,11 @@ class JourneyManager(models.Manager):
         # Get a date for the monday of the current week, and the sunday of the same week.
         start = date.today() - timedelta(days=date.today().weekday())
         end = start + timedelta(days=6)
-        return self.filter(user=user, time_started__range=(start, end)).aggregate(models.Sum('carbon_savings'))['carbon_savings__sum']
+        savings = self.filter(user=user, time_started__range=(start, end)).aggregate(models.Sum('carbon_savings'))['carbon_savings__sum']
+        if savings is not None:
+            return savings
+        else:
+            return 0
     
     def get_monthly_savings(self, user: User) -> float:
         """Calculates the total amount of CO2 saved for all journeys made in the current month, starting from the first day of the month.
@@ -56,7 +64,11 @@ class JourneyManager(models.Manager):
         # Get a date for the first day of the current month, and the last day of the current month.
         start = date.today().replace(day=1)
         end = start + timedelta(months=1) - timedelta(days=1)
-        return self.filter(user=user, time_started__range=(start, end)).aggregate(models.Sum('carbon_savings'))['carbon_savings__sum']
+        savings = self.filter(user=user, time_started__range=(start, end)).aggregate(models.Sum('carbon_savings'))['carbon_savings__sum']
+        if savings is not None:
+            return savings
+        else:
+            return 0
     
  
 class Journey(models.Model):
