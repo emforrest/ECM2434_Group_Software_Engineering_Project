@@ -14,6 +14,7 @@ import json
 import math
 import requests
 from typing import Union
+from django.contrib.auth.models import User
 from datetime import datetime, timedelta
 from common.travelTypes import TravelType
 from leaderboard.models import Leaderboard_Entry
@@ -256,5 +257,6 @@ def leaderboardWinner(users_journeys):
             user_entry.totalCo2Saved += 0
         if topUser.totalCo2Saved < user_entry.totalCo2Saved:
             topUser = user_entry
+    topUser = User.objects.filter(id = topUser.id)
     return topUser
 
