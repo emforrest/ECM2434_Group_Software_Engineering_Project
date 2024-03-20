@@ -232,7 +232,8 @@ def start_journey(request):
     """
     # Set any context required for rendering the template
     context = {
-        "tab": 1
+        "tab": 1,
+        "locations": Location.objects.filter(on_campus=True)
     }
     
     # Check the user has an active journey, and if so, return an unauthorized error
@@ -337,7 +338,8 @@ def end_journey(request):
     """
     # Set any context required for rendering the template
     context = {
-        "tab": 1
+        "tab": 1,
+        "locations": Location.objects.filter(on_campus=True)
     }
     
     # Check the user has an active journey, and if not, return an unauthorized error
