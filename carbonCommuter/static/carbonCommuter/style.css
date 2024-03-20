@@ -41,7 +41,7 @@ h1 {
     min-width: 320px; /* Minimum width for the main wrapper */
     background-color: rgba(255, 255, 255, .6);
     border: 2px solid rgba(255, 255, 255, .2);
-    backdrop-filter: blur(40px);
+    backdrop-filter: blur(100px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
     color: black;
     border-radius: 10px;
@@ -198,7 +198,7 @@ tbody tr:nth-child(n + 11) {
     width: 420px;
     background-color: rgba(255, 255, 255, .6);
     border: 2px solid rgba(255, 255, 255, .2);
-    backdrop-filter: blur(40px);
+    backdrop-filter: blur(100px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
     color: black;
     border-radius: 10px;
@@ -295,7 +295,7 @@ tbody tr:nth-child(n + 11) {
     width: 420px;
     background-color: rgba(255, 255, 255, 0.6);
     border: 2px solid rgba(255, 255, 255, .2);
-    backdrop-filter: blur(40px);
+    backdrop-filter: blur(100px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
     color: black;
     border-radius: 10px;
@@ -371,7 +371,7 @@ tbody tr:nth-child(n + 11) {
     width: 100%;
     background-color: rgba(255, 255, 255, 0.6);
     border: 2px solid rgba(255, 255, 255, .2);
-    backdrop-filter: blur(40px);
+    backdrop-filter: blur(100px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
     color: black;
     border-radius: 10px;
@@ -501,7 +501,7 @@ tbody tr:nth-child(n + 11) {
     height: 40px;
     background-color: rgba(255, 255, 255, 0.6);
     border: 2px solid rgba(255, 255, 255, .2);
-    backdrop-filter: blur(40px);
+    backdrop-filter: blur(100px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
     color: black;
     border-radius: 10px;
@@ -522,7 +522,7 @@ tbody tr:nth-child(n + 11) {
     height: 40px;
     background-color:rgba(255, 255, 255, .6);
     border: 2px solid rgba(255, 255, 255, .2);
-    backdrop-filter: blur(40px);
+    backdrop-filter: blur(100px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
     color: black;
     border-radius: 10px;
@@ -545,7 +545,7 @@ tbody tr:nth-child(n + 11) {
     min-width: 320px; /* Minimum width for the main wrapper */
     background-color:rgba(255, 255, 255, .6);
     border: 2px solid rgba(255, 255, 255, .2);
-    backdrop-filter: blur(40px);
+    backdrop-filter: blur(100px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
     color: #fff;
     border-radius: 10px;
