@@ -628,6 +628,10 @@ tbody tr:nth-child(n + 11) {
         height: auto;
     }
 
+    .column {
+        display: block;
+    }
+
     .column-box {
         width: auto;
     }
