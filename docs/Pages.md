@@ -63,3 +63,4 @@ If a code isn't present on the URL, the user will be promoted to enter a join co
 ## Leave Group - `./groups/leave`
 
 This page is only accessible via a POST request from the [Groups](#about-a-specific-group---groupsgroup-id) page, and must contain a valid group id to leave that the member is part of. If the group is private, the user will be notified they are about to leave a private group and wont be able to rejoin without the code. If they select yes, all group permissions are revoked and the user is removed from the group.
+
