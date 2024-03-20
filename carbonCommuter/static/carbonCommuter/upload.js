@@ -169,3 +169,17 @@ function setLatLong(lat, long) {
     document.getElementById('long').value = long;
     document.getElementById('google_map').setAttribute('src', `https://maps.google.co.uk?q=${lat},${long}&output=embed`);
 }
+
+function showInfo(option) {
+    document.getElementById("additional-info").style.display = "block";
+    var infoContainer = document.getElementById("additional-info");
+    if (option === 'Bus') {
+        infoContainer.innerHTML = "<p>Compared to an average car you are saving:<br>33% of CO2</p>";
+    } else if (option === 'Train') {
+        infoContainer.innerHTML = "<p>Compared to an average car you are saving:<br>72.6% of CO2</p>";
+    } else if (option === 'Bike') {
+        infoContainer.innerHTML = "<p>Compared to an average car you are saving:<br>86% of CO2</p>";
+    } else if (option === 'Walk') {
+        infoContainer.innerHTML = "<p>Compared to an average car you are saving:<br>62.6% of CO2</p>";
+    }
+}

@@ -18,7 +18,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!--Set up the connection to the Google Maps API-->
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIZe4j6_6bvgDSdz4rjX_29_r6C6FGi1Y&libraries=places&callback=initAutocomplete&loading=async"></script>
-    <script type="text/javascript" src="{% static 'carboncommuter/upload.js' %}"></script> 
+    <script type="text/javascript" src="{% static 'carbonCommuter/upload.js' %}"></script> 
     <script>
         window.error='{{ error|escapejs }}';
         if (window.error != "") {
@@ -37,7 +37,7 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav ml-auto" style="text-align: right; float: right;">
                         {% if request.user.is_authenticated %}
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'user_groups_home_page' %}">Groups</a>
@@ -123,13 +123,18 @@
                         <h4>Select the mode of transport you plan to use:</h4>
                         <br>
 
-                        <select name="transport" id="transport">
+                        <select name="transport" id="transport" onchange="showInfo(this.value)">
+                            <option selected disabled>Select transport</option>
                             <option value = "Bus">Bus</option>
                             <option value = "Train">Train</option>
                             <option value = "Bike">Bike</option>
                             <option value = "Walk">Walk</option>
                         </select>
                         <br>
+                        <br>
+                        <div id="additional-info" style="display: none">
+                            <!-- Additional information will be displayed here -->
+                        </div>
                         
                         <br>
                         <div>
@@ -141,14 +146,10 @@
         
                 <p id="error" style='color: red; display: none; text-align: center;'>An unknown error has occured...</p>
             </div>
+            <br>
+            <div class="footer">
+                <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
+            </div>
         </div>
-
-        <br>
-        <div class="footer">
-            <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
-        </div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     </body>
 </html>

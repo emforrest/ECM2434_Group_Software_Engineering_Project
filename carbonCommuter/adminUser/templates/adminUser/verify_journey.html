@@ -2,8 +2,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- A HTML document that produces the choose event page for admin users. -->
-<!-- authors: Eleanor Forrest -->
+<!-- A HTML document that produces the home page for admin users. -->
+<!-- authors: Sam Townley -->
 
 <head>
     <meta charset="UTF-8">
@@ -14,7 +14,6 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
-
 <body>
     <header>
         <!--The navbar, consistent across the site-->
@@ -48,45 +47,48 @@
 
     <br>
     <div class="wrapper">
-    <div class="column">
-
-        <form action="{% url 'submitEvent' %}" method="POST">
-            {% csrf_token %}
-            <!--Display the relevant fields for the user to input the targets-->
-            {% for field, info in fieldsInfo.items %}
-            <br>
-            <label for="{{ field }}">{{ info.label }}</label>
-            {% if info.type == 'text' %}
-                <input type="text" id="{{ field }}" name="{{ field }}"><br>
-            {% elif info.type == 'dropdown' %}
-            <!--the user can select from many locations on campus-->
-            <select name="oncampus" id="oncampus">
-                {% for location in locations %}
-                <option value = "{{ location.name }}">{{ location.name }}</option>
-                {% endfor %}
-            </select>
-
-            {% endif %}
-        {% endfor %}
-        <br>
-
-        <label>Enter an end date for this event:</label>
-        <input type = 'date' id = 'endDate' name="endDate"> 
-        <br>
-        <input type="hidden" name="eventID" value="{{ eventType }}">
-        <br>
-        <a href="/adminUser/chooseEvent/"><button type="button" class="btn" style="display: inline-block; width: 49%">Back</button></a>
-        <button type="submit" class="btn" style="display: inline-block; width: 49%">Create Event</button>
-        </form>
-        <br>
-        
-    </div>
-    </div>
-
-
+        <div class="column">
+            <!-- the text to show the user they have reached the admin page -->
+            <div class="table">
+                <section class="leaderboard_header">
+                    <h1>Review Suspicious Journeys:</h1>
+                </section>
+                <section class="leaderboard_body">                    
+                    <table>
+                        <thead>
+                            <tr> 
+                                <!-- Headers for the table -->
+                                <th>User</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Reason</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!--Here, the django for loop displays each user, with a medal for the top users-->
+                            {%for journey in journeys %}
+                            <tr>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                            </tr>
+                            {%endfor%}
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+        </div>
+    </div>  
     <br>
+    
 
     <!--The footer, consistent across the site-->
     <div class="footer">
         <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
     </div>
+
+</body>
+</html>
