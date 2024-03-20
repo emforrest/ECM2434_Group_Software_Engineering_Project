@@ -47,6 +47,29 @@ def home(request):
     co2Saved = request.user.profile.get_total_savings()
     started = request.user.profile.has_active_journey()
 
+    #set streak to 0 if no journey in the last day
+    dateNow = timezone.now()
+    twoDays = dateNow - timedelta(2)
+    pastJourneys = Journey.objects.all().filter(user_id=request.user.id, time_finished__gt=twoDays) #accessing the past journeys within two days
+    checkStreak = False #boolean to check if a streak still exists
+    for pastJourney in reversed(pastJourneys):
+        #looping through past journeys in reverse so the most recent is first
+        pastJourneyDate = pastJourney.time_finished
+        difference = dateNow-pastJourneyDate
+        if difference.seconds/60 > 1440:
+            #if the difference between the last journey is more than 1440 minutes (24 hours), there is no streak
+            break
+        if (dateNow.weekday() - pastJourneyDate.weekday()) == 1:
+            #checking there is a days difference between journeys
+            checkStreak = True
+            break
+        elif (dateNow.weekday() - pastJourneyDate.weekday()) == 0:
+            #if an event has already happened on the same day, keep the streak
+            checkStreak = True
+    if not checkStreak:
+        #if streak has been broken, set back to 0
+        request.user.profile.streak = 0
+
     #setting values for opacity to show if user has the badges
     userBadge = UserBadge.get_badges(request.user)
     badgesList = []
@@ -435,10 +458,18 @@ def end_journey(request):
                 checkStreak = True
                 request.user.profile.streak = request.user.profile.streak + 1 
                 break
+            elif (dateNow.weekday() - pastJourneyDate.weekday()) == 0:
+                #if an event has already happened on the same day, keep the streak
+                checkStreak = True
+        #if the first day of streak, set the streak to 1
+        dateNow = timezone.now()
+        pastDayJourneys = pastJourneys.filter(time_finished__gt=dateNow-timedelta(1))
+        if len(pastDayJourneys) == 1:
+            checkStreak = True
+            request.user.profile.streak = 1 
         if not checkStreak:
             #if streak has been broken, set back to 0
             request.user.profile.streak = 0
-
         #check if user has earned any streak badges
         check_streak(request.user)
 
