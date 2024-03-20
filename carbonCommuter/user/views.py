@@ -597,7 +597,19 @@ def profile(request, username:str):
             followingUser = True
         else:
             followingUser = False
-
+        #work out badges for user
+        userBadge = UserBadge.get_badges(request.user)
+        badgesList = []
+        for badge in userBadge:
+            #for every badge retrieved earlier, adding their name into list
+            badgeName = Badges.objects.get(id=badge.badge_id).name
+            badgesList.append(badgeName)
+        badgeImages = []
+        for badge in badgesList:
+            #adding image strings for each badge
+            badgeImage = getBadgeImage(badge)
+            if not badgeImage == None:
+                badgeImages.append(badgeImage)
         context = {
             "username": username,
             "dateJoined" : user.date_joined,
@@ -605,7 +617,7 @@ def profile(request, username:str):
             "isCurrentUser" : isCurrentUser,
             "followingUser" : followingUser,
             "userToFollow" : user,
-        
+            "badgeImages" : badgeImages
         }
         return render(request, "user/profile.html", context)
     else:
@@ -708,7 +720,6 @@ def check_streak(user):
         add_badge(badgeID, user)
 
 def check_leaderboard():
-    #today = datetime.date.today()
     today = datetime.now().astimezone()
     startWeekDate = (today + timedelta(days=-today.weekday(), weeks=-1)).replace(hour=0, minute=0, second=0, microsecond=0)
     endWeekDate = (startWeekDate + timedelta(6)).replace(hour=0, minute=0, second=0, microsecond=0)
@@ -718,12 +729,14 @@ def check_leaderboard():
     print("end week date: ", endWeekDate)
     print("start month date: ", startMonthDate)
     print("end month date: ", endMonthDate)
-    lastWeekJourneys = Journey.objects.filter(time_finished__gte=startWeekDate, time_finished__lte=endWeekDate)
-    lastMonthJourneys = Journey.objects.filter(time_finished__gte=startMonthDate, time_finished__lte=endMonthDate)
-    '''weeklyWinner = leaderboardWinner(lastWeekJourneys)
+    lastWeekJourneys = Journey.objects.filter(time_finished__gte=startWeekDate, time_finished__lte=endWeekDate).values('user__id').annotate(total_carbon_saved=Sum('carbon_savings')).order_by("-user_id")
+    lastMonthJourneys = Journey.objects.filter(time_finished__gte=startMonthDate, time_finished__lte=endMonthDate).values('user__id').annotate(total_carbon_saved=Sum('carbon_savings')).order_by("-user_id")
+    weeklyWinner = leaderboardWinner(lastWeekJourneys)
     monthlyWinner = leaderboardWinner(lastMonthJourneys)
-    add_badge("1weekLeaderboard", weeklyWinner)
-    add_badge("1monthLeaderboard", monthlyWinner)'''
+    print("weekly Winner: ", weeklyWinner[0])
+    print("monthly winner: ", monthlyWinner[0])
+    add_badge(Badges.objects.get(name="weekLeaderboard").id, weeklyWinner[0])
+    add_badge(Badges.objects.get(name="monthLeaderboard").id, monthlyWinner[0])
 
 def add_badge(badge, user):
     """Adding the corresponding badge to the database
@@ -763,3 +776,51 @@ def check_validity(journey):
         journey.reason = reason
         journey.save()
 
+
+def getBadgeImage(badgeName):
+    if badgeName == "Amory":
+        return "/media/badges/locations/amory.png"
+    elif badgeName == "Business School - Building One":
+        return "/media/badges/locations/business.png"
+    elif badgeName == "Devonshire House":
+        return "/media/badges/locations/DH.png"
+    elif badgeName == "Forum":
+        return "/media/badges/locations/forum.png"
+    elif badgeName == "Harrison":
+        return "/media/badges/locations/harrison.png"
+    elif badgeName == "Innovation Centre":
+        return "/media/badges/locations/innovationCentre.png"
+    elif badgeName == "Laver":
+        return "/media/badges/locations/laver.png"
+    elif badgeName == "Living Systems Institute":
+        return "/media/badges/locations/LSI.png"
+    elif badgeName == "Peter Chalk":
+        return "/media/badges/locations/peterChalk.png"
+    elif badgeName == "Queens":
+        return "/media/badges/locations/queens.png"
+    elif badgeName == "Sports Park":
+        return "/media/badges/locations/sportsPark.png"
+    elif badgeName == "South West Institute of Technology":
+        return "/media/badges/locations/swiot.png"
+    elif badgeName == "Washington Singer":
+        return "/media/badges/locations/washingtonSinger.png"
+    elif badgeName == "7days":
+        return "/media/badges/streaks/7days.png"
+    elif badgeName == "14days":
+        return "/media/badges/streaks/14days.png"
+    elif badgeName == "30days":
+        return "/media/badges/streaks/30days.png"
+    elif badgeName == "50days":
+        return "/media/badges/streaks/50days.png"
+    elif badgeName == "75days":
+        return "/media/badges/streaks/75days.png"
+    elif badgeName == "100days":
+        return "/media/badges/streaks/100days.png"
+    elif badgeName == "topLeaderboard":
+        return "/media/badges/leaderboard/overall.png"
+    elif badgeName == "weekLeaderboard":
+        return "/media/badges/leaderboard/weekly.png"
+    elif badgeName == "monthLeaderboard":
+        return "/media/badges/leaderboard/monthly.png"
+    else:
+        return None

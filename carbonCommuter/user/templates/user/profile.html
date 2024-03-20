@@ -41,7 +41,11 @@
                 <p>Carbon Saved: <i>{{co2Saved}}</i></p>
                 <p><p1>Join Date: </p1><i>{{ dateJoined }}</i></p>
                 <p>Badges:</p>
-                <p><i>This user currently has no badges.</i></p>
+                <p>
+                    {% for badge in badgeImages %}
+                    <img src={{ badge }}>
+                    {% endfor %}
+                </p>
                 <br>
                 {% if isCurrentUser %}
                     <!-- If it is the user's public profile a back button is displayed -->
