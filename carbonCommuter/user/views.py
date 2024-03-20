@@ -630,8 +630,7 @@ def profile(request, username:str):
     userFilter = User.objects.filter(username=username)
     if userFilter.exists():
         user = userFilter[0]
-        users_journeys =Journey.objects.filter(id = request.user.id).values('user__id').annotate(total_carbon_saved=Sum('carbon_savings'))
-        co2Saved = request.user.profile.get_total_savings()
+        co2Saved = user.profile.get_total_savings()
         #Work out the context
         if request.user.username == username:
             isCurrentUser = True
