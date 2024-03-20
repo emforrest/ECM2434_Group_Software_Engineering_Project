@@ -148,8 +148,9 @@ def verify_suspicious_journey(request):
         render : the rendered webpage
     """
     context = {'journeys': Journey.objects.filter(flagged=True)}
-    return render(request, "adminUser/verify_journey.html", context=context
-                  
+    return render(request, "adminUser/verify_journey.html", context=context)
+
+@login_required  
 def approve_journey(request):
     """A POST endpoint for approving that a journey is not suspicious
 
@@ -168,7 +169,7 @@ def approve_journey(request):
             return HttpResponse(status=400)
         
         # Return 404 if the journey object cannot be found
-        journey = Journey.objects.filter(id=id)
+        journey = Journey.objects.get(id=id)
         if journey is None:
             return HttpResponse(status=404)
         

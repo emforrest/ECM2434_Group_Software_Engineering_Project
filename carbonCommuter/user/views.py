@@ -29,7 +29,7 @@ from user.models import Badges, UserBadge
 from main.models import Location
 from adminUser.models import Event
 from common.travelTypes import TravelType
-from common.utils import get_route, calculate_co2, get_distance_to_campus, format_time_between
+from common.utils import get_route, calculate_co2, get_distance_to_campus, format_time_from_minutes
 
 LOGGER = logging.getLogger(__name__)
 
@@ -545,7 +545,7 @@ def end_journey(request):
         context = {
             "journey": journey,
             "transport": TravelType.from_str(journey.transport).to_str(),
-            "time_taken": format_time_between(journey.time_finished, journey.time_started)
+            "time_taken": format_time_from_minutes(journey.calculate_duration())
         }
         return render(request, "upload/finished.html", context=context)
     
@@ -581,16 +581,12 @@ def journey(request, journey_id: int):
     if (journey.user.id != request.user.id) and (request.user.profile.gamemaster != True):
         return HttpResponse(status=403)
     
-    # Calculate which number of the user's journeys it is
-    journeys = list(Journey.objects.filter(user=journey.user).values_list('id', flat=True))
-    journey_no = journeys.index(journey.id) + 1
-    
     # Add journey information to context so it can be displayed on frontend
     context = {
         "journey": journey,
         "transport": TravelType.from_str(journey.transport).to_str(),
-        "time_taken": format_time_between(journey.time_finished, journey.time_started),
-        "journey_no": journey_no
+        "time_taken": format_time_from_minutes(journey.calculate_duration()),
+        "journey_no": journey.get_number()
     }
     return render(request, "user/journey.html", context)
 
@@ -611,6 +607,10 @@ def delete_journey(request):
     # Check if the user is authorized to delete the journey or is an admin
     if (journey.user != request.user) and (request.user.profile.gamemaster != True):
         return HttpResponse(status=403)
+    elif journey.user != request.user:
+        OWNER = False
+    else:
+        OWNER = True
     
     if request.method == "POST":
         # Delete active journey if the user has one
@@ -618,9 +618,12 @@ def delete_journey(request):
             request.user.profile.active_journey = None
             request.user.profile.save()
             
-        # Delete the journey and redirect to the user home page
+        # Delete the journey and redirect to the corresponding page
         journey.delete()
-        return redirect("dashboard")
+        if OWNER:
+            return redirect("dashboard")
+        else:
+            return redirect("/admin/verify/")
     
     # Render template based on if the journey is being cancelled or not
     else:
@@ -834,19 +837,19 @@ def check_validity(journey):
     # Check that the actual time taken isn't significantly shorter than the estimated time as per google maps
     if journey.transport in ["train", "bus"] and (journey.estimated_time - journey.calculate_duration()) >= 5:
         flagged = True
-        reason += f"Estimated duration ({ round(journey.estimated_time) }) doesn't match actual duration ({ journey.calculate_duration() })! "
+        reason += f"Estimated duration ({ format_time_from_minutes(journey.estimated_time) }) doesn't match actual duration ({ format_time_from_minutes(journey.calculate_duration()) })! "
     elif journey.transport in ["walk", "bike"] and journey.estimated_time <= 10 and(journey.estimated_time - journey.calculate_duration()) >= 2:
         flagged = True
-        reason += f"Estimated duration ({ round(journey.estimated_time) }) doesn't match actual duration ({ journey.calculate_duration() })! "
+        reason += f"Estimated duration ({ format_time_from_minutes(journey.estimated_time) }) doesn't match actual duration ({ format_time_from_minutes(journey.calculate_duration()) })! "
     elif journey.transport in ["walk", "bike"] and journey.estimated_time <= 30 and(journey.estimated_time - journey.calculate_duration()) >= 5:
         flagged = True
-        reason += f"Estimated duration ({ round(journey.estimated_time) }) doesn't match actual duration ({ journey.calculate_duration() })! "
+        reason += f"Estimated duration ({ format_time_from_minutes(journey.estimated_time) }) doesn't match actual duration ({ format_time_from_minutes(journey.calculate_duration()) })! "
     elif journey.transport in ["walk", "bike"] and journey.estimated_time <= 60 and(journey.estimated_time - journey.calculate_duration()) >= 10:
         flagged = True
-        reason += f"Estimated duration ({ round(journey.estimated_time) }) doesn't match actual duration ({ journey.calculate_duration() })! "
+        reason += f"Estimated duration ({ format_time_from_minutes(journey.estimated_time) }) doesn't match actual duration ({ format_time_from_minutes(journey.calculate_duration()) })! "
     elif journey.transport in ["walk", "bike"] and (journey.estimated_time - journey.calculate_duration()) >= 20:
         flagged = True
-        reason += f"Estimated duration ({ round(journey.estimated_time) }) doesn't match actual duration ({ journey.calculate_duration() })! "
+        reason += f"Estimated duration ({ format_time_from_minutes(journey.estimated_time) }) doesn't match actual duration ({ format_time_from_minutes(journey.calculate_duration()) })! "
     
     # Check that the user hasn't uploaded a journey in the last 5 minutes
     journeys = Journey.objects.filter(user=journey.user).order_by("-time_finished")
