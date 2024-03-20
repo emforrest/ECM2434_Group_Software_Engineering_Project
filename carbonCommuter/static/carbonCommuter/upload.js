@@ -2,9 +2,19 @@
 function onLoad(tab = 1) {
     window.attempts = 0;
     window.last_accuracy = "0";
+
+    var form = document.getElementById("journey_form");
+    form.addEventListener("submit", onSubmit, true);
+
     window.current_tab = tab;
     document.getElementById(`tab${tab}`).style.display = "block";
-    getLocation();
+
+    if (window.error != "") {
+        showError();
+    }
+    if (window.current_tab == 1) {
+        getLocation();
+    }
 }
 
 function showManualInput() {
@@ -42,42 +52,38 @@ function getLocation() {
 }
 
 function checkAccuracy(position) {
-    if (window.current_tab > 1) {
+    if (window.current_tab == 2) {
         showPosition(position);
-    } else if (parseFloat(position.coords.accuracy) < 300) {
+    } else if (parseFloat(position.coords.accuracy) <= 300) {
         showPosition(position);
         setTimeout(nextTab, 3000);
     } else {
         window.attempts++;
-        if (window.attempts >= 3 && Math.abs(parseFloat(window.last_accuracy) - parseFloat(position.coords.accuracy)) <= 0.001) {
-            showPosition(position);
+        if ((window.attempts >= 2 && Math.abs(parseFloat(window.last_accuracy) - parseFloat(position.coords.accuracy)) <= 0.001) || (window.attempts > 3)) {
             accuracyErrorOnLoad();
-            setTimeout(nextTab, 3000);
-        } else if (window.attempts < 5) {
-            window.last_accuracy = position.coords.accuracy;
-            setTimeout(getLocation, 5000);
+            setTimeout(nextTab, 2000);
         } else {
-            showPosition(position);
-            accuracyErrorOnLoad();
-            setTimeout(nextTab, 3000);
+            window.last_accuracy = position.coords.accuracy;
+            setTimeout(getLocation, 3000);
         }
     }
 }
 
 function accuracyErrorOnLoad() {
     console.log("Couldn't get an accurate location!");
-    window.error = "Failed to get an accurate location! You may need to adjust it manually...";
+    window.error = "Failed to get an accurate location! Please enter it manually...";
     document.getElementById("loading").style.display = "none";
     showError();
 }
 
 function showPosition(position) {
     setLatLong(position.coords.latitude, position.coords.longitude);
+    document.getElementById("btn_refresh").innerHTML = "Re-fetch Location"
     getAddress(position);
 }
 
 function showError() {
-    document.getElementById("error").innerHTML = window.error;
+    document.getElementById("error_msg").innerHTML = window.error;
     document.getElementById("error").style.display = "block";
 }
 
@@ -119,19 +125,42 @@ function getAddress(position) {
 
 function verifyAddress() {
     if (document.getElementById("lat").value == "") {
-        window.error = "An address must be provided before continuing!";
+        window.error = "You must fetch your location before continuing!";
         showError();
         return false;
     } else if (document.getElementById("long").value == "") {
-        window.error = "An address must be provided before continuing!";
+        window.error = "You must fetch your location before continuing!";
         showError();
         return false;
     } else if (document.getElementById("address").value == "") {
-        window.error = "An address must be provided before continuing!";
+        window.error = "You must fetch your location before continuing!";
         showError();
         return false;
     } else {
         return true;
+    }
+}
+
+function onSubmit(event) {
+    var valid = true;
+    if (document.getElementById("transport") != null) {
+        if (document.getElementById("transport").value == "") {
+            valid = false;
+            window.error = "You must select a method of transport!";
+            showError();
+        }
+    }
+
+    if (!verifyAddress()) {
+        if (window.current_tab == 3) {
+            prevTab();
+        }
+        valid = false;
+    }
+
+    if (!valid) {
+        console.log("preventing default");
+        event.preventDefault();
     }
 }
 
