@@ -60,9 +60,12 @@
         {% endif %}
         <script>
             function redirect(buttonClicked){
+                //The chooseEvent page should only be accessible by clicking this button (checked with a flag)
                 window.location.href = "{% url 'chooseEvent' %}?buttonClicked=" + String(buttonClicked)
             }
         </script>
+        <br>
+        <a href="/adminUser/verify/"><button type="button" class="btn">Verify Journeys</button></a>
     </div>
     </div>  
     <br>

@@ -2,6 +2,7 @@
 Authors: 
 - Abi Hinton
 - Eleanor Forrest
+- Sam Townley
 """
 
 from django.shortcuts import render
@@ -13,8 +14,6 @@ from datetime import datetime
 from user.models import Journey
 from django.utils import timezone
 
-NUM_BUILDINGS = 27
-
 def mainAdmin(request):
     """
     Return the /adminUser page which allows the user to see that they are an admin on the website
@@ -23,7 +22,6 @@ def mainAdmin(request):
     Return:
     The function returns the rendering of the admin home webpage
     """
-    ##Event.objects.all().delete()
     #Check if there is an active and incomplete event
     activeEvent = Event.objects.filter(endDate__gt=timezone.now()).filter(complete=False).exists()
     return render(request, "adminUser/mainAdmin.html", {'activeEvent': activeEvent})
@@ -55,7 +53,7 @@ def confirmEvent(request):
         HttpResponse : A 400 error code is returned if this page was accessed without selecting an event type
     """
     eventType = request.GET.get('eventID')
-    fieldsInfo = {}
+    fieldsInfo = {} #each event has different associated fields and text
     if eventType == '1':
         fieldsInfo = {'field1': {'label': 'Enter a target amount of CO2 to be saved:', 'type':'range', 'max' : 50}}
     elif eventType == '2':
@@ -79,6 +77,8 @@ def submitEvent(request):
     """
     if request.method=="POST":
         eventType = request.POST.get('eventID')
+
+        #Get the required information and create an Event in the database
         if eventType == '1' or eventType == '2':
             target = request.POST.get('field1')
             endDate = request.POST.get('endDate')
@@ -93,7 +93,7 @@ def submitEvent(request):
             return success(request)
 
         elif eventType == '4':
-            target = NUM_BUILDINGS
+            target = len(Location.objects.filter(on_campus = True))
             endDate = request.POST.get('endDate')
             Event.objects.create(type=eventType, target=target, endDate=endDate)
             return success(request)
@@ -117,6 +117,7 @@ def success(request):
         if eventType not in ['1', '2', '3', '4']:
             return HttpResponse(status=400)
         else:
+            #Determine a suitable information message about the event
             if eventType == '1':
                 message = f"Save {request.POST.get('field1')} kilograms of CO2 by {datetime.strptime(request.POST.get('endDate'), '%Y-%m-%d').strftime('%d-%m-%Y')}."
             elif eventType == '2':
@@ -131,6 +132,14 @@ def success(request):
     
 
 def verify_suspicious_journey(request):
+    """Produce the journey verification page
+
+    Args:
+        request: The HTTP request object containing information about the request.
+    
+    Returns:
+        render : the rendered webpage
+    """
     context = {'journeys': Journey.objects.filter(flagged=True)}
     return render(request, "adminUser/verify_journey.html", context=context)
 
