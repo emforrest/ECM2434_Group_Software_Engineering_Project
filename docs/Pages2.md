@@ -35,6 +35,10 @@ The User Groups Home Page is designed for users to manage their group membership
 
 This page serves as a central hub for users to engage with the community, whether by maintaining existing connections or forging new ones.
 
+## Join Group - `./groups/join` OR `./groups/join/<code>`
+
+If a code isn't present on the URL, the user will be promoted to enter a join code for a private group. Public groups are only joinable using the button on the [Group Profile](#about-a-specific-group---groupsgroup-id) page, since this redirects the user to this page with the code already attached. The user should be warned about this underneath the box where they enter the code. Upon submission, the code is verified and if it matches a group in the database, they user should be added to the group, and a success page returned. If not, the user should be informed that there doesn't exist a group with that code.
+
 ## Leaderboard - `./leaderboard`
 
 The leaderboard page allows anyone without an account to view the status of the leaderbaord. It will display the all time carbon savings for the top 10 users on the system. You can also see the top users this week, and the top groups on the website. 
@@ -62,10 +66,6 @@ CarbonCommuter handles sensitive location data, and the privacy policy outlines 
 ## Register - `./register`
 
 Register follows a standard website register template, with a form that contains fields for the first and last name, username, email address, password, and another to re-enter the password, as well as a prompt to a privacy policy that they must accept. The password is checked against standard security checks (such as length and whether it is a common password), then verified to match the re-entered password. If these checks pass then a new user is created within the database. The user is then redirected to the user home page.
-
-## Base Template - `base.html`
-
-The base template is the foundation for the rest of the website. Each page is built upon this file. The file contains some standard CSS files, JS scripts for mobile compatibility, The navbar which can then be built upon to show appropriate infromation for each page. It has a block for users to then add the body.
 
 ## Cancel Journey Page - `cancel.html`
 
