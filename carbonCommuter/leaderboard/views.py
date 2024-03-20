@@ -13,7 +13,7 @@ from django.db.models import Sum
 
 from django.http import HttpResponse
 
-
+from user.models import Badges, UserBadge
     
 @login_required
 def user_leaderboard(request):
@@ -69,6 +69,16 @@ def user_leaderboard(request):
     users_total = users_total[:10]
     for x in range(0,len(users_total)):
         users_total[x].position = x+1
+
+
+    #logic for leaderboard badges
+    #add top of the leaderboard badge
+    badge = Badges.objects.get(name="topLeaderboard").id
+    if not UserBadge.objects.filter(user_id=users_total[0].id, badge_id=badge).exists():
+        #if the badge does not already exist for the user
+        newBadge = UserBadge(user_id=users_total[0].id, badge_id=badge)
+        newBadge.save()
+
 
     users_weekly.sort(key=lambda x: x.totalCo2Saved, reverse=True)
     users_weekly = users_weekly[:10]
