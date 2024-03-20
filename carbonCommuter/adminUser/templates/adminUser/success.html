@@ -55,12 +55,15 @@
         <br>
         <div class="container">
             <div class="wrapper">
-                <h1>Event successfully added!</h1>
-                <br>
-                <p>{{eventMessage}}</p>
-                <br>
-                <a href="/adminUser/"> <button type="button" class="btn" id="btn_home" >Back to admin</button></a>
-
+                {% if user.profile.gamemaster %}
+                    <h1>Event successfully added!</h1>
+                    <br>
+                    <p>{{eventMessage}}</p>
+                    <br>
+                    <a href="/adminUser/"> <button type="button" class="btn" id="btn_home" >Back to admin</button></a>
+                {% else %}
+                    <p>This page is for gamemasters only</p>
+                {% endif %}
             </div>
             <br>
             <div class="footer">
