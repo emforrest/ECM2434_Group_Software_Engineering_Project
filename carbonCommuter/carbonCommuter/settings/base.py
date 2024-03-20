@@ -1,11 +1,13 @@
+"""Django settings be to used across both the development and production environments.
+
+Logging config can be found seperately in logging.py.
+
+Authors:
+- Sam Townley
+"""
+
 import os
 from pathlib import Path
-
-
-from django.conf.urls import handler400, handler403, handler404, handler500
-from carbonCommuter.views import error_400, error_403, error_404, error_500
-
-# Base config for use across all environments
 
 # Build the relative path for the app
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -104,9 +106,3 @@ MEDIA_ROOT = '../media/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
-handler400 = error_400
-handler403 = error_403
-handler404 = error_404
-handler500 = error_500

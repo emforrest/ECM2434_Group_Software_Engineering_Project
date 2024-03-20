@@ -412,6 +412,12 @@ def end_journey(request):
             context["tab"] = 2
             return render(request, "upload/end_journey.html", context=context)
         
+        # Throw an error if the start point of the journey was not on campus and the new location isnt on campus either
+        if not(journey.origin.on_campus) and distance > 0.3:
+            context["error"] = "This journey must finish on campus to be a valid commute. If this is no longer the case, please cancel the journey."
+            context["tab"] = 2
+            return render(request, "upload/end_journey.html", context=context)
+        
         # Get (or create) a Location object for the specified location if off campus
         if distance <= 0.3:
             location = Location.objects.get(name=building)

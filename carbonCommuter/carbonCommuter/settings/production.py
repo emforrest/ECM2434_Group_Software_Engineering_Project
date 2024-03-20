@@ -1,3 +1,9 @@
+"""Django settings exclusively meant for running on the production environment.
+
+Authors:
+- Sam Townley
+"""
+
 import os
 import sentry_sdk
 
