@@ -760,7 +760,9 @@ tbody tr:nth-child(n + 11) {
     .column-box-journeys {
         width: auto;
         background-color: rgba(255, 255, 255, .85);
-        overflow: auto;
+        overflow-x: auto;
+        overflow-y: hidden;
+        white-space: nowrap;
     }
 
     .main-links .btn {
