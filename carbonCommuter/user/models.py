@@ -119,6 +119,8 @@ class Profile(models.Model):
     Attributes:
         user (User): A one-to-one relationship with the built in User model.
         active_journey (Journey): A reference to an incomplete journey for the current user if one exists. Will be none otherwise.
+        streak : how many journys in a row a user has loged
+        gamemaster: Weather or not a user is a gamemaster and has access to admin pages.
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     active_journey = models.ForeignKey(Journey, on_delete=models.SET_NULL, null=True, blank=True)
