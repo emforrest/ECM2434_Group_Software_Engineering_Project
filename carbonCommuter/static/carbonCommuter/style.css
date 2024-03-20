@@ -651,4 +651,8 @@ tbody tr:nth-child(n + 11) {
     .l-footer {
         width: 100%;
     }
+
+    #google_map {
+        width: 90%;
+    }
 }
