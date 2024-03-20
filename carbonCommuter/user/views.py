@@ -87,17 +87,17 @@ def home(request):
     eventProgress = -1
     eventTarget = -1
     eventComplete = False
-    activeEventExists = Event.objects.filter(endDate__gt=timezone.now()).exists()
+    activeEventExists = Event.objects.filter(complete=False).exists()
     if activeEventExists:
         eventBool = True
-        event = Event.objects.filter(endDate__gt=timezone.now()).last()
+        event = Event.objects.filter(complete=False).last()
         eventType = event.type
         eventProgress = event.progress
         eventTarget = event.target
         eventComplete = event.complete
         if not eventComplete:
             #Check if the event is now complete
-            if eventProgress >= eventTarget:
+            if eventProgress >= eventTarget or event.endDate < timezone.now().date():
                 eventComplete = True
                 event.complete = True
                 event.save()
@@ -586,7 +586,7 @@ def profile(request, username:str):
     if userFilter.exists():
         user = userFilter[0]
         users_journeys =Journey.objects.filter(id = request.user.id).values('user__id').annotate(total_carbon_saved=Sum('carbon_savings'))
-        co2Saved = users_journeys['carbon_savings']
+        co2Saved = users_journeys[0]['total_carbon_saved']
         co2Saved = round(co2Saved, 2)
         #Work out the context
         if request.user.username == username:
