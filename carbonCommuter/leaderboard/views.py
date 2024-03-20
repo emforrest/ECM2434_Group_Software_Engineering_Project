@@ -50,16 +50,18 @@ def user_leaderboard(request):
     group_scores = group_scores[:10]
     for x in range(0,len(group_scores)):
         group_scores[x].position = x+1
+        group_scores[x].totalCo2Saved = round(group_scores[x].totalCo2Saved,2)
 
     following = request.user.following.all() 
     
     for user in following: 
+        followeruser = User.objects.get(id=user_id)
         follower_entry = Leaderboard_Entry()
+        follower_entry.name = followeruser.first_name + ' ' + followeruser.last_name
+        follower_entry.id = followeruser.id
+        follower_entry.username = followeruser.username
         for follower in users_total:
             if follower.id == user.followedUser.id:
-                follower_entry.name = follower.name
-                follower_entry.id = follower.id
-                follower_entry.username = follower.username
                 follower_entry.totalCo2Saved=follower.totalCo2Saved
                 break
         users_followers.append(follower_entry)
@@ -125,6 +127,7 @@ def leaderboard(request):
     group_scores = group_scores[:10]
     for x in range(0,len(group_scores)):
         group_scores[x].position = x+1
+        group_scores[x].totalCo2Saved = round(group_scores[x].totalCo2Saved,2)
             
 
     users_total.sort(key=lambda x: x.totalCo2Saved, reverse=True)

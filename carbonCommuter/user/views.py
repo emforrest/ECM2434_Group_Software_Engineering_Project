@@ -13,6 +13,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.utils import timezone
+from django.db.models import Sum
 
 
 import logging
@@ -509,7 +510,9 @@ def profile(request, username:str):
     userFilter = User.objects.filter(username=username)
     if userFilter.exists():
         user = userFilter[0]
-        co2Saved = user.profile.get_total_savings()
+        users_journeys =Journey.objects.filter(id = request.user.id).values('user__id').annotate(total_carbon_saved=Sum('carbon_savings'))
+        co2Saved = users_journeys['carbon_savings']
+        co2Saved = round(co2Saved, 2)
         #Work out the context
         if request.user.username == username:
             isCurrentUser = True
