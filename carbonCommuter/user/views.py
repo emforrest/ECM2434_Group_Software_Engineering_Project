@@ -750,6 +750,7 @@ def check_leaderboard():
     add_badge(Badges.objects.get(name="weekLeaderboard").id, weeklyWinner[0])
     add_badge(Badges.objects.get(name="monthLeaderboard").id, monthlyWinner[0])
 
+
 def add_badge(badge, user):
     """Adding the corresponding badge to the database
 
@@ -801,10 +802,11 @@ def check_validity(journey):
     
     # Check that the user hasn't uploaded a journey in the last 5 minutes
     journeys = Journey.objects.filter(user=journey.user).order_by("-time_finished")
-    diff = journeys[1].time_finished - journey.time_started
-    if diff.seconds <= 300:
-        flagged = True
-        reason += f"The user finished a journey {diff.seconds}s before starting this journey!"
+    if len(journeys) > 2:
+        diff = journeys[1].time_finished - journey.time_started
+        if diff.seconds <= 300:
+            flagged = True
+            reason += f"The user finished a journey {diff.seconds}s before starting this journey!"
     
     # Save changes to the journey if it's been flagged for review
     if flagged:
