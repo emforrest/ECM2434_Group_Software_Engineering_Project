@@ -7,12 +7,13 @@ from .models import Leaderboard_Entry
 from django.contrib.auth.decorators import login_required
 from common.utils import leaderboardData
 from datetime import datetime, timedelta
+from django.db.models import Sum
 
 # Render Leaderboard webpages here
 
 from django.http import HttpResponse
 
-
+from user.models import Badges, UserBadge
     
 @login_required
 def user_leaderboard(request):
@@ -20,29 +21,13 @@ def user_leaderboard(request):
     users_weekly = []
     group_scores = []
     users_followers = []
-    users_journeys = Journey.objects.all().order_by("-user_id")
+    users_journeys =Journey.objects.values('user__first_name', 'user__last_name', 'user__username', 'user__id').annotate(total_carbon_saved=Sum('carbon_savings'))
     users_total = leaderboardData(users_journeys)
-    current_id = - 1
-    for journey in users_journeys:
-        if journey.user.id != current_id: 
-            if current_id != -1:
-                users_weekly.append(user_entry)
-            user_entry = Leaderboard_Entry()
-            current_id = journey.user_id
-            user_entry.name = journey.user.first_name + " " + journey.user.last_name
-            user_entry.totalCo2Saved = 0
-            user_entry.id = current_id
-            user_entry.username = journey.user.username
-        now = datetime.now()
-        this_monday = now - timedelta(days=now.weekday())
-        try:
-            journey_week_monday = journey.time_finished - timedelta(days=journey.time_finished.weekday())
-            if (this_monday.date() == journey_week_monday.date()): 
-                user_entry.totalCo2Saved += journey.carbon_savings
-        except: 
-            #If journey is in progress, ignore it. 
-            continue
-    users_weekly.append(user_entry)
+
+    now = datetime.now()
+    this_monday = now - timedelta(days=now.weekday())
+    weekly_journeys = Journey.objects.filter(time_finished__gt=this_monday).values('user__first_name', 'user__last_name', 'user__username', 'user__id').annotate(total_carbon_saved=Sum('carbon_savings')).order_by("-user_id")
+    users_weekly = leaderboardData(weekly_journeys)
 
     groups = Group.objects.all()
     for group in groups:
@@ -85,6 +70,16 @@ def user_leaderboard(request):
     for x in range(0,len(users_total)):
         users_total[x].position = x+1
 
+
+    #logic for leaderboard badges
+    #add top of the leaderboard badge
+    badge = Badges.objects.get(name="topLeaderboard").id
+    if not UserBadge.objects.filter(user_id=users_total[0].id, badge_id=badge).exists():
+        #if the badge does not already exist for the user
+        newBadge = UserBadge(user_id=users_total[0].id, badge_id=badge)
+        newBadge.save()
+
+
     users_weekly.sort(key=lambda x: x.totalCo2Saved, reverse=True)
     users_weekly = users_weekly[:10]
     for x in range(0,len(users_weekly)):
@@ -110,30 +105,14 @@ def leaderboard(request):
     users_total = []
     users_weekly = []
     group_scores = []
-    users_followers = []
-    users_journeys = Journey.objects.all().order_by("-user_id")
+    users_journeys =Journey.objects.values('user__first_name', 'user__last_name', 'user__username', 'user__id').annotate(total_carbon_saved=Sum('carbon_savings'))
     users_total = leaderboardData(users_journeys)
-    current_id = - 1
-    for journey in users_journeys:
-        if journey.user.id != current_id: 
-            if current_id != -1:
-                users_weekly.append(user_entry)
-            user_entry = Leaderboard_Entry()
-            current_id = journey.user_id
-            user_entry.name = journey.user.first_name + " " + journey.user.last_name
-            user_entry.totalCo2Saved = 0
-            user_entry.id = current_id
-            user_entry.username = journey.user.username
-        now = datetime.now()
-        this_monday = now - timedelta(days=now.weekday())
-        try:
-            journey_week_monday = journey.time_finished - timedelta(days=journey.time_finished.weekday())
-            if (this_monday.date() == journey_week_monday.date()): 
-                user_entry.totalCo2Saved += journey.carbon_savings
-        except: 
-            #If journey is in progress, ignore it. 
-            continue
-    users_weekly.append(user_entry)
+
+    now = datetime.now()
+    this_monday = now - timedelta(days=now.weekday())
+    weekly_journeys = Journey.objects.filter(time_finished__gt=this_monday).values('user__first_name', 'user__last_name', 'user__username', 'user__id').annotate(total_carbon_saved=Sum('carbon_savings')).order_by("-user_id")
+    users_weekly = leaderboardData(weekly_journeys)
+
 
     groups = Group.objects.all()
     for group in groups:
