@@ -20,15 +20,11 @@ function onLoad(tab = 1) {
 function showManualInput() {
     document.getElementById("geolocation").style.display = "none";
     document.getElementById("manual_select").style.display = "block";
-    document.getElementById("btn_input").style.display = "none";
-    document.getElementById("btn_continue").style.width = "100%"
 }
 
 function hideManualInput() {
     document.getElementById("manual_select").style.display = "none";
     document.getElementById("geolocation").style.display = "block";
-    document.getElementById("btn_input").style.display = "inline-block";
-    document.getElementById("btn_continue").style.width = "49%"
 }
 
 function nextTab() {
