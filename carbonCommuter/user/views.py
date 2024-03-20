@@ -769,38 +769,38 @@ def check_validity(journey):
     # Check that the distance is valid based on the mode of transport
     if journey.distance >= 40 and journey.transport == "train":
         flagged = True
-        reason += "Distance by train is too long! "
+        reason += f"Distance by train ({ round(journey.distance, 1) }) is too long! "
     elif journey.distance >= 20 and journey.transport == "bus":
         flagged = True
-        reason += "Distance by bus is too long! "
+        reason += f"Distance by bus ({ round(journey.distance, 1) }) is too long! "
     elif journey.distance >= 10 and journey.transport == "bike":
         flagged = True
-        reason += "Distance cycled is too long! "
+        reason += f"Distance cycled ({ round(journey.distance, 1) }) is too long! "
     elif journey.distance >= 5 and journey.transport == "walk":
         flagged = True
-        reason += "Distance walked is too long! "
+        reason += f"Distance walked ({ round(journey.distance, 1) }) is too long! "
         
     # Check that the actual time taken isn't significantly shorter than the estimated time as per google maps
     if journey.transport in ["train", "bus"] and (journey.estimated_time - journey.calculate_duration()) >= 5:
         flagged = True
-        reason += f"Estimated duration ({journey.estimated_time}) doesn't match actual duration ({round(journey.calculate_duration(), 1)})! "
+        reason += f"Estimated duration ({ round(journey.estimated_time) }) doesn't match actual duration ({ journey.calculate_duration() })! "
     elif journey.transport in ["walk", "bike"] and journey.estimated_time <= 10 and(journey.estimated_time - journey.calculate_duration()) >= 2:
         flagged = True
-        reason += f"Estimated duration ({journey.estimated_time}) doesn't match actual duration ({round(journey.calculate_duration(), 1)})! "
+        reason += f"Estimated duration ({ round(journey.estimated_time) }) doesn't match actual duration ({ journey.calculate_duration() })! "
     elif journey.transport in ["walk", "bike"] and journey.estimated_time <= 30 and(journey.estimated_time - journey.calculate_duration()) >= 5:
         flagged = True
-        reason += f"Estimated duration ({journey.estimated_time}) doesn't match actual duration ({round(journey.calculate_duration(), 1)})! "
+        reason += f"Estimated duration ({ round(journey.estimated_time) }) doesn't match actual duration ({ journey.calculate_duration() })! "
     elif journey.transport in ["walk", "bike"] and journey.estimated_time <= 60 and(journey.estimated_time - journey.calculate_duration()) >= 10:
         flagged = True
-        reason += f"Estimated duration ({journey.estimated_time}) doesn't match actual duration ({round(journey.calculate_duration(), 1)})! "
+        reason += f"Estimated duration ({ round(journey.estimated_time) }) doesn't match actual duration ({ journey.calculate_duration() })! "
     elif journey.transport in ["walk", "bike"] and (journey.estimated_time - journey.calculate_duration()) >= 20:
         flagged = True
-        reason += f"Estimated duration ({journey.estimated_time}) doesn't match actual duration ({round(journey.calculate_duration(), 1)})! "
+        reason += f"Estimated duration ({ round(journey.estimated_time) }) doesn't match actual duration ({ journey.calculate_duration() })! "
     
     # Check that the user hasn't uploaded a journey in the last 5 minutes
     journeys = Journey.objects.filter(user=journey.user).order_by("-time_finished")
     diff = journeys[1].time_finished - journey.time_started
-    if diff.seconds >= 300:
+    if diff.seconds <= 300:
         flagged = True
         reason += f"The user finished a journey {diff.seconds}s before starting this journey!"
     
