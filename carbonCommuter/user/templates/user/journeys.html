@@ -30,7 +30,7 @@
                                         <td>{{ journey.destination }}</td>
                                         <td>{{ journey.transport }}</td>
                                         <td>
-                                            <a href="{% url 'delete' journey.id %}" class="btn btn-danger">Delete</a>
+                                            <a href="/user/journeys/delete?id={{ journey.id }}" class="btn btn-danger">Delete</a>
 
                                         </td>
                                     </tr>
