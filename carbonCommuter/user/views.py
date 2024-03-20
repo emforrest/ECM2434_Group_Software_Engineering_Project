@@ -6,7 +6,7 @@ Authors:
 - Eleanor Forrest
 - Abi Hinton
 """
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
@@ -137,6 +137,22 @@ def home(request):
             elif eventType == 3:
                 eventMessage = f"Visit {event.building}, {event.target} times by {event.endDate.strftime('%d-%m-%Y')}." 
             else:
+                #check current progress for this event
+                progressCount = 0
+                startDate = event.startDate
+                locationIDs = Location.objects.filter(on_campus = True).values_list('id', flat=True)
+                recentJourneys = Journey.objects.filter(time_started__gt = startDate)
+                #Check all journeys, if their start location or end location is a building that hasn't been visited then it is added to progressCount
+                for id in locationIDs:
+                    for j in recentJourneys:
+                        if j.origin_id == id or j.destination_id == id:
+                            if j.origin_id == id and j.destination_id == id:
+                                progressCount += 2
+                            else:
+                                progressCount += 1
+                            break
+                event.progress = progressCount
+                event.save()
                 eventMessage = f"Visit every location on campus by {event.endDate.strftime('%d-%m-%Y')}."
 
     check_leaderboard()
