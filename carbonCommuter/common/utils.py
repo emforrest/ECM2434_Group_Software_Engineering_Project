@@ -193,20 +193,18 @@ def get_distance_to_campus(lat: float, lng: float) -> Union[str, float]:
     return list(ordered.items())[0]
 
 
-def format_time_between(time1: datetime, time2: datetime) -> str:
-    """Formats the timedelta between two datetimes into a human-readable string.
+def format_time_from_minutes(minutes: int) -> str:
+    """Formats a number of minutes into a human-readable string of hours and minutes.
 
     Args:
-        time1 (datetime): The start datetime.
-        time2 (datetime): The end datetime.
+        minutes (int): The number of minutes to format
 
     Returns:
-        str: A formatted representation of time difference.
+        str: A formatted representation of time.
     """
-    # Calculate the hours and minutes between the two datetimes
-    diff = time1 - time2
-    hours = diff.days * 24 + diff.seconds // 3600
-    minutes = (diff.seconds % 3600) // 60
+    # Calculate the hours and minutes from the number of minutes
+    hours = minutes // 60
+    minutes = (minutes % 60) * 60
     
     # If 1 or more hours, add this to the result string.
     formatted = ""

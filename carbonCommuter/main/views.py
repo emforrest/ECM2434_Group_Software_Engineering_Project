@@ -9,3 +9,4 @@ def main(request):
         return render(request, "main/main.html")
     else:
         return redirect("/user/")
+
