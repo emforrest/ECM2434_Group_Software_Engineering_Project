@@ -1,10 +1,35 @@
 {% extends 'base.html' %}
 
+{% block title %}Leaderboard{% endblock%}
+
+{% block navbar %}
+    {% if request.user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'user_groups_home_page' %}">Groups</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/leaderboard/user_leaderboard">Leaderboard</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/logout/">Logout</a>
+        </li>
+    {% else %}
+        <li class="nav-item">
+            <a class="nav-link" href="/leaderboard/">Leaderboard</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/login/">Login</a>
+        </li>
+    {%endif%}
+    <li class="nav-item">
+        <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
+    </li> 
+{% endblock %}
+
 {% block content %}
-<h2>Your Journeys</h2>
             <div class="row">
                 <div class="column">
-                    <div class="column-box">
+                    <div class="column-box-journeys">
                         <h1>Your Journeys</h1>
                         <table class="table">
                             <thead>
@@ -30,18 +55,17 @@
                                         <td>{{ journey.destination }}</td>
                                         <td>{{ journey.transport }}</td>
                                         <td>
-                                            <a href="/user/journeys/delete?id={{ journey.id }}" class="btn btn-danger">Delete</a>
-
-                                        </td>
-                                    </tr>
-                                {% empty %}
-                                    <tr>
-                                        <td colspan="8">No journeys recorded yet.</td>
-                                    </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+                                            <a href="/user/journeys/delete?id={{ journey.id }}" class="btn btn-danger">Delete</a?
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="8">No journeys recorded yet.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 {% endblock %}
