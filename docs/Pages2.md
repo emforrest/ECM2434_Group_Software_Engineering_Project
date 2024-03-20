@@ -91,7 +91,7 @@ The template defines several overrideable Django template blocks (`script`, `bod
 
 ## Delete Journey Page - `delete.html`
 
-`delete.html` works within the `base.html` framework, specifically enabling users to permanently remove a journey on the CarbonCommuter platform. Titled "Delete Journey," it features a navigation bar for easy access to the Leaderboard and User Profile, streamlining navigation. The centerpiece is a confirmation form that underscores the permanence of the deletion process, aiming to prompt thoughtful user action. Buttons offer a choice between cancelling the action and proceeding with the deletion, balancing user autonomy against irreversible decisions. This design marries simplicity with caution, all under the consistent branding and copyright assurance of the site-wide footer.
+`delete.html` works within the `base.html` framework, specifically enabling users to permanently remove a journey on the CarbonCommuter platform. Titled "Delete Journey," it features the site-wide navigation bar for easy access to the Leaderboard and User Profile. The centerpiece is a confirmation form that uses a thoughtful user action to ensure the correct journey is deleted. Buttons offer a choice between cancelling the action and proceeding with the deletion, balancing user autonomy against irreversible decisions. 
 
 ## End Journey Page - `end_journey.html`
 
