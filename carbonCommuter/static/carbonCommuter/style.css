@@ -615,11 +615,6 @@ tbody tr:nth-child(n + 11) {
 
 /* Smartphones (portrait and landscape) ----------- */
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
-    
-}
-
-/* Media query for smaller screens */
-@media screen and (max-width: 600px) {
     .container{
         max-width: 100%;
     }
@@ -660,4 +655,9 @@ tbody tr:nth-child(n + 11) {
         width: 100%;
         background-color: rgba(255, 255, 255, .6);
     }
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 600px) {
+    
 }
