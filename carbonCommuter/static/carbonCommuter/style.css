@@ -629,11 +629,11 @@ tbody tr:nth-child(n + 11) {
     }
 
     .column-box {
-        width: 100%;
+        width: auto;
     }
 
     .column-box2 {
-        width: 100%;
+        width: auto;
     }
 
     .main-links .btn {
