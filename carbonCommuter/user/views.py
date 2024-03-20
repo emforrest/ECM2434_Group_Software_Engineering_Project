@@ -523,6 +523,8 @@ def journey(request, journey_id: int):
     journey = Journey.objects.get(id=journey_id)
     if journey is None:
         return HttpResponse(status=404)
+    elif not(journey.is_complete):
+        return HttpResponse(status=404)
     
     # Check if the user has admin or is the user that created the journey
     if (journey.user.id != request.user.id) and (request.user.profile.gamemaster != True):
