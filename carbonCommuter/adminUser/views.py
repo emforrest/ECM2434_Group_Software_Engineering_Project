@@ -16,7 +16,7 @@ from django.utils import timezone
 
 def mainAdmin(request):
     """
-    Return the /adminUser page which allows the user to see that they are an admin on the website
+    Return the /adminUser page which allows the user to see admin functionality
     Parameters:
     request - the HTTP POST request containing the inputted data by the user
     Return:
