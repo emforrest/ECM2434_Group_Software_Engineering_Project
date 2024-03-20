@@ -39,7 +39,7 @@ h1 {
     margin: auto;
     width: 90%;
     min-width: 320px; /* Minimum width for the main wrapper */
-    background-color: rgba(255, 255, 255, .75);
+    background-color: rgba(255, 255, 255, .6);
     border: 2px solid rgba(255, 255, 255, .2);
     backdrop-filter: blur(100px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
@@ -196,7 +196,7 @@ tbody tr:nth-child(n + 11) {
 .wrapper {
     margin: auto;
     width: 420px;
-    background-color: rgba(255, 255, 255, .75);
+    background-color: rgba(255, 255, 255, .6);
     border: 2px solid rgba(255, 255, 255, .2);
     backdrop-filter: blur(100px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
@@ -293,7 +293,7 @@ tbody tr:nth-child(n + 11) {
 .column-box {
     margin: 10px;
     width: 420px;
-    background-color: rgba(255, 255, 255, 0.75);
+    background-color: rgba(255, 255, 255, 0.6);
     border: 2px solid rgba(255, 255, 255, .2);
     backdrop-filter: blur(100px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
@@ -369,7 +369,7 @@ tbody tr:nth-child(n + 11) {
 .column-box2 {
     margin: 10px;
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.75);
+    background-color: rgba(255, 255, 255, 0.6);
     border: 2px solid rgba(255, 255, 255, .2);
     backdrop-filter: blur(100px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
@@ -499,7 +499,7 @@ tbody tr:nth-child(n + 11) {
     transform: translateX(-50%);
     width: 420px;
     height: 40px;
-    background-color: rgba(255, 255, 255, 0.75);
+    background-color: rgba(255, 255, 255, 0.6);
     border: 2px solid rgba(255, 255, 255, .2);
     backdrop-filter: blur(100px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
@@ -520,7 +520,7 @@ tbody tr:nth-child(n + 11) {
     width: 45%;
     max-width: 419px;
     height: 40px;
-    background-color:rgba(255, 255, 255, .75);
+    background-color:rgba(255, 255, 255, .6);
     border: 2px solid rgba(255, 255, 255, .2);
     backdrop-filter: blur(100px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
@@ -543,7 +543,7 @@ tbody tr:nth-child(n + 11) {
     width: 90%;
     height: 40px;
     min-width: 320px; /* Minimum width for the main wrapper */
-    background-color:rgba(255, 255, 255, 0.75);
+    background-color:rgba(255, 255, 255, 0.6);
     border: 2px solid rgba(255, 255, 255, .2);
     backdrop-filter: blur(100px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
@@ -622,6 +622,7 @@ tbody tr:nth-child(n + 11) {
 
     .wrapper {
         width: auto;
+        background-color: rgba(255, 255, 255, .95);
     }
 
     .wrapper .btn {
@@ -631,10 +632,12 @@ tbody tr:nth-child(n + 11) {
     .column-box {
         width: auto;
         flex: 1;
+        background-color: rgba(255, 255, 255, .95);
     }
 
     .column-box2 {
         width: auto;
+        background-color: rgba(255, 255, 255, .95);
     }
 
     .main-links .btn {
@@ -643,18 +646,22 @@ tbody tr:nth-child(n + 11) {
 
     .main-wrapper {
         width: 100%;
+        background-color: rgba(255, 255, 255, .95);
     }
 
     .main-footer {
         width: 100%;
+        background-color: rgba(255, 255, 255, .95);
     }
 
     .footer {
         width: 100%;
+        background-color: rgba(255, 255, 255, .95);
     }
 
     .l-footer {
         width: 100%;
+        background-color: rgba(255, 255, 255, .95);
     }
 
     #google_map {
