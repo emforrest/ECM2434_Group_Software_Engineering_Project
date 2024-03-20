@@ -471,10 +471,7 @@ def end_journey(request):
                 print(progressCount)
                 event.progress = progressCount
             event.save()
-                            
-
-          
-
+                        
         # Reset user's active journey flag by setting active journey to none
         request.user.profile.active_journey = None
         request.user.profile.save()
@@ -513,11 +510,16 @@ def journey(request, journey_id: int):
     if journey is None:
         return HttpResponse(status=404)
     
+    # Calculate which number of the user's journeys it is
+    journeys = list(Journey.objects.filter(user=journey.user).values_list('id', flat=True))
+    journey_no = journeys.index(journey.id) + 1
+    
     # Add journey information to context so it can be displayed on frontend
     context = {
         "journey": journey,
         "transport": TravelType.from_str(journey.transport).to_str(),
-        "time_taken": format_time_between(journey.time_finished, journey.time_started)
+        "time_taken": format_time_between(journey.time_finished, journey.time_started),
+        "journey_no": journey_no
     }
     return render(request, "user/journey.html", context)
 

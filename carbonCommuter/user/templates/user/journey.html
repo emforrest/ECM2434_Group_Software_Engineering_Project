@@ -30,7 +30,11 @@
 <br>
 <div class="container">
     <div class="wrapper">
-        <h1>About Your Journey</h1>
+        {% if journey.user.id == request.user.id %}
+            <h1>Your Journey #{{ journey_no }}</h1>
+        {% else %}
+            <h1>{{ journey.user.username }}'s Journey #{{ journey_no }}</h1>
+        {% endif %}
         <p>
             You travelled {{ journey.distance }}km in just {{ time_taken }}!
             <br>
