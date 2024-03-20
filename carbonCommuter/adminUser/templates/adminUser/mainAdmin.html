@@ -39,12 +39,13 @@
                     window.location.href = "{% url 'chooseEvent' %}?buttonClicked=" + String(buttonClicked)
                 }
             </script>
+            <br>
+            <br>
+            <a href="/admin/verify/"><button type="button" class="btn">Verify Journeys</button></a>
         {% else %}
-            <p>This page is for gamemasters only</p>
+            <p>This page is for gamemasters only.</p>
         {% endif %}
-        <br>
-        <br>
-        <a href="/admin/verify/"><button type="button" class="btn">Verify Journeys</button></a>
+        
     </div>
     </div>  
     <br>
