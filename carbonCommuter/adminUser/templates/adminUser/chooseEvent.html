@@ -49,6 +49,7 @@
         {% if user.profile.gamemaster %}
             <h1>Select an event:</h1>
             <br><br>
+            <!--The user can select a type of event to begin-->
             <button type="submit" class="btn" onclick="redirect(1)">Save X kg of CO2</button>
             <br><br>
             <button type="submit" class="btn" onclick="redirect(2)">Log X total journeys</button>
@@ -61,10 +62,12 @@
         {% else %}
             <p>This page is for gamemasters only</p>
         {% endif %}
+
     </div>
     </div>
     <script>
         function redirect(eventID){
+            //Direct the user to the confirmEvent page, passing through which event was selected
             window.location.href = "{% url 'confirmEvent' %}?eventID=" + String(eventID);
         }
     </script>
