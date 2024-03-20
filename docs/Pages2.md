@@ -1,36 +1,31 @@
 ## Base Template - `base.html`
 
-Authored by Giulia Brown, `base.html` serves as the foundational template for the CO2 Saving Website, incorporating static and dynamic site content. It sets up basic structure including DOCTYPE, language, character encoding, responsive design, and includes the site title. External CSS for styling and boxicons for icons are linked. The navigation bar provides links to Register, Login, Leaderboard, User Profile, and Groups. A footer includes copyright information. External JavaScript libraries like jQuery, Popper.js, and Bootstrap are integrated for functionality. This template ensures a consistent look and facilitates easy navigation across the website.
+This serves as the template for the Website. It sets up basic structures. External CSS and boxicons are also linked. The navbar provides links to Register, Login, Leaderboard, User Profile, and Groups. A footer includes copyright information. External JavaScript libraries are integrated. This template ensures a consistent look and facilitates easy navigation across the website.
 
-## Choose Event Page - `chooseEvent.html`
+## Choose Event Page - `/admin/chooseEvent`
 
-Authored by Eleanor Forrest, `chooseEvent.html` is a webpage for admin users to select an event within the CarbonCommuter application. The page offers a navigation bar linking to Groups, Logout, User Leaderboard, and User Profile. Admins, identified as "gamemasters," are presented with a selection of events: Save X kg of CO2, Log X total journeys, Visit one location X times, and Visit every location at least once. A back button redirects to the admin homepage. Non-gamemaster users are informed the page is restricted. The footer reinforces site copyright. JavaScript enables redirection based on the selected event, enhancing user interaction.
+The choose event page allows users who are authorised as gamemasters to select one of the following global events: Save X kg of CO2, Log X total journeys, Visit one location X times, and Visit every location at least once. Non gamemasters cannot access this page.
 
-## Confirm Event Page - `confirmEvent.html`
+## Confirm Event Page - `/admin/confirmEvent`
 
-Created by Eleanor Forrest, `confirmEvent.html` facilitates event confirmation for admin users of the CarbonCommuter application. Featuring a consistent navigation bar with links to Groups, Logout, Leaderboard, and User Profile, it guides "gamemasters" through finalizing event details. Admins are prompted to fill out specific event parameters such as target amounts or selection from dropdowns, with fields dynamically generated based on event type. A JavaScript slider displays the value for range inputs, enhancing user interaction. The page includes a form submission for event creation with CSRF protection and an end date input. Non-gamemaster users are restricted from accessing this functionality. The footer maintains site-wide copyright consistency.
+This page simply allows gamemasters to view the events that they have created, and confirm the details before deployng the event for the whole website. Access is restricted for non gamemasters. Once the event has been confirmed, a success message will appear. S
 
-## Admin Home Page - `mainAdmin.html`
+## Admin Home Page - `/admin`
 
-Authored by Abi Hinton and Eleanor Forrest, `mainAdmin.html` is the admin dashboard for the CarbonCommuter application. It features a standard navigation bar with links to Groups, Logout, Leaderboard, and User Profile, ensuring easy navigation. The page welcomes admins, specifically "gamemasters," with a greeting and the capability to create global events. A conditional display alerts admins if an event is already active, otherwise offering a "Create Event" button. A separate option to "Verify Journeys" is provided. Gamemaster restriction is enforced, with a script to redirect to the event creation page, ensuring controlled access. The footer maintains copyright information, emphasizing the professional and secure environment of the admin dashboard.
+The admin home page is acessible to users that have the 'Gamemaster' Tag. This tag is assigned in the database and allows users to create events for all users in the app and manually review all journeys that our system has flagged as being suspicious. If a user who is not an admin tries to acess this page they will not be able to access anything and will instaid get a messgae that they do not have permissions. 
 
-## Event Creation Success Page - `success.html`
+## Journey Verification Page - `/admin/verify`
 
-Created by Eleanor Forrest, `success.html` confirms the successful addition of an event within the CarbonCommuter application. The page includes a consistent navigation bar, accommodating both authenticated and unauthenticated users with appropriate links such as Groups, Leaderboard, Logout, and Login. Specifically designed for "gamemasters," it displays a congratulatory message and the event's description, reinforcing the successful creation of a global event. A "Back to admin" button redirects gamemasters to the admin dashboard for further management. Restricted access is highlighted for non-gamemaster users. The footer underscores copyright, preserving the site's professional integrity.
+This page is used to display all journeys that our automatic system has flagged as being suspicious - By how much quicker the journey has occured compared to the apis estimate for how long it should take, or a journey is too long. These can be reviewed, and approved if the gamemaster thinks that the journey made is valid, and denied if the journey was clearly fake. This incresases the integrity of our website by ensuring we have a way to moderate journeys so positions on the leaderboard are earned, and cant be cheated. 
 
-## Journey Verification Page - `verify_journey.html`
+## Group Page - `/groups/view/<group_id>`
+This page displays the public information about a group. The group leader and group members. It also allows you to join the group, which will then be sent to the group leader for manual review. 
 
-`verify_journey.html` extends the base template to focus on the admin task of verifying suspicious journeys within the CarbonCommuter system. It maintains the consistent navigation bar from `base.html`, tailored for authenticated users, with links to Groups, Leaderboard, Logout, and User Profile. The main content presents a table where admins can review journeys flagged as suspicious. Each row displays a journey's details—user, date, time, reason for suspicion—and offers actions: approve or delete the journey, represented by checkmark and cross icons, respectively. A script enhances user interaction, making table rows clickable and redirecting to detailed journey information. This page is designed for admin use, streamlining the review process of flagged journeys to ensure data integrity.
+## Search Groups Page - `/groups/search`
 
-## Group Page - `group_page.html`
+The search group page allows user to put in a group name. Underneath in Search Results a list of groups with similar names appear, with the group name and a button to view the group. The button then redirects you to that gruops home page. 
 
-`group_page.html` extends from the base layout to ensure site-wide consistency, specifically focusing on group details and interactions. The page dynamically titles itself with the group's name and adjusts the navigation bar based on user authentication. Main content highlights the group's name, membership status of the visitor, and different interaction options such as joining, leaving, or managing the group. For group leaders, additional controls are available for deleting the group or managing membership, including removal options for members and handling join requests. Links to member profiles provide a personal touch. The group's privacy settings dictate join options, distinguishing between open and request-to-join mechanisms. The footer reaffirms copyright, maintaining the site's professionalism.
-
-## Search Groups Page - `search.html`
-
-`search.html` sets its title to "Search Groups Page" and adapts the navigation bar according to user authentication status, offering links to Groups, Leaderboard, and Login/Logout. The page features a search bar for users to find groups by name. Below the search bar, search results are presented within individual cards that include the group's name and a "View Group" button, directing to the group's detailed page. If no groups match the search query, the page displays a "No groups found" message. The footer carries a copyright notice, emphasizing the ownership and rights of the website content.
-
-## User Groups Home Page - `user_groups_home_page.html`
+## User Groups Home Page - `/groups`
 
 The User Groups Home Page is designed for users to manage their group memberships and explore new groups. The page title is set to "User Groups Home Page," and the navigation bar includes user-centric links. Main content is split into sections for current group memberships and group discovery:
 
@@ -40,56 +35,43 @@ The User Groups Home Page is designed for users to manage their group membership
 
 This page serves as a central hub for users to engage with the community, whether by maintaining existing connections or forging new ones.
 
-## Leaderboard - `leaderboard.html`
+## Join Group - `./groups/join` OR `./groups/join/<code>`
 
-Authored by Jack Skinner, the `leaderboard.html` page presents a comprehensive view of user and group achievements in CO2 savings. It features a main leaderboard showcasing individual users, a weekly leaderboard for timely accomplishments, and a group leaderboard to highlight collective efforts. Each section uses symbols (🥇, 🥈, 🥉) to denote the top three positions, adding a competitive edge. The design ensures easy navigation between different leaderboard categories, making it straightforward for users to compare rankings. This page plays a key role in fostering a sense of community and competition, motivating further participation in carbon-saving activities.
+If a code isn't present on the URL, the user will be promoted to enter a join code for a private group. Public groups are only joinable using the button on the [Group Profile](#about-a-specific-group---groupsgroup-id) page, since this redirects the user to this page with the code already attached. The user should be warned about this underneath the box where they enter the code. Upon submission, the code is verified and if it matches a group in the database, they user should be added to the group, and a success page returned. If not, the user should be informed that there doesn't exist a group with that code.
 
-## User Leaderboard - `user_leaderboard.html`
+## Leaderboard - `./leaderboard`
 
-Authored by Jack Skinner, `user_leaderboard.html` showcases various leaderboards to highlight achievements within the CarbonCommuter community, specifically catering to logged-in users. This page features multiple sections:
+The leaderboard page allows anyone without an account to view the status of the leaderbaord. It will display the all time carbon savings for the top 10 users on the system. You can also see the top users this week, and the top groups on the website. 
 
-- **Leaderboard**: A table displaying all users ranked by their CO2 savings, with special icons (🥇, 🥈, 🥉) for the top three performers. Users' names are clickable, linking to their profiles.
-- **Weekly Leaderboard**: Focuses on weekly achievements, encouraging short-term engagement and competition. It also uses medals to denote top performers and links to user profiles.
-- **Group Leaderboard**: Highlights groups leading in CO2 savings, fostering a sense of community and collective effort. Group names link to their respective pages.
-- **Follower Leaderboard**: A unique addition showcasing the achievements of users followed by the logged-in user, adding a personal touch to the competition.
+## Leaderboard `./leaderboard/user_leaderboard`
 
-Each section is designed to motivate users through recognition, fostering a competitive yet community-oriented environment.
+The user_leaderboard page allows users who are logged in to view additional information on top of the standard leaderboard. You can click on users and groups on the leaderboard to view their public information, You can see how you are doing in comparision to people you are following. The users at the top of the weekly leaderboard at the end of the week will be awarded with a badge. 
 
-## Login Page - `login.html`
+## Login - `./login`
 
-Created by Jack Skinner, Giulia Brown, and Abi Hinton, `login.html` serves as the entry point for users to access their accounts on the platform, mistakenly titled "Registration page" which should be "Login Page". The layout integrates a minimalist navigation bar directing authenticated users to groups and leaderboard sections. It features a straightforward login form prompting for username and password, with an error message display for input validation. For new visitors, a registration link invites them to create an account. Logged-in users receive a prompt about their status with an option to logout, enhancing user experience by addressing session management directly. The footer reinforces the site's copyright.
+Login follows a standard website login template, with a form that contains fields for the username and password, and a submit button. On submit, the login details should be verified against the database using the built-in Django authentication system. If successfull, the user is redirected to the [User Home](#user-home---user) page, otherwise an error is displayed and they must try again. If this page is visited by an autenticated user, it should instead warn them and give them the option to logout.
 
-## Logout Page - `logout.html`
+## Logout - `./login/logout`
 
-Developed by Jack Skinner, Giulia Brown, and Abi Hinton, the logout page offers a straightforward mechanism for users to securely exit their accounts. Titled "Logout page," it streamlines the navigation bar to essential links like the leaderboard and user profile. Central to the page is a confirmation prompt ensuring users intentionally choose to logout, addressed through a submission form guarded by CSRF tokens for security. For visitors not logged in, it thoughtfully provides a prompt to login or an invitation to register, accommodating all user states. This design prioritizes user intention and security, facilitating a clear and concise logout process. The consistent footer across the site underlines copyright.
+For the Logout page, if the user is authenticated, it should ask for a confirmation if they want to logout, then logout the user if they click the button. If they're not authenticated, it should offer a link to the login/register pages instead.
 
-## Main Home Page - `main.html`
 
-Authored by Jack Skinner and Giulia Brown, `main.html` introduces users to the CarbonCommuter platform. Titled "CO2 Saving Website," it simplifies the navigation bar with essential links: Register, Login, and Leaderboard. The core of the page is a welcoming message encouraging new visitors to register and start tracking their carbon emissions, offering a community-focused experience through groups and competitive leaderboards. It provides straightforward access with buttons for registration, login, and leaderboard viewing, each followed by a brief directive. This layout aims to onboard new users while re-engaging returning visitors. The footer across the site underscores the copyright, ensuring brand consistency.
+## Home - `./`
 
-## Admin Home Page - `mainAdmin.html`
+The Home page contains information about the application, and is the first page to be visited when users discover the site. It should encourage users to register for an account or login if they already have one, as well as highlight the advantages of using the system, such as linking the Leaderboard. This page should only be accessible to un-authenticated users, any users already logged in should be redirected to the [User Home](#user-home---user) page.
 
-The `mainAdmin.html` page is specifically designed for administrators of the CO2 Saving Website, extending from the `base.html` template with a focus on admin responsibilities. The page features a navigation bar with links to Register, Login, Leaderboard, User Profile, and Groups, emphasizing the admin's unique role in the community. It highlights the importance of admin tasks such as managing groups and ensuring the validity of carbon emission inputs. The welcome message underscores the admin's crucial role in overseeing the platform's impact on carbon savings, inviting them to actively participate in the community's efforts to reduce emissions.
+## Privacy Policy `./register/PrivacyPolicy`
+CarbonCommuter handles sensitive location data, and the privacy policy outlines how the app uses your personal data. We outline how sensitive location data is deleted after 2 weeks, and that this data is secure and encrypted and stored in a secure database (oracle)
 
-## Privacy Policy - `PrivacyPolicy.html`
+## Register - `./register`
 
-Created by Jack Skinner, `PrivacyPolicy.html` presents the Privacy Policy of the CarbonCommuter platform, accessible through a simplified navigation bar tailored for both authenticated and unauthenticated users. The document, last updated on 17/03/2024, details the collection, use, and disclosure of personal data by the Carbon Commuter mobile app. It highlights the types of data collected, including location and personal data, and the purposes behind this collection—to enhance service provision. The policy outlines data usage practices, emphasizing the commitment to data security and the conditions under which data is stored or shared. Notably, it assures users of the protective measures against data breaches and unauthorized access. The document also mentions the protocol for policy updates and encourages users to periodically review the changes. A contact email provides a direct line for privacy concerns, reaffirming user rights and the app's dedication to privacy adherence. The footer echoes the site-wide copyright notice, reinforcing the platform's professional integrity.
-
-## Register Page - `register.html`
-
-Created by Jack Skinner, Giulia Brown, and Abi Hinton, the registration page facilitates new user sign-ups for the CO2 Saving Website, ensuring accessibility through a clearly structured form. The page, titled "Register - CO2 Saving Website," provides a simplified navigation bar suited for both new and returning users with direct links to login and leaderboard. It features a comprehensive form collecting essential details such as first name, surname, username, email, and password with a secondary password input for confirmation. Additionally, it includes a mandatory acceptance checkbox for the Privacy Policy, reinforcing the site's commitment to data protection. An error display mechanism alerts users to any input discrepancies. For those already registered, a prompt redirects them to the login page. The footer maintains copyright consistency across the site.
-
-## Base Template - `base.html`
-
-Authored by Giulia Brown, `base.html` establishes the foundational HTML structure for all pages within the CarbonCommuter website. It sets universal HTML, head, and body tags, incorporating responsive meta tags and importing essential styles and scripts for consistent design and functionality across the site. The stylesheet links include CarbonCommuter's custom CSS, Boxicons for icons, and Bootstrap for responsive layout components. JavaScript sources for dynamic content and Bootstrap's components enhance interactivity.
-
-The template defines several overrideable Django template blocks (`script`, `body`, `navbar`, `content`) allowing derived pages to inject specific content or scripts while maintaining a consistent navigation bar and site-wide header. Notably, the navbar dynamically adjusts to include an 'Admin' link for users identified as 'gamemasters', ensuring easy access to administrative functions. This base structure is pivotal for ensuring a cohesive user experience across the CarbonCommuter platform.
+Register follows a standard website register template, with a form that contains fields for the first and last name, username, email address, password, and another to re-enter the password, as well as a prompt to a privacy policy that they must accept. The password is checked against standard security checks (such as length and whether it is a common password), then verified to match the re-entered password. If these checks pass then a new user is created within the database. The user is then redirected to the user home page.
 
 ## Cancel Journey Page - `cancel.html`
 
 `cancel.html` integrates with the `base.html` template to provide a focused interface for users contemplating the cancellation of an active journey on the CarbonCommuter platform. The page is succinctly titled "Delete Journey" and retains a streamlined navigation bar leading to the Leaderboard and User Profile, emphasizing essential user actions. Central to the page is a confirmation prompt that stresses the irreversibility of cancelling a journey, aiming to ensure users make an informed decision. It features a form facilitating the cancellation process, alongside a "Go Back" button for reconsideration, balancing user autonomy with caution. This setup underscores the platform's commitment to user control over their data, within a structure that consistently echoes the site's branding and copyright through the footer.
 
-## Delete Journey Page - `delete.html`
+## Delete Journey Page - `.user/`
 
 `delete.html` works within the `base.html` framework, specifically enabling users to permanently remove a journey on the CarbonCommuter platform. Titled "Delete Journey," it features the site-wide navigation bar for easy access to the Leaderboard and User Profile. The centerpiece is a confirmation form that uses a thoughtful user action to ensure the correct journey is deleted. Buttons offer a choice between cancelling the action and proceeding with the deletion, balancing user autonomy against irreversible decisions. 
 
