@@ -42,9 +42,11 @@
                 <p><p1>Join Date: </p1><i>{{ dateJoined }}</i></p>
                 <p>Badges:</p>
                 <p>
+                    <div class="badge-images">
                     {% for badge in badgeImages %}
                     <img src={{ badge }}>
                     {% endfor %}
+                    </div>
                 </p>
                 <br>
                 {% if isCurrentUser %}

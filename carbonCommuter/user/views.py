@@ -591,7 +591,7 @@ def profile(request, username:str):
         else:
             followingUser = False
         #work out badges for user
-        userBadge = UserBadge.get_badges(request.user)
+        userBadge = UserBadge.get_badges(user)
         badgesList = []
         for badge in userBadge:
             #for every badge retrieved earlier, adding their name into list
