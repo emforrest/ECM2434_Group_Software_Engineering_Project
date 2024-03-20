@@ -15,7 +15,12 @@ from django.urls import reverse
 from django.utils import timezone
 from django.db.models import Sum
 
+from common.utils import leaderboardWinner, leaderboadWeeklyWinner, leaderboadMonthlyWinner
+
+
 import logging
+from datetime import datetime, timedelta
+
 
 from user.models import Journey, Follower
 from user.models import Badges, UserBadge
@@ -107,6 +112,8 @@ def home(request):
                 eventMessage = f"Visit {event.building}, {event.target} times by {event.endDate.strftime('%d-%m-%Y')}." 
             else:
                 eventMessage = f"Visit every location on campus by {event.endDate.strftime('%d-%m-%Y')}."
+
+    check_leaderboard()
 
     #adding opacity of badges to context so can be displayed correctly to the user
     context = context = {"full_name": name,
@@ -700,6 +707,23 @@ def check_streak(user):
         #if the user has achieved a streak listed, will add the badge
         add_badge(badgeID, user)
 
+def check_leaderboard():
+    #today = datetime.date.today()
+    today = datetime.now().astimezone()
+    startWeekDate = (today + timedelta(days=-today.weekday(), weeks=-1)).replace(hour=0, minute=0, second=0, microsecond=0)
+    endWeekDate = (startWeekDate + timedelta(6)).replace(hour=0, minute=0, second=0, microsecond=0)
+    endMonthDate = today.replace(day=1, hour=0, minute=0, second=0, microsecond=0) - timedelta(days=1)
+    startMonthDate = today.replace(day=1, month=endMonthDate.month, hour=0, minute=0, second=0, microsecond=0) 
+    print("start week date: ", startWeekDate)
+    print("end week date: ", endWeekDate)
+    print("start month date: ", startMonthDate)
+    print("end month date: ", endMonthDate)
+    lastWeekJourneys = Journey.objects.filter(time_finished__gte=startWeekDate, time_finished__lte=endWeekDate)
+    lastMonthJourneys = Journey.objects.filter(time_finished__gte=startMonthDate, time_finished__lte=endMonthDate)
+    weeklyWinner = leaderboardWinner(lastWeekJourneys)
+    monthlyWinner = leaderboardWinner(lastMonthJourneys)
+    add_badge("1weekLeaderboard", weeklyWinner)
+    add_badge("1monthLeaderboard", monthlyWinner)
 
 def add_badge(badge, user):
     """Adding the corresponding badge to the database
