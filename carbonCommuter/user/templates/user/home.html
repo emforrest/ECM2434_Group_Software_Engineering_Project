@@ -7,42 +7,31 @@
 {% block title %}CO2 Saving Website{% endblock%}
 
 {% block navbar %}
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-    
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto" style="text-align: right; float: right;">
-                        {% if request.user.is_authenticated %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'user_groups_home_page' %}">Groups</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/leaderboard/user_leaderboard">Leaderboard</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'journeys' %}">My Journeys</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/logout/">Logout</a>
-                            </li>
-                        {% else %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="/leaderboard/">Leaderboard</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/login/">Login</a>
-                            </li>
-                        {%endif%}
-                        <li class="nav-item">
-                            <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+    {% if request.user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'user_groups_home_page' %}">Groups</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/leaderboard/user_leaderboard">Leaderboard</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'journeys' %}">My Journeys</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/logout/">Logout</a>
+        </li>
+    {% else %}
+        <li class="nav-item">
+            <a class="nav-link" href="/leaderboard/">Leaderboard</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/login/">Login</a>
+        </li>
+    {%endif%}
+    <li class="nav-item">
+        <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
+    </li>
 {%endblock%}
-            
-        </header>
 
 {% block content %}
         <br>
@@ -75,83 +64,94 @@
                     </div>
                 </div>
                 <br>
-                <div class="column">
-                    {% if eventBool %}
-                    <div class="column-box">
-                        <h1>Global Challenge</h1>
-                        <p>{{eventMessage}}</p>
-                        <div class="progress-container">
-                            <span >{{eventProgress}}</span>
-                            <progress class="progress-bar" value = {{eventProgress}} max = {{eventTarget}}>{{eventProgress}}</progress>
-                        </div>
-                    </div>
-                    <br>
-                    {%endif%}
-                    <div class="column-box">
-                        <h1>Savings</h1>
-                        <br>
-                        <p><p1>Total Saving: &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</p1><i>{{ co2Saved }}</i></p>
-                        {% if not started %}
-                        <a href="/user/journeys/create"><button type="submit" class="btn">Start Journey</button></a>
-                        {% else %}
-                        <a href="/user/journeys/finish"><button type="submit" class="btn">End Journey</button></a>
-                        <br><br>
-                        <a href="/user/journeys/delete?id={{ request.user.profile.active_journey.id }}"><button type="submit" class="btn">Cancel Journey</button></a>
-                        {% endif %}
-                    </div>
-                    <br>
-                    <div class="column-box">
-                        <h1>Following</h1>
-                        {% if not followingUsers %}
-                        <p>You aren't following anyone.</p>
-                        {% else %}
-                            {% for member in followingUsers %}
-                            <div>
-                                <a href="{% url 'profile' username=member %}">{{ member }}</a>
-                            </div>
-                            {% endfor %}
-                        {%endif%}
-                    </div>
-                </div>
+                <p><p1>Name: </p1><i>{{ full_name }}</i></p>
                 <br>
-                <div class="column">
-                    <!-- Adding another row to display the user badges -->
-                    <div class="column-box2">
-                        <h1>Badges</h1>
-                        <br>
-                        <h4>Streaks:</h4>
-                        <img style="opacity: {{ sevenDaysOpac|escape }}" src="/media/badges/streaks/7days.png" alt="7 Days">
-                        <img style="opacity: {{ fourteenDaysOpac|escape }}" src="/media/badges/streaks/14days.png" alt="14 Days">
-                        <img style="opacity: {{ thirtyDaysOpac|escape }}" src="/media/badges/streaks/30days.png" alt="30 Days">
-                        <img style="opacity: {{ fiftyDaysOpac|escape }}" src="/media/badges/streaks/50days.png" alt="50 Days">
-                        <img style="opacity: {{ seventyFiveDaysOpac|escape }}" src="/media/badges/streaks/75days.png" alt="75 Days">
-                        <img style="opacity: {{ hundredDaysOpac|escape }}" src="/media/badges/streaks/100days.png" alt="100 Days">
-                        <h4>Locations:</h4>
-                        <img style="opacity: {{ amoryOpac|escape }}" src="/media/badges/locations/amory.png" alt="Amory">
-                        <img style="opacity: {{ businessSchoolOpac|escape }}" src="/media/badges/locations/business.png" alt="BusinessSchool">
-                        <img style="opacity: {{ devonshireHouseOpac|escape }}" src="/media/badges/locations/DH.png" alt="DevonshireHouse">
-                        <img style="opacity: {{ forumOpac|escape }}" src="/media/badges/locations/forum.png" alt="Forum">
-                        <img style="opacity: {{ harrisonOpac|escape }}" src="/media/badges/locations/harrison.png" alt="Harrison">
-                        <img style="opacity: {{ innovationCentreOpac|escape }}" src="/media/badges/locations/innovationCentre.png" alt="InnovationCentre">
-                        <img style="opacity: {{ laverOpac|escape }}" src="/media/badges/locations/laver.png" alt="Laver">
-                        <img style="opacity: {{ lsiOpac|escape }}" src="/media/badges/locations/LSI.png" alt="LSI">
-                        <img style="opacity: {{ peterChalkOpac|escape }}" src="/media/badges/locations/peterChalk.png" alt="PeterChalk">
-                        <img style="opacity: {{ queensOpac|escape }}" src="/media/badges/locations/queens.png" alt="Queens">
-                        <img style="opacity: {{ sportsParkOpac|escape }}" src="/media/badges/locations/sportsPark.png" alt="SportsPark">
-                        <img style="opacity: {{ swiotOpac|escape }}" src="/media/badges/locations/swiot.png" alt="Swiot">
-                        <img style="opacity: {{ washingtonSingerOpac|escape }}" src="/media/badges/locations/washingtonSinger.png" alt="WashingtonSinger">
-                        <h4>Leaderboard:</h4>
-                        <img style="opacity: {{ topLeaderboardOpac|escape }}" src="/media/badges/leaderboard/overall.png" alt="Top of Leaderboard">
-                        <img style="opacity: {{ weekLeaderboardOpac|escape }}" src="/media/badges/leaderboard/weekly.png" alt="Top of Leaderboard for 1 week">
-                        <img style="opacity: {{ monthLeaderboardOpac|escape }}" src="/media/badges/leaderboard/monthly.png" alt="Top of Leaderboard for 1 month">
-                    </div>
+                <p><p1>Email: </p1><i>{{ request.user.email }}</i></p>
+                <br>
+                <p><p1>Username: </p1><i>{{ request.user.username }}</i></p>
+                <br>
+                <p><p1>Join Date: </p1><i>{{ request.user.date_joined }}</i></p>
+                <a href="/user/settings"><button type="submit" class="btn">Edit Profile</button></a>
+                <br><br>
+                <a  href="{% url 'profile' username=request.user.username %}"><button type="submit" class="btn">View Public Profile</button></a>
+            </div>
+        </div>
+        <br>
+        <div class="column">
+            {% if eventBool %}
+            <div class="column-box">
+                <h1>Global Challenge</h1>
+                <p>{{eventMessage}}</p>
+                <div class="progress-container">
+                    <span >{{eventProgress}}</span>
+                    <progress class="progress-bar" value = {{eventProgress}} max = {{eventTarget}}>{{eventProgress}}</progress>
                 </div>
             </div>
             <br>
-            <div class="footer">
-                <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
+            {%endif%}
+            <div class="column-box">
+                <h1>Savings</h1>
+                <br>
+                <p><p1>Total Saving: &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</p1><i>{{ co2Saved }}</i></p>
+                {% if not started %}
+                <a href="/user/journeys/create"><button type="submit" class="btn">Start Journey</button></a>
+                {% else %}
+                <a href="/user/journeys/finish"><button type="submit" class="btn">End Journey</button></a>
+                <br><br>
+                <a href="/user/journeys/delete?id={{ request.user.profile.active_journey.id }}"><button type="submit" class="btn">Cancel Journey</button></a>
+                {% endif %}
+            </div>
+            <br>
+            <div class="column-box">
+                <h1>Following</h1>
+                {% if not followingUsers %}
+                <p>You aren't following anyone.</p>
+                {% else %}
+                    {% for member in followingUsers %}
+                    <div>
+                        <a href="{% url 'profile' username=member %}">{{ member }}</a>
+                    </div>
+                    {% endfor %}
+                {%endif%}
             </div>
         </div>
-    </body>
-    {% endblock %}
-</html>
+        <br>
+        <div class="column">
+            <!-- Adding another column to display the user badges -->
+            <div class="column-box2">
+                <h1>Badges</h1>
+                <br>
+                <h4>Streaks:</h4>
+                <img style="opacity: {{ sevenDaysOpac|escape }}" src="/media/badges/streaks/7days.png" alt="7 Days">
+                <img style="opacity: {{ fourteenDaysOpac|escape }}" src="/media/badges/streaks/14days.png" alt="14 Days">
+                <img style="opacity: {{ thirtyDaysOpac|escape }}" src="/media/badges/streaks/30days.png" alt="30 Days">
+                <img style="opacity: {{ fiftyDaysOpac|escape }}" src="/media/badges/streaks/50days.png" alt="50 Days">
+                <img style="opacity: {{ seventyFiveDaysOpac|escape }}" src="/media/badges/streaks/75days.png" alt="75 Days">
+                <img style="opacity: {{ hundredDaysOpac|escape }}" src="/media/badges/streaks/100days.png" alt="100 Days">
+                <h4>Locations:</h4>
+                <img style="opacity: {{ amoryOpac|escape }}" src="/media/badges/locations/amory.png" alt="Amory">
+                <img style="opacity: {{ businessSchoolOpac|escape }}" src="/media/badges/locations/business.png" alt="BusinessSchool">
+                <img style="opacity: {{ devonshireHouseOpac|escape }}" src="/media/badges/locations/DH.png" alt="DevonshireHouse">
+                <img style="opacity: {{ forumOpac|escape }}" src="/media/badges/locations/forum.png" alt="Forum">
+                <img style="opacity: {{ harrisonOpac|escape }}" src="/media/badges/locations/harrison.png" alt="Harrison">
+                <img style="opacity: {{ innovationCentreOpac|escape }}" src="/media/badges/locations/innovationCentre.png" alt="InnovationCentre">
+                <img style="opacity: {{ laverOpac|escape }}" src="/media/badges/locations/laver.png" alt="Laver">
+                <img style="opacity: {{ lsiOpac|escape }}" src="/media/badges/locations/LSI.png" alt="LSI">
+                <img style="opacity: {{ peterChalkOpac|escape }}" src="/media/badges/locations/peterChalk.png" alt="PeterChalk">
+                <img style="opacity: {{ queensOpac|escape }}" src="/media/badges/locations/queens.png" alt="Queens">
+                <img style="opacity: {{ sportsParkOpac|escape }}" src="/media/badges/locations/sportsPark.png" alt="SportsPark">
+                <img style="opacity: {{ swiotOpac|escape }}" src="/media/badges/locations/swiot.png" alt="Swiot">
+                <img style="opacity: {{ washingtonSingerOpac|escape }}" src="/media/badges/locations/washingtonSinger.png" alt="WashingtonSinger">
+                <h4>Leaderboard:</h4>
+                <img style="opacity: {{ topLeaderboardOpac|escape }}" src="/media/badges/leaderboard/overall.png" alt="Top of Leaderboard">
+                <img style="opacity: {{ weekLeaderboardOpac|escape }}" src="/media/badges/leaderboard/weekly.png" alt="Top of Leaderboard for 1 week">
+                <img style="opacity: {{ monthLeaderboardOpac|escape }}" src="/media/badges/leaderboard/monthly.png" alt="Top of Leaderboard for 1 month">
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="footer">
+        <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
+    </div>
+</div>
+{% endblock %}
