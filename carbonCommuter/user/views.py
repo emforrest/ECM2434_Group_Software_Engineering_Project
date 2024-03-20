@@ -15,7 +15,12 @@ from django.urls import reverse
 from django.utils import timezone
 from django.db.models import Sum
 
+from common.utils import leaderboardWinner
+
+
 import logging
+from datetime import datetime, timedelta
+
 
 from user.models import Journey, Follower
 from user.models import Badges, UserBadge
@@ -82,17 +87,17 @@ def home(request):
     eventProgress = -1
     eventTarget = -1
     eventComplete = False
-    activeEventExists = Event.objects.filter(endDate__gt=timezone.now()).exists()
+    activeEventExists = Event.objects.filter(complete=False).exists()
     if activeEventExists:
         eventBool = True
-        event = Event.objects.filter(endDate__gt=timezone.now()).last()
+        event = Event.objects.filter(complete=False).last()
         eventType = event.type
         eventProgress = event.progress
         eventTarget = event.target
         eventComplete = event.complete
         if not eventComplete:
             #Check if the event is now complete
-            if eventProgress >= eventTarget:
+            if eventProgress >= eventTarget or event.endDate < timezone.now().date():
                 eventComplete = True
                 event.complete = True
                 event.save()
@@ -107,6 +112,8 @@ def home(request):
                 eventMessage = f"Visit {event.building}, {event.target} times by {event.endDate.strftime('%d-%m-%Y')}." 
             else:
                 eventMessage = f"Visit every location on campus by {event.endDate.strftime('%d-%m-%Y')}."
+
+    check_leaderboard()
 
     #adding opacity of badges to context so can be displayed correctly to the user
     context = context = {"full_name": name,
@@ -581,7 +588,7 @@ def profile(request, username:str):
     if userFilter.exists():
         user = userFilter[0]
         users_journeys =Journey.objects.filter(id = request.user.id).values('user__id').annotate(total_carbon_saved=Sum('carbon_savings'))
-        co2Saved = users_journeys['carbon_savings']
+        co2Saved = users_journeys[0]['total_carbon_saved']
         co2Saved = round(co2Saved, 2)
         #Work out the context
         if request.user.username == username:
@@ -702,6 +709,23 @@ def check_streak(user):
         #if the user has achieved a streak listed, will add the badge
         add_badge(badgeID, user)
 
+def check_leaderboard():
+    #today = datetime.date.today()
+    today = datetime.now().astimezone()
+    startWeekDate = (today + timedelta(days=-today.weekday(), weeks=-1)).replace(hour=0, minute=0, second=0, microsecond=0)
+    endWeekDate = (startWeekDate + timedelta(6)).replace(hour=0, minute=0, second=0, microsecond=0)
+    endMonthDate = today.replace(day=1, hour=0, minute=0, second=0, microsecond=0) - timedelta(days=1)
+    startMonthDate = today.replace(day=1, month=endMonthDate.month, hour=0, minute=0, second=0, microsecond=0) 
+    print("start week date: ", startWeekDate)
+    print("end week date: ", endWeekDate)
+    print("start month date: ", startMonthDate)
+    print("end month date: ", endMonthDate)
+    lastWeekJourneys = Journey.objects.filter(time_finished__gte=startWeekDate, time_finished__lte=endWeekDate)
+    lastMonthJourneys = Journey.objects.filter(time_finished__gte=startMonthDate, time_finished__lte=endMonthDate)
+    '''weeklyWinner = leaderboardWinner(lastWeekJourneys)
+    monthlyWinner = leaderboardWinner(lastMonthJourneys)
+    add_badge("1weekLeaderboard", weeklyWinner)
+    add_badge("1monthLeaderboard", monthlyWinner)'''
 
 def add_badge(badge, user):
     """Adding the corresponding badge to the database
@@ -741,3 +765,29 @@ def check_validity(journey):
         journey.reason = reason
         journey.save()
 
+
+@login_required
+def journeys(request):
+    user_journeys = Journey.objects.filter(user=request.user).order_by('-time_started')
+    context = {'user_journeys': user_journeys}
+
+    # Fetch the user's journeys, ordered by the start time
+    user_journeys = Journey.objects.filter(user=request.user).order_by('-time_started')
+
+    # Format journeys for the template
+    formatted_journeys = []
+    for journey in user_journeys:
+        formatted_journeys.append({
+            'id': journey.id,
+            'start_time': journey.format_time_started(),
+            'end_time': journey.format_time_finished() if journey.time_finished else 'In Progress',
+            'distance': journey.distance,
+            'carbon_savings': journey.carbon_savings,
+            'origin': journey.origin.address if journey.origin else 'Unknown',
+            'destination': journey.destination.address if journey.destination else 'Unknown',
+            'transport': journey.transport,
+        })
+
+    # Add the journeys to the context
+    context['user_journeys'] = formatted_journeys
+    return render(request, 'user/journeys.html', context)

@@ -30,13 +30,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/logout/">Logout</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/register/">Register</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/leaderboard/">Leaderboard</a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/leaderboard/user_leaderboard">Leaderboard</a>
+                        </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
                     </li>
@@ -51,18 +47,22 @@
         <!-- the text to show the user they have reached the admin page -->
         <h1>CarbonCommuter Admin</h1>
         <p></p>
-        <p>As an admin, you can create global events.</p>
-        <br>
-        {% if not activeEvent %}
-            <button type="submit" class="btn" id="createButton" onclick="redirect('true')">Create Event</button>
+        {% if request.user.profile.gamemaster %}
+            <p>As an admin, you can create global events.</p>
+            <br>
+            {% if not activeEvent %}
+                <button type="submit" class="btn" id="createButton" onclick="redirect('true')">Create Event</button>
+            {% else %}
+                <p>There is already an active event, please wait until it ends.</p>
+            {% endif %}
+            <script>
+                function redirect(buttonClicked){
+                    window.location.href = "{% url 'chooseEvent' %}?buttonClicked=" + String(buttonClicked)
+                }
+            </script>
         {% else %}
-            <p>There is already an active event, please wait until it ends.</p>
+            <p>This page is for gamemasters only</p>
         {% endif %}
-        <script>
-            function redirect(buttonClicked){
-                window.location.href = "{% url 'chooseEvent' %}?buttonClicked=" + String(buttonClicked)
-            }
-        </script>
     </div>
     </div>  
     <br>

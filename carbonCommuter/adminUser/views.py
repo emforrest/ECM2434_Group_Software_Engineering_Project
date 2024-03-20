@@ -23,6 +23,7 @@ def mainAdmin(request):
     Return:
     The function returns the rendering of the admin home webpage
     """
+    ##Event.objects.all().delete()
     #Check if there is an active and incomplete event
     activeEvent = Event.objects.filter(endDate__gt=timezone.now()).filter(complete=False).exists()
     return render(request, "adminUser/mainAdmin.html", {'activeEvent': activeEvent})
@@ -56,11 +57,11 @@ def confirmEvent(request):
     eventType = request.GET.get('eventID')
     fieldsInfo = {}
     if eventType == '1':
-        fieldsInfo = {'field1': {'label': 'Enter a target amount of CO2 to be saved:', 'type':'text'}}
+        fieldsInfo = {'field1': {'label': 'Enter a target amount of CO2 to be saved:', 'type':'range', 'max' : 50}}
     elif eventType == '2':
-        fieldsInfo = {'field1': {'label': 'Enter a target number of total journeys:', 'type':'text'}}
+        fieldsInfo = {'field1': {'label': 'Enter a target number of total journeys:', 'type':'range', 'max' : 50}}
     elif eventType == '3':
-        fieldsInfo = {'field1':{'label':'Select a building:', 'type':'dropdown'}, 'field2':{'label':'Enter a target number of times to visit the building:', 'type':'text'}}
+        fieldsInfo = {'field1':{'label':'Select a building:', 'type':'dropdown'}, 'field2':{'label':'Enter a target number of times to visit the building:', 'type':'range', 'max' : 30}}
     elif eventType == '4':
         fieldsInfo = {}
     else:

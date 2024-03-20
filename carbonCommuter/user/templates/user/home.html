@@ -37,6 +37,9 @@
                                 <a class="nav-link" href="/leaderboard/user_leaderboard">Leaderboard</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" href="{% url 'journeys' %}">My Journeys</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="/logout/">Logout</a>
                             </li>
                         {% else %}
@@ -55,25 +58,9 @@
             </nav>
             
         </header>
-
         <br>
         <div class="container">
-            {% if eventBool %}
-            <div class="row">
-                <div class="column">
-                    <div class="column-box">
-                        <h1>Global Challenge</h1>
-                        <p>{{eventMessage}}</p>
-                        <div class="progress-container">
-                            <span >{{eventProgress}}</span>
-                            <progress class="progress-bar" value = {{eventProgress}} max = {{eventTarget}}>{{eventProgress}}</progress>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {%endif%}
-
-            <!-- Set up three columns to display the Profile details, badges, savings and groups-->
+            <!-- Set up three columns to display the Profile details, global challenge, badges, savings-->
             <div class="row">
                 <div class="column">
                     <div class="column-box">
@@ -102,6 +89,17 @@
                 </div>
                 <br>
                 <div class="column">
+                    {% if eventBool %}
+                    <div class="column-box">
+                        <h1>Global Challenge</h1>
+                        <p>{{eventMessage}}</p>
+                        <div class="progress-container">
+                            <span >{{eventProgress}}</span>
+                            <progress class="progress-bar" value = {{eventProgress}} max = {{eventTarget}}>{{eventProgress}}</progress>
+                        </div>
+                    </div>
+                    <br>
+                    {%endif%}
                     <div class="column-box">
                         <h1>Savings</h1>
                         <br>
@@ -114,6 +112,7 @@
                         <a href="/user/journeys/delete?id={{ request.user.profile.active_journey.id }}"><button type="submit" class="btn">Cancel Journey</button></a>
                         {% endif %}
                     </div>
+                    <br>
                     <div class="column-box">
                         <h1>Following</h1>
                         {% if not followingUsers %}
@@ -127,42 +126,40 @@
                         {%endif%}
                     </div>
                 </div>
-            </div>
-            <!-- Adding another row to display the user badges -->
-            <div class="row">
+                <br>
                 <div class="column">
-                <div class="column-box2">
-                    <h1>Badges</h1>
-                    <br>
-                    <h4>Streaks:</h4>
-                    <img style="opacity: {{ sevenDaysOpac|escape }}" src="/media/badges/streaks/7days.png" alt="7 Days">
-                    <img style="opacity: {{ fourteenDaysOpac|escape }}" src="/media/badges/streaks/14days.png" alt="14 Days">
-                    <img style="opacity: {{ thirtyDaysOpac|escape }}" src="/media/badges/streaks/30days.png" alt="30 Days">
-                    <img style="opacity: {{ fiftyDaysOpac|escape }}" src="/media/badges/streaks/50days.png" alt="50 Days">
-                    <img style="opacity: {{ seventyFiveDaysOpac|escape }}" src="/media/badges/streaks/75days.png" alt="75 Days">
-                    <img style="opacity: {{ hundredDaysOpac|escape }}" src="/media/badges/streaks/100days.png" alt="100 Days">
-                    <h4>Locations:</h4>
-                    <img style="opacity: {{ amoryOpac|escape }}" src="/media/badges/locations/amory.png" alt="Amory">
-                    <img style="opacity: {{ businessSchoolOpac|escape }}" src="/media/badges/locations/business.png" alt="BusinessSchool">
-                    <img style="opacity: {{ devonshireHouseOpac|escape }}" src="/media/badges/locations/DH.png" alt="DevonshireHouse">
-                    <img style="opacity: {{ forumOpac|escape }}" src="/media/badges/locations/forum.png" alt="Forum">
-                    <img style="opacity: {{ harrisonOpac|escape }}" src="/media/badges/locations/harrison.png" alt="Harrison">
-                    <img style="opacity: {{ innovationCentreOpac|escape }}" src="/media/badges/locations/innovationCentre.png" alt="InnovationCentre">
-                    <img style="opacity: {{ laverOpac|escape }}" src="/media/badges/locations/laver.png" alt="Laver">
-                    <img style="opacity: {{ lsiOpac|escape }}" src="/media/badges/locations/LSI.png" alt="LSI">
-                    <img style="opacity: {{ peterChalkOpac|escape }}" src="/media/badges/locations/peterChalk.png" alt="PeterChalk">
-                    <img style="opacity: {{ queensOpac|escape }}" src="/media/badges/locations/queens.png" alt="Queens">
-                    <img style="opacity: {{ sportsParkOpac|escape }}" src="/media/badges/locations/sportsPark.png" alt="SportsPark">
-                    <img style="opacity: {{ swiotOpac|escape }}" src="/media/badges/locations/swiot.png" alt="Swiot">
-                    <img style="opacity: {{ washingtonSingerOpac|escape }}" src="/media/badges/locations/washingtonSinger.png" alt="WashingtonSinger">
-                    <h4>Leaderboard:</h4>
-                    <img style="opacity: {{ topLeaderboardOpac|escape }}" src="/media/badges/leaderboard/overall.png" alt="Top of Leaderboard">
-                    <img style="opacity: {{ weekLeaderboardOpac|escape }}" src="/media/badges/leaderboard/weekly.png" alt="Top of Leaderboard for 1 week">
-                    <img style="opacity: {{ monthLeaderboardOpac|escape }}" src="/media/badges/leaderboard/monthly.png" alt="Top of Leaderboard for 1 month">
-                </div>
+                    <!-- Adding another row to display the user badges -->
+                    <div class="column-box2">
+                        <h1>Badges</h1>
+                        <br>
+                        <h4>Streaks:</h4>
+                        <img style="opacity: {{ sevenDaysOpac|escape }}" src="/media/badges/streaks/7days.png" alt="7 Days">
+                        <img style="opacity: {{ fourteenDaysOpac|escape }}" src="/media/badges/streaks/14days.png" alt="14 Days">
+                        <img style="opacity: {{ thirtyDaysOpac|escape }}" src="/media/badges/streaks/30days.png" alt="30 Days">
+                        <img style="opacity: {{ fiftyDaysOpac|escape }}" src="/media/badges/streaks/50days.png" alt="50 Days">
+                        <img style="opacity: {{ seventyFiveDaysOpac|escape }}" src="/media/badges/streaks/75days.png" alt="75 Days">
+                        <img style="opacity: {{ hundredDaysOpac|escape }}" src="/media/badges/streaks/100days.png" alt="100 Days">
+                        <h4>Locations:</h4>
+                        <img style="opacity: {{ amoryOpac|escape }}" src="/media/badges/locations/amory.png" alt="Amory">
+                        <img style="opacity: {{ businessSchoolOpac|escape }}" src="/media/badges/locations/business.png" alt="BusinessSchool">
+                        <img style="opacity: {{ devonshireHouseOpac|escape }}" src="/media/badges/locations/DH.png" alt="DevonshireHouse">
+                        <img style="opacity: {{ forumOpac|escape }}" src="/media/badges/locations/forum.png" alt="Forum">
+                        <img style="opacity: {{ harrisonOpac|escape }}" src="/media/badges/locations/harrison.png" alt="Harrison">
+                        <img style="opacity: {{ innovationCentreOpac|escape }}" src="/media/badges/locations/innovationCentre.png" alt="InnovationCentre">
+                        <img style="opacity: {{ laverOpac|escape }}" src="/media/badges/locations/laver.png" alt="Laver">
+                        <img style="opacity: {{ lsiOpac|escape }}" src="/media/badges/locations/LSI.png" alt="LSI">
+                        <img style="opacity: {{ peterChalkOpac|escape }}" src="/media/badges/locations/peterChalk.png" alt="PeterChalk">
+                        <img style="opacity: {{ queensOpac|escape }}" src="/media/badges/locations/queens.png" alt="Queens">
+                        <img style="opacity: {{ sportsParkOpac|escape }}" src="/media/badges/locations/sportsPark.png" alt="SportsPark">
+                        <img style="opacity: {{ swiotOpac|escape }}" src="/media/badges/locations/swiot.png" alt="Swiot">
+                        <img style="opacity: {{ washingtonSingerOpac|escape }}" src="/media/badges/locations/washingtonSinger.png" alt="WashingtonSinger">
+                        <h4>Leaderboard:</h4>
+                        <img style="opacity: {{ topLeaderboardOpac|escape }}" src="/media/badges/leaderboard/overall.png" alt="Top of Leaderboard">
+                        <img style="opacity: {{ weekLeaderboardOpac|escape }}" src="/media/badges/leaderboard/weekly.png" alt="Top of Leaderboard for 1 week">
+                        <img style="opacity: {{ monthLeaderboardOpac|escape }}" src="/media/badges/leaderboard/monthly.png" alt="Top of Leaderboard for 1 month">
+                    </div>
                 </div>
             </div>
-
             <br>
             <div class="footer">
                 <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
