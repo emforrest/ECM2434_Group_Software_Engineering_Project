@@ -1,3 +1,11 @@
+"""Custom logging configuration for Django.
+
+Includes a custom class for configuring the colour of the logging output within the console.
+
+Authors:
+- Sam Townley
+"""
+
 import logging
 
 # Create Custom Coloured Formatter
@@ -40,7 +48,7 @@ LOGGING = {
     "handlers": {
         "console": {
             "class": "logging.StreamHandler",
-            "level": "WARNING",
+            "level": "INFO",
             "formatter": "custom"
         },
         "master": {
@@ -49,7 +57,7 @@ LOGGING = {
             "filename": "../logs/master.log",
             "mode": "a",
             "encoding": "UTF-8",
-            "formatter": "custom"
+            "formatter": "standard"
         },
         "debug": {
             "class": "logging.FileHandler",
@@ -57,12 +65,16 @@ LOGGING = {
             "filename": "../logs/debug.log",
             "mode": "a",
             "encoding": "UTF-8",
-            "formatter": "custom"
+            "formatter": "standard"
         }
     },
     "formatters": {
         "custom": {
             "()": ColouredFormat
+        },
+        "standard": {
+            "format": "%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+            "datefmt": "%d-%m-%Y %H:%M:%S"
         }
     },
     "loggers": {

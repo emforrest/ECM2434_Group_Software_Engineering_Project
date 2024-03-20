@@ -73,7 +73,7 @@ Register follows a standard website register template, with a form that contains
 
 ## Delete Journey Page - `.user/`
 
-`delete.html` works within the `base.html` framework, specifically enabling users to permanently remove a journey on the CarbonCommuter platform. Titled "Delete Journey," it features a navigation bar for easy access to the Leaderboard and User Profile, streamlining navigation. The centerpiece is a confirmation form that underscores the permanence of the deletion process, aiming to prompt thoughtful user action. Buttons offer a choice between cancelling the action and proceeding with the deletion, balancing user autonomy against irreversible decisions. This design marries simplicity with caution, all under the consistent branding and copyright assurance of the site-wide footer.
+`delete.html` works within the `base.html` framework, specifically enabling users to permanently remove a journey on the CarbonCommuter platform. Titled "Delete Journey," it features the site-wide navigation bar for easy access to the Leaderboard and User Profile. The centerpiece is a confirmation form that uses a thoughtful user action to ensure the correct journey is deleted. Buttons offer a choice between cancelling the action and proceeding with the deletion, balancing user autonomy against irreversible decisions. 
 
 ## End Journey Page - `end_journey.html`
 
@@ -85,29 +85,33 @@ The page, titled "End Your Journey," provides a straightforward and engaging int
 
 ## Start A Journey Page - `start_journey.html`
 
-`start_journey.html, introduces a platform for users to initiate their journeys on CarbonCommuter. Titled "Start A Journey," the page allows navigation and utilises the Google Maps API for accurate location services. Users can either automatically obtain their starting location or input it manually, ensuring flexibility in how journeys begin. The page progresses through stages: obtaining location, confirming it, and selecting the mode of transport, each facilitated by intuitive buttons and dropdown menus. Additional instructions or errors are handled gracefully.
+`start_journey.html, introduces a platform for users to initiate their journeys on CarbonCommuter. Titled "Start A Journey", the page allows navigation and utilises the Google Maps API for accurate location services. Users can either automatically obtain their starting location or input it manually, ensuring flexibility in how journeys begin. The page progresses through stages: obtaining location, confirming it, and selecting the mode of transport, each facilitated by intuitive buttons and dropdown menus. Additional instructions or errors are handled gracefully.
+
 ## Journey Started Page - `started.html`
 
-`started.html` extends from `base.html` to show the start of a new journey by the user. The page, aptly titled "Success," features a navigation bar tailored for both logged-in and guest users, providing links to Groups, Leaderboard, Login/Logout, and User Profile. It congratulates users on beginning their "new adventure" and emphasises the environmental impact of their journey. Users are reminded to end their journey on the website to contribute to leaderboard rankings. A "Go home" button offers a return to the user dashboard.
+`started.html` extends from `base.html` to show the start of a new journey by the user. The page, aptly titled "Success", features a navigation bar tailored for both logged-in and guest users, providing links to Groups, Leaderboard, Login/Logout, and User Profile. It congratulates users on beginning their "new adventure" and emphasises the environmental impact of their journey. Users are reminded to end their journey on the website to contribute to leaderboard rankings. A "Go home" button offers a return to the user dashboard.
 
 ## Account Deletion Confirmation Page - `confirm.html`
 
 `confirm.html` is an interface designed within the `base.html` framework for users considering the irreversible action of deleting their CarbonCommuter account The cancellation option links back to settings, allowing users to not delete their account.
+
 ## User Home Page - `home.html`
 
 `home.html` serves as the personalised dashboard for users of the CO2 Saving Website, extending from the `base.html` template. The page title "CO2 Saving Website" heads a navigation bar for user interaction, including links to Groups, Leaderboard, My Journeys, and Logout/Login. It also contains user-specific details like streaks, name, email, username, join date, and provides options to edit the profile or view the public profile. It also displays ongoing global challenges, total CO2 savings, and user badges for streaks, locations visited, and leaderboard achievements. Following lists and badges visually represent user achievements and community involvement.
+
 ## Journey Detail Page - `journey.html`
 
-`journey.html` extends the `base.html` template. The"Success" page, offers navigation options relevant to both users and guests. It presents the journey's specifics, such as distance travelled, time taken, CO2 savings, and the mode of transport used. Additional details include start and end times, along with addresses for journeys with location data. For journeys lacking this data, a note clearly states the absence of location information. Two actionable buttons, "Go back" and "Delete Journey," give users control over their navigation and management of journey records. This setup ensures users can easily access, review, and manage their journey details.
+`journey.html` extends the `base.html` template. The "Success" page, offers navigation options relevant to both users and guests. It presents the journey's specifics, such as distance travelled, time taken, CO2 savings, and the mode of transport used. Additional details include start and end times, along with addresses for journeys with location data. For journeys lacking this data, a note clearly states the absence of location information. Two actionable buttons, "Go back" and "Delete Journey", give users control over their navigation and management of journey records. This setup ensures users can easily access, review, and manage their journey details.
 
 ## User Journeys Page - `journeys.html`
 
-Journeys.html` provides a view of a user's journeys on the CarbonCommuter platform, extending the `base.html`. It features a navigation bar for easy access to groups, leaderboard, and logout/login functionalities, for both authenticated and guest users.
+`Journeys.html` provides a view of a user's journeys on the CarbonCommuter platform, extending the `base.html`. It features a navigation bar for easy access to groups, leaderboard, and logout/login functionalities, for both authenticated and guest users.
 The main content showcases a table listing the user's journeys, displaying journey number, date, distance traveled, CO2 savings, transport mode, and actions - specifically, an option to delete each journey. An empty state message informs users when no journeys have been recorded, and JavaScript functionality enhances the table's interactivity, making each row clickable for detailed journey views.
 
 ## Public User Profile Page - `profile.html`
 
-Written by Eleanor Forrest, `profile.html` creates a public-facing profile for users of the CarbonCommuter platform, integrated with the `base.html` template for consistent navigation. The "Profile," enables users to showcase their environmental contributions and connect with the community. It displays the user's username, total carbon savings, join date, and earned and unlearned badges. Depending on the viewer's relationship to the profile, the page adapts to show either a "Back" button for personal profiles or a "Follow/Unfollow" button for others.
+`profile.html` creates a public-facing profile for users of the CarbonCommuter platform, integrated with the `base.html` template for consistent navigation. The "Profile," enables users to showcase their environmental contributions and connect with the community. It displays the user's username, total carbon savings, join date, and earned and unlearned badges. Depending on the viewer's relationship to the profile, the page adapts to show either a "Back" button for personal profiles or a "Follow/Unfollow" button for others.
+
 ## User Settings Page - `settings.html`
 
-Created by Jack Skinner and Giulia Brown, `settings.html` allows CarbonCommuter users to alter their settings within the application, building on the `base.html` template. The page, titled "Settings," provides a navigation bar suited for both logged in and guest users, allowing easy site navigation. Its features allow users to update their first name, last name, username, and email, with a requisite password entry for changes to take effect, emphasising security. Also a distinct section for account deletion making sure the users understand the irreversible nature of this action. 
+`settings.html` allows CarbonCommuter users to alter their settings within the application, building on the `base.html` template. The page, titled "Settings," provides a navigation bar suited for both logged in and guest users, allowing easy site navigation. Its features allow users to update their first name, last name, username, and email, with a requisite password entry for changes to take effect, emphasising security. Also a distinct section for account deletion making sure the users understand the irreversible nature of this action.

@@ -1,7 +1,13 @@
+"""Django settings be to used across both the development and production environments.
+
+Logging config can be found seperately in logging.py.
+
+Authors:
+- Sam Townley
+"""
+
 import os
 from pathlib import Path
-
-# Base config for use across all environments
 
 # Build the relative path for the app
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
