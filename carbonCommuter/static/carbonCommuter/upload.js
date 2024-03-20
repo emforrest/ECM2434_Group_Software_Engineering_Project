@@ -1,13 +1,13 @@
 
 function onLoad(tab = 1) {
+    window.current_tab = tab;
+    document.getElementById(`tab${tab}`).style.display = "block";
+
     window.attempts = 0;
     window.last_accuracy = "0";
 
     var form = document.getElementById("journey_form");
     form.addEventListener("submit", onSubmit, true);
-
-    window.current_tab = tab;
-    document.getElementById(`tab${tab}`).style.display = "block";
 
     if (window.error != "") {
         showError();
@@ -18,6 +18,7 @@ function onLoad(tab = 1) {
 }
 
 function showManualInput() {
+    document.getElementById("geolocation").style.display = "none";
     document.getElementById("manual_select").style.display = "block";
     document.getElementById("btn_input").style.display = "none";
     document.getElementById("btn_continue").style.width = "100%"
@@ -25,6 +26,7 @@ function showManualInput() {
 
 function hideManualInput() {
     document.getElementById("manual_select").style.display = "none";
+    document.getElementById("geolocation").style.display = "block";
     document.getElementById("btn_input").style.display = "inline-block";
     document.getElementById("btn_continue").style.width = "49%"
 }
@@ -75,6 +77,7 @@ function accuracyErrorOnLoad() {
     console.log("Couldn't get an accurate location!");
     window.error = "Failed to get an accurate location! Please enter it manually...";
     document.getElementById("loading").style.display = "none";
+    showManualInput();
     showError();
 }
 
@@ -82,6 +85,12 @@ function showPosition(position) {
     setLatLong(position.coords.latitude, position.coords.longitude);
     document.getElementById("btn_refresh").innerHTML = "Re-fetch Location"
     getAddress(position);
+}
+
+function showCampusLocation(value) {
+    const components = value.split(";");
+    setLatLong(components[0], components[1]);
+    setAddress(components[2]);
 }
 
 function showError() {
@@ -97,7 +106,7 @@ function showLocationOff() {
     document.getElementById("loading").style.display = "none";
     document.getElementById("animation").style.display = "none";
     document.getElementById("location").style.display = "block";
-    document.getElementById("btn_failed").style.display = "block";
+    document.getElementById("btn_home").style.display = "block";
 }
 
 function handleError(error) {
@@ -192,10 +201,8 @@ function initAutocomplete(){
 function onPlaceChanged(){
     var place = autocomplete.getPlace();
     if (place.geometry) {
-        console.log(place.formatted_address);
         setAddress(place.formatted_address);
         setLatLong(place.geometry.location.lat().toString(), place.geometry.location.lng().toString());
-        hideManualInput();
     }
 }
 

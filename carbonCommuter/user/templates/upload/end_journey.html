@@ -89,40 +89,52 @@
             
                     <div id="tab2" style="display: none">
                         <h4>Where are you finishing your journey today?</h4>
-                        <button type="button" class="btn" id="btn_refresh" onclick="getLocation()">Get Location</button>
-                        <br>
+                        <div id="geolocation">
+                            <button type="button" class="btn" id="btn_refresh" onclick="getLocation();">Get Location</button>
+                            <br>
+                            
+                            <br>
+                            <div id="map">
+                                {% if lat and long %}
+                                    <iframe id="google_map" width="350" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.co.uk?q={{ lat|escape }},{{ long|escape }}&output=embed"></iframe>
+                                {% else %}
+                                    <iframe id="google_map" width="350" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=720&amp;height=600&amp;hl=en&amp;q=Exeter&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+                                {% endif %}
+                            </div>
 
-                        <br>
-                        <div id="map">
-                            {% if lat and long %}
-                                <iframe id="google_map" width="350" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.co.uk?q={{ lat|escape }},{{ long|escape }}&output=embed"></iframe>
-                            {% else %}
-                                <iframe id="google_map" width="350" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=720&amp;height=600&amp;hl=en&amp;q=Exeter&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
-                            {% endif %}
+                            <br>
+                            <span>
+                                Your current address is:
+                                {% if address %}
+                                    <span id="display_address">{{ address|escape }}</span>
+                                {% else %}
+                                    <span id="display_address">N/A</span>
+                                {% endif %}
+                            </span>
+                            <br><br>
+
+                            <div>
+                                <button type="button" id="btn_input" class="btn" style="display: inline-block; width: 49%" onclick="showManualInput()">Enter Manually</button>
+                                <button type="submit" id="btn_submit" class="btn" style="display: inline-block; width: 49%" >Confirm Location</button>
+                            </div>
                         </div>
 
-                        <br>
-                        <span>
-                            Your current address is:
-                            {% if address %}
-                                <span id="display_address">{{ address|escape }}</span>
-                            {% else %}
-                                <span id="display_address">N/A</span>
-                            {% endif %}
-                        </span>
-
-                        <br>
                         <div id="manual_select" style="display: none">
                             <br>
-                            <h6>Enter a new location below:</h6>
-                            <input type="text" id="autocomplete" name="autocomplete" placeholder="Enter a location...">
+                            <h6>Search for a location below:</h6>
+                            <input type="text" id="autocomplete" name="autocomplete" style="width: 75%" placeholder="Enter a location...">
+                            <br><br>
+                            <h6>Or select an on-campus location:</h6>
+                            <select name="on_campus" id="on_campus" onchange="showCampusLocation(this.value)">
+                                <option selected disabled value="">Select location on campus... </option>
+                                {% for location in locations %}
+                                    <option value = "{{ location.lat|escape }};{{ location.lng|escape }};{{ location.address|escape }}">{{ location.name|escape }}</option>
+                                {% endfor %}
+                            </select>
+                            <br><br>
+                            <button type="button" id="btn_manual_submit" class="btn" onclick="if (verifyAddress()) {hideManualInput();};">Confirm Location</button>
                         </div>
 
-                        <br>
-                        <div>
-                            <button type="button" id="btn_input" class="btn" style="display: inline-block; width: 49%" onclick="showManualInput()">Enter Manually</button>
-                            <button type="submit" id="btn_submit" class="btn" style="display: inline-block; width: 49%" >Confirm Location</button>
-                        </div>
                         <h5>OR</h5>
                         <a href="/user/journeys/delete?id={{ request.user.profile.active_journey.id }}"><button type="button" class="btn">Cancel Current Journey</button></a>
                     </div>
