@@ -15,11 +15,18 @@ For the Logout page, if the user is authenticated, it should ask for a confirmat
 
 ## Register - `./register`
 
-Register follows a standard website register template, with a form that contains fields for the first and last name, username, email address, password, and another to re-enter the password. The password is checked against standard security checks (such as length and whether it is a common password), then verified to match the re-entered password. If these checks pass then a new user is created within the database. The user is then redirected to the user home page.
+Register follows a standard website register template, with a form that contains fields for the first and last name, username, email address, password, and another to re-enter the passwor, as well as a prompt to a privacy policy that they must accept. The password is checked against standard security checks (such as length and whether it is a common password), then verified to match the re-entered password. If these checks pass then a new user is created within the database. The user is then redirected to the user home page.
+
+## Privacy Policy `./register/PrivacyPolicy`
+CarbonCommuter handles sensitive location data, and the privacy policy outlines how the app uses your personal data. We outline how sensitive location data is deleted after 2 weeks, and that this data is secure and encrypted and stored in a secure database (oracle)
 
 ## Leaderboard - `./leaderboard`
 
-The leaderboard page allows users to compare their carbon savings to other users. It will display the all time carbon savings for the top 10 users on the system. Eventually, users should be able to filter the leaderboard to different periods of time, such as a week, month, or year. They should also be able to choose how many users to display on the leaderboard, and keep scrolling down to go through all users in the leaderboard.
+The leaderboard page allows anyone without an account to view the status of the leaderbaord. It will display the all time carbon savings for the top 10 users on the system. You can also see the top users this week, and the top groups on the website. 
+
+## Leaderboard `./leaderboard/user_leaderboard`
+
+The user_leaderboard page allows users who are logged in to view additional information on top of the standard leaderboard. You can click on users and groups on the leaderboard to view their public information, You can see how you are doing in comparision to people you are following. 
 
 ## User Home - `./user`
 
