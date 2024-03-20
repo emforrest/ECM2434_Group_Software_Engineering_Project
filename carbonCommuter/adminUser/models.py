@@ -22,5 +22,9 @@ class Event(models.Model):
     type = models.PositiveIntegerField(null=False, blank=False)
     target = models.PositiveIntegerField(null=True, blank=True, default=50)
     building = models.CharField(max_length=200, null=True, blank=True)
+    startDate = models.DateField(null=False, blank=False, auto_now_add=True, )
     endDate = models.DateField(null=False, blank=False)
+    progress = models.FloatField(null=False, blank=False, default = 0)
+    complete = models.BooleanField(null=False, blank=False, default=False)
+
 
