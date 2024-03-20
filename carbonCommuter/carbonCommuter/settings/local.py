@@ -1,6 +1,8 @@
-import os
+"""Django settings exclusively meant for running on the local development environment.
 
-# Basic configuration for the local development environment
+Authors:
+- Sam Townley
+"""
 
 SECRET_KEY = 'django-insecure-jpdvh@2*xm2zlkf!i9bs9u55+8%_891p!g3jl%n8j36vm#_*^='
 DEBUG = True
