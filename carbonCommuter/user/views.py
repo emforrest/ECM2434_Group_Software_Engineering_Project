@@ -87,10 +87,10 @@ def home(request):
     eventProgress = -1
     eventTarget = -1
     eventComplete = False
-    activeEventExists = Event.objects.filter(complete=False).exists() #checks for an incomplete event
+    activeEventExists = Event.objects.filter(endDate__gt = timezone.now()).exists() #checks for an incomplete event
     if activeEventExists:
         eventBool = True
-        event = Event.objects.filter(complete=False).last()
+        event = Event.objects.filter(endDate__gt = timezone.now()).last()
         eventType = event.type
         eventProgress = event.progress
         eventTarget = event.target
