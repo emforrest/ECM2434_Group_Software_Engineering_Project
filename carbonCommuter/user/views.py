@@ -17,6 +17,8 @@ from django.db.models import Sum
 
 from common.utils import leaderboardWinner
 
+from django.contrib.auth import logout
+from django.contrib import messages
 
 import logging
 from datetime import datetime, timedelta
@@ -856,3 +858,13 @@ def getBadgeImage(badgeName):
     else:
         return None
 
+@login_required
+def delete_account(request):
+    if request.method == "POST":
+        user = request.user
+        user.delete()
+        logout(request)
+        messages.success(request, "Your account has been successfully deleted.")
+        return redirect('login')
+    else:
+        return render(request, "user/confirm.html")
