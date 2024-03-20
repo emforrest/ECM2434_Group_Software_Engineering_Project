@@ -6,7 +6,7 @@ Authors:
 - Eleanor Forrest
 - Abi Hinton
 """
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
@@ -535,39 +535,30 @@ def journey(request, journey_id: int):
 
 
 @login_required
-def delete_journey(request):
-    
-    # Get id of journey to delete
-    if request.method == "POST":
-        id = request.POST.get('id')
-    else:
-        id = request.GET.get('id')
-    
-    # Check the journey exists
-    journey = Journey.objects.get(id=id)
-    if journey is None:
-        return HttpResponse(status=404)
-    
-    # Check if the user is authorised to delete the journey
-    if journey.user.id != request.user.id:
+def delete_journey(request, journey_id):
+    # Attempt to get the journey object, ensuring it belongs to the current user
+    journey = get_object_or_404(Journey, id=journey_id, user=request.user)
+
+    # Check if the user is authorized to delete the journey
+    if journey.user != request.user:
         return HttpResponse(status=403)
-    
-    if request.method == "POST":
-        # Delete active journey if the user has one
-        if journey.id == request.user.profile.active_journey.id:
-            request.user.profile.active_journey = None
-            request.user.profile.save()
-            
-        # Delete the journey and redirect to the user home page
-        journey.delete()
-        return redirect("dashboard")
-    
-    # Render template based on if the journey is being cancelled or not
-    else:
-        if journey.id == request.user.profile.active_journey.id:
-            return render(request, "upload/cancel.html", context={"id": journey.id})
-        else:
-            return render(request, "upload/delete.html", context={"id": journey.id})
+
+    # For a GET request, consider showing a confirmation page
+    if request.method == "GET":
+        # Logic to show confirmation could go here
+        pass  # Replace or remove this with your actual logic
+
+    # Proceed with deletion
+    # Check if the journey being deleted is the user's active journey
+    if request.user.profile.active_journey and journey.id == request.user.profile.active_journey.id:
+        request.user.profile.active_journey = None
+        request.user.profile.save()
+
+    # Delete the journey
+    journey.delete()
+
+    # Redirect to a preferred URL after deletion
+    return redirect("journeys")  # Adjust redirect as needed
 
 
 @login_required
@@ -791,3 +782,4 @@ def journeys(request):
     # Add the journeys to the context
     context['user_journeys'] = formatted_journeys
     return render(request, 'user/journeys.html', context)
+
