@@ -14,6 +14,7 @@ from datetime import datetime
 from user.models import Journey
 from django.utils import timezone
 
+@login_required
 def mainAdmin(request):
     """
     Return the /adminUser page which allows the user to see admin functionality
@@ -22,10 +23,12 @@ def mainAdmin(request):
     Return:
     The function returns the rendering of the admin home webpage
     """
+    
     #Check if there is an active and incomplete event
     activeEvent = Event.objects.filter(endDate__gt=timezone.now()).filter(complete=False).exists()
     return render(request, "adminUser/mainAdmin.html", {'activeEvent': activeEvent})
 
+@login_required
 def chooseEvent(request):
     """Return the adminUser/chooseEvent page with buttons for each event type
     
@@ -42,6 +45,7 @@ def chooseEvent(request):
     else:
         return HttpResponse(status = 403)
 
+@login_required
 def confirmEvent(request):
     """Produce the confirmEvent page based on which button was selected in chooseEvent, where users can choose related targets
     
@@ -66,6 +70,7 @@ def confirmEvent(request):
         return HttpResponse(status=400)
     return render(request, "adminUser/confirmEvent.html", {'fieldsInfo': fieldsInfo, 'eventType': eventType, 'locations': Location.objects.filter(on_campus=True)})
 
+@login_required
 def submitEvent(request):
     """Uses the provided information to create a new event
 
@@ -103,6 +108,7 @@ def submitEvent(request):
     else:
         return HttpResponse(status=405) 
 
+@login_required
 def success(request):
     """Produce a success page based on the created event
 
@@ -130,7 +136,7 @@ def success(request):
     else:
         return HttpResponse(status=405)
     
-
+@login_required
 def verify_suspicious_journey(request):
     """Produce the journey verification page
 
@@ -142,4 +148,3 @@ def verify_suspicious_journey(request):
     """
     context = {'journeys': Journey.objects.filter(flagged=True)}
     return render(request, "adminUser/verify_journey.html", context=context)
-

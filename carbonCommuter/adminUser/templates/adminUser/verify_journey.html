@@ -45,6 +45,7 @@
     <br>
     <div class="wrapper" style="width: 30%; min-width: 400px;">
         <h1>Review suspicious journeys:</h1>
+        {% if request.user.profile.gamemaster %}
         <div class="table">
             <table>
                 <tr> 
@@ -70,6 +71,9 @@
                 {% endfor %}
             </table>
         </div> 
+        {% else %}
+            <p>This page is for gamemasters only.</p>
+        {% endif %}
     </div>
     <br>
     
