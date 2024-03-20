@@ -227,36 +227,65 @@ def format_time_between(time1: datetime, time2: datetime) -> str:
     return formatted
 
 def leaderboardData(journeys_by_id):
+    # Initialized an empty list to store leaderboard entries
     users = []
-    current_id = -1
+    current_id = -1  # Initialize current_id to -1
+    
+    # Iterates through each journey in journeys_by_id
     for journey in journeys_by_id:
+        # Checked if the current journey belongs to a different user than the previous one
         if journey['user__id'] != current_id:
+            # Createed a new leaderboard entry for the user
             user_entry = Leaderboard_Entry()
+            # Sets the name of the user
             user_entry.name = journey['user__first_name'] + " " + journey['user__last_name']
-            user_entry.totalCo2Saved = 0
-            current_id = journey['user__id']
-            user_entry.id = current_id
-            user_entry.username = journey['user__username']
+            # Sets the total CO2 saved by the user
             user_entry.totalCo2Saved = round(journey['total_carbon_saved'], 2)
+            # Updateed current_id to the current user's ID
+            current_id = journey['user__id']
+            # Sets the user ID
+            user_entry.id = current_id
+            # Sets the username
+            user_entry.username = journey['user__username']
+            # Appended the user entry to the list of users
             users.append(user_entry)
+    
+    # Returns the list of users
     return users
 
 def leaderboardWinner(users_journeys):
+    # Initialize a topUser object to keep track of the user with the highest CO2 savings
     topUser = Leaderboard_Entry()
     topUser.totalCo2Saved = 0
     current_id = -1
+    
+    # Iterate through each journey in users_journeys
     for journey in users_journeys:
+        # Checked if the current journey belongs to a different user than the previous one
         if journey['user__id'] != current_id:
+            # Created a new leaderboard entry for the user
             user_entry = Leaderboard_Entry()
+            # Set the user ID
             current_id = journey['user__id']
-            user_entry.totalCo2Saved = 0
             user_entry.id = current_id
+            # Initialized the total CO2 saved by the user to 0
+            user_entry.totalCo2Saved = 0
+        
+        # Tried to add the total CO2 saved from the aggregated current journey to the user's total
         try:
             user_entry.totalCo2Saved += journey['total_carbon_saved']
         except:
+            # If there is an error retrieving the total CO2 saved, add 0 to the user's total
             user_entry.totalCo2Saved += 0
+        
+        # Check if the current user's total CO2 saved is greater than the topUser's total
         if topUser.totalCo2Saved < user_entry.totalCo2Saved:
+            # If so, update the topUser to the current user
             topUser = user_entry
-    topUser = User.objects.filter(id = topUser.id)
+    
+    # Retrieves the user object corresponding to the top user from the database
+    topUser = User.objects.filter(id=topUser.id)
+    
+    # Returns the topUser
     return topUser
 
