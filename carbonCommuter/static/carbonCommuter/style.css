@@ -35,112 +35,6 @@ h1 {
     padding-right: 0.5rem;
 }
 
-/* 2xl */
-@media (max-width: 1536px){
-    .container{
-        max-width: 1280px;
-    }
-}
-
-/* xl */
-@media (max-width: 1280px){
-    .container{
-        max-width: 1024px;
-    }
-}
-
-/* lg */
-@media (max-width: 1024px){
-    .container{
-        max-width: 768px;
-    }
-}
-
-/* md */
-@media (max-width: 768px){
-    .container{
-        max-width: 640px;
-    }
-}
-
-/* sm */
-@media (max-width: 640px){
-    .container{
-        max-width: 475px;
-    }
-}
-
-/* xs */
-@media (max-width: 475px){
-    .container{
-        max-width: 100%;
-    }
-}
-
-/* Smartphones (portrait and landscape) ----------- */
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
-    .container{
-        max-width: 100%;
-    }
-
-    .wrapper {
-        width: auto;
-    }
-
-    .column-box {
-        width: auto;
-    }
-
-    .footer {
-        width: auto;
-    }
-
-    .l-footer {
-        width: auto;
-    }
-
-}
-
-/* Smartphones (landscape) ----------- */
-@media only screen and (min-width : 321px) {
-    .container{
-        max-width: 100%;
-    }
-
-}
-
-/* Smartphones (portrait and landscape) ----------- */
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
-    .container{
-        max-width: 100%;
-    }
-
-    .wrapper {
-        width: auto;
-    }
-
-    .column-box {
-        width: auto;
-    }
-
-    .footer {
-        width: auto;
-    }
-
-    .l-footer {
-        width: auto;
-    }
-
-}
-
-/* Smartphones (landscape) ----------- */
-@media only screen and (min-width : 321px) {
-    .container{
-        max-width: 100%;
-    }
-
-}
-
 .main-wrapper {
     margin: auto;
     width: 90%;
@@ -210,16 +104,6 @@ h1 {
     outline: none;
     margin: 5px; /* Adjusted margin for smaller screens */
     border-radius: 20px;
-}
-
-/* Media query for smaller screens */
-@media screen and (max-width: 600px) {
-    .main-links .btn {
-        width: 90%; /* Adjusted width for smaller screens */
-    }
-    .main-wrapper {
-        width: 100%
-    }
 }
 
 /*add hover effects to the buttons in the main home page*/
@@ -657,7 +541,6 @@ tbody tr:nth-child(n + 11) {
     margin: auto;
     width: 90%;
     height: 40px;
-    max-width: 90%;
     min-width: 320px; /* Minimum width for the main wrapper */
     background-color:rgba(255, 255, 255, .6);
     border: 2px solid rgba(255, 255, 255, .2);
@@ -677,5 +560,83 @@ tbody tr:nth-child(n + 11) {
 @media (min-width: 0px) {
     .navbar navbar-expand-lg navbar-light bg-light {
         width: 110%; /* Set navbar width to 100% of viewport width */
+    }
+}
+
+/* 2xl */
+@media (max-width: 1536px){
+    .container{
+        max-width: 1280px;
+    }
+}
+
+/* xl */
+@media (max-width: 1280px){
+    .container{
+        max-width: 1024px;
+    }
+}
+
+/* lg */
+@media (max-width: 1024px){
+    .container{
+        max-width: 768px;
+    }
+}
+
+/* md */
+@media (max-width: 768px){
+    .container{
+        max-width: 640px;
+    }
+}
+
+/* sm */
+@media (max-width: 640px){
+    .container{
+        max-width: 475px;
+    }
+}
+
+/* Smartphones (landscape) ----------- */
+@media only screen and (min-width : 321px) {
+    .container{
+        max-width: 100%;
+    }
+
+}
+
+/* xs */
+@media (max-width: 475px){
+    .container{
+        max-width: 100%;
+    }
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    .container{
+        max-width: 100%;
+    }
+
+    .wrapper {
+        width: auto;
+    }
+
+    .column-box {
+        width: auto;
+    }
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 600px) {
+    .main-links .btn {
+        width: 90%; /* Adjusted width for smaller screens */
+    }
+    .main-wrapper {
+        width: 100%
+    }
+    .main-footer {
+        width: 100%
     }
 }
