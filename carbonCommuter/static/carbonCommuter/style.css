@@ -1,4 +1,4 @@
-/*Authors: Giulia Brown, Jack Skinner*/
+/*Authors: Giulia Brown, Jack Skinner, Eleanor Forrest*/
 /*general style*/
 * {
     margin: 0;
@@ -12,7 +12,7 @@
 body {
     min-height: 100vh;
     max-width: 100%;
-    background: url('forum.jpg');
+    background: url('/media/images/forum.jpg');
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -668,3 +668,56 @@ tbody tr:nth-child(n + 11) {
         width: 90%;
     }
 }
+
+.progress-container {
+    appearance: none;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+  }
+  
+  .progress-bar {
+    display: block;
+    width: 100%;
+    height: 20px; 
+    background-color: #5181e7; 
+    border-radius: 10px; 
+    text-align: center; 
+    line-height: 20px;
+    color: white; 
+    font-weight: bold; 
+  }
+
+  .progress-container span {
+    position: absolute;
+    display: block;
+    color: white;
+    text-align: right;
+  }
+
+
+.icon-btn {
+    border: none;
+    outline: none;
+    background: none;
+}
+.slider {
+    appearance: none;
+    width: 80%;
+    height: 20px;
+    background: #535353;
+    border-radius: 0;
+    outline: none;
+    opacity: 0.5;
+    transition: opacity .2s;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: rgb(0, 191, 0);
+    cursor: pointer;
+  }

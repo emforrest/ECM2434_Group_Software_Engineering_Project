@@ -10,9 +10,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Dashboard</title>
         <!--Import styling-->
-        <link rel="stylesheet" href="{% static 'carbonCommuter/style.css' %}">
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{% static 'carbonCommuter/style.css' %}">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -53,17 +53,33 @@
                     </ul>
                 </div>
             </nav>
+            
         </header>
 
         <br>
         <div class="container">
+            {% if eventBool %}
+            <div class="row">
+                <div class="column">
+                    <div class="column-box">
+                        <h1>Global Challenge</h1>
+                        <p>{{eventMessage}}</p>
+                        <div class="progress-container">
+                            <span >{{eventProgress}}</span>
+                            <progress class="progress-bar" value = {{eventProgress}} max = {{eventTarget}}>{{eventProgress}}</progress>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {%endif%}
+
             <!-- Set up three columns to display the Profile details, badges, savings and groups-->
             <div class="row">
                 <div class="column">
                     <div class="column-box">
                         <h1>Profile</h1>
                         <div class="streak">
-                            <img src="{% static 'carbonCommuter/CarbonCommuter images/Streaks/dailyStreak.png' %}" alt="Daily streak">
+                            <img src="/media/badges/streaks/daily.png" alt="Daily streak">
                             {% if request.user.profile.streak > 10 %}
                                 <div style="left: 25%" class="streakText">{{ request.user.profile.streak }}</div>
                             {% else %}
@@ -90,11 +106,12 @@
                         <h1>Savings</h1>
                         <br>
                         <p><p1>Total Saving: &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</p1><i>{{ co2Saved }}</i></p>
-                        <br>
                         {% if not started %}
                         <a href="/user/journeys/create"><button type="submit" class="btn">Start Journey</button></a>
                         {% else %}
                         <a href="/user/journeys/finish"><button type="submit" class="btn">End Journey</button></a>
+                        <br><br>
+                        <a href="/user/journeys/delete?id={{ request.user.profile.active_journey.id }}"><button type="submit" class="btn">Cancel Journey</button></a>
                         {% endif %}
                     </div>
                     <div class="column-box">
@@ -118,30 +135,30 @@
                     <h1>Badges</h1>
                     <br>
                     <h4>Streaks:</h4>
-                    <img style="opacity: {{ sevenDaysOpac }}" src="{% static 'carbonCommuter/CarbonCommuter images/Streaks/7days.png' %}" alt="7 Days">
-                    <img style="opacity: {{ fourteenDaysOpac }}" src="{% static 'carbonCommuter/CarbonCommuter images/Streaks/14days.png' %}" alt="14 Days">
-                    <img style="opacity: {{ thirtyDaysOpac }}" src="{% static 'carbonCommuter/CarbonCommuter images/Streaks/30days.png' %}" alt="30 Days">
-                    <img style="opacity: {{ fiftyDaysOpac }}" src="{% static 'carbonCommuter/CarbonCommuter images/Streaks/50days.png' %}" alt="50 Days">
-                    <img style="opacity: {{ seventyFiveDaysOpac }}" src="{% static 'carbonCommuter/CarbonCommuter images/Streaks/75days.png' %}" alt="75 Days">
-                    <img style="opacity: {{ hundredDaysOpac }}" src="{% static 'carbonCommuter/CarbonCommuter images/Streaks/100days.png' %}" alt="100 Days">
+                    <img style="opacity: {{ sevenDaysOpac|escape }}" src="/media/badges/streaks/7days.png" alt="7 Days">
+                    <img style="opacity: {{ fourteenDaysOpac|escape }}" src="/media/badges/streaks/14days.png" alt="14 Days">
+                    <img style="opacity: {{ thirtyDaysOpac|escape }}" src="/media/badges/streaks/30days.png" alt="30 Days">
+                    <img style="opacity: {{ fiftyDaysOpac|escape }}" src="/media/badges/streaks/50days.png" alt="50 Days">
+                    <img style="opacity: {{ seventyFiveDaysOpac|escape }}" src="/media/badges/streaks/75days.png" alt="75 Days">
+                    <img style="opacity: {{ hundredDaysOpac|escape }}" src="/media/badges/streaks/100days.png" alt="100 Days">
                     <h4>Locations:</h4>
-                    <img style="opacity: {{ amoryOpac }}" src="{% static 'carbonCommuter/CarbonCommuter images/Locations/Amory.png' %}" alt="Amory">
-                    <img style="opacity: {{ businessSchoolOpac }}" src="{% static 'carbonCommuter/CarbonCommuter images/Locations/BusinessSchool.png' %}" alt="BusinessSchool">
-                    <img style="opacity: {{ devonshireHouseOpac }}" src="{% static 'carbonCommuter/CarbonCommuter images/Locations/DevonshireHouse.png' %}" alt="DevonshireHouse">
-                    <img style="opacity: {{ forumOpac }}" src="{% static 'carbonCommuter/CarbonCommuter images/Locations/Forum.png' %}" alt="Forum">
-                    <img style="opacity: {{ harrisonOpac }}" src="{% static 'carbonCommuter/CarbonCommuter images/Locations/Harrison.png' %}" alt="Harrison">
-                    <img style="opacity: {{ innovationCentreOpac }}" src="{% static 'carbonCommuter/CarbonCommuter images/Locations/InnovationCentre.png' %}" alt="InnovationCentre">
-                    <img style="opacity: {{ laverOpac }}" src="{% static 'carbonCommuter/CarbonCommuter images/Locations/Laver.png' %}" alt="Laver">
-                    <img style="opacity: {{ lsiOpac }}" src="{% static 'carbonCommuter/CarbonCommuter images/Locations/LSI.png' %}" alt="LSI">
-                    <img style="opacity: {{ peterChalkOpac }}" src="{% static 'carbonCommuter/CarbonCommuter images/Locations/PeterChalk.png' %}" alt="PeterChalk">
-                    <img style="opacity: {{ queensOpac }}" src="{% static 'carbonCommuter/CarbonCommuter images/Locations/Queens.png' %}" alt="Queens">
-                    <img style="opacity: {{ sportsParkOpac }}" src="{% static 'carbonCommuter/CarbonCommuter images/Locations/SportsPark.png' %}" alt="SportsPark">
-                    <img style="opacity: {{ swiotOpac }}" src="{% static 'carbonCommuter/CarbonCommuter images/Locations/Swiot.png' %}" alt="Swiot">
-                    <img style="opacity: {{ washingtonSingerOpac }}" src="{% static 'carbonCommuter/CarbonCommuter images/Locations/WashingtonSinger.png' %}" alt="WashingtonSinger">
+                    <img style="opacity: {{ amoryOpac|escape }}" src="/media/badges/locations/amory.png" alt="Amory">
+                    <img style="opacity: {{ businessSchoolOpac|escape }}" src="/media/badges/locations/business.png" alt="BusinessSchool">
+                    <img style="opacity: {{ devonshireHouseOpac|escape }}" src="/media/badges/locations/DH.png" alt="DevonshireHouse">
+                    <img style="opacity: {{ forumOpac|escape }}" src="/media/badges/locations/forum.png" alt="Forum">
+                    <img style="opacity: {{ harrisonOpac|escape }}" src="/media/badges/locations/harrison.png" alt="Harrison">
+                    <img style="opacity: {{ innovationCentreOpac|escape }}" src="/media/badges/locations/innovationCentre.png" alt="InnovationCentre">
+                    <img style="opacity: {{ laverOpac|escape }}" src="/media/badges/locations/laver.png" alt="Laver">
+                    <img style="opacity: {{ lsiOpac|escape }}" src="/media/badges/locations/LSI.png" alt="LSI">
+                    <img style="opacity: {{ peterChalkOpac|escape }}" src="/media/badges/locations/peterChalk.png" alt="PeterChalk">
+                    <img style="opacity: {{ queensOpac|escape }}" src="/media/badges/locations/queens.png" alt="Queens">
+                    <img style="opacity: {{ sportsParkOpac|escape }}" src="/media/badges/locations/sportsPark.png" alt="SportsPark">
+                    <img style="opacity: {{ swiotOpac|escape }}" src="/media/badges/locations/swiot.png" alt="Swiot">
+                    <img style="opacity: {{ washingtonSingerOpac|escape }}" src="/media/badges/locations/washingtonSinger.png" alt="WashingtonSinger">
                     <h4>Leaderboard:</h4>
-                    <img src="{% static 'carbonCommuter/CarbonCommuter images/Leaderboard/TopLeaderboard.png' %}" alt="Top of Leaderboard">
-                    <img src="{% static 'carbonCommuter/CarbonCommuter images/Leaderboard/1weekLeaderboard.png' %}" alt="Top of Leaderboard for 1 week">
-                    <img src="{% static 'carbonCommuter/CarbonCommuter images/Leaderboard/1monthLeaderboard.png' %}" alt="Top of Leaderboard for 1 month">
+                    <img style="opacity: {{ topLeaderboardOpac|escape }}" src="/media/badges/leaderboard/overall.png" alt="Top of Leaderboard">
+                    <img style="opacity: {{ weekLeaderboardOpac|escape }}" src="/media/badges/leaderboard/weekly.png" alt="Top of Leaderboard for 1 week">
+                    <img style="opacity: {{ monthLeaderboardOpac|escape }}" src="/media/badges/leaderboard/monthly.png" alt="Top of Leaderboard for 1 month">
                 </div>
                 </div>
             </div>

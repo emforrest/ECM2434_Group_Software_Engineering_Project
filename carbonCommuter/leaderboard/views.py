@@ -13,7 +13,7 @@ from django.db.models import Sum
 
 from django.http import HttpResponse
 
-
+from user.models import Badges, UserBadge
     
 @login_required
 def user_leaderboard(request):
@@ -21,7 +21,7 @@ def user_leaderboard(request):
     users_weekly = []
     group_scores = []
     users_followers = []
-    users_journeys =Journey.objects.values('user__first_name', 'user__last_name', 'user__username', 'user__id').annotate(total_carbon_saved=Sum('carbon_savings'))
+    users_journeys =Journey.objects.values('user__first_name', 'user__last_name', 'user__username', 'user__id').annotate(total_carbon_saved=Sum('carbon_savings')).order_by("-user_id")
     users_total = leaderboardData(users_journeys)
 
     now = datetime.now()
@@ -50,16 +50,18 @@ def user_leaderboard(request):
     group_scores = group_scores[:10]
     for x in range(0,len(group_scores)):
         group_scores[x].position = x+1
+        group_scores[x].totalCo2Saved = round(group_scores[x].totalCo2Saved,2)
 
     following = request.user.following.all() 
     
     for user in following: 
+        followeruser = User.objects.get(id=user_id)
         follower_entry = Leaderboard_Entry()
+        follower_entry.name = followeruser.first_name + ' ' + followeruser.last_name
+        follower_entry.id = followeruser.id
+        follower_entry.username = followeruser.username
         for follower in users_total:
             if follower.id == user.followedUser.id:
-                follower_entry.name = follower.name
-                follower_entry.id = follower.id
-                follower_entry.username = follower.username
                 follower_entry.totalCo2Saved=follower.totalCo2Saved
                 break
         users_followers.append(follower_entry)
@@ -69,6 +71,16 @@ def user_leaderboard(request):
     users_total = users_total[:10]
     for x in range(0,len(users_total)):
         users_total[x].position = x+1
+
+
+    #logic for leaderboard badges
+    #add top of the leaderboard badge
+    badge = Badges.objects.get(name="topLeaderboard").id
+    if not UserBadge.objects.filter(user_id=users_total[0].id, badge_id=badge).exists():
+        #if the badge does not already exist for the user
+        newBadge = UserBadge(user_id=users_total[0].id, badge_id=badge)
+        newBadge.save()
+
 
     users_weekly.sort(key=lambda x: x.totalCo2Saved, reverse=True)
     users_weekly = users_weekly[:10]
@@ -95,7 +107,7 @@ def leaderboard(request):
     users_total = []
     users_weekly = []
     group_scores = []
-    users_journeys =Journey.objects.values('user__first_name', 'user__last_name', 'user__username', 'user__id').annotate(total_carbon_saved=Sum('carbon_savings'))
+    users_journeys =Journey.objects.values('user__first_name', 'user__last_name', 'user__username', 'user__id').annotate(total_carbon_saved=Sum('carbon_savings')).order_by("-user_id")
     users_total = leaderboardData(users_journeys)
 
     now = datetime.now()
@@ -125,6 +137,7 @@ def leaderboard(request):
     group_scores = group_scores[:10]
     for x in range(0,len(group_scores)):
         group_scores[x].position = x+1
+        group_scores[x].totalCo2Saved = round(group_scores[x].totalCo2Saved,2)
             
 
     users_total.sort(key=lambda x: x.totalCo2Saved, reverse=True)

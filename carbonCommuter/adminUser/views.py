@@ -9,6 +9,8 @@ from main.models import Location
 from django.http import HttpResponse
 from adminUser.models import Event
 from datetime import datetime
+
+from user.models import Journey
 from django.utils import timezone
 
 NUM_BUILDINGS = 27
@@ -21,9 +23,8 @@ def mainAdmin(request):
     Return:
     The function returns the rendering of the admin home webpage
     """
-    Event.objects.all().delete() 
-    #Check if there is an active event
-    activeEvent = Event.objects.filter(endDate__gt=timezone.now()).exists()
+    #Check if there is an active and incomplete event
+    activeEvent = Event.objects.filter(endDate__gt=timezone.now()).filter(complete=False).exists()
     return render(request, "adminUser/mainAdmin.html", {'activeEvent': activeEvent})
 
 def chooseEvent(request):
@@ -55,11 +56,11 @@ def confirmEvent(request):
     eventType = request.GET.get('eventID')
     fieldsInfo = {}
     if eventType == '1':
-        fieldsInfo = {'field1': {'label': 'Enter a target amount of CO2 to be saved:', 'type':'text'}}
+        fieldsInfo = {'field1': {'label': 'Enter a target amount of CO2 to be saved:', 'type':'range', 'max' : 50}}
     elif eventType == '2':
-        fieldsInfo = {'field1': {'label': 'Enter a target number of total journeys:', 'type':'text'}}
+        fieldsInfo = {'field1': {'label': 'Enter a target number of total journeys:', 'type':'range', 'max' : 50}}
     elif eventType == '3':
-        fieldsInfo = {'field1':{'label':'Select a building:', 'type':'dropdown'}, 'field2':{'label':'Enter a target number of times to visit the building:', 'type':'text'}}
+        fieldsInfo = {'field1':{'label':'Select a building:', 'type':'dropdown'}, 'field2':{'label':'Enter a target number of times to visit the building:', 'type':'range', 'max' : 30}}
     elif eventType == '4':
         fieldsInfo = {}
     else:
@@ -126,6 +127,9 @@ def success(request):
             return render(request, "adminUser/success.html", context={'eventMessage' : message})
     else:
         return HttpResponse(status=405)
+    
 
-##Event.objects.all().delete() 
-##print(Event.objects.all())
+def verify_suspicious_journey(request):
+    context = {'journeys': Journey.objects.filter(flagged=True)}
+    return render(request, "adminUser/verify_journey.html", context=context)
+

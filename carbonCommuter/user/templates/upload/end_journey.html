@@ -21,9 +21,6 @@
     <script type="text/javascript" src="{% static 'carbonCommuter/upload.js' %}"></script> 
     <script>
         window.error='{{ error|escapejs }}';
-        if (window.error != "") {
-            showError();
-        }
     </script>
 </head>
 
@@ -68,7 +65,7 @@
         <div class="container">
             <div class="wrapper">
                 <!--The form object takes the user's selections and passes them to the upload function-->
-                <form name="end" id="end_journey" action="/user/journeys/finish" method="post">
+                <form name="end" id="journey_form" action="/user/journeys/finish" method="post">
                     {% csrf_token %}
                     <h1>End Your Current Journey</h1>
             
@@ -80,28 +77,38 @@
                     <div id="tab1" style="text-align: center; display: none;">
                         <h3>Getting your current location</h3>
                         <br>
-                        <div style="margin: auto; width: 50%">
-                            <img src="/media/loading/pikachu.gif"/>
+                        <div id="animation" style="margin: auto; width: 50%">
+                            <img src="/media/animations/pikachu.gif"/>
+                        </div>
+                        <div id="location" style="margin: auto; width: 50%; display: none;">
+                            <img style="width: 100px; height: 100px;" src="/media/icons/location_off.png"/>
                         </div>
                         <br>
-                        <i id="loading">This could take up to 30 seconds...</i>
+                        <i id="loading">This could take up to 20 seconds...</i>
                     </div>
             
                     <div id="tab2" style="display: none">
                         <h4>Where are you finishing your journey today?</h4>
-                        <br>
-                        <button type="button" class="btn" onclick="getLocation()">Re-fetch Location</button>
+                        <button type="button" class="btn" id="btn_refresh" onclick="getLocation()">Get Location</button>
                         <br>
 
                         <br>
                         <div id="map">
-                            <iframe id="google_map" width="350" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=720&amp;height=600&amp;hl=en&amp;q=Exeter&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+                            {% if lat and long %}
+                                <iframe id="google_map" width="350" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.co.uk?q={{ lat|escape }},{{ long|escape }}&output=embed"></iframe>
+                            {% else %}
+                                <iframe id="google_map" width="350" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=720&amp;height=600&amp;hl=en&amp;q=Exeter&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+                            {% endif %}
                         </div>
 
                         <br>
                         <span>
                             Your current address is:
-                            <span id="display_address">N/A</span>
+                            {% if address %}
+                                <span id="display_address">{{ address|escape }}</span>
+                            {% else %}
+                                <span id="display_address">N/A</span>
+                            {% endif %}
                         </span>
 
                         <br>
@@ -116,11 +123,17 @@
                             <button type="button" id="btn_input" class="btn" style="display: inline-block; width: 49%" onclick="showManualInput()">Enter Manually</button>
                             <button type="submit" id="btn_submit" class="btn" style="display: inline-block; width: 49%" >Confirm Location</button>
                         </div>
+                        <h5>OR</h5>
+                        <a href="/user/journeys/delete?id={{ request.user.profile.active_journey.id }}"><button type="button" class="btn">Cancel Current Journey</button></a>
                     </div>
 
                 </form>
-                
-                <p id="error" style='color: red; display: none; text-align: center;'>An unknown error has occured...</p>
+                <div id="error" style="display: none; text-align: center;">
+                    <br>
+                    <p id="error_msg" style='color: red;'>An unknown error has occured...</p>
+                    <br>
+                    <button class="btn" id="btn_failed" onclick="history.back();" style="display: none;">Go Back</button>
+                </div>
             </div>
             <br>
             <div class="footer">

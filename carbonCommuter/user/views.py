@@ -13,11 +13,9 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.utils import timezone
-
+from django.db.models import Sum
 
 import logging
-from datetime import datetime
-
 
 from user.models import Journey, Follower
 from user.models import Badges, UserBadge
@@ -71,28 +69,44 @@ def home(request):
     fiftyDaysOpac = determine_opacity("50days", badgesList)
     seventyFiveDaysOpac = determine_opacity("75days", badgesList)
     hundredDaysOpac = determine_opacity("100days", badgesList)
+    topLeaderboardOpac = determine_opacity("topLeaderboard", badgesList)
+    weekLeaderboardOpac = determine_opacity("weekLeaderboard", badgesList)
+    monthLeaderboardOpac = determine_opacity("monthLeaderboard", badgesList)
 
      #get a list of users this user is following
     followingUsers = User.objects.filter(followers__follower=request.user).values_list('username', flat=True)
 
     #get information about the current event
+    eventBool = False
     eventMessage = ''
     eventProgress = -1
     eventTarget = -1
+    eventComplete = False
     activeEventExists = Event.objects.filter(endDate__gt=timezone.now()).exists()
     if activeEventExists:
-        event = Event.objects.filter(endDate__gt=timezone.now())[0]
+        eventBool = True
+        event = Event.objects.filter(endDate__gt=timezone.now()).last()
         eventType = event.type
         eventProgress = event.progress
         eventTarget = event.target
-        if eventType == '1':
-            eventMessage = f"Save {event.target} kilograms of CO2 by {event.endDate.strftime('%d-%m-%Y')}."
-        elif eventType == '2':
-            eventMessage = f"Log {event.target} total journeys by {event.endDate.strftime('%d-%m-%Y')}."
-        elif eventType == '3':
-            eventMessage = f"Visit {event.building}, {event.target} times by {event.endDate.strftime('%d-%m-%Y')}." 
+        eventComplete = event.complete
+        if not eventComplete:
+            #Check if the event is now complete
+            if eventProgress >= eventTarget:
+                eventComplete = True
+                event.complete = True
+                event.save()
+        if eventComplete:
+            eventMessage = "Event complete! You did it!"
         else:
-            eventMessage = f"Visit every location on campus by {event.endDate.strftime('%d-%m-%Y')}."
+            if eventType == 1:
+                eventMessage = f"Save {event.target} kilograms of CO2 by {event.endDate.strftime('%d-%m-%Y')}."
+            elif eventType == 2:
+                eventMessage = f"Log {event.target} total journeys by {event.endDate.strftime('%d-%m-%Y')}."
+            elif eventType == 3:
+                eventMessage = f"Visit {event.building}, {event.target} times by {event.endDate.strftime('%d-%m-%Y')}." 
+            else:
+                eventMessage = f"Visit every location on campus by {event.endDate.strftime('%d-%m-%Y')}."
 
     #adding opacity of badges to context so can be displayed correctly to the user
     context = context = {"full_name": name,
@@ -117,11 +131,16 @@ def home(request):
                          "sportsParkOpac": sportsParkOpac,
                          "swiotOpac": swiotOpac,
                          "washingtonSingerOpac": washingtonSingerOpac,
+                         "topLeaderboardOpac": topLeaderboardOpac,
+                         "weekLeaderboardOpac": weekLeaderboardOpac,
+                         "monthLeaderboardOpac": monthLeaderboardOpac, 
                          "followingUsers": followingUsers,
                          "eventMessage" : eventMessage,
                          "eventProgress" : eventProgress,
-                         "eventTarget" : eventTarget
+                         "eventTarget" : eventTarget,
+                         "eventBool" : eventBool
                          }
+
     return render(request, "user/home.html", context)
 
 
@@ -213,7 +232,7 @@ def start_journey(request):
     journey = request.user.profile.active_journey
     if journey is not None:
         LOGGER.warning(f"User [{request.user.username}:{request.user.id}]: Tried to access the start journey page with an active journey.")
-        return redirect('end_journey')
+        return redirect('end')
     
     # If method is POST, handle form submission
     if request.method == "POST":
@@ -275,13 +294,18 @@ def start_journey(request):
         journey = Journey(user = request.user,
                           origin = location, 
                           transport = str(transport),
-                          time_started = datetime.now())
+                          time_started = timezone.now())
         journey.save()
         
         # Update the users active journey
         request.user.profile.active_journey = journey
         request.user.profile.save()
-        return redirect("dashboard")
+        
+        # Render success page
+        context = {
+            "CO2_Savings": round(abs(TravelType.CAR.value - transport.value), 2)
+        }
+        return render(request, "upload/started.html", context=context)
     
     # Render the form if visited by a GET request
     else:
@@ -313,7 +337,7 @@ def end_journey(request):
     journey = request.user.profile.active_journey
     if journey is None:
         LOGGER.warning(f"User [{request.user.username}:{request.user.id}]: Tried to access the end journey page without an active journey.")
-        return redirect('start_journey')
+        return redirect('start')
     
     # If method is POST, handle form submission
     if request.method == "POST":
@@ -382,13 +406,13 @@ def end_journey(request):
         journey.distance = distance
         journey.estimated_time = time
         journey.carbon_savings = savings
-        journey.time_finished = datetime.now()
+        journey.time_finished = timezone.now()
         journey.save()
         check_validity(journey)
 
         # Add to streak of the user
         pastJourneys = Journey.objects.all().filter(user_id=request.user.id) #accessing all the past journeys the user has made
-        dateNow = datetime.now().astimezone()
+        dateNow = timezone.now()
         checkStreak = False #boolean to check if a streak still exists
         for pastJourney in reversed(pastJourneys):
             #looping through past journeys in reverse so the most recent is first
@@ -410,9 +434,9 @@ def end_journey(request):
         check_streak(request.user)
 
         #Add progres to the current event if there is one
-        activeEventExists = Event.objects.filter(endDate__gt=timezone.now()).exists()
+        activeEventExists = Event.objects.filter(complete=False).exists()
         if activeEventExists:
-            event = Event.objects.filter(endDate__gt=timezone.now())[0]
+            event = Event.objects.filter(complete=False)[0]
             eventType = event.type
             if eventType == 1:
                 #target amount of CO2 saved
@@ -448,22 +472,26 @@ def end_journey(request):
                 print(progressCount)
                 event.progress = progressCount
             event.save()
-                            
-
-          
-
+                        
         # Reset user's active journey flag by setting active journey to none
         request.user.profile.active_journey = None
         request.user.profile.save()
-        return redirect("journey", journey_id=journey.id)
+        
+        # Render success page
+        context = {
+            "journey": journey,
+            "transport": TravelType.from_str(journey.transport).to_str(),
+            "time_taken": format_time_between(journey.time_finished, journey.time_started)
+        }
+        return render(request, "upload/finished.html", context=context)
     
     # Render the form if visited by a GET request
     else:
-        return render(request, "upload/end_journey.html")
+        return render(request, "upload/end_journey.html", context=context)
     
 
 @login_required
-def journey_created(request, journey_id: int):
+def journey(request, journey_id: int):
     """Displays information about a completed journey once it's been submitted successfully to the system.
 
     Args:
@@ -483,13 +511,54 @@ def journey_created(request, journey_id: int):
     if journey is None:
         return HttpResponse(status=404)
     
+    # Calculate which number of the user's journeys it is
+    journeys = list(Journey.objects.filter(user=journey.user).values_list('id', flat=True))
+    journey_no = journeys.index(journey.id) + 1
+    
     # Add journey information to context so it can be displayed on frontend
     context = {
         "journey": journey,
         "transport": TravelType.from_str(journey.transport).to_str(),
-        "time_taken": format_time_between(journey.time_finished, journey.time_started)
+        "time_taken": format_time_between(journey.time_finished, journey.time_started),
+        "journey_no": journey_no
     }
-    return render(request, "upload/success.html", context)
+    return render(request, "user/journey.html", context)
+
+
+@login_required
+def delete_journey(request):
+    
+    # Get id of journey to delete
+    if request.method == "POST":
+        id = request.POST.get('id')
+    else:
+        id = request.GET.get('id')
+    
+    # Check the journey exists
+    journey = Journey.objects.get(id=id)
+    if journey is None:
+        return HttpResponse(status=404)
+    
+    # Check if the user is authorised to delete the journey
+    if journey.user.id != request.user.id:
+        return HttpResponse(status=403)
+    
+    if request.method == "POST":
+        # Delete active journey if the user has one
+        if journey.id == request.user.profile.active_journey.id:
+            request.user.profile.active_journey = None
+            request.user.profile.save()
+            
+        # Delete the journey and redirect to the user home page
+        journey.delete()
+        return redirect("dashboard")
+    
+    # Render template based on if the journey is being cancelled or not
+    else:
+        if journey.id == request.user.profile.active_journey.id:
+            return render(request, "upload/cancel.html", context={"id": journey.id})
+        else:
+            return render(request, "upload/delete.html", context={"id": journey.id})
 
 
 @login_required
@@ -509,7 +578,9 @@ def profile(request, username:str):
     userFilter = User.objects.filter(username=username)
     if userFilter.exists():
         user = userFilter[0]
-        co2Saved = user.profile.get_total_savings()
+        users_journeys =Journey.objects.filter(id = request.user.id).values('user__id').annotate(total_carbon_saved=Sum('carbon_savings'))
+        co2Saved = users_journeys['carbon_savings']
+        co2Saved = round(co2Saved, 2)
         #Work out the context
         if request.user.username == username:
             isCurrentUser = True
@@ -638,9 +709,9 @@ def add_badge(badge, user):
         user: The user to be able to get the badges for that specific user
     """
     if not UserBadge.objects.filter(user_id=user.id, badge_id=badge).exists():
-            #if the badge does not already exist for the user
-            newBadge = UserBadge(user_id=user.id, badge_id=badge)
-            newBadge.save()
+        #if the badge does not already exist for the user
+        newBadge = UserBadge(user_id=user.id, badge_id=badge)
+        newBadge.save()
             
             
 def check_validity(journey):
@@ -667,3 +738,4 @@ def check_validity(journey):
         journey.flagged = True
         journey.reason = reason
         journey.save()
+
