@@ -13,6 +13,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.utils import timezone
+from django.db.models import Sum
 
 
 import logging
@@ -71,28 +72,44 @@ def home(request):
     fiftyDaysOpac = determine_opacity("50days", badgesList)
     seventyFiveDaysOpac = determine_opacity("75days", badgesList)
     hundredDaysOpac = determine_opacity("100days", badgesList)
+    topLeaderboardOpac = determine_opacity("topLeaderboard", badgesList)
+    weekLeaderboardOpac = determine_opacity("weekLeaderboard", badgesList)
+    monthLeaderboardOpac = determine_opacity("monthLeaderboard", badgesList)
 
      #get a list of users this user is following
     followingUsers = User.objects.filter(followers__follower=request.user).values_list('username', flat=True)
 
     #get information about the current event
+    eventBool = False
     eventMessage = ''
     eventProgress = -1
     eventTarget = -1
+    eventComplete = False
     activeEventExists = Event.objects.filter(endDate__gt=timezone.now()).exists()
     if activeEventExists:
-        event = Event.objects.filter(endDate__gt=timezone.now())[0]
+        eventBool = True
+        event = Event.objects.filter(endDate__gt=timezone.now()).last()
         eventType = event.type
         eventProgress = event.progress
         eventTarget = event.target
-        if eventType == '1':
-            eventMessage = f"Save {event.target} kilograms of CO2 by {event.endDate.strftime('%d-%m-%Y')}."
-        elif eventType == '2':
-            eventMessage = f"Log {event.target} total journeys by {event.endDate.strftime('%d-%m-%Y')}."
-        elif eventType == '3':
-            eventMessage = f"Visit {event.building}, {event.target} times by {event.endDate.strftime('%d-%m-%Y')}." 
+        eventComplete = event.complete
+        if not eventComplete:
+            #Check if the event is now complete
+            if eventProgress >= eventTarget:
+                eventComplete = True
+                event.complete = True
+                event.save()
+        if eventComplete:
+            eventMessage = "Event complete! You did it!"
         else:
-            eventMessage = f"Visit every location on campus by {event.endDate.strftime('%d-%m-%Y')}."
+            if eventType == 1:
+                eventMessage = f"Save {event.target} kilograms of CO2 by {event.endDate.strftime('%d-%m-%Y')}."
+            elif eventType == 2:
+                eventMessage = f"Log {event.target} total journeys by {event.endDate.strftime('%d-%m-%Y')}."
+            elif eventType == 3:
+                eventMessage = f"Visit {event.building}, {event.target} times by {event.endDate.strftime('%d-%m-%Y')}." 
+            else:
+                eventMessage = f"Visit every location on campus by {event.endDate.strftime('%d-%m-%Y')}."
 
     #adding opacity of badges to context so can be displayed correctly to the user
     context = context = {"full_name": name,
@@ -117,11 +134,16 @@ def home(request):
                          "sportsParkOpac": sportsParkOpac,
                          "swiotOpac": swiotOpac,
                          "washingtonSingerOpac": washingtonSingerOpac,
+                         "topLeaderboardOpac": topLeaderboardOpac,
+                         "weekLeaderboardOpac": weekLeaderboardOpac,
+                         "monthLeaderboardOpac": monthLeaderboardOpac, 
                          "followingUsers": followingUsers,
                          "eventMessage" : eventMessage,
                          "eventProgress" : eventProgress,
-                         "eventTarget" : eventTarget
+                         "eventTarget" : eventTarget,
+                         "eventBool" : eventBool
                          }
+
     return render(request, "user/home.html", context)
 
 
@@ -410,9 +432,9 @@ def end_journey(request):
         check_streak(request.user)
 
         #Add progres to the current event if there is one
-        activeEventExists = Event.objects.filter(endDate__gt=timezone.now()).exists()
+        activeEventExists = Event.objects.filter(complete=False).exists()
         if activeEventExists:
-            event = Event.objects.filter(endDate__gt=timezone.now())[0]
+            event = Event.objects.filter(complete=False)[0]
             eventType = event.type
             if eventType == 1:
                 #target amount of CO2 saved
@@ -509,7 +531,9 @@ def profile(request, username:str):
     userFilter = User.objects.filter(username=username)
     if userFilter.exists():
         user = userFilter[0]
-        co2Saved = user.profile.get_total_savings()
+        users_journeys =Journey.objects.filter(id = request.user.id).values('user__id').annotate(total_carbon_saved=Sum('carbon_savings'))
+        co2Saved = users_journeys['carbon_savings']
+        co2Saved = round(co2Saved, 2)
         #Work out the context
         if request.user.username == username:
             isCurrentUser = True
@@ -638,9 +662,9 @@ def add_badge(badge, user):
         user: The user to be able to get the badges for that specific user
     """
     if not UserBadge.objects.filter(user_id=user.id, badge_id=badge).exists():
-            #if the badge does not already exist for the user
-            newBadge = UserBadge(user_id=user.id, badge_id=badge)
-            newBadge.save()
+        #if the badge does not already exist for the user
+        newBadge = UserBadge(user_id=user.id, badge_id=badge)
+        newBadge.save()
             
             
 def check_validity(journey):
@@ -667,3 +691,4 @@ def check_validity(journey):
         journey.flagged = True
         journey.reason = reason
         journey.save()
+
