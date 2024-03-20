@@ -5,7 +5,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
-    /*color: black;*/
+    color: black;
 }
 
 /*set the same background for all the pages*/
@@ -196,11 +196,11 @@ tbody tr:nth-child(n + 11) {
 .wrapper {
     margin: auto;
     width: 420px;
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, .6);
     border: 2px solid rgba(255, 255, 255, .2);
     backdrop-filter: blur(20px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
-    color: #fff;
+    color: black;
     border-radius: 10px;
     padding: 15px 40px;
 }
@@ -208,7 +208,7 @@ tbody tr:nth-child(n + 11) {
 .wrapper h1 {
     font-size: 36px;
     text-align: center;
-    color: white;
+    color: black;
 }
 /*set the input-box features, and input button*/
 .wrapper .input-box {
@@ -216,6 +216,7 @@ tbody tr:nth-child(n + 11) {
     width: 100%;
     height: 50px;
     margin: 15px 0;
+
 }
 
 .input-box input {
@@ -224,15 +225,15 @@ tbody tr:nth-child(n + 11) {
     background: transparent;
     border: none;
     outline: none;
-    border: 2px solid rgba(255, 255, 255, .2);
+    border: 2px solid rgba(255, 255, 255, .6);
     border-radius: 40px;
     font-size: 16px;
-    color: #fff;
+    color: black;
     padding: 20px 45px 20px 20px ;
 }
 
 .input-box input::placeholder {
-    color: #fff;
+    color: black;
 }
 
 .input-box i {
@@ -250,7 +251,7 @@ tbody tr:nth-child(n + 11) {
     border: none;
     outline: none;
     border-radius: 50px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
     cursor: pointer;
     font-size: 16px;
     color: #333;
@@ -269,7 +270,7 @@ tbody tr:nth-child(n + 11) {
 }
 
 .link p a {
-    color: #fff;
+    color: black;
     text-decoration: none;
     font-weight: 600;
 }
@@ -292,11 +293,11 @@ tbody tr:nth-child(n + 11) {
 .column-box {
     margin: 10px;
     width: 420px;
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.6);
     border: 2px solid rgba(255, 255, 255, .2);
     backdrop-filter: blur(20px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
-    color: #fff;
+    color: black;
     border-radius: 10px;
     padding: 15px 40px;
 }
@@ -304,7 +305,7 @@ tbody tr:nth-child(n + 11) {
 .column-box h1 {
     font-size: 36px;
     text-align: center;
-    color: white;
+    color: black;
 }
 
 .column-box .btn {
@@ -333,7 +334,7 @@ tbody tr:nth-child(n + 11) {
 }
 
 .link p a {
-    color: #fff;
+    color: black;
     text-decoration: none;
     font-weight: 600;
 }
@@ -345,7 +346,7 @@ tbody tr:nth-child(n + 11) {
 .streak {
     position: relative;
     text-align: center;
-    color: white;
+    color: black;
     font-family: "chewy";
     top: 0;
     right: 0;
@@ -368,11 +369,11 @@ tbody tr:nth-child(n + 11) {
 .column-box2 {
     margin: 10px;
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.6);
     border: 2px solid rgba(255, 255, 255, .2);
     backdrop-filter: blur(20px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
-    color: #fff;
+    color: black;
     border-radius: 10px;
     padding: 15px 30px;
 }
@@ -498,11 +499,11 @@ tbody tr:nth-child(n + 11) {
     transform: translateX(-50%);
     width: 420px;
     height: 40px;
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.6);
     border: 2px solid rgba(255, 255, 255, .2);
     backdrop-filter: blur(20px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
-    color: #fff;
+    color: black;
     border-radius: 10px;
     padding: 5px 2px;
 }
@@ -523,7 +524,7 @@ tbody tr:nth-child(n + 11) {
     border: 2px solid rgba(255, 255, 255, .2);
     backdrop-filter: blur(20px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
-    color: #fff;
+    color: black;
     border-radius: 10px;
     padding: 5px 2px;
     overflow: auto;
