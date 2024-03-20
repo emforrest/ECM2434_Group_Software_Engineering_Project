@@ -520,6 +520,10 @@ def journey(request, journey_id: int):
     if journey is None:
         return HttpResponse(status=404)
     
+    # Check if the user has admin or is the user that created the journey
+    if (journey.user.id != request.user.id) and (request.user.profile.gamemaster != True):
+        return HttpResponse(status=403)
+    
     # Calculate which number of the user's journeys it is
     journeys = list(Journey.objects.filter(user=journey.user).values_list('id', flat=True))
     journey_no = journeys.index(journey.id) + 1
@@ -548,8 +552,8 @@ def delete_journey(request):
     if journey is None:
         return HttpResponse(status=404)
 
-    # Check if the user is authorized to delete the journey
-    if journey.user != request.user:
+    # Check if the user is authorized to delete the journey or is an admin
+    if (journey.user != request.user) and (request.user.profile.gamemaster != True):
         return HttpResponse(status=403)
     
     if request.method == "POST":
