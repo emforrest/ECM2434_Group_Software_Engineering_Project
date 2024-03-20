@@ -511,9 +511,11 @@ def end_journey(request):
                 for id in locationIDs:
                     for j in recentJourneys:
                         if j.origin_id == id or j.destination_id == id:
-                            progressCount += 1
+                            if j.origin_id == id and j.destination_id == id:
+                                progressCount += 2
+                            else:
+                                progressCount += 1
                             break
-                print(progressCount)
                 event.progress = progressCount
             event.save()
                         
