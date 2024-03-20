@@ -15,7 +15,7 @@ from django.urls import reverse
 from django.utils import timezone
 from django.db.models import Sum
 
-from common.utils import leaderboardWinner, leaderboadWeeklyWinner, leaderboadMonthlyWinner
+from common.utils import leaderboardWinner
 
 
 import logging
@@ -720,10 +720,10 @@ def check_leaderboard():
     print("end month date: ", endMonthDate)
     lastWeekJourneys = Journey.objects.filter(time_finished__gte=startWeekDate, time_finished__lte=endWeekDate)
     lastMonthJourneys = Journey.objects.filter(time_finished__gte=startMonthDate, time_finished__lte=endMonthDate)
-    weeklyWinner = leaderboardWinner(lastWeekJourneys)
+    '''weeklyWinner = leaderboardWinner(lastWeekJourneys)
     monthlyWinner = leaderboardWinner(lastMonthJourneys)
     add_badge("1weekLeaderboard", weeklyWinner)
-    add_badge("1monthLeaderboard", monthlyWinner)
+    add_badge("1monthLeaderboard", monthlyWinner)'''
 
 def add_badge(badge, user):
     """Adding the corresponding badge to the database
