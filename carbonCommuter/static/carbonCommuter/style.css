@@ -39,7 +39,7 @@ h1 {
     margin: auto;
     width: 90%;
     min-width: 320px; /* Minimum width for the main wrapper */
-    background-color: rgba(255, 255, 255, .6) !important;
+    background-color: rgba(255, 255, 255, .6);
     border: 2px solid rgba(255, 255, 255, .2);
     backdrop-filter: blur(20px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
@@ -626,10 +626,17 @@ tbody tr:nth-child(n + 11) {
 
     .wrapper {
         width: auto;
+        background-color: rgba(255, 255, 255, .6);
     }
 
     .column-box {
         width: auto;
+        background-color: rgba(255, 255, 255, .6);
+    }
+
+    .column-box2 {
+        width: auto;
+        background-color: rgba(255, 255, 255, .6);
     }
 
     .main-links .btn {
@@ -646,9 +653,11 @@ tbody tr:nth-child(n + 11) {
 
     .footer {
         width: 100%;
+        background-color: rgba(255, 255, 255, .6);
     }
 
     .l-footer {
         width: 100%;
+        background-color: rgba(255, 255, 255, .6);
     }
 }
