@@ -658,6 +658,7 @@ tbody tr:nth-child(n + 11) {
     width: 90%;
     height: 40px;
     max-width: 90%;
+    min-width: 320px; /* Minimum width for the main wrapper */
     background-color:rgba(255, 255, 255, .6);
     border: 2px solid rgba(255, 255, 255, .2);
     backdrop-filter: blur(20px);
