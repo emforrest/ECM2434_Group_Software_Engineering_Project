@@ -23,6 +23,8 @@ from django.conf import settings
 from django.urls import include, path
 from django.conf.urls.static import static
 from login import views as login_views
+from carbonCommuter import views
+from django.conf.urls import handler404, handler500, handler403, handler400
 
 
 urlpatterns = [
@@ -42,3 +44,8 @@ urlpatterns = [
 if settings.DEBUG:
     # handling media in Debug mode (images, gifs, etc.)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+else:
+    handler400 = views.error_400
+    handler403 = views.error_403
+    handler404 = views.error_404
+    handler500 = views.error_500
