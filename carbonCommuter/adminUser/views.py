@@ -149,7 +149,8 @@ def verify_suspicious_journey(request):
     """
     context = {'journeys': Journey.objects.filter(flagged=True)}
     return render(request, "adminUser/verify_journey.html", context=context)
-                  
+
+@login_required  
 def approve_journey(request):
     """A POST endpoint for approving that a journey is not suspicious
 
