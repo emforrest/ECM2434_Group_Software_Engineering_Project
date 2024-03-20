@@ -422,7 +422,7 @@ tbody tr:nth-child(n + 11) {
 
 .column-box2 {
     /*margin: 10px;*/
-    width: 420px;
+    width: 100%;
     background-color: rgba(255, 255, 255, 0.6);
     border: 2px solid rgba(255, 255, 255, .2);
     backdrop-filter: blur(100px);
@@ -665,6 +665,13 @@ tbody tr:nth-child(n + 11) {
     height: 20px;
     background: rgb(0, 191, 0);
     cursor: pointer;
+}
+
+/* profile badges */
+.badge-images img {
+    width: 50px;
+    height: 50px;
+    margin: 5px auto;
 }
 
 /* deal with different screen sizes */
