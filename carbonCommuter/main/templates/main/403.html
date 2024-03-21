@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Registration page{% endblock%}
+
+{% block navbar %}
+    {% if request.user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'user_groups_home_page' %}">Groups</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/leaderboard/user_leaderboard">Leaderboard</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/user/"><i class='bx bxs-user-circle'></i></a>
+        </li>
+    {% else %}
+        <li class="nav-item">
+            <a class="nav-link" href="/leaderboard/">Leaderboard</a>
+        </li>
+    {%endif%}
+{% endblock %}
+
+{% block content %}
+<br>
+<div class="container">
+    <div class = "wrapper">
+        <h1>403 ERROR: Unauthorised, forbidden</h1>
+        <h3>You do not have the permission to access this</h3>
+    </div>
+    <br>
+    <!--The footer, consistent across the site-->
+    <div class="footer">
+        <p>&copy; 2024 CarbonCommuter. All Rights Reserved.</p>
+    </div>
+</div>
+{% endblock %}

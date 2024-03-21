@@ -6,7 +6,7 @@ Authors:
 - Eleanor Forrest
 - Abi Hinton
 """
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
@@ -29,12 +29,13 @@ from user.models import Badges, UserBadge
 from main.models import Location
 from adminUser.models import Event
 from common.travelTypes import TravelType
-from common.utils import get_route, calculate_co2, get_distance_to_campus, format_time_between
+from common.utils import get_route, calculate_co2, get_distance_to_campus, format_time_from_minutes
 
 LOGGER = logging.getLogger(__name__)
 
 @login_required
 def home(request):
+    #return HttpResponse(code=404)
     """Return the /user/home page with the information about the current user such as their 
     name and email address, and any badges they have earned.
     
@@ -137,8 +138,25 @@ def home(request):
             elif eventType == 3:
                 eventMessage = f"Visit {event.building}, {event.target} times by {event.endDate.strftime('%d-%m-%Y')}." 
             else:
+                #check current progress for this event
+                progressCount = 0
+                startDate = event.startDate
+                locationIDs = Location.objects.filter(on_campus = True).values_list('id', flat=True)
+                recentJourneys = Journey.objects.filter(time_started__gt = startDate)
+                #Check all journeys, if their start location or end location is a building that hasn't been visited then it is added to progressCount
+                for id in locationIDs:
+                    for j in recentJourneys:
+                        if j.origin_id == id or j.destination_id == id:
+                            if j.origin_id == id and j.destination_id == id:
+                                progressCount += 2
+                            else:
+                                progressCount += 1
+                            break
+                event.progress = progressCount
+                event.save()
                 eventMessage = f"Visit every location on campus by {event.endDate.strftime('%d-%m-%Y')}."
 
+    #check for weekly and monthly leaderboard badges from previous week/month
     check_leaderboard()
 
     #adding opacity of badges to context so can be displayed correctly to the user
@@ -394,6 +412,12 @@ def end_journey(request):
             context["tab"] = 2
             return render(request, "upload/end_journey.html", context=context)
         
+        # Throw an error if the start point of the journey was not on campus and the new location isnt on campus either
+        if not(journey.origin.on_campus) and distance > 0.3:
+            context["error"] = "This journey must finish on campus to be a valid commute. If this is no longer the case, please cancel the journey."
+            context["tab"] = 2
+            return render(request, "upload/end_journey.html", context=context)
+        
         # Get (or create) a Location object for the specified location if off campus
         if distance <= 0.3:
             location = Location.objects.get(name=building)
@@ -446,7 +470,9 @@ def end_journey(request):
         check_validity(journey)
 
         # Add to streak of the user
-        pastJourneys = Journey.objects.all().filter(user_id=request.user.id) #accessing all the past journeys the user has made
+        dateNow = timezone.now()
+        oneDay = dateNow - timedelta(1)
+        pastJourneys = Journey.objects.all().filter(user_id=request.user.id, time_finished__gt=oneDay) #accessing all the past journeys the user has made
         dateNow = timezone.now()
         checkStreak = False #boolean to check if a streak still exists
         for pastJourney in reversed(pastJourneys):
@@ -459,12 +485,13 @@ def end_journey(request):
             if (dateNow.weekday() - pastJourneyDate.weekday()) == 1:
                 #checking there is a days difference between journeys
                 checkStreak = True
+
                 request.user.profile.streak = request.user.profile.streak + 1 
                 break
             elif (dateNow.weekday() - pastJourneyDate.weekday()) == 0:
                 #if an event has already happened on the same day, keep the streak
                 checkStreak = True
-        #if the first day of streak, set the streak to 1
+        #if it is the first day of streak, set the streak to 1
         dateNow = timezone.now()
         pastDayJourneys = pastJourneys.filter(time_finished__gt=dateNow-timedelta(1))
         if len(pastDayJourneys) == 1:
@@ -527,7 +554,7 @@ def end_journey(request):
         context = {
             "journey": journey,
             "transport": TravelType.from_str(journey.transport).to_str(),
-            "time_taken": format_time_between(journey.time_finished, journey.time_started)
+            "time_taken": format_time_from_minutes(journey.calculate_duration())
         }
         return render(request, "upload/finished.html", context=context)
     
@@ -563,23 +590,18 @@ def journey(request, journey_id: int):
     if (journey.user.id != request.user.id) and (request.user.profile.gamemaster != True):
         return HttpResponse(status=403)
     
-    # Calculate which number of the user's journeys it is
-    journeys = list(Journey.objects.filter(user=journey.user).values_list('id', flat=True))
-    journey_no = journeys.index(journey.id) + 1
-    
     # Add journey information to context so it can be displayed on frontend
     context = {
         "journey": journey,
         "transport": TravelType.from_str(journey.transport).to_str(),
-        "time_taken": format_time_between(journey.time_finished, journey.time_started),
-        "journey_no": journey_no
+        "time_taken": format_time_from_minutes(journey.calculate_duration()),
+        "journey_no": journey.get_number()
     }
     return render(request, "user/journey.html", context)
 
 
 @login_required
 def delete_journey(request):
-    
     # Get id of journey to delete
     if request.method == "POST":
         id = request.POST.get('id')
@@ -594,6 +616,10 @@ def delete_journey(request):
     # Check if the user is authorized to delete the journey or is an admin
     if (journey.user != request.user) and (request.user.profile.gamemaster != True):
         return HttpResponse(status=403)
+    elif journey.user != request.user:
+        OWNER = False
+    else:
+        OWNER = True
     
     if request.method == "POST":
         # Delete active journey if the user has one
@@ -601,9 +627,12 @@ def delete_journey(request):
             request.user.profile.active_journey = None
             request.user.profile.save()
             
-        # Delete the journey and redirect to the user home page
+        # Delete the journey and redirect to the corresponding page
         journey.delete()
-        return redirect("dashboard")
+        if OWNER:
+            return redirect("dashboard")
+        else:
+            return redirect("/admin/verify/")
     
     # Render template based on if the journey is being cancelled or not
     else:
@@ -630,9 +659,7 @@ def profile(request, username:str):
     userFilter = User.objects.filter(username=username)
     if userFilter.exists():
         user = userFilter[0]
-        users_journeys =Journey.objects.filter(id = request.user.id).values('user__id').annotate(total_carbon_saved=Sum('carbon_savings'))
-        co2Saved = users_journeys[0]['total_carbon_saved']
-        co2Saved = round(co2Saved, 2)
+        co2Saved = user.profile.get_total_savings()
         #Work out the context
         if request.user.username == username:
             isCurrentUser = True
@@ -819,19 +846,19 @@ def check_validity(journey):
     # Check that the actual time taken isn't significantly shorter than the estimated time as per google maps
     if journey.transport in ["train", "bus"] and (journey.estimated_time - journey.calculate_duration()) >= 5:
         flagged = True
-        reason += f"Estimated duration ({ round(journey.estimated_time) }) doesn't match actual duration ({ journey.calculate_duration() })! "
+        reason += f"Estimated duration ({ format_time_from_minutes(journey.estimated_time) }) doesn't match actual duration ({ format_time_from_minutes(journey.calculate_duration()) })! "
     elif journey.transport in ["walk", "bike"] and journey.estimated_time <= 10 and(journey.estimated_time - journey.calculate_duration()) >= 2:
         flagged = True
-        reason += f"Estimated duration ({ round(journey.estimated_time) }) doesn't match actual duration ({ journey.calculate_duration() })! "
+        reason += f"Estimated duration ({ format_time_from_minutes(journey.estimated_time) }) doesn't match actual duration ({ format_time_from_minutes(journey.calculate_duration()) })! "
     elif journey.transport in ["walk", "bike"] and journey.estimated_time <= 30 and(journey.estimated_time - journey.calculate_duration()) >= 5:
         flagged = True
-        reason += f"Estimated duration ({ round(journey.estimated_time) }) doesn't match actual duration ({ journey.calculate_duration() })! "
+        reason += f"Estimated duration ({ format_time_from_minutes(journey.estimated_time) }) doesn't match actual duration ({ format_time_from_minutes(journey.calculate_duration()) })! "
     elif journey.transport in ["walk", "bike"] and journey.estimated_time <= 60 and(journey.estimated_time - journey.calculate_duration()) >= 10:
         flagged = True
-        reason += f"Estimated duration ({ round(journey.estimated_time) }) doesn't match actual duration ({ journey.calculate_duration() })! "
+        reason += f"Estimated duration ({ format_time_from_minutes(journey.estimated_time) }) doesn't match actual duration ({ format_time_from_minutes(journey.calculate_duration()) })! "
     elif journey.transport in ["walk", "bike"] and (journey.estimated_time - journey.calculate_duration()) >= 20:
         flagged = True
-        reason += f"Estimated duration ({ round(journey.estimated_time) }) doesn't match actual duration ({ journey.calculate_duration() })! "
+        reason += f"Estimated duration ({ format_time_from_minutes(journey.estimated_time) }) doesn't match actual duration ({ format_time_from_minutes(journey.calculate_duration()) })! "
     
     # Check that the user hasn't uploaded a journey in the last 5 minutes
     journeys = Journey.objects.filter(user=journey.user).order_by("-time_finished")

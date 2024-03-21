@@ -22,13 +22,16 @@ from django.contrib import admin
 from django.conf import settings
 from django.urls import include, path
 from django.conf.urls.static import static
-from login import views
+from login import views as login_views
+from carbonCommuter import views
+from django.conf.urls import handler404, handler500, handler403, handler400
+
 
 urlpatterns = [
     path("", include("main.urls")),
     path("register/", include("register.urls")),
-    path('accounts/login/', views.login_view),
-    path('logout/', views.logout_view),
+    path('accounts/login/', login_views.login_view),
+    path('logout/', login_views.logout_view),
     path("login/", include("login.urls")),
     path("leaderboard/", include("leaderboard.urls")),
     path("user/", include("user.urls")),
@@ -37,6 +40,12 @@ urlpatterns = [
     path("admin/", include("adminUser.urls")),
 ]
 
+
 if settings.DEBUG:
     # handling media in Debug mode (images, gifs, etc.)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+else:
+    handler400 = views.error_400
+    handler403 = views.error_403
+    handler404 = views.error_404
+    handler500 = views.error_500

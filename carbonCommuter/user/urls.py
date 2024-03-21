@@ -18,6 +18,5 @@ urlpatterns = [
     path("follow/", views.follow, name="follow"),
     path("journeys/delete", views.delete_journey, name="delete"),
     path("journeys/", views.journeys, name="journeys"),
-
     path('delete_account/', views.delete_account, name='delete_account'),
 ]

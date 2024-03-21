@@ -27,49 +27,75 @@
 {% endblock %}
 
 {% block content %}
+    <script>
+        jQuery(document).ready(function($) {
+            $(".clickable-row").on('click', 'td', function() {
+                if ($(this).index() < 4) {
+                    window.location = $(this).closest("tr").attr("data-href");
+                }
+            });
+
+            $(".icon-btn").click(function() {
+                if ($(this).attr("id") == "btn_approve") {
+                    const xhr = new XMLHttpRequest();
+                    xhr.open("POST", "/admin/verify/approve");
+                    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                    xhr.send(`id=${$(this).attr("data-jid")}&csrfmiddlewaretoken={{ csrf_token }}`);
+                    xhr.onload = () => {
+                        if (xhr.readyState == 4 && xhr.status == 201) {
+                            console.log("Approved");
+                            $(this).closest("tr").remove();
+                        } else {
+                            console.log(`Error: ${xhr.response}`);
+                        }
+                    };
+                } else if ($(this).attr("id") == "btn_delete") {
+                    window.location = `/user/journeys/delete?id=${$(this).attr("data-jid")}`;
+                }
+            });
+        });
+    </script>
+
     <div class="container">
         <div class="row">
             <div class="column">
                 <div class="column-box-journeys">
-                    <h1>Review suspicious journeys:</h1>
-                    <table class="table clickable">
-                        <thead>
-                            <tr> 
-                                <!-- Headers for the table -->
-                                <th>User</th>
-                                <th>Date</th>
-                                <th>Time</th>
-                                <th>Reason</th>
-                                <th>Actions</th>
+                  <h1>Review suspicious journeys:</h1>
+                  {% if request.user.profile.gamemaster %}
+                  <div class="table clickable">
+                      <table>
+                          <tr> 
+                              <!-- Headers for the table -->
+                              <th>User</th>
+                              <th>Date</th>
+                              <th>Time</th>
+                              <th>Reason</th>
+                              <th>Actions</th>
+                          </tr>
+                          <!--Here, the django for loop displays each user, with a medal for the top users-->
+                          {% for journey in journeys %}
+                            <tr class="clickable-row" data-href="/user/journeys/{{ journey.id }}/">
+                                <td>{{ journey.user.username }}</td>
+                                <td>{{ journey.format_date }}</td>
+                                <td>{{ journey.format_time }}</td>
+                                <td>{{ journey.reason }}</td>
+                                <td>
+                                    <button id="btn_approve" type="button" class="icon-btn" data-jid="{{ journey.id }}"><img src="/media/icons/checkmark.png" alt="Approve" width="30px"/></button>
+                                    <button id="btn_delete" type="button" class="icon-btn" data-jid="{{ journey.id }}"><img src="/media/icons/cross.png" alt="Delete" width="30px"/></button>
+                                </td>
                             </tr>
-                        </thead>
-                        
-                        <tbody>
-                            {% for journey in journeys %}
-                                <tr class='clickable-row' data-href='/user/journeys/{{ journey.id }}/'>
-                                    <td>{{ journey.user.username }}</td>
-                                    <td>{{ journey.format_date }}</td>
-                                    <td>{{ journey.format_time }}</td>
-                                    <td>{{ journey.reason }}</td>
-                                    <td>
-                                        <button id="btn_approve" class="icon-btn"><img src="/media/icons/checkmark.png" alt="Approve" width="30px"/></button>
-                                        <button id="btn_delete" class="icon-btn"><img src="/media/icons/cross.png" alt="Delete" width="30px"/></button>
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                          {% endfor %}
+                      </table>
+                  </div> 
+                  {% else %}
+                      <p>This page is for gamemasters only.</p>
+                  {% endif %}
                 </div>
             </div>
         </div>
     </div>
-    <br>
     
     <script>
-        jQuery(document).ready(function($) {
-            $(".clickable-row").click(function() {
-                window.location = $(this).data("href");
-            });
-        });
+        
     </script>
 {% endblock %}
