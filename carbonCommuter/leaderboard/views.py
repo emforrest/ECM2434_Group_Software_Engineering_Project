@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from .models import Leaderboard_Entry
 from django.contrib.auth.decorators import login_required
 from common.utils import leaderboardData
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 from django.db.models import Sum
 
 # Render Leaderboard webpages here
@@ -28,7 +28,7 @@ def user_leaderboard(request):
     users_total = leaderboardData(users_journeys)
 
     # Retrieve users' weekly carbon savings from the database
-    now = datetime.now()
+    now = date.now()
     this_monday = now - timedelta(days=now.weekday())
     weekly_journeys = Journey.objects.filter(time_finished__gt=this_monday).values('user__first_name', 'user__last_name', 'user__username', 'user__id').annotate(total_carbon_saved=Sum('carbon_savings')).order_by("-user_id")
     users_weekly = leaderboardData(weekly_journeys)
@@ -117,7 +117,7 @@ def leaderboard(request):
     users_journeys = Journey.objects.values('user__first_name', 'user__last_name', 'user__username', 'user__id').annotate(total_carbon_saved=Sum('carbon_savings')).order_by("-user_id")
     users_total = leaderboardData(users_journeys)
 
-    now = datetime.now()
+    now = date.now()
     this_monday = now - timedelta(days=now.weekday())
     weekly_journeys = Journey.objects.filter(time_finished__gt=this_monday).values('user__first_name', 'user__last_name', 'user__username', 'user__id').annotate(total_carbon_saved=Sum('carbon_savings')).order_by("-user_id")
     users_weekly = leaderboardData(weekly_journeys)
